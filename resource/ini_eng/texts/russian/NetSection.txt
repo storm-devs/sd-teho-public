@@ -1,0 +1,17 @@
+Net_ShipDieFromPlayer 			{%1 <%2> sank %3 <%4>.}
+Net_ShipDieFromCollisionLiveShip 	{%1 <%2> rammed %3 <%4>.}
+Net_ShipDieFromCollisionDeadShip 	{%1 <%2> went to feed the sharks! Woe to such a navigator!}
+Net_ShipDieFromCollisionIsland 		{%1 <%2> crashed against the rocks! Shame on such a navigator!}
+Net_ShipDieFromLighting 		{The Lord was angry with %1 <%2> and chastised him!}
+Net_ShipDieFromCriticalHit 		{%1 <%2> blew %3 <%4> into pieces!}
+Net_CriticalHit 			{%1 <%2> hit the powder keg on the deck of %3 <%4>!}
+Net_MastFallFromHit 			{%1 <%2> knocked down the mast of %3 <%4>.}
+Net_MastFallFromCollision 		{%1 <%2> lost the mast as a result of a collision.}
+Net_FireActivation 			{%1 <%2> set fire to %3 <%4>}
+NetFG_ServerIsFull 			{Server is full. Joining of another player is impossible.}
+NetFG_NeedUserPassword 			{The entered password doesn't match with the password stored on the server, please, try again.}
+NetFG_NeedServerPassword 		{You have entered invalid password to connect to the server, please try again.}
+NetFG_RejectedUnknown 			{Connection to the server failed due to unknown reasons.}
+NetFG_Banned 				{You were prohibited from accessing this server.}
+NetEG_DeathMatch 			{Battle's finished.\n \n%1 won!}
+NetEG_Team 				{Battle's finished.\n \nTeam "%1" won!}

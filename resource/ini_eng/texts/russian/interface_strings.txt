@@ -1,0 +1,18 @@
+Delete profile confirm{Are you sure you want to delete this profile and all its saves?}
+Delete savefile confirm{Are you sure you want to delete this save?}
+Overwrite savefile confirm{Are you sure you want to overwrite this save?}
+
+Low storage and unable save create{Not enough free space to save game.}
+Load game confirm{Are you sure you want to load this save?}
+Unable to Load save game{Unable to load this save.}
+
+Salary info
+{Your crew demands the monthly wage.
+Will you pay?}
+Officer info {Your officers demand their monthly wage:}
+All info {Net amount: }
+
+New game confirm{Are you sure you want to start a new game?}
+
+Insert Disk Ok {Please insert Disc 1 "Pirates Of The Caribbean"}
+save game limit {You have exceeded the limit of saved games. Delete older saves.}

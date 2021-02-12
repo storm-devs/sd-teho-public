@@ -1,0 +1,397 @@
+newline  {
+
+}
+
+BasicDefense	{Basic defense skill}
+perkBasicDefense
+{
+Incoming damage to the character is reduced by 10%.
+}
+
+AdvancedDefense	{Advanced defense skill}
+perkAdvancedDefense
+{
+Incoming damage to the character is reduced by 20%.
+}
+
+CriticalHit	{Critical hit}
+perkCriticalHit
+{
+Character receives 5% chance to land a critical hit on the opponent.
+}
+
+Ciras	{Cuirass}
+perkCiras
+{
+This skill allows to use cuirasses.
+}
+
+SwordplayProfessional	{Professional fencer}
+perkSwordplayProfessional
+{
+15% chance to land a critical hit. Incoming damage to the character is reduced by 30%.
+}
+
+Grus	{Additional weight}
+perkGrus
+{
+This ability allows to carry additional 30 pounds.
+}
+
+Rush	{The Ometochtli tincture}
+perkRush
+{
+Intoxicating tincture, contributing to the instantaneous manifestation of tremendous strength and endurance, a significant increase in dexterity and quickness of reaction, insensitivity to pain and increased aggression.
+For 12 seconds, character's attacks become much more powerful, and incoming damage is reduced.
+~
+This ability has a 1 minute cooldown.
+}
+
+Tireless	{Tireless}
+perkTireless
+{
+You get your second wind in combat, which helps you to reduce fighting fatigue. (+15% energy recovery).
+}
+
+HardHitter {Hard hitter}
+perkHardHitter
+{
+A successful heavy blow deals double damage.
+~
+Target losses energy if gets hit by:
+- heavy blows and thrusts (Rapiers and swords),
+- heavy blows and slashes (Sabres and cutlasses).
+}
+
+BladeDancer	{Blade dance}
+perkBladeDancer
+{
+You have finally learned to perform the group attack correctly. (+30% Group attack damage bonus).
+}
+
+Sliding	{Irresistible strike}
+perkSliding
+{
+Your attacks have an additional 20% chance to strike through the enemy defense.
+}
+
+Gunman {Musketeer}
+perkGunman
+{
+The character uses handguns more effectively: reload is faster for 10% and accurcy is 10% better. 
+Now the character and those officers who directly say about it are able to use arquebuses, muskets, mortars and other large one-barrel firearms.
+}
+
+GunProfessional {Sniper}
+perkGunProfessional
+{
+The character gets professional skills: 25% faster reloading of personal firearms. 25% better accuracy.
+Multibarreled and repeating firearms can now be used.
+}
+
+IronWill	{Iron will}
+perkIronWill
+{
+The probability of mutiny on the ship caused by wages delay and famine is reduced.
+}
+
+SharedExperience	{Experience exchange}
+perkSharedExperience
+{
+The hero can exchange items with the officers during boarding.
+The experience gained in the hero's skills goes to passengers, officers and companions twice as much and becomes 10%, 50% and 33%, respectively.
+}
+
+Medic	{Excellent health}
+perkMedic
+{
+This ability allows to restore health faster, if no serious wounds were taken during the day. Reduces the decrease of health if the character is wounded. Works while sailing, but slower.
+}
+
+HPPlus	{Growing life}
+perkHPPlus
+{
+This ability increases the maximum life of the hero by one additional point per rank.
+}
+
+EnergyPlus	{Growing energy}
+perkEnergyPlus
+{
+This ability increases the maximum energy of the hero by one additional point per rank.
+}
+
+ByWorker	{By-worker}
+perkByWorker
+{
+This character can occopy two officer positions at once.
+}
+
+ByWorker2	{Universalist}
+perkByWorker2
+{
+This character can occupy three officer positions at once.
+}
+
+Trustworthy	{Trustworthy}
+perkTrustworthy
+{
+Negative reputation of the hero no longer affects the decision of the most employers about hiring him, since they are charmed by his charisma.
+}
+
+ShipEscape	{Rescue on life boat}
+perkShipEscape
+{
+Rescuing the hero from the sinking ship to one of the ships of his squadron on life boat.
+This ability allows you to exchange or transfer to another ship of the squadron during the battle through the hold menu, when hull integrity is less than 15%.
+If a companion has this ability, he will escape the sinking ship or brander, returning to the hero's ship on a life boat as a passanger.
+}
+
+Alchemy	{Alchemy}
+perkAlchemy
+{
+This ability allows to create items, using instruments and components by the means of chemical or mechanical transformations.
+}
+
+FastReload {Fast reloading}
+perkFastReload
+{
+Reloading of cannons is accelerated by 10%.
+}
+
+ImmediateReload	{Preliminary reload}
+perkImmediateReload
+{
+After using this ability the next reload will proceed 30% faster. This ability has 5 min cooldown.
+}
+
+HullDamageUp	{Increased damage to hull}
+perkHullDamageUp
+{
+Damage to enemy ship's hull is increased by 15%.
+}
+
+SailsDamageUp	{Increased damage to sails}
+perkSailsDamageUp
+{
+Damage to enemy ship's sails is increased by 15%.
+}
+
+CrewDamageUp {Increased damage to crew}
+perkCrewDamageUp
+{
+Damage to enemy ship's crew is increased by 15%.
+}
+
+CriticalShoot	{Critical shot}
+perkCriticalShoot
+{
+The character gets 5% chance to score a critical hit with the volley fired at the enemy.
+}
+
+LongRangeShoot	{Increased firing range}
+perkLongRangeShoot
+{
+Firing range of cannons increases by 15%.
+}
+
+CannonProfessional	{Professional cannoneer}
+perkCannonProfessional
+{
+Damage to any part of the enemy ship is increased by 30%. 15% to score a critical hit.
+}
+
+LongRangeGrappling	{Long-range boarding}
+perkLongRangeGrappling
+{
+The boarding range is increased by 15%.
+}
+
+MusketsShoot {Musket salvo}
+perkMusketsShoot
+{
+A musket salvo is shot right before the boarding action.
+~
+Enemy's casualties depends on ships' sizes and on amount of boarding officers in position.
+}
+
+GrapplingProfessional	{Professional boarding}
+perkGrapplingProfessional
+{
+The boarding range is increased by 25%. A ship can now be boarded at any angle and ship speed.
+}
+
+BasicBattleState	{Basic ship defense}
+perkBasicBattleState
+{
+Generic damage dealt to the ship is reduced by 15%.
+}
+
+AdvancedBattleState	{Improved ship defense}
+perkAdvancedBattleState
+{
+Generic damage dealt to the ship is reduced by 25%.
+}
+
+ShipDefenseProfessional	{Professional ship defense}
+perkShipDefenseProfessional
+{
+Generic damage dealt to the ship is reduced by 25%. The chance to take a critical hit is reduced by 70%.
+}
+
+
+ShipSpeedUp	{Increased ship speed}
+perkShipSpeedUp
+{
+The maximum speed of the ship is increased by 15%.
+}
+
+ShipTurnRateUp	{Increased ship maneuverability}
+perkShipTurnRateUp
+{
+Maneuverability of the ship is increased by 15%.
+}
+
+StormProfessional	{Sailing in storms}
+perkStormProfessional
+{
+Damage dealt by storms is reduced by 30%.
+}
+
+Turn180	{Quick turnaround}
+perkTurn180
+{
+For 1 minute, the speed of the turnaround is 4 times faster. This ability has 3 min cooldown.
+}
+
+SailingProfessional	{Skilled seafarer}
+perkSailingProfessional
+{
+The speed and maneuverability of the ship are increased by 20%. 3/4 of the ordinary ships on the world's map can be bypassed.
+}
+
+SeaDogProfessional	{Scourge of the Seas}
+perkSeaDogProfessional
+{
+Even the inveterate adventurers and brigands will not dare to try their luck, when they see the flag of the Scourge of the Seas. Protects from attacks by enemy squadrons. Doesn't work on low class ships.
+}
+
+FlagPir	{Pirate flag}
+perkFlagPir
+{
+Gives an opportunity to cange your flag to the Jolly Roger.
+}
+
+FlagEng	{English flag}
+perkFlagEng
+{
+Gives an opportunity to cange your flag to the flag of England. The chance that your disguise will not work depends on stealth, number and class of the ships in the squadron, the number of enemy ships and bounties.
+}
+
+FlagFra	{French flag}
+perkFlagFra
+{
+Gives an opportunity to cange your flag to the flag of France. The chance that your disguise will not work depends on stealth, number and class of the ships in the squadron, the number of enemy ships and bounties.
+}
+
+FlagSpa	{Spanish flag}
+perkFlagSpa
+{
+Gives an opportunity to cange your flag to the flag of Spain. The chance that your disguise will not work depends on stealth, number and class of the ships in the squadron, the number of enemy ships and bounties.
+}
+
+FlagHol	{Dutch flag}
+perkFlagHol
+{
+Gives an opportunity to cange your flag to the flag of Holland. The chance that your disguise will not work depends on stealth, number and class of the ships in the squadron, the number of enemy ships and bounties.
+}
+
+Brander	{Brander}
+perkBrander
+{
+Gives an opportunity to send an allied ship to detonate near the enemy ship, dealing huge damage to it.
+}
+
+Troopers	{Land troops from allied ships}
+perkTroopers
+{
+Gives an opportunity to combine the crews of your subordinate ships before assaulting the fort to send them as a united force.
+}
+
+BasicCommerce	{Basic trading}
+perkBasicCommerce
+{
+10% discount at the stores.
+}
+
+AdvancedCommerce	{Advanced trading}
+perkAdvancedCommerce
+{
++10% selling bonus at the stores.
+}
+
+ProfessionalCommerce	{Professional trading}
+perkProfessionalCommerce
+{
+This ability gives - 15% discount and +15% selling bonus to all dealings.
+}
+
+Carpenter	{Autonomous repair}
+perkCarpenter
+{
+This skill works during adventures on land or on the global map. On the ship, if the captain possess this ability, hull damage and rigging on the existing masts is slowly restored. Requires planks to repair the hull and sailcloth to fix sails.
+}
+
+InstantRepair	{Combat repair}
+perkInstantRepair
+{
+A quick repair, which can be done even in the heat of battle. You should have planks to repair the hull and sailcloth to fix the sails. Fallen masts cannot be restored.
+Maximum restoration of the ship's hull - up to 65% of the available resource.
+90 seconds cooldown.
+}
+
+LightRepair	{Urgent repair}
+perkLightRepair
+{
+This skill allows to patch the ship's hull without resources, but not exceeding 10% of available HP. Without this ability the ship will fall apart, if the hull's HP are less than 10%.
+Works for 60 seconds once in 3 minutes.
+The autonomous repair is accelerated by 50%.
+}
+
+Builder	{Professional repair}
+perkBuilder
+{
+Planks and sailcloth consumption during repair is reduced by 25%. The autonomous repair is accelerated by 100%.
+}
+
+SelfRepair {Full repair}
+perkSelfRepair
+{
+This skill allows to fully repair your ship with the efforts of your crew on any convenient shore. You should have planks to repair the hull and sailcloth to fix the sails. Allows to completely restore the hull, sails and masts.
+Repair can only be performed on land in the coastal locations.
+}
+
+WindCatcher	{Increased dynamics}
+perkWindCatcher
+{
+You can feel the slightest change in the wind and can use it to your advantage. (+10% to ship's acceleration).
+}
+
+SailsMan	{Fast sails}
+perkSailsMan
+{
+You managed to speed up all operations with the sails by 10%.
+}
+
+Doctor1	{Doctor}
+perkDoctor1
+{
+In naval combat, decreases the casualties from wounds and grapeshot by 10%.
+}
+
+Doctor2	{Life saver}
+perkDoctor2
+{
+In naval combat, decreases the casualties from wounds and grapeshot by 20%.
+}
+
+InstantBoarding {Instant boarding}

@@ -1,0 +1,376 @@
+newline{
+
+}
+
+Balls {Cannonballs}
+Balls_descr
+{
+The cheapest, easiest to use and reliable type of ammunition. Cannonbals are usually used to deal damage to the hull of the ship and also to attack coastal defensive structures at large distances, but in the navy, they are not too effective against enemy manpower.
+Base damage: hull - #f.2DamageHull#, sails-#f.2DamageRig#, crew-#f.2DamageCrew#
+}
+
+
+Grapes {Grapeshot}
+Grapes_descr
+{
+A load of lead or iron forged bullets placed into a linen sack tightly wrapped up with ropes together with a wooden tray.
+Doesn't have any significant hull damage capability and has low firing distance, but has a large hitting area and is widely used in naval combats to eliminate enemy crew and boarding parties.
+Base damage: hull - #f.2DamageHull#, sails-#f.2DamageRig#, crew-#f.2DamageCrew#
+}
+
+
+Knippels {Knippels}
+Knippels_descr
+{
+A knippel is a projectile consisting of two cannonballs or half-balls, connected by a chain or an iron rod. This ammunition is used to damage masts and spars and rig.
+Generally, knippels have low effectiveness at medium and large distances. They have an unpredictable trajectory and they do almost no damage to the ship's hull. Still, they can be quite effective against enemy manpower at point-blank range.
+Base damage: hull - #f.2DamageHull#, sails-#f.2DamageRig#, crew-#f.2DamageCrew#
+}
+
+
+Bombs {Bombs}
+Bombs_descr
+{
+Explosive cast iron ammunition is the most expensive and most destructive one. It consists of a cast iron ball filled with gunpowder and equipped with a wooden ignition pipe. After ignition the ball explodes, hitting the crewmen with fragments, setting the rigging on fire and dealing damage to the hull with the shockwave.
+Base damage: hull - #f.2DamageHull#, sails-#f.2DamageRig#, crew-#f.2DamageCrew#
+}
+
+
+Sailcloth {Sailcloth}
+Sailcloth_descr
+{
+Thick dense linen used in sails manufacturing.
+In the Northern colonies producing cotton, a specific fabric is made. Its transversal fibres are made of cotton, and lengthwise fibres (the base) are hempen. It has cream color, is lighter and dries more quickly compared to traditional slightly grey linen made of non-whitened flax.
+}
+
+
+Planks {Planks}
+Planks_descr
+{
+Dry planks of select 2nd category wood, obtained by cracking the logs with the wedges. Those are more sturdy compared to sawn planks, are less susceptible to drying out and also don't cast and crack as much.
+Best material for express repair of the wooden hull elements.
+}
+
+
+Wheat {Wheat}
+Wheat_descr
+{
+The local sorts of wheat are highly valued for their flour, which yields nice tasti bread with good porous crumb.
+Considering high crop capacity and the time of ripening (January), it is possible to make good money by importing wheat to Europe.
+}
+
+
+Ebony {Ebony}
+Ebony_descr
+{
+Black (ebony) wood has always fascinated the carpenters and commoners with its hardness: this wood is twise as hard as oak. Combined with the unique color of the wood, it really impressed the Europeans.
+Every sort of ebony has its own hue of wood - from greenish and brown to velvety black. With time, the wood becomes darker - and more expensive.
+}
+
+
+Chocolate {Cocoa}
+Chocolate_descr
+{
+Ripe cocoa fruits are picked and cracked to extract the beans. Dried cocoa beans can be stored for an unusually long term.
+High demand for cocoa among the aborigens and wealthy locals already dictates high prices for this merchandise, but the italians are willing to pay for it in gold, which makes the prices exorbitant.
+}
+
+
+Sugar {Sugar}
+Sugar_descr
+{
+Trick sweet syrup, dried and prepared for transportation to Europe, where it will be refined.
+The everlasting fashion and the aristocratic symbol of well-being, the custom to offer the guests tea or coffee is a safe guarantee that crude sugarcane syrup is always in high demand.
+}
+
+
+Wine {Wine}
+Wine_descr
+{
+Although there have been many attempts at winegrowing, using imported vines, the genuine French, Italian, Spanish or Portugese wine is valued very highly still!
+Genuine vine is in great demand in any settlement, and the local merchants will buy it in any amounts.
+}
+
+
+ShipSilk {Shipsilk}
+ShipSilk_descr
+{
+A masterpiece of the Lyon textile mills - dense silken sailcloth.
+The silk is extremely robust, the filaments are strong, elastic and uniform in thickness. This fabric is light and air-penetrating; it absorbs moisture quickly, but dries even faster. It retains the shape and is resistant to stretching.
+With all its advantages, the silken cloth still has a significant drawback - sunrays are affecting it in a bad way.
+}
+
+
+Rum {Rum}
+Rum_descr
+{
+A strong alcoholic beverage with original taste and flavor. A precious merchandise, which can always be sold profitably.
+This can be used according to its intended purpose, since it raises morale of the sailors, warms them up and benumbs the feeling of hunger.
+Not only that, rum is added to the supply of fresh water on the ships with the purpose of disinfection, which can allow to store it for longer. The shortage of rum on the ship can cause the unrest among your sailors and even become the cause of a mutiny.
+}
+
+
+Tobacco {Tobacco}
+Tobacco_descr
+{
+In distant Europe, in the local settlements and in cramped crew quarters tobacco is a man's delight. It is also considered a reliable profilactic measure against many diseases - at least, that's what people believes.
+There are three types of tobacco ready for consumption - smoking tobacco, snuff tobacco and chewing tobacco. Tobacco leaves in linen sacks are a longed-for cargo for any visiting negotiant.
+}
+
+
+Coffee {Coffee}
+Coffee_descr
+{
+Fragrant energizing drink made of coffee beans, honey and cinnamon is very popular among the denizens of the New World these days - not only due to the large number of coffee plantations which became the main source of income for many rich Europeans, but also because of the lack of tea.
+Geyish-yellow coffee beans, which retain their merchantability and useful properties for a long time, are always in high demand in continental Europe, since coffee is now a must in any rich household or on a rout.
+}
+
+
+Mahogany {Mahogany}
+Mahogany_descr
+{
+The wood of the redwood trees has a very distinct and beautiful natural pattern, is very sturdy, fire-resistant and long-lasting. It can be polished very easily, and wood pests of any kind do not harm it at all. The Spaniards were the first to appreciate it - now they're widely using redwood in construction of ships, monasteries and palaces.
+Furniture made of mahogany is an example of classic luxury, good taste and well-being of it owner.
+}
+
+
+Cinnamon {Vanilla}
+Cinnamon_descr
+{
+Specifically treated pods of an evergreen vine have a sweet flavour, but a bitter taste.
+Vanilla is used in Europe in making cocoa and chocolate, it is also used as aromatizer for tobacco; other are simply chewing it, considering it arousing, but even more often it's used just for show, because this spice is more expensive than gold!
+}
+
+
+Copra {Copra}
+Copra_descr
+{
+Dried pulp of the coconuts.
+Copra is used in the making of copra oil and soap. This soap smells nicely and also dyes hair, masking grey hair with noble yellowish hue.
+}
+
+
+Paprika {Paprika}
+Paprika_descr
+{
+Indian 'red salt' - ground red capsicum, a bright red spice, sweet and hot.
+Paprica is very popular among Germans, Spaniards and in Mediterranean Europe, since it goes perfectly with meat, fowl, fish and seafood, vegetables and curds.
+}
+
+
+Fruits {Fruits}
+Fruits_descr
+{
+Edible fruits of the local flora.
+Those can be sold in any settlement - there are buers even for rare delicacies.
+}
+
+
+Ale {Ale}
+Ale_descr
+{
+A drink with low content of alcohol, prepared by the means of top fermentation.
+Ale, together with bread, is considered a necessity and is included in the rations of the local garrisons. Ale can be stored for long times; besides, it possesses aseptic properties thanks to the gruit (a mixture of herbs and spices used instead of hops).
+}
+
+
+Ropes {Ropes}
+Ropes_descr
+{
+Strong ropes made of hemp. Being resistant to salt water, these are best ropes to be used in the rigging.
+The very best and famous ropes are manufactured in Tsardom of Russia.
+}
+
+
+Clothes {Clothes}
+Clothes_descr
+{
+Practical conservative clothes made of dark fabric, simple cambric linen, turn-down collars and cuffs - a comfortable attire of any honest, hard-working, modest and economical provincial.
+Inexpensive merchandise, always in demand.
+}
+
+
+Cotton {Cotton}
+Cotton_descr
+{
+On the insular plantations of the Archipelago the cotton is ripening late and the crop capacity is rather low, but its fiber is still very valuable, since it is unusually long and thin. This silken creamy fibers are used to make threads for the thinnest fabrics of the finest quality.
+This laborious manufacture requires setting up a relatively small plantation and at least 20 slaves to work there.
+}
+
+
+Sandal {Ironwood}
+Sandal_descr
+{
+Ironwoon is also known as 'lignum vitae'. This dense, hard and sturdy wood is almost impossible to crack. It's very heavy and drowns easily.
+Very sturdy wood, although difficult to work up. It has self-lubricant properties, especially in water.
+Due to the sturdiness and natural lubrication ship elements made of ironwood do not require replacement despite the sever conditions of exploitation in the open sea.
+}
+
+
+Oil {Tar}
+Oil_descr
+{
+The natural asphalt tar is a sticky greyish-black mixture of bitumen, fine-dispersed clay and salt water. The most famous thing on Trinidad - although surely not the most beautiful one.
+This tar is used for the impregnation of the ships' hulls.
+It is believed that this tar is far superior to the analogs producen in the northern European countries.
+}
+
+
+Leather {Leather}
+Leather_descr
+{
+Dressed hides of cattle is a universal merchandise always in demand in Europe.
+Although not many merchants would load their ships with leather alone, it is best to fit the remaning cargo space, since it is most unpretentious to the shipping conditions.
+}
+
+
+Slaves {Slaves}
+Slaves_descr
+{
+White or black men or women sold into slavery as a result of lost battles, as punishment for committed crimes or as clearing off debts. From the plantators' point of view, this is totally legitimate merchandise, since the person was already a slave at the moment of purchase.
+The life of a slave is short - most of them die during the first three years after being sold to work on the plantations.
+}
+
+
+Powder {Gunpowder}
+Powder_descr
+{
+Imported strategic merchandise, the product of dirty, noisy, stinky and dangerous gunpowder mills.
+'Keep your powder dry', say the experienced cannoneers. That can't be stressed enough: without gunpowder the cannons are just a deadweight, a burden for the ship.
+A decent captain will always have enough gunpowder in the most dry section of the hold.
+}
+
+
+Food {Food}
+Food_descr
+{
+A standard set of military rations and supply of fresh water, required for feeding the crew and transported slaves during a voyage.
+The lack of food on board leads to famine, deaths and huge drop of morale. 
+Dayly consumption: sailors - 0.1 unit, slaves - 0.05 unit.
+}
+
+
+Weapon {Weapon}
+Weapon_descr
+{
+Ordinary army weapons: sabers and broadswords, pikes and muskets.
+During boardings, every participant in the battle must be armed. The lack of weapons will cause the casualties to go up.
+As sailors perish, the amount of weapons onboard diminishes.
+}
+
+
+Gold {Gold}
+Gold_descr
+{
+Golden ingots, marke by the Treasury of Spain.
+Capturing a ship with a load of those is a dream of every privateer!
+}
+
+
+Silver {Silver}
+Silver_descr
+{
+Silver ingots, marke by the Treasury of Spain.
+A desired price; a modest share of other peoples treausure, which didn't go down in the holds of ships destroyed during savage boardings and ravaging storms...
+}
+
+
+Brick {Bricks}
+Brick_descr
+{
+Neat blocks and roof tiles made of fired clay. Those are widely used in town construction.
+Due to frequent fires the authorities stimulate the use of bricks in construction, therefore this merchandise is always in demand.
+}
+
+
+Medicament {Medicines}
+Medicament_descr
+{
+A typical set of medicine and instruments intended for treatment of the most common diseases and rendering first aid to the wounded and injured.
+Having medicines onboard helps to save the injured (reducec boarding casualties) and sick during the voyage.
+}
+
+Cannon_3 {Falconets}
+Cannon_3_descr
+{
+Deck cannons equipped with a ring mount. They have the highest mobility and, to the small size, also the smallest firing distance and damage.
+Often they are equipped with interchangeable breechh, which allows to perform the reloading faster.
+Firing distance - #dFireRange#, damage - x#f.1DamageMultiply#, reload - #dReloadTime# sec.
+}
+
+Cannon_6 {Light demi-cannons}
+Cannon_6_descr
+{
+Small cannons, which are quite popular on courier and trade vessels due to low weight and simplicity of maintenance.
+Firing distance - #dFireRange#, damage - x#f.1DamageMultiply#, reload - #dReloadTime# sec.
+}
+
+Cannon_12 {Demi-cannons}
+Cannon_12_descr
+{
+Main cannons of a small military fleet, capable of firing at large angles of elevation, which increases the effective combat distance significantly. They are also high reliability.
+Firing distance - #dFireRange#, damage - x#f.1DamageMultiply#, reload - #dReloadTime# sec.
+}
+
+Cannon_16 {Naval demi-cannons}
+Cannon_16_descr
+{
+Modern cannons of the French type. Thanks to advanced construction have greater firing range and deal more damage compared to ordinary demi-cannons, while being a bit slower to load, slightly less reliability and a bit heavier.
+Firing distance - #dFireRange#, damage - x#f.1DamageMultiply#, reload - #dReloadTime# sec.
+}
+
+Cannon_20 {Small cannons}
+Cannon_20_descr
+{
+Cannons of the largest caliber to fire file-hard cannonballs, which allow to significantly increase damage dealt to the enemy. Still, increased barrel length causes significant increase of their weight.
+Firing distance - #dFireRange#, damage - x#f.1DamageMultiply#, reload - #dReloadTime# sec.
+}
+
+Cannon_24 {Ship cannons}
+Cannon_24_descr
+{
+The most balanced cannons, considering their main technical characteristics. They are very popular on military and expeditional vessels, and for good reason.
+Firing distance - #dFireRange#, damage - x#f.1DamageMultiply#, reload - #dReloadTime# sec.
+}
+
+Cannon_32 {Battery cannons}
+Cannon_32_descr
+{
+Heavy cannons of the large caliber, capable of bombarding defensive structures. Deal great damage to the hull.
+Firing distance - #dFireRange#, damage - x#f.1DamageMultiply#, reload - #dReloadTime# sec.
+}
+
+Cannon_36 {Coastal cannons}
+Cannon_36_descr
+{
+Long-barreled cannons are rare guests on the gundeck. But despite their long reloading time, they deal great damage and have quite a long firing range.
+Firing distance - #dFireRange#, damage - x#f.1DamageMultiply#, reload - #dReloadTime# sec.
+}
+
+Cannon_42 {Siege cannons}
+Cannon_42_descr
+{
+Almost obsolete, yet still powerful cannon, also quite suitable for using on the line ships.
+Firing distance - #dFireRange#, damage - x#f.1DamageMultiply#, reload - #dReloadTime# sec.
+}
+
+Culverine_8 {Demi-couleuvrines}
+Culverine_8_descr
+{
+Long-barreled 8-pound cannon on whelless mount. Has increased firing rande. Usually is used for barrage fire.
+Firing distance - #dFireRange#, damage - x#f.1DamageMultiply#, reload - #dReloadTime# sec.
+}
+
+Culverine_18 {Couleuvrines}
+Culverine_18_descr
+{
+This 18-pound medium cannon with a long firing range is 12 feet long. Despite astounding firing range, it is very slow and has a very long reloading time.
+Firing distance - #dFireRange#, damage - x#f.1DamageMultiply#, reload - #dReloadTime# sec.
+}
+
+Culverine_36 {Full couleuvrines}
+Culverine_36_descr
+{
+A 36-pound fort cannon intended for breaching fire. Can also be used in the ship's batteries as well and deal significant damage to the enemy, provided that the cannoneer is experienced, agile and very lucky.
+Firing distance - #dFireRange#, damage - x#f.1DamageMultiply#, reload - #dReloadTime# sec.
+} 
