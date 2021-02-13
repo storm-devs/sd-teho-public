@@ -3,7 +3,7 @@ int scx, scy, spx, spy, sgxy, ssxy, smxy;
 int move_i, dir_i, dir_i_start;
 bool openExit;
 bool cardMove;
-int  money_i, moneyOp_i;
+int money_i, moneyOp_i;
 string money_s;
 
 ref npchar;
@@ -22,79 +22,79 @@ void InitInterface(string iniName)
 {
     GameInterface.title = "";
 
-    SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
+    SendMessage(&GameInterface, "ls", MSG_INTERFACE_INIT, iniName);
 
-	SetEventHandler("InterfaceBreak","ProcessBreakExit",0);
-	SetEventHandler("exitCancel","ProcessCancelExit",0);
-	SetEventHandler("ievnt_command","ProcessCommandExecute",0);
-	SetEventHandler("My_eventMoveImg","MoveImg",0);
-	SetEventHandler("My_eStartGame","StartGame",0);
-	SetEventHandler("My_eOpenCards","OpenCards",0);
-	/*
-	hearts_A,diamonds_A,clubs_A,spades_A  - 124x184
-	blank - 124x184
-	pack -  186x202
-	gold, silver   - 100x100
-	A - ace
-	J - Jack
-	Q - Queen
-	K - King
-	10..6 - other
-	
-	screen: -40..680 x -30..510  (720x540)
-	*/
-	
+    SetEventHandler("InterfaceBreak", "ProcessBreakExit", 0);
+    SetEventHandler("exitCancel", "ProcessCancelExit", 0);
+    SetEventHandler("ievnt_command", "ProcessCommandExecute", 0);
+    SetEventHandler("My_eventMoveImg", "MoveImg", 0);
+    SetEventHandler("My_eStartGame", "StartGame", 0);
+    SetEventHandler("My_eOpenCards", "OpenCards", 0);
+    /*
+    hearts_A,diamonds_A,clubs_A,spades_A  - 124x184
+    blank - 124x184
+    pack -  186x202
+    gold, silver   - 100x100
+    A - ace
+    J - Jack
+    Q - Queen
+    K - King
+    10..6 - other
+    
+    screen: -40..680 x -30..510  (720x540)
+    */
+
     sgxy = 50;
     ssxy = 70;
-    
+
     scx = 114;
     scy = 170;
-    
+
     spx = 172;
     spy = 188;
-    
-    openExit = false;  // можно ли прервать игру
-	cardMove = false; // игрок перемещает карту
-    
+
+    openExit = false; // можно ли прервать игру
+    cardMove = false; // игрок перемещает карту
+
     pchar = GetMainCharacter();
-    
-    iRate  = sti(pchar.GenQuest.Cards.iRate); // ставки золотых
-    
+
+    iRate = sti(pchar.GenQuest.Cards.iRate); // ставки золотых
+
     //pchar.GenQuest.Cards.npcharIdx = GetCharacterIndex("Filosof"); // test
-    
+
     npchar = GetCharacter(sti(pchar.GenQuest.Cards.npcharIdx));
-    
-	iMoneyP = sti(pchar.Money); // mitrokosta теперь смотрим на реальные деньги только в начале и в конце
-	iMoneyN = sti(npchar.Money);
-    
+
+    iMoneyP = sti(pchar.Money); // mitrokosta теперь смотрим на реальные деньги только в начале и в конце
+    iMoneyN = sti(npchar.Money);
+
     switch (iRate)
     {
-        case 100 :
-            money_s = "silver";
-            iExpRate = 1;
-        break;
-        
-        case 500 :
-            money_s = "gold";
-            iExpRate = 2;
-        break;
-        
-        case 1000 :
-            money_s = "silver";
-            SetNewPicture("SCROLLPICT", "interfaces\card_sukno.tga");
-            iExpRate = 3;
+    case 100:
+        money_s = "silver";
+        iExpRate = 1;
         break;
 
-        case 5000 :
-            money_s = "gold";
-            SetNewPicture("SCROLLPICT", "interfaces\card_sukno.tga");
-            iExpRate = 6;
+    case 500:
+        money_s = "gold";
+        iExpRate = 2;
         break;
-		
-		case 10000 : // Jason Дороже золота
-            money_s = "gold";
-            SetNewPicture("SCROLLPICT", "interfaces\card_sukno.tga");
-            iExpRate = 8;
+
+    case 1000:
+        money_s = "silver";
+        SetNewPicture("SCROLLPICT", "interfaces\card_sukno.tga");
+        iExpRate = 3;
+        break;
+
+    case 5000:
+        money_s = "gold";
+        SetNewPicture("SCROLLPICT", "interfaces\card_sukno.tga");
+        iExpRate = 6;
+        break;
+
+    case 10000: // Jason Дороже золота
+        money_s = "gold";
+        SetNewPicture("SCROLLPICT", "interfaces\card_sukno.tga");
+        iExpRate = 8;
         break;
     }
     if (money_s == "gold")
@@ -105,95 +105,99 @@ void InitInterface(string iniName)
     {
         smxy = ssxy;
     }
-    CreateImage("BLANK","","", 0, 0, 0, 0); // выше всех
-    
-	CreateImage("Pack","CARDS","pack", 40, 203, 20 + spx, 199 + spy);
+    CreateImage("BLANK", "", "", 0, 0, 0, 0); // выше всех
 
-    SetNewPicture("ICON_2", "interfaces\PORTRAITS\64\face_" + pchar.faceId+ ".tga");
-    
-    CreateString(true,"Money","",FONT_NORMAL,COLOR_MONEY, 613,348,SCRIPT_ALIGN_CENTER,1.1);
-    CreateString(true,"MoneyInChest","",FONT_NORMAL,COLOR_MONEY,615,292,SCRIPT_ALIGN_CENTER,1.3);
-    
+    CreateImage("Pack", "CARDS", "pack", 40, 203, 20 + spx, 199 + spy);
+
+    SetNewPicture("ICON_2", "interfaces\PORTRAITS\64\face_" + pchar.faceId + ".tga");
+
+    CreateString(true, "Money", "", FONT_NORMAL, COLOR_MONEY, 613, 348, SCRIPT_ALIGN_CENTER, 1.1);
+    CreateString(true, "MoneyInChest", "", FONT_NORMAL, COLOR_MONEY, 615, 292, SCRIPT_ALIGN_CENTER, 1.3);
+
     if (rand(1) == 1)
     {
-        dir_i  = -1;  // кто ходит - комп
+        dir_i = -1; // кто ходит - комп
     }
     else
     {
-        dir_i  = 1;  // кто ходит - ГГ
+        dir_i = 1; // кто ходит - ГГ
     }
     dir_i_start = dir_i; // запомним кто начал
-    
-    CreateString(true,"Beta_P", "", "INTERFACE_ULTRASMALL",COLOR_NORMAL, 380, 370, SCRIPT_ALIGN_LEFT,1.0);
-    CreateString(true,"Beta_N", "", "INTERFACE_ULTRASMALL",COLOR_NORMAL, 380, 210, SCRIPT_ALIGN_LEFT,1.0);
-    CreateString(true,"Beta_Next", "", "INTERFACE_ULTRASMALL",COLOR_NORMAL, 230, 310, SCRIPT_ALIGN_LEFT,1.0);
-    CreateString(true,"Beta_MoneyN", "", "INTERFACE_ULTRASMALL",COLOR_NORMAL, 530, 210, SCRIPT_ALIGN_LEFT,1.0);
-    CreateString(true,"Beta_WinLose", "", "INTERFACE_ULTRASMALL",COLOR_NORMAL, 530, 370, SCRIPT_ALIGN_LEFT,1.0);
+
+    CreateString(true, "Beta_P", "", "INTERFACE_ULTRASMALL", COLOR_NORMAL, 380, 370, SCRIPT_ALIGN_LEFT, 1.0);
+    CreateString(true, "Beta_N", "", "INTERFACE_ULTRASMALL", COLOR_NORMAL, 380, 210, SCRIPT_ALIGN_LEFT, 1.0);
+    CreateString(true, "Beta_Next", "", "INTERFACE_ULTRASMALL", COLOR_NORMAL, 230, 310, SCRIPT_ALIGN_LEFT, 1.0);
+    CreateString(true, "Beta_MoneyN", "", "INTERFACE_ULTRASMALL", COLOR_NORMAL, 530, 210, SCRIPT_ALIGN_LEFT, 1.0);
+    CreateString(true, "Beta_WinLose", "", "INTERFACE_ULTRASMALL", COLOR_NORMAL, 530, 370, SCRIPT_ALIGN_LEFT, 1.0);
     // новая игра
     NewGameBegin();
     iTurnGame = 1; // игра первая
     iHeroLose = 0;
-    iHeroWin  = 0;
+    iHeroWin = 0;
 }
 
 void ProcessBreakExit()
 {
-	Exit();
+    Exit();
 }
 
 void ProcessCancelExit()
 {
-	Exit();
+    Exit();
 }
 
 void Exit()
 {
     if (openExit)
     {
-        DelEventHandler("InterfaceBreak","ProcessBreakExit");
-    	DelEventHandler("exitCancel","ProcessCancelExit");
-    	DelEventHandler("ievnt_command","ProcessCommandExecute");
-    	DelEventHandler("My_eventMoveImg","MoveImg");
-    	DelEventHandler("My_eStartGame","StartGame");
-    	DelEventHandler("My_eOpenCards","OpenCards");
+        DelEventHandler("InterfaceBreak", "ProcessBreakExit");
+        DelEventHandler("exitCancel", "ProcessCancelExit");
+        DelEventHandler("ievnt_command", "ProcessCommandExecute");
+        DelEventHandler("My_eventMoveImg", "MoveImg");
+        DelEventHandler("My_eStartGame", "StartGame");
+        DelEventHandler("My_eOpenCards", "OpenCards");
 
         if (sti(pchar.GenQuest.Cards.SitType) == true)
-    	{
-			if(npchar.id == "AffairOfHonor_WolvesAndSheeps_Man")
-			{
-				DoQuestFunctionDelay("AffairOfHonor_AfterCards", 0.6);
-			}
-			else
-			{
-            DoQuestCheckDelay("exit_sit", 0.6);
-    	}
-    	}
+        {
+            if (npchar.id == "AffairOfHonor_WolvesAndSheeps_Man")
+            {
+                DoQuestFunctionDelay("AffairOfHonor_AfterCards", 0.6);
+            }
+            else
+            {
+                DoQuestCheckDelay("exit_sit", 0.6);
+            }
+        }
         interfaceResultCommand = RC_INTERFACE_SALARY_EXIT;
 
-		AddMoneyToCharacter(pchar, iMoneyP - sti(pchar.Money)); // mitrokosta раздача денег теперь в конце
-		AddMoneyToCharacter(npchar, iMoneyN - sti(npchar.Money));
-    	Statistic_AddValue(Pchar, "GameCards_Win", iHeroWin);
-		Achievment_SetStat(pchar, 25, iHeroWin);
-    	AddCharacterExpToSkill(Pchar, SKILL_FORTUNE, iExpRate*5*iHeroWin);
-    	AddCharacterExpToSkill(Pchar, SKILL_FORTUNE, iExpRate*2*iHeroLose);
-    	Statistic_AddValue(Pchar, "GameCards_Lose", iHeroLose);
-		Achievment_SetStat(pchar, 26, iHeroLose);
-    	
-    	bQuestCheckProcessFreeze = true;
-    	WaitDate("",0,0,0, 0, iTurnGame*15);
-    	bQuestCheckProcessFreeze = false;
-    	RefreshLandTime();
-    	EndCancelInterface(true);
-		// Jason Дороже золота
-		if (CheckAttribute(pchar, "questTemp.GoldenGirl.Game")) // идет квестовая игра
-		{
-			if (CheckAttribute(pchar, "questTemp.GoldenGirl.Game.G1")) DoQuestCheckDelay("GoldenGirl_Game1Res", 1.0);
-			if (CheckAttribute(pchar, "questTemp.GoldenGirl.Game.G2")) DoQuestCheckDelay("GoldenGirl_Game2Res", 1.0);
-			if (CheckAttribute(pchar, "questTemp.GoldenGirl.Game.G3")) DoQuestCheckDelay("GoldenGirl_Game3Res", 1.0);
-			if (CheckAttribute(pchar, "questTemp.GoldenGirl.Game.G4")) DoQuestCheckDelay("GoldenGirl_Game4Res", 1.0);
-		}
-	}
-	else
+        AddMoneyToCharacter(pchar, iMoneyP - sti(pchar.Money)); // mitrokosta раздача денег теперь в конце
+        AddMoneyToCharacter(npchar, iMoneyN - sti(npchar.Money));
+        Statistic_AddValue(Pchar, "GameCards_Win", iHeroWin);
+        Achievment_SetStat(pchar, 25, iHeroWin);
+        AddCharacterExpToSkill(Pchar, SKILL_FORTUNE, iExpRate * 5 * iHeroWin);
+        AddCharacterExpToSkill(Pchar, SKILL_FORTUNE, iExpRate * 2 * iHeroLose);
+        Statistic_AddValue(Pchar, "GameCards_Lose", iHeroLose);
+        Achievment_SetStat(pchar, 26, iHeroLose);
+
+        bQuestCheckProcessFreeze = true;
+        WaitDate("", 0, 0, 0, 0, iTurnGame * 15);
+        bQuestCheckProcessFreeze = false;
+        RefreshLandTime();
+        EndCancelInterface(true);
+        // Jason Дороже золота
+        if (CheckAttribute(pchar, "questTemp.GoldenGirl.Game")) // идет квестовая игра
+        {
+            if (CheckAttribute(pchar, "questTemp.GoldenGirl.Game.G1"))
+                DoQuestCheckDelay("GoldenGirl_Game1Res", 1.0);
+            if (CheckAttribute(pchar, "questTemp.GoldenGirl.Game.G2"))
+                DoQuestCheckDelay("GoldenGirl_Game2Res", 1.0);
+            if (CheckAttribute(pchar, "questTemp.GoldenGirl.Game.G3"))
+                DoQuestCheckDelay("GoldenGirl_Game3Res", 1.0);
+            if (CheckAttribute(pchar, "questTemp.GoldenGirl.Game.G4"))
+                DoQuestCheckDelay("GoldenGirl_Game4Res", 1.0);
+        }
+    }
+    else
     {
         PlaySound("interface\knock.wav");
     }
@@ -201,69 +205,74 @@ void Exit()
 
 void ProcessCommandExecute()
 {
-	string comName = GetEventData();
-	string nodName = GetEventData();
-	ref chr = GetMainCharacter();
+    string comName = GetEventData();
+    string nodName = GetEventData();
+    ref chr = GetMainCharacter();
 
-	switch(nodName)
-	{
-    	case "B_PACK":
-    		if(comName=="activate" || comName=="click")
-    		{
-                if (openExit == true)
-                {   // еще одна игра
-                    if (bStartGame != 100)
-                    {
-                        dir_i = -dir_i_start;
-                        dir_i_start = dir_i;
-                        iTurnGame++;
-                        NewGameBegin();
-                        openExit = false;
+    switch (nodName)
+    {
+    case "B_PACK":
+        if (comName == "activate" || comName == "click")
+        {
+            if (openExit == true)
+            { // еще одна игра
+                if (bStartGame != 100)
+                {
+                    dir_i = -dir_i_start;
+                    dir_i_start = dir_i;
+                    iTurnGame++;
+                    NewGameBegin();
+                    openExit = false;
+                }
+                else
+                {
+                    PlaySound("interface\knock.wav");
+                }
+            }
+            else
+            { // ГГ берет карты
+                if (bStartGame < 2)
+                    break; // еще сдают
+                if (bStartGame == 100)
+                    break; // открываемся
+
+                if (dir_i == 1 && (iMoneyP - iRate) < 0)
+                {
+                    PlaySound("interface\knock.wav");
+                    SetFormatedText("INFO_TEXT", "Что, денежки кончились? Бедненький :)");
+                    break;
+                }
+                if (dir_i == -1 && (iMoneyN - iRate) < 0)
+                {
+                    PlaySound("interface\knock.wav");
+                    SetFormatedText("INFO_TEXT", "Я на мели!!! Вот не пруха!");
+                    break;
+                }
+
+                if (dir_i == 1)
+                {
+                    if (cardMove)
+                    { // mitrokosta фикс множественного взятия
+                        break;
                     }
                     else
                     {
-                        PlaySound("interface\knock.wav");
+                        cardMove = true; // начинаем перемещение
                     }
-                }
-                else
-                {   // ГГ берет карты
-                    if (bStartGame <2) break; // еще сдают
-                    if (bStartGame == 100) break; // открываемся
-                    
-                    if (dir_i == 1 && (iMoneyP - iRate) < 0)
-                    {
-                        PlaySound("interface\knock.wav");
-                        SetFormatedText("INFO_TEXT", "Что, денежки кончились? Бедненький :)");
-                        break;
-                    }
-                    if (dir_i == -1 && (iMoneyN - iRate) < 0)
-                    {
-                        PlaySound("interface\knock.wav");
-                        SetFormatedText("INFO_TEXT", "Я на мели!!! Вот не пруха!");
-                        break;
-                    }
-                    
-                    if (dir_i == 1)
-                    {
-						if (cardMove) { // mitrokosta фикс множественного взятия
-							break;
-						} else {
-							cardMove = true; // начинаем перемещение
-						}
-                        move_i = 0;
-                        PlaySound("interface\took_item.wav");
-                        PostEvent("My_eventMoveImg", 100);
-                        
-                        PutNextCoin();
-                        money_i++;
+                    move_i = 0;
+                    PlaySound("interface\took_item.wav");
+                    PostEvent("My_eventMoveImg", 100);
 
-                        iMoneyP = iMoneyP - iRate;
-                        iChest += iRate;
-                        howCard--;
-                        cardsP[howPchar] = cardsPack[howCard];
-                        howPchar++;
-                    }
-                    /*
+                    PutNextCoin();
+                    money_i++;
+
+                    iMoneyP = iMoneyP - iRate;
+                    iChest += iRate;
+                    howCard--;
+                    cardsP[howPchar] = cardsPack[howCard];
+                    howPchar++;
+                }
+                /*
                     else
                     {
                         PutNextCoinOp();
@@ -274,61 +283,61 @@ void ProcessCommandExecute()
                         cardsN[howNpchar] = cardsPack[howCard];
                         howNpchar++;
                     }  */
-                    ShowMoney();
-                }
-    		}
-    	break;
-    	
-    	case "B_ICON_1":
-    		if(comName=="activate" || comName=="click")
-    		{
-                if (dir_i == 1 && bStartGame != 100 && bStartGame > 1 && !openExit) // только передача хода или открываемся
+                ShowMoney();
+            }
+        }
+        break;
+
+    case "B_ICON_1":
+        if (comName == "activate" || comName == "click")
+        {
+            if (dir_i == 1 && bStartGame != 100 && bStartGame > 1 && !openExit) // только передача хода или открываемся
+            {
+                dir_i = -1; // смена хода
+                SetNextTip();
+                if (dir_i_start == -1) // комп начинал игру первый
                 {
-                    dir_i = -1; // смена хода
-                    SetNextTip();
-                    if (dir_i_start == -1)// комп начинал игру первый
-                    {
-                        SetFormatedText("INFO_TEXT", "Открываемся!!!");
-                        bStartGame = 100;
-                        PostEvent("My_eOpenCards", 2000);
-                    }
-                    else
-                    {// комп должен себе набрать
-                        SetFormatedText("INFO_TEXT", "Так, теперь мне карту.");
-                        
-                        move_i = 0;
-                        PlaySound("interface\took_item.wav");
-                        PostEvent("My_eventMoveImg", 500);
-                        
-                        PutNextCoinOp();
-                        moneyOp_i++;
-                        iMoneyN = iMoneyN - iRate;
-                        iChest += iRate;
-                        howCard--;
-                        cardsN[howNpchar] = cardsPack[howCard];
-                        howNpchar++;
-                        ShowMoney();
-                    }
+                    SetFormatedText("INFO_TEXT", "Открываемся!!!");
+                    bStartGame = 100;
+                    PostEvent("My_eOpenCards", 2000);
                 }
                 else
-                {
-                    PlaySound("interface\knock.wav");
+                { // комп должен себе набрать
+                    SetFormatedText("INFO_TEXT", "Так, теперь мне карту.");
+
+                    move_i = 0;
+                    PlaySound("interface\took_item.wav");
+                    PostEvent("My_eventMoveImg", 500);
+
+                    PutNextCoinOp();
+                    moneyOp_i++;
+                    iMoneyN = iMoneyN - iRate;
+                    iChest += iRate;
+                    howCard--;
+                    cardsN[howNpchar] = cardsPack[howCard];
+                    howNpchar++;
+                    ShowMoney();
                 }
-    		}
-    	break;
-    	
-    	case "B_ICON_2":
-    		if(comName=="activate" || comName=="click")
-    		{
-                //PlaySound("interface\knock.wav");
-    		}
-    	break;
-	}
+            }
+            else
+            {
+                PlaySound("interface\knock.wav");
+            }
+        }
+        break;
+
+    case "B_ICON_2":
+        if (comName == "activate" || comName == "click")
+        {
+            //PlaySound("interface\knock.wav");
+        }
+        break;
+    }
 }
 
 void MoveImg()
 {
-    CreateImage("BLANK","CARDS","blank", 90+move_i*25, 210+ dir_i*move_i*22, 90 + scx+move_i*25, 210 + scy + dir_i*move_i*22);
+    CreateImage("BLANK", "CARDS", "blank", 90 + move_i * 25, 210 + dir_i * move_i * 22, 90 + scx + move_i * 25, 210 + scy + dir_i * move_i * 22);
     move_i++;
     if (move_i < 10)
     {
@@ -336,18 +345,19 @@ void MoveImg()
     }
     else
     {
-		cardMove = false; // закончили перемещение
-        CreateImage("BLANK","","", 0, 0, 0, 0);
+        cardMove = false; // закончили перемещение
+        CreateImage("BLANK", "", "", 0, 0, 0, 0);
         PlaySound("interface\button3.wav");
         // перерисуем все карты на руках
         RedrawCards();
-        
+
         // начало игры, по карте каждому -->
         if (bStartGame < 2)
         {
             dir_i = -dir_i; // смена хода
             bStartGame++;
-            if (bStartGame == 1)  PostEvent("My_eStartGame", 500);
+            if (bStartGame == 1)
+                PostEvent("My_eStartGame", 500);
         }
         // начало игры, по карте каждому <--
         SetNextTip();
@@ -358,50 +368,49 @@ void MoveImg()
 
 void PutNextCoin()
 {
-    CreateImage("Money_"+money_i,"CARDS",money_s, 280+money_i*3, 280-money_i*3, 280+money_i*3 + smxy, 280-money_i*3 + smxy);
+    CreateImage("Money_" + money_i, "CARDS", money_s, 280 + money_i * 3, 280 - money_i * 3, 280 + money_i * 3 + smxy, 280 - money_i * 3 + smxy);
 }
 void PutNextCoinOp()
 {
-    CreateImage("Money_"+(18+moneyOp_i),"CARDS",money_s, 380+moneyOp_i*3, 280-moneyOp_i*3, 380+moneyOp_i*3 + smxy, 280-moneyOp_i*3 + smxy);
+    CreateImage("Money_" + (18 + moneyOp_i), "CARDS", money_s, 380 + moneyOp_i * 3, 280 - moneyOp_i * 3, 380 + moneyOp_i * 3 + smxy, 280 - moneyOp_i * 3 + smxy);
 }
 
 void PackShake()
 {
     // тасуем карты
-    int  i;
+    int i;
     bool ok;
-    int  nextCard;
-    
+    int nextCard;
+
     howCard = 0;
-    while (howCard <36)
+    while (howCard < 36)
     {
         ok = false;
         while (!ok)
         {
             ok = true;
-            nextCard = rand(35)+1;
-            for (i=0; i<howCard; i++)
-        	{
+            nextCard = rand(35) + 1;
+            for (i = 0; i < howCard; i++)
+            {
                 if (nextCard == cardsPack[i])
                 {
                     ok = false;
                     break;
                 }
-        	}
-        	if (ok)
-        	{
+            }
+            if (ok)
+            {
                 cardsPack[howCard] = nextCard;
                 //log_info(""+nextCard);
                 howCard++;
-                
-        	}
-    	}
+            }
+        }
     }
     /*howCard = 36;
     for (i=0; i<howCard; i++)
-	{
+    {
         cardsPack[i] = i-20;
-	}*/
+    }*/
 }
 void RedrawCards()
 {
@@ -411,48 +420,47 @@ void RedrawCards()
     k = scx;
     if (howPchar > 6)
     {
-        k = scx/2;
+        k = scx / 2;
     }
-    for (i=0; i<howPchar; i++)
-	{
-        sTemp = "c"+cardsP[i];
-        CreateImage("PCard"+i,"CARDS", NullCharacter.Cards.(sTemp).pic, 400 - howPchar*k/2 + i*k , 394, 400 - howPchar*k/2 + i*k + scx, 394 + scy);
-	}
-	k = scx;
-	if (howNpchar > 6)
+    for (i = 0; i < howPchar; i++)
     {
-        k = scx/2;
+        sTemp = "c" + cardsP[i];
+        CreateImage("PCard" + i, "CARDS", NullCharacter.Cards.(sTemp).pic, 400 - howPchar * k / 2 + i * k, 394, 400 - howPchar * k / 2 + i * k + scx, 394 + scy);
     }
-	for (i=0; i<howNpchar; i++)
-	{
-        sTemp = "c"+cardsN[i];
+    k = scx;
+    if (howNpchar > 6)
+    {
+        k = scx / 2;
+    }
+    for (i = 0; i < howNpchar; i++)
+    {
+        sTemp = "c" + cardsN[i];
         sTemp = NullCharacter.Cards.(sTemp).pic;
         if (!openExit)
         {
             sTemp = "blank";
         }
-        CreateImage("PCard"+(18+i),"CARDS", sTemp, 400 - howNpchar*k/2 + i*k , 36, 400 - howNpchar*k/2 + i*k + scx, 36 + scy);
-	}
-    
+        CreateImage("PCard" + (18 + i), "CARDS", sTemp, 400 - howNpchar * k / 2 + i * k, 36, 400 - howNpchar * k / 2 + i * k + scx, 36 + scy);
+    }
 }
 void RedrawDeck()
 {
     // монетки с запасом
     int i;
-    for (i=35; i>=0; i--)
-	{
-        CreateImage("Money_"+i,"","", 0, 0, 0, 0);
-        CreateImage("PCard"+i, "", "", 0, 0, 0, 0);
-	}
-	money_i = 0; // индекс монетки
+    for (i = 35; i >= 0; i--)
+    {
+        CreateImage("Money_" + i, "", "", 0, 0, 0, 0);
+        CreateImage("PCard" + i, "", "", 0, 0, 0, 0);
+    }
+    money_i = 0; // индекс монетки
     moneyOp_i = 0;
     iChest = 0; // на кону
-    
+
     ShowMoney();
-    
+
     // тасуем карты
     PackShake();
-    howPchar  = 0; // карты на руках
+    howPchar = 0; // карты на руках
     howNpchar = 0;
     SetNextTip();
     BetaInfo();
@@ -462,24 +470,24 @@ void SetNextTip()
 {
     if (dir_i == 1)
     {
-        if (bStartGame <2)
+        if (bStartGame < 2)
         {
-            SetFormatedText("INFO_TEXT","Теперь тебе карту."+NewStr()+"Делай ставку!");
+            SetFormatedText("INFO_TEXT", "Теперь тебе карту." + NewStr() + "Делай ставку!");
         }
         else
         {
-            SetFormatedText("INFO_TEXT",LinkRandPhrase("Твой ход!", "Давай, не тяни кота за хвост...", RandSwear() + "Бери карту себе! Не задерживай!"));
+            SetFormatedText("INFO_TEXT", LinkRandPhrase("Твой ход!", "Давай, не тяни кота за хвост...", RandSwear() + "Бери карту себе! Не задерживай!"));
         }
     }
     else
     {
-        if (bStartGame <2)
+        if (bStartGame < 2)
         {
-            SetFormatedText("INFO_TEXT","Теперь мне карту."+NewStr()+"Кладу монету!");
+            SetFormatedText("INFO_TEXT", "Теперь мне карту." + NewStr() + "Кладу монету!");
         }
         else
         {
-            SetFormatedText("INFO_TEXT",LinkRandPhrase("Мой ход!", "Посмотрим, что там за карта...", "Ну-ка, опять шиперки..."));
+            SetFormatedText("INFO_TEXT", LinkRandPhrase("Мой ход!", "Посмотрим, что там за карта...", "Ну-ка, опять шиперки..."));
         }
     }
 }
@@ -488,10 +496,10 @@ int CountCardsP()
     int ret = 0;
     int i;
     string sTemp;
-    
+
     for (i = 0; i < howPchar; i++)
     {
-        sTemp = "c"+cardsP[i];
+        sTemp = "c" + cardsP[i];
         ret += sti(NullCharacter.Cards.(sTemp).count);
     }
     return ret;
@@ -505,7 +513,7 @@ int CountCardsN()
 
     for (i = 0; i < howNpchar; i++)
     {
-        sTemp = "c"+cardsN[i];
+        sTemp = "c" + cardsN[i];
         ret += sti(NullCharacter.Cards.(sTemp).count);
     }
     return ret;
@@ -514,21 +522,21 @@ void BetaInfo()
 {
     if (bBettaTestMode)
     {
-        GameInterface.strings.Beta_P       = "Beta_P " + CountCardsP();
-        GameInterface.strings.Beta_N       = "Beta_N " + CountCardsN();
-        GameInterface.strings.Beta_Next    = "Beta_Next " + NextCardPack();
-        GameInterface.strings.Beta_MoneyN  = "Beta_MoneyN " + MakeMoneyShow(iMoneyN, MONEY_SIGN,MONEY_DELIVER);
-        GameInterface.strings.Beta_WinLose = "Beta Win " + (Statistic_AddValue(Pchar, "GameCards_Win", 0)+iHeroWin) + " Lose " + (Statistic_AddValue(Pchar, "GameCards_Lose", 0)+iHeroLose);
+        GameInterface.strings.Beta_P = "Beta_P " + CountCardsP();
+        GameInterface.strings.Beta_N = "Beta_N " + CountCardsN();
+        GameInterface.strings.Beta_Next = "Beta_Next " + NextCardPack();
+        GameInterface.strings.Beta_MoneyN = "Beta_MoneyN " + MakeMoneyShow(iMoneyN, MONEY_SIGN, MONEY_DELIVER);
+        GameInterface.strings.Beta_WinLose = "Beta Win " + (Statistic_AddValue(Pchar, "GameCards_Win", 0) + iHeroWin) + " Lose " + (Statistic_AddValue(Pchar, "GameCards_Lose", 0) + iHeroLose);
     }
 }
 int NextCardPack()
 {
     string sTemp;
     int ret;
-    
-    sTemp = "c"+cardsPack[howCard-1];
+
+    sTemp = "c" + cardsPack[howCard - 1];
     ret = sti(NullCharacter.Cards.(sTemp).count);
-    
+
     return ret;
 }
 // сдать карту
@@ -565,17 +573,17 @@ void StartGame()
 
 void ShowMoney()
 {
-    GameInterface.strings.Money        = MakeMoneyShow(iMoneyP,MONEY_SIGN,MONEY_DELIVER);
-    GameInterface.strings.MoneyInChest = MakeMoneyShow(iChest,MONEY_SIGN,MONEY_DELIVER);
+    GameInterface.strings.Money = MakeMoneyShow(iMoneyP, MONEY_SIGN, MONEY_DELIVER);
+    GameInterface.strings.MoneyInChest = MakeMoneyShow(iChest, MONEY_SIGN, MONEY_DELIVER);
 }
 
 bool CheckGame()
 {
     string sTemp;
-    int   ok = 0;
-    bool  ok1;
-    bool  ret = false;
-    
+    int ok = 0;
+    bool ok1;
+    bool ret = false;
+
     if (CountCardsP() > 21)
     {
         ok = -1; // выиграл комп
@@ -585,71 +593,72 @@ bool CheckGame()
     if (CountCardsN() > 21)
     {
         ok = 1; // выиграл ГГ
-        sTemp = RandSwear() + "У меня ПЕРЕБОР! Ты выиграл"+ GetSexPhrase("","а") +".";
+        sTemp = RandSwear() + "У меня ПЕРЕБОР! Ты выиграл" + GetSexPhrase("", "а") + ".";
         iHeroWin++;
     }
     if (ok != 0)
     {
         EndGameCount(ok);
-        if (ok == 1) RedrawCards(); // покажем перебор
-        
-		// Jason Дороже золота
-		if (CheckAttribute(pchar, "questTemp.GoldenGirl.Game")) // идет квестовая игра
-		{
-			if (ok == -1) // выиграл комп
-			{
-				if (iMoneyP > iRate)
-				{
-					sTemp += NewStr() + RandPhraseSimple("Играем дальше!","Продолжаем!");
-				}
-				else
-				{
-					bStartGame = 100;//признах запрета новой игры
-					sTemp += NewStr() + "Все, капитан, у вас больше не осталось денег на ставку. Вы проиграли!";
-					pchar.questTemp.GoldenGirl.Game.Fail = "true"; // ГГ проиграл
-				}
-			}
-			else
-			{
-			if (iMoneyN > iRate) // есть деньги на игру
-			{
-				if (iMoneyP > iRate)
-				{
-					sTemp += NewStr() + RandPhraseSimple("Играем дальше!","Продолжаем!");
-				}
-				else
-				{
-					bStartGame = 100;//признах запрета новой игры
-						sTemp += NewStr() + "Все, тебе больше нечего ставить. Ты проиграл!";
-					pchar.questTemp.GoldenGirl.Game.Fail = "true"; // ГГ проиграл
-				}
-			}
-			else
-			{
-				bStartGame = 100;//признах запрета новой игры
-					sTemp += NewStr() + "Все, мне больше нечего ставить. Ты победил!";
-				pchar.questTemp.GoldenGirl.Game.Win = "true"; // ГГ выиграл
-			}	
-		}
-		}
-		else
-		{
-        if (CheckNextGame() && rand(10) < 10) // есть деньги на игру
+        if (ok == 1)
+            RedrawCards(); // покажем перебор
+
+        // Jason Дороже золота
+        if (CheckAttribute(pchar, "questTemp.GoldenGirl.Game")) // идет квестовая игра
         {
-            sTemp += NewStr() + RandPhraseSimple("Повторим?","Еще разок?");
+            if (ok == -1) // выиграл комп
+            {
+                if (iMoneyP > iRate)
+                {
+                    sTemp += NewStr() + RandPhraseSimple("Играем дальше!", "Продолжаем!");
+                }
+                else
+                {
+                    bStartGame = 100; //признах запрета новой игры
+                    sTemp += NewStr() + "Все, капитан, у вас больше не осталось денег на ставку. Вы проиграли!";
+                    pchar.questTemp.GoldenGirl.Game.Fail = "true"; // ГГ проиграл
+                }
+            }
+            else
+            {
+                if (iMoneyN > iRate) // есть деньги на игру
+                {
+                    if (iMoneyP > iRate)
+                    {
+                        sTemp += NewStr() + RandPhraseSimple("Играем дальше!", "Продолжаем!");
+                    }
+                    else
+                    {
+                        bStartGame = 100; //признах запрета новой игры
+                        sTemp += NewStr() + "Все, тебе больше нечего ставить. Ты проиграл!";
+                        pchar.questTemp.GoldenGirl.Game.Fail = "true"; // ГГ проиграл
+                    }
+                }
+                else
+                {
+                    bStartGame = 100; //признах запрета новой игры
+                    sTemp += NewStr() + "Все, мне больше нечего ставить. Ты победил!";
+                    pchar.questTemp.GoldenGirl.Game.Win = "true"; // ГГ выиграл
+                }
+            }
         }
         else
         {
-            bStartGame = 100;//признах запрета новой игры
-            sTemp += NewStr() + "Все, с меня хватит!";
+            if (CheckNextGame() && rand(10) < 10) // есть деньги на игру
+            {
+                sTemp += NewStr() + RandPhraseSimple("Повторим?", "Еще разок?");
+            }
+            else
+            {
+                bStartGame = 100; //признах запрета новой игры
+                sTemp += NewStr() + "Все, с меня хватит!";
+            }
         }
-		}
         SetFormatedText("INFO_TEXT", sTemp);
         ret = true;
     }
     else
     {
-        ok1 = (CountCardsN() > 16) && (CountCardsN() <22);
+        ok1 = (CountCardsN() > 16) && (CountCardsN() < 22);
         // жухло!!!!! -->
         if (!CheckAttribute(pchar, "questTemp.GoldenGirl.Game") && GetCharacterSkillToOld(pchar, SKILL_FORTUNE) + makeint(isEquippedArtefactUse(pchar, "totem_13", 0.0, 2.0)) < rand(12)) // Jason Дороже золота
         {
@@ -663,17 +672,17 @@ bool CheckGame()
             }
         }
         // жухло!!!!! <--
-        
+
         if (ok1 || (iMoneyN - iRate) < 0)
         {
-            if (dir_i == -1 && dir_i_start == 1)// комп ходит последним
+            if (dir_i == -1 && dir_i_start == 1) // комп ходит последним
             {
                 SetFormatedText("INFO_TEXT", "Мне хватит. Открываемся!");
                 bStartGame = 100;
                 PostEvent("My_eOpenCards", 2000);
                 ret = true;
             }
-            if (dir_i == -1 && dir_i_start == -1)// комп начинает
+            if (dir_i == -1 && dir_i_start == -1) // комп начинает
             {
                 dir_i = 1;
                 SetFormatedText("INFO_TEXT", "Теперь ты себе! Мне хватит.");
@@ -684,7 +693,7 @@ bool CheckGame()
         {
             if (dir_i == -1 && bStartGame >= 2) // комп играет сам
             {
-				cardMove = true; // начинаем перемещение
+                cardMove = true; // начинаем перемещение
                 move_i = 0;
                 PlaySound("interface\took_item.wav");
                 PostEvent("My_eventMoveImg", 500);
@@ -697,7 +706,7 @@ bool CheckGame()
                 cardsN[howNpchar] = cardsPack[howCard];
                 howNpchar++;
                 ShowMoney();
-                
+
                 ret = true;
             }
         }
@@ -709,7 +718,7 @@ void NewGameBegin()
 {
     RedrawDeck(); // новая игра
     bStartGame = 0;
-    SetFormatedText("INFO_TEXT","Сдаем карты. "+NewStr()+"Делаем ставки.");
+    SetFormatedText("INFO_TEXT", "Сдаем карты. " + NewStr() + "Делаем ставки.");
     PostEvent("My_eStartGame", 1000);
 }
 
@@ -718,85 +727,85 @@ void EndGameCount(int who)
     openExit = true;
     if (who == 1) // ГГ
     {
-		iMoneyP += iChest;
+        iMoneyP += iChest;
     }
     else
     {
-		iMoneyN += iChest;
+        iMoneyN += iChest;
     }
 }
 
 void OpenCards();
 {
-	int iRes = 0; // Jason Дороже золота
+    int iRes = 0; // Jason Дороже золота
     string sTemp;
-    if (CountCardsP() > makefloat(CountCardsN() + 0.1*dir_i_start)) // преимущество тому, кто сдает (те ходит последним)
+    if (CountCardsP() > makefloat(CountCardsN() + 0.1 * dir_i_start)) // преимущество тому, кто сдает (те ходит последним)
     {
         EndGameCount(1);
-        sTemp = RandSwear() + "Ты выиграл"+ GetSexPhrase("","а") +". У тебя " + CountCardsP() +", у меня " + CountCardsN()+"." ;
+        sTemp = RandSwear() + "Ты выиграл" + GetSexPhrase("", "а") + ". У тебя " + CountCardsP() + ", у меня " + CountCardsN() + ".";
         iHeroWin++;
-		iRes = 1; // Jason Дороже золота выиграл ГГ
+        iRes = 1; // Jason Дороже золота выиграл ГГ
     }
     else
     {
         EndGameCount(-1);
-        sTemp = "Удача на моей стороне. У меня " + CountCardsN() +", у тебя " + CountCardsP()+". Я победил!";
+        sTemp = "Удача на моей стороне. У меня " + CountCardsN() + ", у тебя " + CountCardsP() + ". Я победил!";
         iHeroLose++;
-		iRes = -1; // Jason Дороже золота выиграл комп
+        iRes = -1; // Jason Дороже золота выиграл комп
     }
-	// Jason Дороже золота
-	if (CheckAttribute(pchar, "questTemp.GoldenGirl.Game")) // идет квестовая игра
-	{
-		if (iRes == -1) // выиграл комп
-		{
-			if (iMoneyP > iRate)
-			{
-				sTemp += NewStr() + RandPhraseSimple("Играем дальше!","Продолжаем!");
-				bStartGame = 2;
-			}
-			else
-			{
-				bStartGame = 100;//признах запрета новой игры
-				sTemp += NewStr() + "Все, капитан, у вас больше не осталось денег на ставку. Вы проиграли!";
-				pchar.questTemp.GoldenGirl.Game.Fail = "true"; // ГГ проиграл
-			}
-		}
-		else
-	{
-		if (iMoneyN > iRate) // есть деньги на игру
-		{
-			if (iMoneyP > iRate)
-			{
-				sTemp += NewStr() + RandPhraseSimple("Играем дальше!","Продолжаем!");
-        bStartGame = 2;
+    // Jason Дороже золота
+    if (CheckAttribute(pchar, "questTemp.GoldenGirl.Game")) // идет квестовая игра
+    {
+        if (iRes == -1) // выиграл комп
+        {
+            if (iMoneyP > iRate)
+            {
+                sTemp += NewStr() + RandPhraseSimple("Играем дальше!", "Продолжаем!");
+                bStartGame = 2;
+            }
+            else
+            {
+                bStartGame = 100; //признах запрета новой игры
+                sTemp += NewStr() + "Все, капитан, у вас больше не осталось денег на ставку. Вы проиграли!";
+                pchar.questTemp.GoldenGirl.Game.Fail = "true"; // ГГ проиграл
+            }
+        }
+        else
+        {
+            if (iMoneyN > iRate) // есть деньги на игру
+            {
+                if (iMoneyP > iRate)
+                {
+                    sTemp += NewStr() + RandPhraseSimple("Играем дальше!", "Продолжаем!");
+                    bStartGame = 2;
+                }
+                else
+                {
+                    bStartGame = 100; //признах запрета новой игры
+                    sTemp += NewStr() + "Все, тебе больше нечего ставить. Ты проиграл!";
+                    pchar.questTemp.GoldenGirl.Game.Fail = "true"; // ГГ проиграл
+                }
+            }
+            else
+            {
+                bStartGame = 100; //признах запрета новой игры
+                sTemp += NewStr() + "Все, мне больше нечего ставить. Ты победил!";
+                pchar.questTemp.GoldenGirl.Game.Win = "true"; // ГГ выиграл
+            }
+        }
     }
     else
     {
-        bStartGame = 100;//признах запрета новой игры
-					sTemp += NewStr() + "Все, тебе больше нечего ставить. Ты проиграл!";
-				pchar.questTemp.GoldenGirl.Game.Fail = "true"; // ГГ проиграл
-			}
-		}
-		else
-		{
-			bStartGame = 100;//признах запрета новой игры
-				sTemp += NewStr() + "Все, мне больше нечего ставить. Ты победил!";
-			pchar.questTemp.GoldenGirl.Game.Win = "true"; // ГГ выиграл
-		}	
-	}
-	}
-	else
-	{
-		if (CheckNextGame() && rand(10) < 10) // есть деньги на игру
-		{
-			sTemp += NewStr() + RandPhraseSimple("Повторим?","Еще разок?");
-			bStartGame = 2;
-		}
-		else
-		{
-			bStartGame = 100;//признах запрета новой игры
-			sTemp += NewStr() + "Все, с меня хватит!";
-		}
+        if (CheckNextGame() && rand(10) < 10) // есть деньги на игру
+        {
+            sTemp += NewStr() + RandPhraseSimple("Повторим?", "Еще разок?");
+            bStartGame = 2;
+        }
+        else
+        {
+            bStartGame = 100; //признах запрета новой игры
+            sTemp += NewStr() + "Все, с меня хватит!";
+        }
     }
     SetFormatedText("INFO_TEXT", sTemp);
     RedrawCards();
@@ -804,8 +813,10 @@ void OpenCards();
 bool CheckNextGame()
 {
     bool ret = true;
-    if (iRate*3 > iMoneyN) ret = false;
-    if (iRate*3 > iMoneyP) ret = false;
-    
+    if (iRate * 3 > iMoneyN)
+        ret = false;
+    if (iRate * 3 > iMoneyP)
+        ret = false;
+
     return ret;
 }

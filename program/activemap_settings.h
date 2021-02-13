@@ -10,11 +10,11 @@
 /* Boundaries opacity(1-100) and RGB(0-255) settings
  * Used when SHOW_BOUNDARIES is set to 1
  */
-#define BOUNDARIES_OPACITY  65
+#define BOUNDARIES_OPACITY 65
 
-#define BOUNDARIES_R 		0
-#define BOUNDARIES_G		206
-#define BOUNDARIES_B		209
+#define BOUNDARIES_R 0
+#define BOUNDARIES_G 206
+#define BOUNDARIES_B 209
 
 /* Modes for displaying time to travel
  * 0 - display approximate time interval in days

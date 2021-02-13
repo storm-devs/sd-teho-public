@@ -4,65 +4,65 @@ void InitInterface(string iniName)
 {
     // лочим квест и карту
     bQuestCheckProcessFreeze = true;
-    if(IsEntity(&worldMap))
+    if (IsEntity(&worldMap))
     {
-    	wdmLockReload            = true;
+        wdmLockReload = true;
     }
     StartAboveForm(true);
-    
+
     GameInterface.title = "titleNationLegend";
 
-    SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
+    SendMessage(&GameInterface, "ls", MSG_INTERFACE_INIT, iniName);
 
-	CalculateNationRelat();
+    CalculateNationRelat();
 
-	SetFormatedText("INFO_TEXT",totalInfo);
-	SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE,"INFO_TEXT",5);
+    SetFormatedText("INFO_TEXT", totalInfo);
+    SendMessage(&GameInterface, "lsl", MSG_INTERFACE_MSG_TO_NODE, "INFO_TEXT", 5);
 
-	SetEventHandler("InterfaceBreak","ProcessBreakExit",0);
-	SetEventHandler("exitCancel","ProcessCancelExit",0);
-	SetEventHandler("ievnt_command","ProcCommand",0);
-	SetEventHandler("evntDoPostExit","DoPostExit",0);
+    SetEventHandler("InterfaceBreak", "ProcessBreakExit", 0);
+    SetEventHandler("exitCancel", "ProcessCancelExit", 0);
+    SetEventHandler("ievnt_command", "ProcCommand", 0);
+    SetEventHandler("evntDoPostExit", "DoPostExit", 0);
 }
 
 void ProcessBreakExit()
 {
-	IDoExit( RC_INTERFACE_SALARY_EXIT );
+    IDoExit(RC_INTERFACE_SALARY_EXIT);
 }
 
 void ProcessCancelExit()
 {
-	IDoExit( RC_INTERFACE_SALARY_EXIT );
+    IDoExit(RC_INTERFACE_SALARY_EXIT);
 }
 
 void IDoExit(int exitCode)
 {
     EndAboveForm(true);
-    
-	DelEventHandler("InterfaceBreak","ProcessBreakExit");
-	DelEventHandler("exitCancel","ProcessCancelExit");
-	DelEventHandler("ievnt_command","ProcCommand");
-	DelEventHandler("evntDoPostExit","DoPostExit");
 
-	interfaceResultCommand = exitCode;
-	EndCancelInterface(true);
-    PostEvent("StopQuestCheckProcessFreeze", 500);//boal 230804 заморозка проверки квестов
+    DelEventHandler("InterfaceBreak", "ProcessBreakExit");
+    DelEventHandler("exitCancel", "ProcessCancelExit");
+    DelEventHandler("ievnt_command", "ProcCommand");
+    DelEventHandler("evntDoPostExit", "DoPostExit");
+
+    interfaceResultCommand = exitCode;
+    EndCancelInterface(true);
+    PostEvent("StopQuestCheckProcessFreeze", 500); //boal 230804 заморозка проверки квестов
 }
 
 void ProcCommand()
 {
-	string comName = GetEventData();
-	string nodName = GetEventData();
+    string comName = GetEventData();
+    string nodName = GetEventData();
 
-	switch(nodName)
-	{
-    	case "B_OK":
-    		if(comName=="activate" || comName=="click")
-    		{
-                IDoExit(RC_INTERFACE_SALARY_EXIT);
-    		}
-    	break;
-	}
+    switch (nodName)
+    {
+    case "B_OK":
+        if (comName == "activate" || comName == "click")
+        {
+            IDoExit(RC_INTERFACE_SALARY_EXIT);
+        }
+        break;
+    }
 }
 
 void CalculateNationRelat()
@@ -72,66 +72,65 @@ void CalculateNationRelat()
 
     // boal 04.04.04 навел марафет в коде - красота :)
     bool ok1, ok2;
-    
+
     Nation1 = 1;
     Nation2 = 1;
     while (Nation1 == Nation2)
     {
-	    switch (Rand(3))
-	    {
-	        case 0:
-		        Nation1 = ENGLAND;
-	        break;
-
-	        case 1:
-		        Nation1 = FRANCE;
-	        break;
-
-	        case 2:
-		        Nation1 = HOLLAND;
-	        break;
-
-	        case 3:
-		        Nation1 = SPAIN;
-	        break;
-	    }
-
-	    switch (Rand(3))
-	    {
-	        case 0:
-		       Nation2 = SPAIN;
-	        break;
-	        case 1:
-		       Nation2 = HOLLAND;
-	        break;
-	        case 2:
-		        Nation2 = FRANCE;
-	        break;
-	        case 3:
-		        Nation2 = ENGLAND;
-	        break;
-	    }
-    }
-
-
-    if (GetNationRelation(Nation1, Nation2) == RELATION_ENEMY || GetNationRelation(Nation1, Nation2) == RELATION_FRIEND)
-    {   // меняем крайние на середину
-        RelatNat = RELATION_NEUTRAL;
-    }
-    else
-    {   // нейтралы - случайно
-        switch(Rand(1))
+        switch (Rand(3))
         {
-            case 0:
-    	       RelatNat = RELATION_FRIEND;
+        case 0:
+            Nation1 = ENGLAND;
             break;
-            case 1:
-    	       RelatNat = RELATION_ENEMY;
+
+        case 1:
+            Nation1 = FRANCE;
+            break;
+
+        case 2:
+            Nation1 = HOLLAND;
+            break;
+
+        case 3:
+            Nation1 = SPAIN;
+            break;
+        }
+
+        switch (Rand(3))
+        {
+        case 0:
+            Nation2 = SPAIN;
+            break;
+        case 1:
+            Nation2 = HOLLAND;
+            break;
+        case 2:
+            Nation2 = FRANCE;
+            break;
+        case 3:
+            Nation2 = ENGLAND;
             break;
         }
     }
-//Фикс для эскадр, чтоб на время осады не поменялась на дружественные или нейтральные отношения.////////////////////////
- /*
+
+    if (GetNationRelation(Nation1, Nation2) == RELATION_ENEMY || GetNationRelation(Nation1, Nation2) == RELATION_FRIEND)
+    { // меняем крайние на середину
+        RelatNat = RELATION_NEUTRAL;
+    }
+    else
+    { // нейтралы - случайно
+        switch (Rand(1))
+        {
+        case 0:
+            RelatNat = RELATION_FRIEND;
+            break;
+        case 1:
+            RelatNat = RELATION_ENEMY;
+            break;
+        }
+    }
+    //Фикс для эскадр, чтоб на время осады не поменялась на дружественные или нейтральные отношения.////////////////////////
+    /*
     ref FortCh, CaptEsc;
     CaptEsc = GetCharacter(GetCharacterIndex("NatCapitan_1"));
 
@@ -145,25 +144,25 @@ void CalculateNationRelat()
             RelatNat = RELATION_ENEMY;
         }
     }     */
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	if (CheckAttribute(pchar, "questTemp.Patria.War")) // Jason, НСО
-	{
-		RelatNat = RELATION_ENEMY;
-		Nation1 = FRANCE;
-		Nation2 = HOLLAND;
-	}
-	if (CheckAttribute(pchar, "questTemp.Patria.Friend")) 
-	{
-		RelatNat = RELATION_FRIEND;
-		Nation1 = FRANCE;
-		Nation2 = ENGLAND;
-	}
-	if (CheckAttribute(pchar, "questTemp.Patria.Neutral")) 
-	{
-		RelatNat = RELATION_NEUTRAL;
-		Nation1 = FRANCE;
-		Nation2 = HOLLAND;
-	}
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    if (CheckAttribute(pchar, "questTemp.Patria.War")) // Jason, НСО
+    {
+        RelatNat = RELATION_ENEMY;
+        Nation1 = FRANCE;
+        Nation2 = HOLLAND;
+    }
+    if (CheckAttribute(pchar, "questTemp.Patria.Friend"))
+    {
+        RelatNat = RELATION_FRIEND;
+        Nation1 = FRANCE;
+        Nation2 = ENGLAND;
+    }
+    if (CheckAttribute(pchar, "questTemp.Patria.Neutral"))
+    {
+        RelatNat = RELATION_NEUTRAL;
+        Nation1 = FRANCE;
+        Nation2 = HOLLAND;
+    }
     SetNationRelationBoth(Nation1, Nation2, RelatNat);
 
     if (sti(mainCh.nation) == Nation1)
@@ -176,26 +175,26 @@ void CalculateNationRelat()
         SetNationRelation2MainCharacter(Nation1, RelatNat);
     }
     totalInfo = XI_ConvertString(GetNationNameByType(Nation1)) + " и " + XI_ConvertString(GetNationNameByType(Nation2));
-    if(RelatNat == RELATION_FRIEND)
+    if (RelatNat == RELATION_FRIEND)
     {
         totalInfo = totalInfo + " стали союзниками.";
     }
-    if(RelatNat == RELATION_ENEMY)
+    if (RelatNat == RELATION_ENEMY)
     {
         totalInfo = totalInfo + " перешли в состояние войны.";
     }
-    if(RelatNat == RELATION_NEUTRAL)
+    if (RelatNat == RELATION_NEUTRAL)
     {
         totalInfo = totalInfo + " перешли к нейтральным отношениям.";
     }
     Log_SetStringToLog(totalInfo); // boal fix tavern
-    SetNewGroupPicture("Nat1", "NATIONS",  GetNationNameByType(Nation1));
+    SetNewGroupPicture("Nat1", "NATIONS", GetNationNameByType(Nation1));
     SetNewGroupPicture("Nat2", "NATIONS", GetNationNameByType(Nation2));
     SetNewGroupPicture("RelNat", "relations", GetRelationName(GetNationRelation(Nation1, Nation2)));
 }
 
 void DoPostExit()
 {
-	int exitCode = GetEventData();
-	IDoExit(exitCode);
+    int exitCode = GetEventData();
+    IDoExit(exitCode);
 }

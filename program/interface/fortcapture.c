@@ -4,33 +4,31 @@ string sColonyName;
 
 void TEMP_ExitColony()
 {
-	SetFortCharacterCaptured(glob_captref,true);
-	ProcessCancelExit();
+    SetFortCharacterCaptured(glob_captref, true);
+    ProcessCancelExit();
 }
 
-void InitInterface_R(string iniName,ref captref)
+void InitInterface_R(string iniName, ref captref)
 {
-	GameInterface.title = "titleColonyCapture";
-	
-	glob_captref = captref;
+    GameInterface.title = "titleColonyCapture";
 
-	pchar.from_interface.fortCharacterIdx = captref.index;
+    glob_captref = captref;
 
-	SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
+    pchar.from_interface.fortCharacterIdx = captref.index;
 
-	SetEventHandler("InterfaceBreak","ProcessCancelExit",0);
-	SetEventHandler("exitCancel","ProcessCancelExit",0);
+    SendMessage(&GameInterface, "ls", MSG_INTERFACE_INIT, iniName);
 
-	TEMP_ExitColony(); // сразу в порт
+    SetEventHandler("InterfaceBreak", "ProcessCancelExit", 0);
+    SetEventHandler("exitCancel", "ProcessCancelExit", 0);
+
+    TEMP_ExitColony(); // сразу в порт
 }
 
 void ProcessCancelExit()
 {
-	DelEventHandler("InterfaceBreak","ProcessCancelExit");
-	DelEventHandler("exitCancel","ProcessCancelExit");
+    DelEventHandler("InterfaceBreak", "ProcessCancelExit");
+    DelEventHandler("exitCancel", "ProcessCancelExit");
 
-	interfaceResultCommand = RC_INTERFACE_FORTCAPTURE_EXIT;
-	EndCancelInterface(true);
+    interfaceResultCommand = RC_INTERFACE_FORTCAPTURE_EXIT;
+    EndCancelInterface(true);
 }
-
-

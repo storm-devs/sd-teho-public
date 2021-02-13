@@ -1,35 +1,35 @@
 /*
 void InitInterface(string iniName)
 {
-	GameInterface.title = "";
+    GameInterface.title = "";
 
-	SendMessage(&GameInterface, "ls", MSG_INTERFACE_INIT, iniName);
-	
-	SetEventHandler("OnNetMenuDisconnect", "ICancelProcedure", 0);
-	SetEventHandler("OnNetMenuReturn", "IReturnToGame", 0);
-	SetEventHandler("exitCancel", "IReturnToGame", 0);
+    SendMessage(&GameInterface, "ls", MSG_INTERFACE_INIT, iniName);
+    
+    SetEventHandler("OnNetMenuDisconnect", "ICancelProcedure", 0);
+    SetEventHandler("OnNetMenuReturn", "IReturnToGame", 0);
+    SetEventHandler("exitCancel", "IReturnToGame", 0);
 
-	FreezeGroupControls("BattleInterfaceControls", true);
+    FreezeGroupControls("BattleInterfaceControls", true);
 }
 
 void IDoExit(int exitCode)
 {
-	DelEventHandler("OnNetMenuDisconnect", "ICancelProcedure");
-	DelEventHandler("OnNetMenuReturn", "IReturnToGame");
+    DelEventHandler("OnNetMenuDisconnect", "ICancelProcedure");
+    DelEventHandler("OnNetMenuReturn", "IReturnToGame");
 
-	interfaceResultCommand = exitCode;
-	EndCancelInterface(true);
+    interfaceResultCommand = exitCode;
+    EndCancelInterface(true);
 }
 
 void ICancelProcedure()
 {
-	Net_Stop();
+    Net_Stop();
 
-	IDoExit( RC_INTERFACE_NET_FINDGAME );
+    IDoExit( RC_INTERFACE_NET_FINDGAME );
 }
 
 void IReturnToGame()
 {
-	IDoExit( INTERFACE_NET_NETMENU );
+    IDoExit( INTERFACE_NET_NETMENU );
 }
 */

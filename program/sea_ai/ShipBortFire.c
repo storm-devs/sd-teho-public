@@ -1,39 +1,39 @@
 void Ship_BortFire()
 {
-	float	dx, dy, dz, d2x, d2y, d2z;
-	float	ax = 0.0;
-	float 	az = 0.0;
-	float   vz = 0.0;
-	aref	firedShip;
-	string	bortName;
-	ref rCharacter = GetCharacter(GetEventData());
-	firedShip = GetEventData();
-	bortName = GetEventData();
-	dx = GetEventData();
-	dy = GetEventData();
-	dz = GetEventData();
-	d2x = GetEventData();
-	d2y = GetEventData();
-	d2z = GetEventData();
+    float dx, dy, dz, d2x, d2y, d2z;
+    float ax = 0.0;
+    float az = 0.0;
+    float vz = 0.0;
+    aref firedShip;
+    string bortName;
+    ref rCharacter = GetCharacter(GetEventData());
+    firedShip = GetEventData();
+    bortName = GetEventData();
+    dx = GetEventData();
+    dy = GetEventData();
+    dz = GetEventData();
+    d2x = GetEventData();
+    d2y = GetEventData();
+    d2z = GetEventData();
     // boal fix charge 29.11.03 -->
     if (bortName == "cannonr" || bortName == "cannonl")
     { // только для бортов проверяем.
         rCharacter.BOAL_ReadyCharge = "0";
     }
     //Log_SetStringToLog("Ship_BortFire " + rCharacter.id + " "+ bortName);
-	// boal fix charge 29.11.03 <--
-	
-	// boal  05.12.03 check skill -->
-	bool  bTempNotEnoughBalls = false;
-	if (sti(rCharacter.index) == GetMainCharacterIndex())
-	{
-		ballNumber = 0;
+    // boal fix charge 29.11.03 <--
+
+    // boal  05.12.03 check skill -->
+    bool bTempNotEnoughBalls = false;
+    if (sti(rCharacter.index) == GetMainCharacterIndex())
+    {
+        ballNumber = 0;
         bTempNotEnoughBalls = bNotEnoughBalls;
-	}
-	bool bOfficer;
-	bOfficer = (sti(rCharacter.index) == GetMainCharacterIndex()) || CheckAttribute(rCharacter, "Payment"); // аналог IsCompanion(rCharacter) только без цикла и кучи иф
-	if (bDisableMapEnter && bOfficer && !bTempNotEnoughBalls) // use only in battle
-	{
+    }
+    bool bOfficer;
+    bOfficer = (sti(rCharacter.index) == GetMainCharacterIndex()) || CheckAttribute(rCharacter, "Payment"); // аналог IsCompanion(rCharacter) только без цикла и кучи иф
+    if (bDisableMapEnter && bOfficer && !bTempNotEnoughBalls)                                               // use only in battle
+    {
         if (bortName == "cannonr" || bortName == "cannonl")
         {
             AddCharacterExpToSkill(rCharacter, "Cannons", 3);
@@ -48,7 +48,7 @@ void Ship_BortFire()
     }
     else
     {
-    	if (bortName == "cannonr" || bortName == "cannonl")
+        if (bortName == "cannonr" || bortName == "cannonl")
         {
             ChangeCrewExp(rCharacter, "Cannoners", 0.08);
         }
@@ -59,8 +59,5 @@ void Ship_BortFire()
     }
     // boal <--
 
-	SendMessage(&SeaOperator, "lisffffff", MSG_SEA_OPERATOR_FIRE, firedShip, bortName, dx, dy, dz, d2x, d2y, d2z);
-
+    SendMessage(&SeaOperator, "lisffffff", MSG_SEA_OPERATOR_FIRE, firedShip, bortName, dx, dy, dz, d2x, d2y, d2z);
 }
-
-

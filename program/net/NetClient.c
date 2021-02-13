@@ -51,114 +51,114 @@ int iTestDeltaTime;
 /*
 void Net_ClientFirstInit()
 {
-	NetClient.NickName = "default";
-	NetClient.Password = "";
-	NetClient.ShipName = "noname";
-	NetClient.FaceImage = "_emptyface_";
-	NetClient.SailImage = "_emptysail_";
-	NetClient.FlagImage = "_emptyflag_";
-	NetClient.SailColor = argb(255, 255, 255, 255);
+    NetClient.NickName = "default";
+    NetClient.Password = "";
+    NetClient.ShipName = "noname";
+    NetClient.FaceImage = "_emptyface_";
+    NetClient.SailImage = "_emptysail_";
+    NetClient.FlagImage = "_emptyflag_";
+    NetClient.SailColor = argb(255, 255, 255, 255);
 
-	NetClient.ClientLastPacketIndex = 0;
+    NetClient.ClientLastPacketIndex = 0;
 }
 
 void Net_DeleteClient()
 {
-	DelEventHandler("ExitApplication", "NetClient_ExitApplication");
-	DelEventHandler("NetClient_OnNetMessage", "NetClient_OnNetMessage");
-	DelEventHandler("NetClient_Ping", "NetClient_Ping");
+    DelEventHandler("ExitApplication", "NetClient_ExitApplication");
+    DelEventHandler("NetClient_OnNetMessage", "NetClient_OnNetMessage");
+    DelEventHandler("NetClient_Ping", "NetClient_Ping");
 
-	NetClient_OnEndGame();
+    NetClient_OnEndGame();
 
-	DeleteClass(&NetClient);
-	DeleteClass(&NCLightPillar);
+    DeleteClass(&NetClient);
+    DeleteClass(&NCLightPillar);
 
-	LanguageCloseFile(iLangNetClient); iLangNetClient  = -1;
+    LanguageCloseFile(iLangNetClient); iLangNetClient  = -1;
 
-	Net_SaveFile(false, &NCInetServers, "InetServers.nsv");
+    Net_SaveFile(false, &NCInetServers, "InetServers.nsv");
 }
 
 void Net_CreateClient()
 {
-	for (int i=0; i<NET_TOTALCLIENTS; i++)
-	{
-		DeleteAttribute(&NCClients[i], "");
-		NCClients[i].index = i;
-		NCClients[i].ID = i;
-		NCClients[i].Use = false;
-		NCClients[i].Server = false;			// netclient clients
-		
-		NCClients[i].BuyReady = false;
-		NCClients[i].StartReady = false;
-		NCClients[i].Kick = false;
+    for (int i=0; i<NET_TOTALCLIENTS; i++)
+    {
+        DeleteAttribute(&NCClients[i], "");
+        NCClients[i].index = i;
+        NCClients[i].ID = i;
+        NCClients[i].Use = false;
+        NCClients[i].Server = false;            // netclient clients
+        
+        NCClients[i].BuyReady = false;
+        NCClients[i].StartReady = false;
+        NCClients[i].Kick = false;
 
-		NCClients[i].Team = 0;
+        NCClients[i].Team = 0;
 
-		NCClients[i].Dead = false;
+        NCClients[i].Dead = false;
 
-		NCClients[i].Stat.DamageInflicted = 0;
-		NCClients[i].Stat.Accuracy = 0;
+        NCClients[i].Stat.DamageInflicted = 0;
+        NCClients[i].Stat.Accuracy = 0;
 
-		NCClients[i].Stat.Kills = "";
+        NCClients[i].Stat.Kills = "";
 
-		NCClients[i].Skills.Repair.Active = 0;
-		NCClients[i].Skills.Repair.TotalCooldownTime = 0;
-		NCClients[i].Skills.Repair.CurrentCooldownTime = 0;
-	}
+        NCClients[i].Skills.Repair.Active = 0;
+        NCClients[i].Skills.Repair.TotalCooldownTime = 0;
+        NCClients[i].Skills.Repair.CurrentCooldownTime = 0;
+    }
 
-	iClientTime = 0;
-	iClientServerTime = 0;
-	iClientDeltaTime = 0;
-	iTestDeltaTime = 0;
+    iClientTime = 0;
+    iClientServerTime = 0;
+    iClientDeltaTime = 0;
+    iTestDeltaTime = 0;
 
-	CreateEntity(&NetClient, "NetClient");
+    CreateEntity(&NetClient, "NetClient");
 
-	NetClient.ServerPassword = "";
-	NetClient.ServerAddr = "";
-	NetClient.ServerPort = NET_DEFAULT_SERVER_PORT;
-	NetClient.Start = "";
-	NetClient.AllowDownload = true;
-	NetClient.AllowUpload = true;
+    NetClient.ServerPassword = "";
+    NetClient.ServerAddr = "";
+    NetClient.ServerPort = NET_DEFAULT_SERVER_PORT;
+    NetClient.Start = "";
+    NetClient.AllowDownload = true;
+    NetClient.AllowUpload = true;
 
-	NetClient.ConvoyShipID = DST_INVALID;
-	NetClient.ConvoyPoint.x = 0.0;
-	NetClient.ConvoyPoint.z = 0.0;
+    NetClient.ConvoyShipID = DST_INVALID;
+    NetClient.ConvoyPoint.x = 0.0;
+    NetClient.ConvoyPoint.z = 0.0;
 
-	NetClient_PingInit();
+    NetClient_PingInit();
 
-	SetEventHandler("ExitApplication", "NetClient_ExitApplication", 0);
-	SetEventHandler("NetClient_OnNetMessage", "NetClient_OnNetMessage", 0);
-	SetEventHandler("NetClient_Ping", "NetClient_Ping", 0);
+    SetEventHandler("ExitApplication", "NetClient_ExitApplication", 0);
+    SetEventHandler("NetClient_OnNetMessage", "NetClient_OnNetMessage", 0);
+    SetEventHandler("NetClient_Ping", "NetClient_Ping", 0);
 
-	// init NCServer object with fake values
-	NCServer.NumClients = 0;
-	NCServer.MaxClients = NET_MAXCLIENTS;
-	NCServer.NumTeams = 4;
-	NCServer.IslandID = "";
-	NCServer.WeatherID = "";
+    // init NCServer object with fake values
+    NCServer.NumClients = 0;
+    NCServer.MaxClients = NET_MAXCLIENTS;
+    NCServer.NumTeams = 4;
+    NCServer.IslandID = "";
+    NCServer.WeatherID = "";
 
-	NetClient.ClientLastPacketIndex = 0;
+    NetClient.ClientLastPacketIndex = 0;
 
-	iLangNetClient = LanguageOpenFile("NetSection.txt");
+    iLangNetClient = LanguageOpenFile("NetSection.txt");
 
-	// load client profiles
-	DeleteAttribute(&NCProfiles, "");
-	Net_LoadFile(false, &NCProfiles, "Profiles.nsv");
+    // load client profiles
+    DeleteAttribute(&NCProfiles, "");
+    Net_LoadFile(false, &NCProfiles, "Profiles.nsv");
 
-	if (CheckAttribute(&NCProfiles, "LastProfile"))
-	{
-		NetClient.SailColor = NCProfiles.LastProfile.SailColor;
-		NetClient.NickName = NCProfiles.LastProfile.NickName;
-		NetClient.ShipName = NCProfiles.LastProfile.ShipName;
-		NetClient.Password = NCProfiles.LastProfile.Password;
-		NetClient.FaceImage = NCProfiles.LastProfile.FaceImage;
-		NetClient.FlagImage = NCProfiles.LastProfile.FlagImage;
-		NetClient.SailImage = NCProfiles.LastProfile.SailImage;
-	}
+    if (CheckAttribute(&NCProfiles, "LastProfile"))
+    {
+        NetClient.SailColor = NCProfiles.LastProfile.SailColor;
+        NetClient.NickName = NCProfiles.LastProfile.NickName;
+        NetClient.ShipName = NCProfiles.LastProfile.ShipName;
+        NetClient.Password = NCProfiles.LastProfile.Password;
+        NetClient.FaceImage = NCProfiles.LastProfile.FaceImage;
+        NetClient.FlagImage = NCProfiles.LastProfile.FlagImage;
+        NetClient.SailImage = NCProfiles.LastProfile.SailImage;
+    }
 
-	// load client inet servers list
-	DeleteAttribute(&NCInetServers, "");
-	Net_LoadFile(false, &NCInetServers, "InetServers.nsv");
+    // load client inet servers list
+    DeleteAttribute(&NCInetServers, "");
+    Net_LoadFile(false, &NCInetServers, "InetServers.nsv");
 }
 
 void NetClient_ExitApplication()
@@ -167,47 +167,47 @@ void NetClient_ExitApplication()
 
 void NetClient_FindLocalServers()
 {
-	int iSMsg = NMCreate();
-	NMAddClientID(iSMsg, DST_INVALID);
-	NMAddByte(iSMsg, NC_BROADCAST);
-	NMAddByte(iSMsg, NSC_BROADCAST_LOCAL);
-	NMAddDword(iSMsg, Net_GetTickCount());
-	NetClient_SendBroadcastMessage(iSMsg);
-	NMDelete(iSMsg);
+    int iSMsg = NMCreate();
+    NMAddClientID(iSMsg, DST_INVALID);
+    NMAddByte(iSMsg, NC_BROADCAST);
+    NMAddByte(iSMsg, NSC_BROADCAST_LOCAL);
+    NMAddDword(iSMsg, Net_GetTickCount());
+    NetClient_SendBroadcastMessage(iSMsg);
+    NMDelete(iSMsg);
 }
 
 void NetClient_TryConnect(string sServerIP, int wPort)
 {
-	NetClient.ServerAddr = sServerIP;
-	NetClient.ServerPort = wPort;
+    NetClient.ServerAddr = sServerIP;
+    NetClient.ServerPort = wPort;
 
-	int iSMsg = NMCreate();
-	NMAddClientID(iSMsg, DST_INVALID);
-	NMAddByte(iSMsg, NC_CONNECT);
-	NMAdd24(iSMsg, NET_TEST_DWORD);
-	NMAddByte(iSMsg, NET_SCRIPT_VERSION);
-	NMAddString(iSMsg, NetClient.NickName, 24);			// nick name
-	NMAddString(iSMsg, NetClient.Password, 12);			// nick password
-	NMAddString(iSMsg, NetClient.ServerPassword, 12);	// nick password
-	NMAddString(iSMsg, NetClient.ShipName, 24);			// ship name
-	NMAddString(iSMsg, NetClient.FaceImage, 12);		// client face
-	NMAddString(iSMsg, NetClient.FlagImage, 12);		// client flag
-	NMAddString(iSMsg, NetClient.SailImage, 12);		// client sail emblem
-	NMAddDword(iSMsg, sti(NetClient.SailColor));		// client sail color
-	NetClient_SendMessage(iSMsg, false);
-	NMDelete(iSMsg);
+    int iSMsg = NMCreate();
+    NMAddClientID(iSMsg, DST_INVALID);
+    NMAddByte(iSMsg, NC_CONNECT);
+    NMAdd24(iSMsg, NET_TEST_DWORD);
+    NMAddByte(iSMsg, NET_SCRIPT_VERSION);
+    NMAddString(iSMsg, NetClient.NickName, 24);            // nick name
+    NMAddString(iSMsg, NetClient.Password, 12);            // nick password
+    NMAddString(iSMsg, NetClient.ServerPassword, 12);    // nick password
+    NMAddString(iSMsg, NetClient.ShipName, 24);            // ship name
+    NMAddString(iSMsg, NetClient.FaceImage, 12);        // client face
+    NMAddString(iSMsg, NetClient.FlagImage, 12);        // client flag
+    NMAddString(iSMsg, NetClient.SailImage, 12);        // client sail emblem
+    NMAddDword(iSMsg, sti(NetClient.SailColor));        // client sail color
+    NetClient_SendMessage(iSMsg, false);
+    NMDelete(iSMsg);
 }
 
 void NetClient_SelectProfile(string sProfileName)
 {
-	NetClient.SailColor = sti(SailsColors[sti(NCProfiles.Profiles.(sProfileName).ColorSail)].Color);
-	
-	NetClient.NickName = NCProfiles.Profiles.(sProfileName).Name;
-	NetClient.ShipName = NCProfiles.Profiles.(sProfileName).ShipName;
-	NetClient.Password = NCProfiles.Profiles.(sProfileName).Password;
+    NetClient.SailColor = sti(SailsColors[sti(NCProfiles.Profiles.(sProfileName).ColorSail)].Color);
+    
+    NetClient.NickName = NCProfiles.Profiles.(sProfileName).Name;
+    NetClient.ShipName = NCProfiles.Profiles.(sProfileName).ShipName;
+    NetClient.Password = NCProfiles.Profiles.(sProfileName).Password;
 
-	NetClient.FaceImage = NCProfiles.Profiles.(sProfileName).ImageFace;
-	NetClient.FlagImage = NCProfiles.Profiles.(sProfileName).ImageFlag;
-	NetClient.SailImage = NCProfiles.Profiles.(sProfileName).ImageSail;
+    NetClient.FaceImage = NCProfiles.Profiles.(sProfileName).ImageFace;
+    NetClient.FlagImage = NCProfiles.Profiles.(sProfileName).ImageFlag;
+    NetClient.SailImage = NCProfiles.Profiles.(sProfileName).ImageSail;
 }
 */

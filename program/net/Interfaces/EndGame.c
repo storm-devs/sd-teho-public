@@ -1,29 +1,29 @@
 /*
 void InitInterface(string iniName)
 {
-	GameInterface.title = "";
+    GameInterface.title = "";
 
-	SendMessage(&GameInterface, "ls", MSG_INTERFACE_INIT, iniName);
-	SetEventHandler("OnEndGameOk", "ICancelProcedure", 0);
-	SetEventHandler("exitCancel", "ICancelProcedure", 0);
+    SendMessage(&GameInterface, "ls", MSG_INTERFACE_INIT, iniName);
+    SetEventHandler("OnEndGameOk", "ICancelProcedure", 0);
+    SetEventHandler("exitCancel", "ICancelProcedure", 0);
 
-	FreezeGroupControls("BattleInterfaceControls", true);
+    FreezeGroupControls("BattleInterfaceControls", true);
 
-	SetFormatedText("TEXT_ENDGAME", oGameOver.Str);
+    SetFormatedText("TEXT_ENDGAME", oGameOver.Str);
 }
 
 void IDoExit(int exitCode)
 {
-	DelEventHandler("OnEndGameOk", "ICancelProcedure");
+    DelEventHandler("OnEndGameOk", "ICancelProcedure");
 
-	interfaceResultCommand = exitCode;
-	EndCancelInterface(true);
+    interfaceResultCommand = exitCode;
+    EndCancelInterface(true);
 }
 
 void ICancelProcedure()
 {
-	Net_Stop();
+    Net_Stop();
 
-	IDoExit( RC_INTERFACE_NET_FINDGAME );
+    IDoExit( RC_INTERFACE_NET_FINDGAME );
 }
 */

@@ -2,13 +2,13 @@ object NSTouch;
 /*
 void NetServer_DeleteTouchEnvironment()
 {
-	DeleteClass(&NSTouch);
+    DeleteClass(&NSTouch);
 }
 
 void NetServer_CreateTouchEnvironment(int iSMsg)
 {
-	NSTouch.Server = true;
-	CreateEntity(&NSTouch, "NetTouch");
-	LayerAddObject("net_execute", &NSTouch, 1);
-	NSTouch.CollisionDepth = -10.0;
+    NSTouch.Server = true;
+    CreateEntity(&NSTouch, "NetTouch");
+    LayerAddObject("net_execute", &NSTouch, 1);
+    NSTouch.CollisionDepth = -10.0;
 }*/

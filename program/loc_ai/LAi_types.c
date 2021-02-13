@@ -48,7 +48,6 @@
 // Оглушенные
 #include "Loc_ai\types\LAi_stunned.c"
 
-
 //------------------------------------------------------------------------------------------
 //Player
 //------------------------------------------------------------------------------------------
@@ -56,11 +55,11 @@
 //Установить персонажу тип игрока
 void LAi_SetPlayerType(aref chr)
 {
-	//Тип персонажа по умолчанию
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	//Шаблон специальный
-	LAi_type_player_Init(chr);
-	LAi_group_MoveCharacter(chr, LAI_GROUP_PLAYER);
+    //Тип персонажа по умолчанию
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    //Шаблон специальный
+    LAi_type_player_Init(chr);
+    LAi_group_MoveCharacter(chr, LAI_GROUP_PLAYER);
 }
 
 //------------------------------------------------------------------------------------------
@@ -70,19 +69,19 @@ void LAi_SetPlayerType(aref chr)
 //Установить персонажу тип офицера
 void LAi_SetOfficerType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_officer_Init(chr);
-	LAi_group_MoveCharacter(chr, LAI_GROUP_PLAYER);
-	//LAi_DelAdjustFencingSkill(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_officer_Init(chr);
+    LAi_group_MoveCharacter(chr, LAI_GROUP_PLAYER);
+    //LAi_DelAdjustFencingSkill(chr);
 }
 
 //Установить персонажу тип офицера
 void LAi_SetFollowerType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_follower_Init(chr);
-	LAi_group_MoveCharacter(chr, LAI_GROUP_PLAYER);
-	//LAi_DelAdjustFencingSkill(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_follower_Init(chr);
+    LAi_group_MoveCharacter(chr, LAI_GROUP_PLAYER);
+    //LAi_DelAdjustFencingSkill(chr);
 }
 
 //------------------------------------------------------------------------------------------
@@ -92,16 +91,16 @@ void LAi_SetFollowerType(aref chr)
 //Установить персонажу тип горожанина
 void LAi_SetCitizenType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_citizen_Init(chr);
-	LAi_group_MoveCharacter(chr, LAI_DEFAULT_GROUP);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_citizen_Init(chr);
+    LAi_group_MoveCharacter(chr, LAI_DEFAULT_GROUP);
 }
 
 //Установить персонажу тип горожанина, без перемещения в группу
 void LAi_SetCitizenTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_citizen_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_citizen_Init(chr);
 }
 
 //------------------------------------------------------------------------------------------
@@ -111,20 +110,20 @@ void LAi_SetCitizenTypeNoGroup(aref chr)
 //Установить персонажу тип стражника
 void LAi_SetGuardianType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_guardian_Init(chr);
-	LAi_group_MoveCharacter(chr, LAI_GROUP_GUARDS);
-// boal	if (!IsOfficer(chr))
-	//{
-	//	LAi_SetAdjustFencingSkill(chr, -4.0, 2.0);
-	//}
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_guardian_Init(chr);
+    LAi_group_MoveCharacter(chr, LAI_GROUP_GUARDS);
+    // boal    if (!IsOfficer(chr))
+    //{
+    //    LAi_SetAdjustFencingSkill(chr, -4.0, 2.0);
+    //}
 }
 
 //Установить персонажу тип стражника, без перемещения в группу
 void LAi_SetGuardianTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_guardian_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_guardian_Init(chr);
 }
 
 //------------------------------------------------------------------------------------------
@@ -134,20 +133,20 @@ void LAi_SetGuardianTypeNoGroup(aref chr)
 //Установить персонажу тип патруля
 void LAi_SetPatrolType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_SetPatrolTypeNoGroup(chr);
-	LAi_group_MoveCharacter(chr, LAI_GROUP_GUARDS);
-// boal	if (!IsOfficer(chr))
-//	{
-//		LAi_SetAdjustFencingSkill(chr, -4.0, 2.0);
-//	}
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_SetPatrolTypeNoGroup(chr);
+    LAi_group_MoveCharacter(chr, LAI_GROUP_GUARDS);
+    // boal    if (!IsOfficer(chr))
+    //    {
+    //        LAi_SetAdjustFencingSkill(chr, -4.0, 2.0);
+    //    }
 }
 
 //Установить персонажу тип патруля, без перемещения в группу
 void LAi_SetPatrolTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_patrol_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_patrol_Init(chr);
 }
 
 //------------------------------------------------------------------------------------------
@@ -157,22 +156,21 @@ void LAi_SetPatrolTypeNoGroup(aref chr)
 //Установить персонажу тип война
 void LAi_SetWarriorType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_warrior_Init(chr);
-	LAi_group_MoveCharacter(chr, LAI_GROUP_GUARDS);
-//	if (!IsOfficer(chr))
-//	{
-//		LAi_SetAdjustFencingSkill(chr, -4.0, 2.0);
-//	}
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_warrior_Init(chr);
+    LAi_group_MoveCharacter(chr, LAI_GROUP_GUARDS);
+    //    if (!IsOfficer(chr))
+    //    {
+    //        LAi_SetAdjustFencingSkill(chr, -4.0, 2.0);
+    //    }
 }
 
 //Установить персонажу тип война, без перемещения в группу
 void LAi_SetWarriorTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_warrior_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_warrior_Init(chr);
 }
-
 
 //------------------------------------------------------------------------------------------
 //Merchant
@@ -181,16 +179,16 @@ void LAi_SetWarriorTypeNoGroup(aref chr)
 //Установить персонажу тип торговца
 void LAi_SetMerchantType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_merchant_Init(chr);
-	LAi_group_MoveCharacter(chr, LAI_DEFAULT_GROUP);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_merchant_Init(chr);
+    LAi_group_MoveCharacter(chr, LAI_DEFAULT_GROUP);
 }
 
 //Установить персонажу тип торговца, без перемещения в группу
 void LAi_SetMerchantTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_merchant_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_merchant_Init(chr);
 }
 
 //------------------------------------------------------------------------------------------
@@ -200,16 +198,16 @@ void LAi_SetMerchantTypeNoGroup(aref chr)
 //Установить персонажу тип стоячего
 void LAi_SetStayType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_stay_Init(chr);
-	LAi_group_MoveCharacter(chr, LAI_DEFAULT_GROUP);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_stay_Init(chr);
+    LAi_group_MoveCharacter(chr, LAI_DEFAULT_GROUP);
 }
 
 //Установить персонажу тип стоячего, без перемещения в группу
 void LAi_SetStayTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_stay_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_stay_Init(chr);
 }
 
 //------------------------------------------------------------------------------------------
@@ -219,18 +217,17 @@ void LAi_SetStayTypeNoGroup(aref chr)
 //Установить персонажу тип сидячего
 void LAi_SetSitType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_sit_Init(chr);
-	LAi_group_MoveCharacter(chr, LAI_DEFAULT_GROUP);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_sit_Init(chr);
+    LAi_group_MoveCharacter(chr, LAI_DEFAULT_GROUP);
 }
 
 //Установить персонажу тип сидячего, без перемещения в группу
 void LAi_SetSitTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_sit_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_sit_Init(chr);
 }
-
 
 //------------------------------------------------------------------------------------------
 //Barmen
@@ -239,16 +236,16 @@ void LAi_SetSitTypeNoGroup(aref chr)
 //Установить персонажу тип бармена (only man)
 void LAi_SetBarmanType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_barman_Init(chr);
-	LAi_group_MoveCharacter(chr, LAI_DEFAULT_GROUP);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_barman_Init(chr);
+    LAi_group_MoveCharacter(chr, LAI_DEFAULT_GROUP);
 }
 
 //Установить персонажу тип официантки, без перемещения в группу (only man)
 void LAi_SetBarmanTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_barman_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_barman_Init(chr);
 }
 
 //------------------------------------------------------------------------------------------
@@ -258,18 +255,17 @@ void LAi_SetBarmanTypeNoGroup(aref chr)
 //Установить персонажу тип официантки (only woman)
 void LAi_SetWaitressType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_waitress_Init(chr);
-	LAi_group_MoveCharacter(chr, LAI_DEFAULT_GROUP);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_waitress_Init(chr);
+    LAi_group_MoveCharacter(chr, LAI_DEFAULT_GROUP);
 }
 
 //Установить персонажу тип официантки, без перемещения в группу (only woman)
 void LAi_SetWaitressTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_waitress_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_waitress_Init(chr);
 }
-
 
 //------------------------------------------------------------------------------------------
 //Poor
@@ -278,16 +274,16 @@ void LAi_SetWaitressTypeNoGroup(aref chr)
 //Установить персонажу тип бедника
 void LAi_SetPoorType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_poor_Init(chr);
-	LAi_group_MoveCharacter(chr, LAI_DEFAULT_GROUP);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_poor_Init(chr);
+    LAi_group_MoveCharacter(chr, LAI_DEFAULT_GROUP);
 }
 
 //Установить персонажу тип бедника, без перемещения в группу
 void LAi_SetPoorTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_poor_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_poor_Init(chr);
 }
 
 //------------------------------------------------------------------------------------------
@@ -297,16 +293,16 @@ void LAi_SetPoorTypeNoGroup(aref chr)
 //Установить персонажу тип губернатора
 void LAi_SetHuberType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_huber_Init(chr);
-	LAi_group_MoveCharacter(chr, LAI_GROUP_HUBER);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_huber_Init(chr);
+    LAi_group_MoveCharacter(chr, LAI_GROUP_HUBER);
 }
 
 //Установить персонажу тип губернатора, без перемещения в группу
 void LAi_SetHuberTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_huber_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_huber_Init(chr);
 }
 
 //------------------------------------------------------------------------------------------
@@ -316,16 +312,16 @@ void LAi_SetHuberTypeNoGroup(aref chr)
 //Установить персонажу тип губернатора, ходячего по комнате
 void LAi_SetHuberStayType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_huberstay_Init(chr);
-	LAi_group_MoveCharacter(chr, LAI_GROUP_HUBER);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_huberstay_Init(chr);
+    LAi_group_MoveCharacter(chr, LAI_GROUP_HUBER);
 }
 
 //Установить персонажу тип губернатора, ходячего по комнате, без перемещения в группу
 void LAi_SetHuberStayTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_huberstay_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_huberstay_Init(chr);
 }
 
 //------------------------------------------------------------------------------------------
@@ -335,18 +331,17 @@ void LAi_SetHuberStayTypeNoGroup(aref chr)
 //Установить персонажу тип священика
 void LAi_SetPriestType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_priest_Init(chr);
-	LAi_group_MoveCharacter(chr, LAI_DEFAULT_GROUP);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_priest_Init(chr);
+    LAi_group_MoveCharacter(chr, LAI_DEFAULT_GROUP);
 }
 
 //Установить персонажу тип священика, без перемещения в группу
 void LAi_SetPriestTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_priest_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_priest_Init(chr);
 }
-
 
 //------------------------------------------------------------------------------------------
 //Actor
@@ -355,16 +350,16 @@ void LAi_SetPriestTypeNoGroup(aref chr)
 //Установить персонажу тип актёра
 void LAi_SetActorType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_actor_Init(chr);
-	LAi_group_MoveCharacter(chr, LAI_GROUP_ACTOR);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_actor_Init(chr);
+    LAi_group_MoveCharacter(chr, LAI_GROUP_ACTOR);
 }
 
 //Установить персонажу тип актёра, без перемещения в группу
 void LAi_SetActorTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_actor_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_actor_Init(chr);
 }
 
 //------------------------------------------------------------------------------------------
@@ -374,16 +369,16 @@ void LAi_SetActorTypeNoGroup(aref chr)
 //Установить персонажу тип хозяина дома/комнаты
 void LAi_SetOwnerType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_owner_Init(chr);
-	LAi_group_MoveCharacter(chr, "");
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_owner_Init(chr);
+    LAi_group_MoveCharacter(chr, "");
 }
 
 //Установить персонажу тип хозятна комнаты без перемещения в группу
 void LAi_SetOwnerTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_owner_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_owner_Init(chr);
 }
 
 //------------------------------------------------------------------------------------------
@@ -393,16 +388,16 @@ void LAi_SetOwnerTypeNoGroup(aref chr)
 //Установить персонажу тип хозяина дома/комнаты
 void LAi_SetCarrierType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_carrier_Init(chr);
-	LAi_group_MoveCharacter(chr, "");
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_carrier_Init(chr);
+    LAi_group_MoveCharacter(chr, "");
 }
 
 //Установить персонажу тип хозятна комнаты без перемещения в группу
 void LAi_SetCarrierTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_carrier_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_carrier_Init(chr);
 }
 
 //------------------------------------------------------------------------------------------
@@ -412,16 +407,16 @@ void LAi_SetCarrierTypeNoGroup(aref chr)
 //Установить персонажу тип гражданина ГПК
 void LAi_SetLSCoutType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAI_type_LSCout_Init(chr);
-	LAi_group_MoveCharacter(chr, "");
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAI_type_LSCout_Init(chr);
+    LAi_group_MoveCharacter(chr, "");
 }
 
 //Установить персонажу тип гражданина ГПК без перемещения в группу
 void LAi_SetLSCoutTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAI_type_LSCout_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAI_type_LSCout_Init(chr);
 }
 
 //------------------------------------------------------------------------------------------
@@ -431,16 +426,16 @@ void LAi_SetLSCoutTypeNoGroup(aref chr)
 //Установить персонажу тип сидящего на земле
 void LAi_SetGroundSitType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAI_type_GroundSit_Init(chr);
-	LAi_group_MoveCharacter(chr, "");
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAI_type_GroundSit_Init(chr);
+    LAi_group_MoveCharacter(chr, "");
 }
 
 //Установить персонажу тип сидящего на земле без перемещения в группу
 void LAi_SetGroundSitTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAI_type_GroundSit_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAI_type_GroundSit_Init(chr);
 }
 
 //------------------------------------------------------------------------------------------
@@ -450,54 +445,52 @@ void LAi_SetGroundSitTypeNoGroup(aref chr)
 //Установить персонажу тип обезьяны-монстра
 void LAi_SetMonkeyType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_monkey_Init(chr);
-	LAi_group_MoveCharacter(chr, LAI_GROUP_MONSTERS);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_monkey_Init(chr);
+    LAi_group_MoveCharacter(chr, LAI_GROUP_MONSTERS);
 }
 
 //Установить персонажу тип обезьяны-монстра, без перемещения в группу
 void LAi_SetMonkeyTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_monkey_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_monkey_Init(chr);
 }
 
 //------------------------------------------------------------------------------------------
-//Lay 
+//Lay
 //------------------------------------------------------------------------------------------
 
 //Установить персонажу тип лежачего
 void LAi_SetLayType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_lay_Init(chr);
-	LAi_group_MoveCharacter(chr, LAI_DEFAULT_GROUP);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_lay_Init(chr);
+    LAi_group_MoveCharacter(chr, LAI_DEFAULT_GROUP);
 }
 
 //Установить персонажу тип лежачего, без перемещения в группу
 void LAi_SetLayTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_lay_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_lay_Init(chr);
 }
 
 //------------------------------------------------------------------------------------------
-// Stunned 
+// Stunned
 //------------------------------------------------------------------------------------------
 
 //Установить персонажу тип оглушенного
 void LAi_SetStunnedType(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_Stunned_Init(chr);
-	LAi_group_MoveCharacter(chr, LAI_DEFAULT_GROUP);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_Stunned_Init(chr);
+    LAi_group_MoveCharacter(chr, LAI_DEFAULT_GROUP);
 }
 
 //Установить персонажу тип оглушенного, без перемещения в группу
 void LAi_SetStunnedTypeNoGroup(aref chr)
 {
-	chr.chr_ai.type = LAI_DEFAULT_TYPE;
-	LAi_type_Stunned_Init(chr);
+    chr.chr_ai.type = LAI_DEFAULT_TYPE;
+    LAi_type_Stunned_Init(chr);
 }
-
-
