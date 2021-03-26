@@ -70,8 +70,22 @@ native int SetTexturePath(int iLevel, string sPath);
 native int SetGlowParams(float fBlurBrushSize, int Intensivity, int BlurPasses);
 native int RPrint(int x, int y, string sPrint);
 
+native int GetSteamEnabled();
+native int GetDLCenabled(int enable);
+native int GetDLCCount();
+native int GetDLCData(int id);
+native int DLCStartOverlay(int id);
+native int SetAchievement(string id);
+native int GetAchievement(string id);
+native int SetStat(string id, int value);
+native int GetStat(string id);
+native int StoreStats();
+native int ClearAchievement(string id);
+native int ResetStats(int bAchievementsToo);
+
 #libriary "script_libriary_test"
 #libriary "dx9render_script_libriary"
+#libriary "SteamApiScriptLib"
 
 #event_handler(NEW_GAME_EVENT, "NewGame");
 #event_handler(GAME_OVER_EVENT, "GameOverE");

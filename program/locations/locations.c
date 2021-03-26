@@ -16,14 +16,6 @@ native void ExecuteTechnique(string techName);
 native string GetNextLineString();
 native void SetReloadNextTipsImage();
 
-native int SetAchievement(string id);
-native int GetAchievement(string id);
-native int SetStat(string id, int value);
-native int GetStat(string id);
-native int StoreStats();
-native int ClearAchievement(string id);
-native int ResetStats(int bAchievementsToo);
-
 #libriary "ScriptLocationLibrary"
 
 void LocationInit()
