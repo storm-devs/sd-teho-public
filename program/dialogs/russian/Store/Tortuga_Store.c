@@ -18,7 +18,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 		
 		case "guardoftruth":
-			dialog.text = "Гай Марше? Как же, как же, помню! Вот только ничего он не закупал, а предоставил свой корабль для фрахта. Мне как раз нужно было судно с объемным трюмом - большая партия сырых кож.";
+			dialog.text = "Гай Марше? Как же, как же, помню! Вот только ничего он не закупал, а предоставил свой корабль для фрахта. Мне как раз нужно было судно с объёмным трюмом - большая партия сырых кож.";
 			link.l1 = "И какой был пункт выгрузки?";
 			link.l1.go = "guardoftruth_1";
 		break;
@@ -30,7 +30,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 		
 		case "guardoftruth_2":
-			dialog.text = "Всегда пожалуйста, капитан. Буду рад видеть вас в своем магазине хоть каждый день!";
+			dialog.text = "Всегда пожалуйста, капитан. Буду рад видеть вас в своём магазине хоть каждый день!";
 			link.l1 = "...";
 			link.l1.go = "exit";
 			AddQuestRecord("Guardoftruth", "10");

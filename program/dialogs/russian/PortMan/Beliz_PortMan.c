@@ -41,11 +41,12 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "Эх... жаль! Ладно, ничего не поделаешь - вы оказались бдительны. До свидания!";
 			link.l1.go = "exit";
 			DeleteAttribute(pchar, "questTemp.Regata");
+			pchar.quest.Regata_PU.over = "yes"; // mitrokosta снимаем прерывание
 			}
 			else
 			{
 			pchar.questTemp.Regata.FirstTransitionTime = GetPastTime("hour", sti(pchar.questTemp.Regata.StartYear), sti(pchar.questTemp.Regata.StartMonth), sti(pchar.questTemp.Regata.StartDay), stf(pchar.questTemp.Regata.StartTime), GetDataYear(), GetDataMonth(), GetDataDay(), GetTime());//истратил ГГ в часах на 1 переход
-			dialog.text = "Так, отмечаем: капитан "+ GetFullName(pchar) +", корабль - "+pchar.Ship.Name+"... Затрачено времени от старта регаты в часах - "+sti(pchar.questTemp.Regata.FirstTransitionTime)+". Все, ваш результат зафиксирован, можете продолжать путь.";
+			dialog.text = "Так, отмечаем: капитан "+ GetFullName(pchar) +", корабль - "+pchar.Ship.Name+"... Затрачено времени от старта регаты в часах - "+sti(pchar.questTemp.Regata.FirstTransitionTime)+". Всё, ваш результат зафиксирован, можете продолжать путь.";
 			link.l1 = "Скажите, а на каком я сейчас месте?";
 			link.l1.go = "Regata_info";
 			}

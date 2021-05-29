@@ -1,5 +1,5 @@
 object NSSea;
-
+/*
 void NetServer_WhrDeleteSeaEnvironment()
 {
 	if (isEntity(&NSSea)) { DeleteClass(&NSSea); }
@@ -47,3 +47,4 @@ void NetServer_MoveSeaToLayers(string sExecuteLayer, string sRealizeLayer)
 	LayerAddObject(sExecuteLayer, &NSSea, 65530);
 	LayerAddObject(sRealizeLayer, &NSSea, 65530);
 }
+*/

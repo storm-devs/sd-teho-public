@@ -1,3 +1,4 @@
+/*
 bool NetServer_CheckGameOver_Convoy()
 {
 	int i;
@@ -53,4 +54,4 @@ bool NetServer_CheckGameOver_Convoy()
 	}
 
 	return false;
-}
+}*/

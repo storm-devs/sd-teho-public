@@ -11,18 +11,11 @@ void InterfaceSpyGlassInit(bool bNet)
 	CreateEntity(&objISpyGlass,"ispyglass");
 	DeleteAttribute(&objISpyGlass,"parameters");
 	TelescopeInitParameters(&Telescope);
-	if( bNet ) {
-		objISpyGlass.bNet = 1;
-		LayerAddObject("net_execute",&objISpyGlass,-1);
-		LayerAddObject("net_realize",&objISpyGlass,-1);
-		SetEventHandler("SetTelescopeInfo","Net_SetSpyGlassData",0);
-		SetEventHandler("MSG_TELESCOPE_REQUEST", "Telescope_Request", 0);
-	} else {
-		objISpyGlass.bNet = 0;
-		LayerAddObject(SEA_EXECUTE,&objISpyGlass,-1);
-		LayerAddObject(SEA_REALIZE,&objISpyGlass,-1);
-		SetEventHandler("SetTelescopeInfo","SetSpyGlassData",0);
-	}
+
+	LayerAddObject(SEA_EXECUTE,&objISpyGlass,-1);
+	LayerAddObject(SEA_REALIZE,&objISpyGlass,-1);
+	SetEventHandler("SetTelescopeInfo","SetSpyGlassData",0);
+		
 	SetEventHandler("ReleaseTelescopeInfo","ResetSpyGlassData",0);
 	SetEventHandler("BI_VISIBLE","CheckInterfaceVisible",0);
 }
@@ -31,12 +24,7 @@ void InterfaceSpyGlassRelease()
 {
 	DelEventHandler("BI_VISIBLE","CheckInterfaceVisible");
 	DelEventHandler("ReleaseTelescopeInfo","ResetSpyGlassData");
-	if( CheckAttribute(&objISpyGlass,"bNet") && sti(objISpyGlass.bNet) ) {
-		DelEventHandler("MSG_TELESCOPE_REQUEST", "Telescope_Request");
-		DelEventHandler("SetTelescopeInfo","Net_SetSpyGlassData");
-	} else {
-		DelEventHandler("SetTelescopeInfo","SetSpyGlassData");
-	}
+	DelEventHandler("SetTelescopeInfo","SetSpyGlassData");
 	DeleteClass(&objISpyGlass);
 }
 
@@ -94,6 +82,7 @@ void SetSpyGlassData()
 	}
 	
 	int nFace = sti(chref.faceID);
+//	Log_SetStringToLog("FaceID : " + nFace);
 	string sCaptainName = GetCharacterFullName(chref.id);
 	int nFencingSkill = GetCharacterSkill(chref,SKILL_DEFENCE);   // защита
 	int nCannonSkill = GetCharacterSkill(chref,SKILL_GRAPPLING);    // абордаж
@@ -379,74 +368,6 @@ void SetSpyGlassData()
 		
 	}
 	// boal <--
-}
-
-void Net_SetSpyGlassData()
-{
-	int wNetClientID = GetEventData();
-	//wNetClientID = NetClient_GetThisClientID();
-	if(wNetClientID<0) return;
-
-	string sTextureName = "battle_interface\ship_icons1.tga";
-	float uvLeft = 0;
-	float uvTop = 0;
-	float uvRight = 0.125;
-	float uvBottom = 0.25;
-
-	ref chref = NetClient_GetClient(wNetClientID);
-	int nShipIdx = sti(chref.ship.type);
-
-	int shipNation = -1;//TranslateNationCode( sti(chref.nation) );
-
-	// смотрим на форт
-
-	// смотрим на корабль
-	int shipCannons = Net_GetIntactCannonsNum(wNetClientID);
-	int shipMaxCannons = Net_GetShipCannonsNum(nShipIdx);
-	string shipName =  chref.Ship.Name;
-	string shipType = XI_ConvertString(NetShips[nShipIdx].Name);//XI_ConvertString(GetShipTypeName(chref));
-
-	Net_GetTextureUVForShip(nShipIdx, &uvLeft, &uvTop, &uvRight, &uvBottom);
-
-	int shipHull = Net_GetHullPercent(chref);
-	int shipSail = Net_GetSailPercent(chref);
-	int shipCrew = GetCrewQuantity(chref);
-	int shipSpeed = stf(chref.Ship.speed.z) * stf(NetBInterface.ShipSpeedScaler);
-
-	int shipCharge = -1;
-	int tmpCharge = sti(chref.Ship.Cannons.Charge.Type);
-	switch(tmpCharge)
-	{
-	case GOOD_BALLS: shipCharge=0; break;
-	case GOOD_GRAPES: shipCharge=3; break;
-	case GOOD_KNIPPELS: shipCharge=2; break;
-	case GOOD_BOMBS: shipCharge=1; break;
-	}
-
-	int nSailState = 1;
-	float fSailSt = NetClient_ShipGetSailState(wNetClientID);
-	if( fSailSt<0.3 ) {nSailState = 0;}
-	else {
-		if( fSailSt<0.6 ) {nSailState = 1;}
-		else {nSailState = 2;}
-	}
-	int nFace = chref.UserData.Face.Texture;
-	int nFencingSkill = sti(chref.Skill.Defence);
-	int nCannonSkill = sti(chref.Skill.Cannons);
-	int nAccuracySkill = sti(chref.Skill.Accuracy);
-	int nNavigationSkill = sti(chref.Skill.Sailing);
-	int nBoardingSkill = sti(chref.Skill.Repair);
-	string sCaptainName = chref.NickName;
-	
-	string sNetUserFaceTex = sUserFacesPath + chref.UserData.Face + ".tga";
-
-	SendMessage(&objISpyGlass,"lsslllflllllllllllss",MSG_ISG_UPDATE,
-		shipName,shipType, shipHull,shipSail,shipCrew, shipSpeed, shipCannons,shipMaxCannons,
-		shipCharge,shipNation, nSailState,-1,
-		nFencingSkill,nCannonSkill,nAccuracySkill,nNavigationSkill,nBoardingSkill,
-		sCaptainName,sNetUserFaceTex);
-	SendMessage(&objISpyGlass,"lsffff",MSG_ISG_SET_SHIPICON, sTextureName, uvLeft,uvTop,uvRight,uvBottom);
-	SendMessage(&objISpyGlass,"ll",MSG_ISG_VISIBLE,true);
 }
 
 void ResetSpyGlassData()

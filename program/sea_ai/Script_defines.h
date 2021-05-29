@@ -60,6 +60,7 @@
 #define SHIP_GET_RUNAWAY_POINT			"Shp_GetRunawayPnt"
 #define SHIP_BORT_RELOADED				"Shp_BortReloaded"
 #define SHIP_SET_BLOT					"ShpSetBlot"
+#define SHIP_FAKE_FIRE 					"Ship_FakeFire"
 
 #define SHIP_MAST_TOUCH_ISLAND		0
 #define SHIP_MAST_TOUCH_SHIP		1

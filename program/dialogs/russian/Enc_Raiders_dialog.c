@@ -149,7 +149,7 @@ void ProcessDialogEvent()
 			}
 			else
 			{
-				bOk1 = makeint(pchar.reputation.nobility) < 51 && makeint(pchar.reputation.nobility) > 41;
+				bOk = makeint(pchar.reputation.nobility) < 51 && makeint(pchar.reputation.nobility) > 41; // Captain Beltrop, 23.01.21 - жесть!!! Надо было всего лишь убрать единичку!
 				if(!bOk || GetSummonSkillFromName(pchar, SKILL_LEADERSHIP) < 35)
 				{
 					dialog.text = RandPhraseSimple("А мы тебя тихонько прирежем, даже пикнуть не успеешь.", 
@@ -173,7 +173,8 @@ void ProcessDialogEvent()
 		break;
 		
 		case "CheckSkills":
-			bool z_ok = (GetCharacterSkillToOld(Pchar, "FencingS") >= 7) && (makeint(Pchar.Rank) >= 8) && (Makeint(PChar.reputation.nobility) <= 30);
+		    bool isStrong = (GetCharacterSkillToOld(Pchar, "FencingL") >= 7) || (GetCharacterSkillToOld(Pchar, "FencingS") >= 7) || (GetCharacterSkillToOld(Pchar, "FencingH") >= 7);
+			bool z_ok = (isStrong) && (makeint(Pchar.Rank) >= 8) && (Makeint(PChar.reputation.nobility) <= 30); // Captain Beltrop & mitrokosta, 23.01.21 проверяем на оружие (новый вариант)
 			if (z_ok || CheckCharacterPerk(pchar, "SeaDogProfessional"))
 			{
 				Diag.TempNode = "GetLost";

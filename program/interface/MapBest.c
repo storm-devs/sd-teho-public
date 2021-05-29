@@ -1,5 +1,5 @@
 // Warship. Доведенный до ума интерфейс бумажной карты из К3. Теперь это интерфейс отличной карты.
-// espkk # ActiveMap 1.2 # 30/Mar/2017 - map with trade assistant for Sea Dogs: TEHO / Теперь действительно доведенный до ума =) 
+// espkk # ActiveMap 1.3 # 25/Sep/2017 - map with trade assistant for Sea Dogs: TEHO / Теперь действительно доведенный до ума =) 
 
 //settings file
 #include "activemap_settings.h"
@@ -8,31 +8,6 @@
 #define TRADEASSISTANT_MAXGOODS 5
 
 ///espkk. utils -->
-//cuz the game doesn't use built-in language mechanism
-#define LANG_FILE "activemap"
-string GetLangStr(string sParam) 
-{
-	string sFile = LANG_FILE + "_";
-	if(findSubStr(VERSION_NUMBER2, "ENG", 0) != -1)
-		sFile += "en";
-	else
-		sfile += "ru";
-	sFile+=".txt";
-	
-	return GetConvertStr(sParam, sFile);
-}
-
-//float to str conversion with one decimal place
-string FloatToStr(float value)
-{
-	if(value == makeint(value))
-		return "" + makeint(value);
-
-    // LDH 12Jul17 - round value
-//	return "" + makefloat(makeint(value*10))/10;
-	return "" + makefloat(makeint((value+0.5)*10))/10;
-}
-
 void AddImageToImageList(string sImgName, string sPicGroup, string sPic, float X, float Y, int Width, int Height)
 {
 	GameInterface.MAP.imagelist.(sImgName).group = sPicGroup;
@@ -46,7 +21,7 @@ void AddImageToImageList(string sImgName, string sPicGroup, string sPic, float X
 //Whether on worldmap or not. Supports Hook's mod position fix
 void GetCorrectShipCoords(ref X, ref Y)
 {
-	if(IsEntity(worldMap))
+	if(IsEntity(&worldMap))
 	{
 		X = sti(worldMap.playerShipX);
 		Y = -sti(worldMap.playerShipZ);
@@ -121,7 +96,7 @@ void InitInterface(string iniName)
 		if(sColony == "IslaDeVieques") continue;
 		if(sColony == "SanAndres") continue;		
 		if(sColony == "Is") continue;
-		if(sColony == "IslaMona" && !CheckAttribute(CharacterFromID("Islamona_carpenter"), "Storage.Activate")) continue;
+		if(sColony == "IslaMona" && GetCharacterIndex("Islamona_carpenter") < 0) continue;
 
 		if(sColony == "IslaMona")
 			sPic = "Smuggler";
@@ -227,9 +202,9 @@ void InitInterface(string iniName)
 	
 	//Draw our ship
 	GetCorrectShipCoords(&X, &Y);
-	AddImageToImageList("PShip", "ICONS", "ship class icon", X, Y, 15, 15);
+	AddImageToImageList("PShip", "ICONS", "ship class icon", X, Y, 20, 20);
 
-	SendMessage(&GameInterface, "ls", MSG_INTERFACE_INIT, "RESOURCE\INI\INTERFACES\activemap.ini");
+	SendMessage(&GameInterface, "ls", MSG_INTERFACE_INIT, "RESOURCE\INI\INTERFACES\MapBest.ini");
 	
 	//Show boundaries
 	if(SHOW_BOUNDARIES == 1)
@@ -239,15 +214,15 @@ void InitInterface(string iniName)
 			argb(makeint(255/(makefloat(100)/BOUNDARIES_OPACITY)), BOUNDARIES_R, BOUNDARIES_G, BOUNDARIES_B));
 	}
 	
-
-	CreateString(true,"GameVersionInfo1", VERSION_NUMBER1, FONT_CAPTION, COLOR_NORMAL, 170, 10, SCRIPT_ALIGN_CENTER, 0.8);
-	CreateString(true,"GameVersionInfo2", GetVerNum(), FONT_CAPTION, COLOR_NORMAL, 630, 10, SCRIPT_ALIGN_CENTER, 0.8);
+	CreateString(true,"DateTime", GetDateString() + " " + GetTimeString(), FONT_CAPTION, COLOR_NORMAL, 170, 10, SCRIPT_ALIGN_CENTER, 0.8);
+	CreateString(true,"ProvisionsInfo", XI_ConvertString("Food for") + CalculateShipFood(pchar) + "/" + CalculateShipRum(pchar) + XI_ConvertString("days") + 
+		" (" + XI_ConvertString("FoodAcc") + "/" + XI_ConvertString("RumAcc") + ")", FONT_CAPTION, COLOR_NORMAL, 630, 10, SCRIPT_ALIGN_CENTER, 0.8);
 
 	SetEventHandler("InterfaceBreak","ProcessExit",0);
 	SetEventHandler("exitCancel","ProcessExit",0);
 	SetEventHandler("evntDoPostExit","DoPostExit",0);
 	SetEventHandler("SelectRColony","SelectRColony",0);
-	SetEventHandler("MouseRClickUP", "HideRColony",0);
+	SetEventHandler("MouseRClickUP","HideRColony",0);
 }
 
 void ProcessExit()
@@ -261,9 +236,14 @@ void IDoExit(int exitCode)
 	DelEventHandler("exitCancel","ProcessExit");
 	DelEventHandler("evntDoPostExit","DoPostExit");
 	DelEventHandler("SelectRColony","SelectRColony");
-	DelEventHandler("MouseRClickUP", "HideRColony");
+	DelEventHandler("MouseRClickUP","HideRColony");
 
+	if(CheckAttribute(pchar, "ShowBestMap")) { // Смотрим из меню
+		DeleteAttribute(pchar, "ShowBestMap");
+		interfaceResultCommand = RC_INTERFACE_TO_ITEMS;
+	} else {
 	interfaceResultCommand = exitCode;
+	}
 	
 	EndCancelInterface(true);
 }
@@ -339,9 +319,9 @@ void ShowColonyInfo(int iColony)
 	sText = GetNationNameByType(sti(rColony.nation));
 	SetNewGroupPicture("INFO_NATION_PICTURE", "NATIONS", sText);
 
-	SetFormatedText("EXPORT_CAPTION", XI_ConvertString("EXPORTING:"));
-	SetFormatedText("IMPORT_CAPTION", XI_ConvertString("IMPORTING:"));
-	SetFormatedText("CONTRABAND_CAPTION", GetLangStr("CONTRABAND"));
+	SetFormatedText("EXPORT_CAPTION", GetConvertStr("EXPORT", "activemap.txt"));
+	SetFormatedText("IMPORT_CAPTION", GetConvertStr("IMPORT", "activemap.txt"));
+	SetFormatedText("CONTRABAND_CAPTION", GetConvertStr("CONTRABAND", "activemap.txt"));
 	SetFormatedText("AGGRESSIVE_CAPTION", "");
 	SetFormatedText("COLONY_INFO", "");
 	SetFormatedText("COLONY_INFO_TEXT", "");
@@ -369,16 +349,15 @@ void ShowColonyInfo(int iColony)
 		if (iDays1 < 1)	iDays1 = 1;
 		if (iDays2 < 1) iDays2 = 1;
 		
-		if (iDays1 == iDays2) 
-			sText += iDays1 + " " + GetLangStr("day");
-		else 
-		{
-			sText += GetLangStr("TRAVEL_from") + " " + iDays1 + " " + GetLangStr("TRAVEL_to") + " " + iDays2 + " ";
-			
-			if(iDays2%10 == 1)
-				sText += GetLangStr("day2");
-			else
-				sText += GetLangStr("days");
+		if (iDays1 == iDays2) {
+			sText += iDays1 + " ";
+			if(iDays2%10 == 1) {
+				sText += GetConvertStr("day2", "activemap.txt");
+			} else {
+				sText += GetConvertStr("days", "activemap.txt");
+			}
+		} else {
+			sText += GetConvertStr("TRAVEL_from", "activemap.txt") + " " + iDays1 + " " + GetConvertStr("TRAVEL_to", "activemap.txt") + " " + iDays2 + " " + GetConvertStr("days", "activemap.txt");
 		}
 		sText+=".";
 	}
@@ -390,27 +369,26 @@ void ShowColonyInfo(int iColony)
 		{
 			iDistance = makeint(_GetDistanceToColony2D(sColony)/6.5 + 0.5)
 			
-			sText = GetLangStr("Distance") + " = " + iDistance + " ";
+			sText = GetConvertStr("Distance", "activemap.txt") + " = " + iDistance + " ";
 			if (iDistance == 1)
 			{
-				sText += GetLangStr("nautical_mile");
+				sText += GetConvertStr("nautical_mile", "activemap.txt");
 			}
 			else 
 			{
 				if(iDistance%10 == 1)
 				{
-					sText += GetLangStr("nautical_mile2");
+					sText += GetConvertStr("nautical_mile2", "activemap.txt");
 				}
 				else
 				{
 					bool lc1 = iDistance%100 < 10 || iDistance%100 > 20;
 					if(lc1 && iDistance%10 > 1 && iDistance%10 < 5)
-						sText += GetLangStr("nautical_miles2");
+						sText += GetConvertStr("nautical_miles2", "activemap.txt");
 					else
-						sText += GetLangStr("nautical_miles");
+						sText += GetConvertStr("nautical_miles", "activemap.txt");
 				}
 			}
-
             // LDH 12Jul17 - add direction
             sText += " " + GetMapDir16(_GetDirToColony(sColony));
             sText += " (" + GetMapDir32(_GetDirToColony(sColony)) + ")";
@@ -425,21 +403,21 @@ void ShowColonyInfo(int iColony)
 			sText += iDistance + " ";
 			if (iDistance == 1)
 			{
-				sText += GetLangStr("hour");
+				sText += GetConvertStr("hour", "activemap.txt");
 			}
 			else
 			{
 				if (iDistance%10 == 1)
 				{
-					sText += GetLangStr("hour");
+					sText += GetConvertStr("hour", "activemap.txt");
 				}
 				else
 				{
 					bool lc2 = iDistance%100 < 10 || iDistance%100 > 20;
 					if(lc2 && iDistance%10 > 1 && iDistance%10 < 5)
-						sText += GetLangStr("hours2");
+						sText += GetConvertStr("hours2", "activemap.txt");
 					else
-						sText += GetLangStr("hours");
+						sText += GetConvertStr("hours", "activemap.txt");
 				}
 			}
 			sText += ".";
@@ -540,7 +518,7 @@ void ShowColonyInfo(int iColony)
 		}
 		
 		if(iType == 3 && i > 1)
-			SetFormatedText("AGGRESSIVE_CAPTION", GetLangStr("AGGRESSIVE"));
+			SetFormatedText("AGGRESSIVE_CAPTION", GetConvertStr("AGGRESSIVE", "activemap.txt"));
 	}
 	
 	///Trade assistant
@@ -549,7 +527,7 @@ void ShowColonyInfo(int iColony)
 	if(sTown == "" || sTown == sColony)
 		return;
 	
-	SetFormatedText("TRADEASSISTANT_CAPTION", "Trade assistant");
+	SetFormatedText("TRADEASSISTANT_CAPTION", "Торговый помощник");
 	
 	//Find town in trade book
 	bool bFound = true; 
@@ -562,7 +540,7 @@ void ShowColonyInfo(int iColony)
 	
 	if(!bFound)
 	{
-		SetFormatedText("TRADEASSISTANT_SPECIAL", GetLangStr("No_price"));
+		SetFormatedText("TRADEASSISTANT_SPECIAL", GetConvertStr("No_price", "activemap.txt"));
 		return;
 	}
 		
@@ -614,7 +592,7 @@ void ShowColonyInfo(int iColony)
 		for(i=0; i<TRADEASSISTANT_MAXGOODS-1; i++)
 			a_fMax[i] = 0.;
 
-		for (i = 0; i < 28; i++) //Skip Shipsilk, Ropes, Sandal, Oil, Gold, Silver, Cannons
+		for (i = GOOD_BALLS; i < GOOD_SHIPSILK; i++) //Skip Shipsilk, Ropes, Sandal, Oil, Gold, Silver, Cannons
 		{
 			sGood = Goods[i].name;
 			if(refStore.Goods.(sGood).TradeType == T_TYPE_CONTRABAND)
@@ -676,7 +654,7 @@ void ShowColonyInfo(int iColony)
 			if(!a_fMax[i])
 				break;
 			
-			AddLineToFormatedText("TRADEASSISTANT_PRICES" + (iType+1), FloatToStr(a_fMax[i]));
+			AddLineToFormatedText("TRADEASSISTANT_PRICES" + (iType+1), FloatToString(a_fMax[i], 1));
 			SetFormattedTextLastLineColor("TRADEASSISTANT_PRICES" + (iType+1), iColor);
 			
 			SendMessage( &GameInterface,"lslslllll",MSG_INTERFACE_MSG_TO_NODE,"GOODS_PICTURES", 0,
@@ -689,12 +667,12 @@ void ShowColonyInfo(int iColony)
 	
 	if(bFound)
 	{
-		SetFormatedText("TRADEASSISTANT_TO", GetLangStr("To"));
-		SetFormatedText("TRADEASSISTANT_FROM", GetLangStr("From"));
+		SetFormatedText("TRADEASSISTANT_TO", GetConvertStr("To", "activemap.txt"));
+		SetFormatedText("TRADEASSISTANT_FROM", GetConvertStr("From", "activemap.txt"));
 	}
 	else
 	{
-		SetFormatedText("TRADEASSISTANT_SPECIAL", GetLangStr("No_profit"));
+		SetFormatedText("TRADEASSISTANT_SPECIAL", GetConvertStr("No_profit", "activemap.txt"));
 	}
 }
 
@@ -750,8 +728,6 @@ int GetMaxFortCannons(string _FortCommander)
 	
 	return _iCannons;
 }
-
-
 // LDH 12Jul17 compass directions -->
 string GetMapDir16(float dir)      // N, NNE, NE
 {
@@ -850,4 +826,4 @@ float Normalize360(float dir)
     if (dir > 360.0) dir -= 360.0;
     return dir;
 }
-// LDH 12Jul17 <--
+// LDH 12Jul17 <-									 

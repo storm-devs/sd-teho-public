@@ -1,6 +1,6 @@
 object NetSkills[16];
 int iNetSkillsNum;
-
+/*
 ref Net_GetSkillByName(string sSkill) 
 {
 	for (int i=0; i<iNetSkillsNum; i++) { if (sSkill == NetSkills[i].Name) return &NetSkills[i]; }
@@ -41,3 +41,4 @@ void Net_InitSkills()
 
 	iNetSkillsNum = n;
 }
+*/

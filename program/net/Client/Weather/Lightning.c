@@ -1,7 +1,7 @@
 object NCLightning;
 float fClientLightningScaleX;
 float fClientLightningScaleY;
-
+/*
 void NetClient_WhrDeleteLightningEnvironment()
 {
 	if (isEntity(&Lightning)) 
@@ -99,3 +99,4 @@ void NetClient_MoveLightningToLayers(string sExecuteLayer, string sRealizeLayer)
 	LayerAddObject(sExecuteLayer, &NCLightning, -2);
 	LayerAddObject(sRealizeLayer, &NCLightning, -2);
 }
+*/

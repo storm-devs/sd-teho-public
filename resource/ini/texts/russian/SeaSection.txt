@@ -15,11 +15,11 @@ seg_Sailcloth	{Парусины}
 seg_Planks		{Досок}
 seg_Slaves		{Рабов}
 seg_Wheat		{Пшеницы}
-seg_Ebony		{Черного дерева}
+seg_Ebony		{Чёрного дерева}
 seg_Chocolate	{Какао}
 seg_Sugar		{Сахара}
 seg_Wine		{Вина}
-seg_ShipSilk	{Корабельного шелка}
+seg_ShipSilk	{Корабельного шёлка}
 seg_Rum			{Рома}
 seg_Tobacco		{Табака}
 seg_Coffee		{Кофе}

@@ -1,5 +1,5 @@
 object	NCShipCamera, NCDeckCamera;
-
+/*
 void NetClient_DeleteCamerasEnvironment()
 {
 	DeleteClass(&NCDeckCamera);
@@ -179,3 +179,4 @@ void NetClient_CameraSwitch()
 	else
 		{ NetClient_SetDeckCameraOn(); }
 }
+*/

@@ -12,7 +12,7 @@ int iTryConnectDeltaTime = 0;
 int iGetInetServersFrameTime = 0;
 int iNumInternetServerToLoad = 0;
 int iCurrentInternetServersLoaded = 0;
-
+/*
 void InitInterface(string iniName)
 {
 	// init some clients data, maybe need place it in another fuction
@@ -1102,25 +1102,8 @@ void FG_OnJoinGame()
 	GameInterface.EDITBOX_CONNECT_NICK.str = NetClient.NickName;
 	GameInterface.EDITBOX_CONNECT_PASSWORD.str = NetClient.Password;
 
-	/*NetClient.NickName = GameInterface.EDITBOX_PLAYERNAME.str;
-	NetClient.Password = GameInterface.EDITBOX_PLAYERPASSWORD.str;
-	NetClient.ShipName = GameInterface.EDITBOX_PLAYERSHIPNAME.str;*/
 
-	/*if (sti(GameInterface.FACESLIST.ListSize))
-	{
-		sImage = "pic" + (sti(GameInterface.FACESLIST.current) + 1);
-		NetClient.FaceImage = GameInterface.FACESLIST.(sImage).FileName.Name;
-	}
-	if (sti(GameInterface.SAILSLIST.ListSize))
-	{
-		sImage = "pic" + (sti(GameInterface.SAILSLIST.current) + 1);
-		NetClient.SailImage = GameInterface.SAILSLIST.(sImage).FileName.Name;
-	}
-	if (sti(GameInterface.FLAGSLIST.ListSize))
-	{
-		sImage = "pic" + (sti(GameInterface.FLAGSLIST.current) + 1);
-		NetClient.FlagImage = GameInterface.FLAGSLIST.(sImage).FileName.Name;
-	}*/
+
 
 	//NetClient_TryConnect(sCurrentIP, sti(sCurrentPort));
 	//IDoExit(RC_INTERFACE_NET_EXIT);
@@ -1213,3 +1196,4 @@ void NetInterface_AddInternetServerToList(string sName, string sIP, int wPort, b
 	iNumInternetServers++;
 	Table_UpdateWindow("TABLE_INETSERVER");
 }
+*/

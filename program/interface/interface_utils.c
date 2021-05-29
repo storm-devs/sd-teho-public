@@ -193,7 +193,7 @@ void ChangeShowIntarface()
 {
     if (bSeaActive && !bAbordageStarted)
     {
-        if (!IsEntity(BattleInterface))
+        if (!IsEntity(&BattleInterface))
         {
             InitBattleInterface();
             StartBattleInterface();
@@ -203,7 +203,7 @@ void ChangeShowIntarface()
     }
     else
     {
-		if (!IsEntity(worldMap))
+		if (!IsEntity(&worldMap))
 		{
 			if (!bLandInterfaceStart)
 	        {

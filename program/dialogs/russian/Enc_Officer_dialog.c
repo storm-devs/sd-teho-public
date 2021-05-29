@@ -118,7 +118,7 @@ void ProcessDialogEvent()
 			
 			
 			// по тек локации определим можно ли тут приказать  -->
-			if(IsEntity(loadedLocation))
+			if(IsEntity(&loadedLocation))
 			{
 				if(CheckAttribute(loadedLocation, "fastreload"))
 				{
@@ -411,10 +411,10 @@ void ProcessDialogEvent()
 		///////////////////////////////////////////////////////////////////////////////////
 		case "WantToGo_Munity":	//zagolski. отыгрыш бегство офицера
 			Diag.TempNode = "Hired";
-			if (sti(Pchar.questTemp.MunityOfficerIDX) != GetCharacterIndex(Npchar.id))
+			if (!CheckAttribute(pchar, "questTemp.MutinyOfficerIDX"))
 			{
-				Pchar.questTemp.MunityOfficerIDX = GetCharacterIndex(Npchar.id);
-				Pchar.questTemp.MunityOfficerIDX.begin = "1";
+				pchar.questTemp.MutinyOfficerIDX = npchar.index;
+				npchar.quest.Mutiny = true; // mitrokosta доп защита от багов
 				SetFunctionTimerCondition("mOfficer_fc", 0, 0, 1, false);
 			}
 			Diag.CurrentNode = Diag.TempNode;
@@ -675,7 +675,7 @@ void ProcessDialogEvent()
 			}
 			if (makeint(PChar.reputation.nobility) < 41 && makeint(NPChar.reputation) < 41) // злодей против злодея
 			{	
-				dialog.text = RandPhraseSimple(LinkRandPhrase("Капитан, я никак не ожидал такого поворота! Может объясните, что произошло?","Капитан, что за муха вас укусила?!","Как прикажете это понимать, капитан?!"), RandPhraseSimple("Как же так, капитан?! Ещё сутра всё было нормально, а тут - на тебе...","Ого! Думаю, вы найдёте пару слов для объяснения?"));
+				dialog.text = RandPhraseSimple(LinkRandPhrase("Капитан, я никак не ожидал такого поворота! Может объясните, что произошло?","Капитан, что за муха вас укусила?!","Как прикажете это понимать, капитан?!"), RandPhraseSimple("Как же так, капитан?! Ещё с утра всё было нормально, а тут - на тебе...","Ого! Думаю, вы найдёте пару слов для объяснения?"));
 				Link.l1 = RandPhraseSimple(LinkRandPhrase("Ты редкостный бездарь и неумеха - тебе бы юнгой в каботажное плавание. Я и так слишком долго терпел"+ GetSexPhrase("","а") +". Так что,","Ты давно меня не устраиваешь, но сейчас я наконец-то наш"+ GetSexPhrase("ел","ла") +" достойную замену. Так что,","Мне стало известно, что ты тайком таскаешь ром и спаиваешь команду, тем самым ослабляя её боевой дух. Поэтому"), LinkRandPhrase("При найме ты распинался, что лучшего офицера не найти на всём флоте, а на поверку оказался обыкновенным лоботрясом, так что","Я предупреждал"+ GetSexPhrase("","а") +", что твоё пьянство плохо кончится. Почему я долж"+ GetSexPhrase("ен","на") +" всё за тебя делать сам"+ GetSexPhrase("","а") +"? Так что,","Вместо несения службы, ты постоянно торчишь в кают-компании за игрой в карты или кости. Надеюсь, ты не думал, что так может продолжаться бесконечно? Так что,")) + " собирайся и проваливай.";
 				Link.l1.go = "Get_out_A4";
 				break;

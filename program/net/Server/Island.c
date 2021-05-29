@@ -1,5 +1,5 @@
 object NSIsland;
-
+/*
 void NetServer_DeleteIslandEnvironment()
 {
 	DeleteClass(&NSIsland);
@@ -26,4 +26,4 @@ void NetServer_CreateIslandEnvironment(int iSMsg)
 		SetTexturePath(0, "");
 	}
 
-}
+}*/

@@ -5,10 +5,10 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	{
 		case "quests":
 			dialog.text = NPCStringReactionRepeat("Все сплетни города "+ GetCityName(npchar.city) +" к вашим услугам. Что бы вы хотели узнать?",
-                          "Мы только что поднимали это тему. Вы, вероятно, запамятовали...", "Сегодня вы уже третий раз говорите о каком-то вопросе...",
+                          "Мы только что поднимали эту тему. Вы, вероятно, запамятовали...", "Сегодня вы уже третий раз говорите о каком-то вопросе...",
                           "Что ты "+ GetSexPhrase("заладил","заладила") +" как попугай одно и то же...", "block", 1, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat("Знаешь, " + NPChar.name + ", как-нибудь в следующий раз.", "Точно, "+ GetSexPhrase("забыл","забыла") +" что-то...",
-                      "Да уж, действительно в третий раз...", "Да уж...", npchar, Dialog.CurrentNode);
+                      "Да уж, действительно, в третий раз...", "Да уж...", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
 			if(CheckAttribute(pchar, "questTemp.Saga") && pchar.questTemp.Saga == "cartahena" && !CheckAttribute(npchar, "quest.gonsales"))
 			{
@@ -24,7 +24,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 		
 		case "saga_1":
-			dialog.text = "Ну, я точно не знаю, но на вид ему никак не меньше полувека. Он живет в этом доме очень давно. Любит рассказывать всякие страшилки про пиратов, которые, скорее всего, сам же и выдумал.";
+			dialog.text = "Ну, я точно не знаю, но на вид ему никак не меньше полувека. Он живёт в этом доме очень давно. Любит рассказывать всякие страшилки про пиратов, которые, скорее всего, сам же и выдумал.";
 			link.l1 = "Похоже, именно он мне и нужен. Спасибо, "+npchar.name+", ты мне очень помог!";
 			link.l1.go = "saga_2";
 		break;

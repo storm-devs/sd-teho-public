@@ -632,7 +632,7 @@ string GetRandSkelModel()
 
 // boal 22.04.04 выбор модели зависимо от типа
 void SetCaptanModelByEncType(ref Chref, string sFantomType)
-{
+{	
     string ModelPirate = "Albermal"; // значит баг
 	
 	int st = GetCharacterShipType(Chref);	
@@ -662,7 +662,7 @@ void SetCaptanModelByEncType(ref Chref, string sFantomType)
 				if(shClass < 4 && shClass > 1)  ModelPirate = "off_" + NationShortName(sti(Chref.nation)) + "_" + (rand(1) + 4);
 				if(shClass == 1)
 				{
-						if(sti(chref.Ship.Type) == SHIP_FORT) 	// командующие фортами
+						if(sti(RealShips[sti(Chref.ship.type)].basetype) == SHIP_FORT) // командующие фортами
 						{
 							ModelPirate = "off_" + NationShortName(sti(Chref.nation)) + "_" + (rand(1) + 4);
 						}

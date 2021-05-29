@@ -61,17 +61,17 @@ void InitInterface_gm(string iniName)
 	string sText = "";
 
 	sText = "BlackMark Studio, Akella ";
-	sText = sText + "- 2017";
+	sText = sText + "- 2019";
 	SetFormatedText("COPYRIGHTS_TEXT", sText);
 	
 	string sDLC = "";
-//	SetFormatedText("DLC_TEXT", sDLC);
+	SetFormatedText("DLC_TEXT", sDLC);
 
 	SetNewPicture("LOGO", "Interfaces\SL_logo.tga");
 
 	if(LAi_IsBoardingProcess())	SetSelectable("MB_RESUME",false);
 
-	if(bSteamAchievements)
+	if(bSteamAchievements && GetSteamEnabled())
 	{
 			DLCAppID = CheckUpdates();	
 			if(DLCAppID > 0) // есть обновления
@@ -86,7 +86,7 @@ void InitInterface_gm(string iniName)
 	else
 	{ // обновлений нет
 		SetSelectable("MB_UPDATES", false);
-	}	
+	}
 }
 
 
@@ -144,7 +144,7 @@ void ProcessCommandExecute()
 		case "MB_UPDATES":
 			if (comName == "click" || comName == "activate")
 			{
-				if(DLCAppID > 0 && bSteamAchievements)
+				if(DLCAppID > 0 && bSteamAchievements && GetSteamEnabled())
 				{
 					DLCState = DLCStartOverlay(MAIN_APPID); // открываем окошко в стиме для главной игры а не для дополнения
 				}
@@ -273,7 +273,7 @@ void UpdateInterface()
 {
 	bool isSteamOverlayEnabled = GetEventData();
 
-	if(!bSteamAchievements) return;
+	if(!bSteamAchievements || !GetSteamEnabled()) return;
 	
 	trace("isSteamOverlayEnabled : " + isSteamOverlayEnabled );
 	if(!isSteamOverlayEnabled) // оверлей закрыт
@@ -301,8 +301,9 @@ bool CheckUpdates()
 	int	   i;
 	int	   appID;
 	string sText = "";
+	int    dlcCount = 0; 
 
-	if(bSteamAchievements)
+	if(bSteamAchievements && GetSteamEnabled())
 	{
 		dlcCount = GetDLCCount();
 		for(i = 0; i < dlcCount; i++)
@@ -332,7 +333,7 @@ bool CheckUpdates()
 						break;
 						
 						case 3:
-							sText = sText + NewStr() + " + 'Герой нации'";	
+							sText = sText + NewStr() + " + 'Герой нации'";		
 							bOk2 = true;							
 						break;
 						

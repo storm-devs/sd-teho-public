@@ -29,7 +29,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 		
 		case "Havana_ratP_1":
-			dialog.text = NPCStringReactionRepeat("Да, останавливался. Но уже ушел от нас. Спросите о нем нашего трактирщика, капитан корвета снимал у него комнату в таверне.", "Вы уже "+ GetSexPhrase("спрашивали","спрашивали") +" об этом, я вам ответил.", "Я же говорю вам, вы уже "+ GetSexPhrase("спрашивали","спрашивали") +" об этом Гонтьере.", "Я прошу не мешать мне работать!", "block", 0, npchar, Dialog.CurrentNode);
+			dialog.text = NPCStringReactionRepeat("Да, останавливался. Но уже ушёл от нас. Спросите о нем нашего трактирщика, капитан корвета снимал у него комнату в таверне.", "Вы уже "+ GetSexPhrase("спрашивали","спрашивали") +" об этом, я вам ответил.", "Я же говорю вам, вы уже "+ GetSexPhrase("спрашивали","спрашивали") +" об этом Гонтьере.", "Я прошу не мешать мне работать!", "block", 0, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat("Спасибо! Так и поступлю.", "Хм, ну да...", "Да, точно, "+ GetSexPhrase("спрашивал","спрашивала") +"...", "Извините, " + npchar.name + "...", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
 		break;

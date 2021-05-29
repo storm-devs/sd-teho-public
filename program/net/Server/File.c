@@ -1,4 +1,4 @@
-
+/*
 void NetServer_OnFile(int wNetClientID, int iMsg)
 {
 	int iSubCode = NMGetByte(iMsg);
@@ -95,4 +95,4 @@ void NetServer_OnFileReceiverReady(int wNetClientID, int iFileID1, int iFileID2,
 void NetServer_OnFileCancel(int wNetClientID, int iFileID1, int iFileID2, int iMsg)
 {
 	NFSDeleteFile(iFileID1);
-}
+}*/

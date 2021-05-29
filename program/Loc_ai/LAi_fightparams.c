@@ -78,14 +78,14 @@ float LAi_GetDamageAttackType(aref attack, aref enemy, string attackType, ref aB
 				if(sFencingType == "FencingL")
 				{
 					kAttackDmg =  0.6 * bLngth * bCurv * (0.9 + ( bWght - 2.0)/5.0) * (0.85 + bBlnce/6.67);
-					if(CheckCharacterPerk(attack, "HardHitter") && CheckAttribute(enemy, "chr_ai.energy") && !CheckCharacterPerk(enemy, "HT1"))  
-					{			
-						enemy.chr_ai.energy = (stf(enemy.chr_ai.energy) * 0.9); 		
-					}					
 				}
 				if(sFencingType == "FencingS")
 				{
 					kAttackDmg =  bLngth * bCurv * (0.85 + (bWght - 2.4)/4.0) * (0.85 + bBlnce/6.67);
+					if(CheckCharacterPerk(attack, "HardHitter") && CheckAttribute(enemy, "chr_ai.energy") && !CheckCharacterPerk(enemy, "HT1"))  
+					{			
+						enemy.chr_ai.energy = (stf(enemy.chr_ai.energy) * 0.9); //belamour 08.04.2020 hardhitter FS		
+					}		
 				}
 				if(sFencingType == "FencingH")
 				{
@@ -105,14 +105,14 @@ float LAi_GetDamageAttackType(aref attack, aref enemy, string attackType, ref aB
 				if(sFencingType == "FencingL")
 				{
 					kAttackDmg = bLngth/bCurv * (0.9 + (bWght - 2.0)/5.0) * (1.22 - bBlnce * 0.22);
+                    if(CheckCharacterPerk(attack, "HardHitter") && CheckAttribute(enemy, "chr_ai.energy") && !CheckCharacterPerk(enemy, "HT1")) 
+					{			
+						enemy.chr_ai.energy = (stf(enemy.chr_ai.energy) * 0.9); //belamour 08.04.2020 hardhitter FL
+					}
 				}
 				if(sFencingType == "FencingS")
 				{
 					kAttackDmg = 0.6 * bLngth/bCurv * (0.85 + (bWght - 2.4)/4.0) * (1.22 - bBlnce * 0.22);
-					if(CheckCharacterPerk(attack, "HardHitter") && CheckAttribute(enemy, "chr_ai.energy") && !CheckCharacterPerk(enemy, "HT1"))  
-					{			
-						enemy.chr_ai.energy = (stf(enemy.chr_ai.energy) * 0.9); 
-					}
 				}
 				if(sFencingType == "FencingH")
 				{
@@ -192,11 +192,11 @@ float LAi_GetDamageAttackType(aref attack, aref enemy, string attackType, ref aB
 				{
 					kAttackDmg = kAttackDmg * 0.85;
 				}
-				if(IsEquipCharacterByArtefact(enemy, "amulet_3"))
+				if(IsEquipCharacterByArtefact(attack, "amulet_3")) // belamour плата за защиту от критиклов 
 				{
 					kAttackDmg = kAttackDmg * 0.90;
 				}
-				if(IsEquipCharacterByArtefact(attack, "indian_3"))
+				if(IsEquipCharacterByArtefact(enemy, "indian_3")) // belamour а хочешь критов, получай по шапке 
 				{
 					kAttackDmg = kAttackDmg * 1.10;
 				}
@@ -844,10 +844,28 @@ void LAi_ApplyCharacterAttackDamage(aref attack, aref enemy, string attackType, 
 	{
 		critical = 0;
 	}
-	if(CheckAttribute(enemy, "cirassId") && critical > 0.0 && CheckAttribute(&Items[sti(enemy.cirassId)],"critical"))
+    //--> Jason && belamour фикс кирас
+	if(CheckAttribute(enemy, "cirassId"))
 	{
-		if(makeint(stf(Items[sti(enemy.cirassId)].critical) * 1000) < rand(1000)) critical = 0.0;
+    float fCritical = 0.0;
+		switch (GetCharacterEquipByGroup(enemy, CIRASS_ITEM_TYPE))
+		{
+			case "cirass1": 	fCritical = 0.2; break;
+			case "cirass2": 	fCritical = 0.3; break;
+			case "cirass3": 	fCritical = 0.5; break;
+			case "cirass4": 	fCritical = 0.0; break;
+			case "cirass5": 	fCritical = 1.0; break;
+			case "cirass6": 	fCritical = 0.8; break;
+			case "cirass7": 	fCritical = 0.7; break;
+			case "cirass8": 	fCritical = 0.5; break;
+			case "underwater": 	fCritical = 0.0; break;
+			case "suit1": 		fCritical = 0.8; break;
+			case "suit4": 		fCritical = 0.5; break;
+		}
+		if(makeint(stf(fCritical) * 1000) <= rand(999)) critical = 0.0;
 	}
+    //<-- фикс кирас
+	
 	if(critical > 0.0)
 	{
         AddCharacterExpToSkill(attack, SKILL_FORTUNE, 5);
@@ -1166,7 +1184,7 @@ float LAi_NPC_GetAttackActive()
 float LAi_NPC_GetAttackWeightFast()
 {
 	aref chr = GetEventData();
-	npc_return_tmp = 20.0 * LAi_NPC_GetAttackPreferenceWeight(chr, "FencingL", 1.0, 3.0);
+	npc_return_tmp = 20.0 * LAi_NPC_GetAttackPreferenceWeight(chr, "FencingS", 1.0, 3.0);
 	npc_return_tmp = npc_return_tmp * LAi_NPC_GetAttackPreferenceWeight(chr, "FencingH", 1.0, 0.5);
 	npc_return_tmp = npc_return_tmp * (0.8 + (0.1 * MOD_SKILL_ENEMY_RATE));
 	return npc_return_tmp;
@@ -1177,7 +1195,7 @@ float LAi_NPC_GetAttackWeightFast()
 float LAi_NPC_GetAttackWeightForce()
 {
 	aref chr = GetEventData();
-	npc_return_tmp = 50.0 * LAi_NPC_GetAttackPreferenceWeight(chr, "FencingS", 1.0, 3.0);
+	npc_return_tmp = 50.0 * LAi_NPC_GetAttackPreferenceWeight(chr, "FencingL", 1.0, 3.0);
 	npc_return_tmp = npc_return_tmp * (0.8 + (0.1 * MOD_SKILL_ENEMY_RATE));
 	return npc_return_tmp;
 }
@@ -1331,32 +1349,39 @@ bool LAi_NPC_AdaptiveTargetSelect()
 bool LAi_NPC_EnableStun()
 {
 	aref chr = GetEventData();
-	if(CheckCharacterPerk(chr, "SwordplayProfessional"))
+	if(CheckCharacterItem(chr, "totem_05") && IsEquipCharacterByArtefact(chr, "totem_05")) // лесник добавил пупа
 	{
-		if(rand(100) < 60) npc_return_tmpb = false;
-		else npc_return_tmpb = true;
-	}
-	else 
-	{
-		if(CheckCharacterPerk(chr, "AdvancedDefense"))
+		npc_return_tmpb = false;
+    }
+    else
+    {	
+		if(CheckCharacterPerk(chr, "SwordplayProfessional"))
 		{
-			if(rand(100) < 30) npc_return_tmpb = false;
+			if(rand(100) < 60) npc_return_tmpb = false;
 			else npc_return_tmpb = true;
 		}
-		else
-		{	
-			if(CheckCharacterPerk(chr, "BasicDefense"))
+		else 
+		{
+			if(CheckCharacterPerk(chr, "AdvancedDefense"))
 			{
-				if(rand(100) < 20) npc_return_tmpb = false;
+				if(rand(100) < 30) npc_return_tmpb = false;
 				else npc_return_tmpb = true;
 			}
 			else
-			{
-				if(rand(100) < 10) npc_return_tmpb = false;
-				npc_return_tmpb = true;
-			}
-		}	
-	}	
+			{	
+				if(CheckCharacterPerk(chr, "BasicDefense"))
+				{
+					if(rand(100) < 20) npc_return_tmpb = false;
+					else npc_return_tmpb = true;
+				}
+				else
+				{
+					if(rand(100) < 10) npc_return_tmpb = false;
+					npc_return_tmpb = true;
+				}
+			}	
+		}
+	}		
 	return npc_return_tmpb;
 }
 

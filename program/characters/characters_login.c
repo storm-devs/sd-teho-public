@@ -71,7 +71,7 @@ void LoginCharacter(aref chr, string locID)
 
 void LogoffCharacter(aref chr)
 {
-	if(IsEntity(chr))
+	if(IsEntity(&chr))
 	{
         DelBakSkillAttr(chr); // fix
 		LAi_CharacterLogoff(chr);
@@ -157,7 +157,7 @@ bool ChangeCharacterAddressGroup(ref character, string location_id, string group
 	}
 	else
 	{
-		if (location_id == character.location && IsEntity(character)) //boal fix 26/06/05
+		if (location_id == character.location && IsEntity(&character)) //boal fix 26/06/05
 		{
 			TeleportCharacterToLocator(character, group, locator);
 			character.location = location_id;

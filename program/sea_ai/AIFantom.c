@@ -34,24 +34,84 @@ int Fantom_GenerateEncounterExt(string sGroupName, object oResult, int iEType, i
 	}
 	
 	int iRank = sti(pchar.Rank);
+	trace("iRank = " + iRank + " iEtype " + iEType);
 	Encounter_GetClassesFromRank(iEType, iRank, &iMerchantClassMin, &iMerchantClassMax, &iWarClassMin, &iWarClassMax);
 	
 	int iFantomIndex, iShipType;
 
 	for (i=0; i<iNumMerchantShips; i++)
 	{
+		if(iNumShips + i >= MAX_SHIPS_ON_SEA) return i;
 		iShipType = Fantom_GetShipTypeExt(iMerchantClassMin, iMerchantClassMax, "Merchant", sGroupName, "Trade", iEType, iNation );
 		if (iShipType == INVALID_SHIP_TYPE) continue;
 	}
 
 	for (i=0; i<iNumWarShips; i++)
 	{
+		if(iNumShips + iNumMerchantShips + i >= MAX_SHIPS_ON_SEA) return iNumMerchantShips + i; 
 		iShipType = Fantom_GetShipTypeExt(iWarClassMin, iWarClassMax, "War", sGroupName, "War", iEType, iNation);
 		if (iShipType == INVALID_SHIP_TYPE) continue;
 	}
 
 	return iNumWarShips + iNumMerchantShips;
 }
+
+int Fantom_GenerateEncounter(string sGroupName, int iEType, int iNation) // --> взято из Новых Горизонтов с разрешения Питера Боелена
+{
+	aref	aWar, aMerchant;
+	ref		rEnc;
+	int		i, iNumMerchantShips, iNumWarShips;
+	int		iWarClassMax, iWarClassMin, iMerchantClassMax, iMerchantClassMin;
+
+	ref rCharacter = GetMainCharacter();
+
+	makeref(rEnc, EncountersTypes[iEType]);
+	makearef(aWar, rEnc.War);
+	makearef(aMerchant, rEnc.Trade);
+	
+	if(iEType == ENCOUNTER_TYPE_BARREL || iEType == ENCOUNTER_TYPE_BOAT)
+	{
+		ref rFantom = GetFantomCharacter(iNumFantoms);
+		
+		DeleteAttribute(rFantom, "relation");
+		DeleteAttribute(rFantom, "abordage_twice");
+		DeleteAttribute(rFantom, "QuestDate");
+		DeleteAttribute(rFantom, "ransom");
+
+		rFantom.SeaAI.Group.Name = sGroupName;
+		iNumFantoms++;
+		return 0;
+	}	
+
+	iNumMerchantShips 	= MakeInt(aMerchant.ShipsMin) + rand(MakeInt(aMerchant.ShipsMax) - MakeInt(aMerchant.ShipsMin));
+	iNumWarShips 		= MakeInt(aWar.ShipsMin) + rand(MakeInt(aWar.ShipsMax) - MakeInt(aWar.ShipsMin));
+
+	int iRank = sti(rCharacter.Rank);
+	trace("iRank = " + iRank + " iEtype " + iEType);
+	
+	Encounter_GetClassesFromRank(iEType, iRank, &iMerchantClassMin, &iMerchantClassMax, &iWarClassMin, &iWarClassMax);
+	
+	int iFantomIndex, iShipType;
+
+	trace("Fantom_GenerateEncounter: type = "+ iEType +", # Mer = " + iNumMerchantShips + ", Mer MAX = " + iMerchantClassMax + ", Mer MIN = " + iMerchantClassMin + ", # War = " + iNumWarShips + ", War MAX = " + iWarClassMax + ", War MIN = " + iWarClassMin);
+	
+	for (i=0; i<iNumMerchantShips; i++)
+	{
+		if(iNumShips + i >= MAX_SHIPS_ON_SEA) return i;
+		iShipType = Fantom_GetShipTypeExt(iMerchantClassMin, iMerchantClassMax, "Merchant", sGroupName, "Trade", iEType, iNation );
+		if (iShipType == INVALID_SHIP_TYPE) continue;
+	}
+
+	for (i=0; i<iNumWarShips; i++)
+	{
+		if(iNumShips + iNumMerchantShips + i >= MAX_SHIPS_ON_SEA) return iNumMerchantShips + i; 
+		iShipType = Fantom_GetShipTypeExt(iWarClassMin, iWarClassMax, "War", sGroupName, "War", iEType, iNation);
+		if (iShipType == INVALID_SHIP_TYPE) continue;
+	}
+
+	return iNumWarShips + iNumMerchantShips;
+}
+
 
 int Fantom_GetShipTypeExt(int iClassMin, int iClassMax, string sShipType, string sGroupName, string sFantomType, int iEncounterType, int iNation)
 {

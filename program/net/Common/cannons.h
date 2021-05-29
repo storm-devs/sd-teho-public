@@ -21,7 +21,7 @@
 
 object NetCannons[NET_CANNON_TYPES_QUANTITY];
 //object  Cannon[CANNON_TYPES_QUANTITY];
-
+/*
 ref Net_GetCannonByType(int iCannonType) 
 { 
 	if (iCannonType == NET_CANNON_TYPE_NONECANNON) return &NullCharacter; // fix
@@ -70,3 +70,4 @@ int Net_GetCannonCaliber(int nCannon)
         break;		
     }
 }
+*/

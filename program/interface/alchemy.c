@@ -240,7 +240,7 @@ void ShowHelpHint()
 		ref    arItm = ItemsFromID(sCurItem);
 		lngFileID = LanguageOpenFile("ItemsDescribe.txt");
 		sHeader = LanguageConvertString(lngFileID, arItm.name);
-		sText1 =  GetItemDescribe(sCurItem); 				
+		sText1 =  GetItemDescribe(sti(arItm.index));
 		CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,192,192,192), sText3, argb(255,255,255,255), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 64, 64);
 		LanguageCloseFile(lngFileID);
 	}

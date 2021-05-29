@@ -266,8 +266,6 @@ void procUpdateControlKeyGroup()
 
 string GetCurControlGroup()
 {
-	if (bNetActive)	{ return Net_GetControlGroup();	}
-
 	if( IsEntity(&aviVideoObj) ) return "VideoPlayer";
 	//if( bRunHelpChooser ) return "HelpChooser";
 

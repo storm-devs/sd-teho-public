@@ -10,7 +10,7 @@ bool	bServerWeatherIsNight = false;
 bool	bServerWeatherIsStorm = false;
 bool	bServerWhrTornado = false;
 string	sServerLightingPath;
-
+/*
 void NetServer_DeleteWeatherEnvironment()
 {
 	NetServer_WhrDeleteSeaEnvironment();
@@ -41,7 +41,7 @@ void NetServer_CreateWeatherEnvironment(int iSMsg)
 		{
 			iServerCurWeatherNum = i;
 			break;
-		}
+		}	
 	}
 
 	if (iServerCurWeatherNum < 0)
@@ -106,4 +106,4 @@ float NetServer_WhrGetWindSpeed() { return 5.0 * stf(NSWeather.WindSpeed); }
 
 bool NetServer_WhrIsDay() { return !bServerWeatherIsNight; }
 bool NetServer_WhrIsNight() { return bServerWeatherIsNight; }
-bool NetServer_WhrIsStorm() { return bServerWeatherIsStorm; }
+bool NetServer_WhrIsStorm() { return bServerWeatherIsStorm; }*/

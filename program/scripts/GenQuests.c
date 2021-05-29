@@ -1181,6 +1181,7 @@ void ReasonToFast_SetTreasureBoxFromMap(string qName)
 
         loc.(box) = Items_MakeTime(GetTime(), GetDataDay(), GetDataMonth(), GetDataYear());
         loc.(box).Treasure =  true; // признак сокровища в сундуке
+		loc.(box).ReasonToFastTreasure = true; // mitrokosta фикс двойных ОЗК
 
         DeleteAttribute(item, "MapIslId");
         TakeNItems(pchar, "mapQuest", -1);
@@ -1673,7 +1674,37 @@ void PiratesOnUninhabited_ClearQuest(String _quest)
 	
 	DeleteAttribute(PChar, "GenQuest.PiratesOnUninhabited");
 }
-
+void prosralisrok(string qName)//просрочили  // лесник если просрочили поиск корабля
+{
+	PChar.GenQuest.ShipWreck_BadPirate.ClearShip = true;
+	Map_ReleaseQuestEncounter("ShipWreck_BadPirate"); //лесник . убирае с глоалки
+	CloseQuestHeader("ShipWrecked");
+	if (IsEntity(&worldMap) || bSeaActive) 
+	{
+	pchar.quest.qazwsx.win_condition.l1 = "Location_Type";
+	pchar.quest.qazwsx.win_condition.l1.location_type = "town";
+	pchar.quest.qazwsx.function = "Removepiratov";
+	log_info("Время на поиски корабля вышло");
+	}
+    else
+	{
+	sld = CharacterFromID("ShipWreck_0");
+	RemovePassenger(Pchar, sld);
+	sld.lifeday = 0;
+	log_info("Время на поиски корабля вышло, капитан сошёл на берег");
+	PlaySound("interface\notebook.wav");
+	}
+	DeleteAttribute(PChar, "GenQuest.ShipWreck");
+}
+void Removepiratov(string qName)//удалить негоцианта  лесник
+{
+	sld = CharacterFromID("ShipWreck_0");
+	RemovePassenger(Pchar, sld);
+	sld.lifeday = 0;
+	log_info("Капитан сошёл на берег");
+	PlaySound("interface\notebook.wav");
+	DeleteAttribute(PChar, "GenQuest.GenQuest.ShipWreck");
+}	
 void PiratesOnUninhabited_ShipSink(String _quest)
 {
 	PChar.GenQuest.PiratesOnUninhabited.ClearShip = true;
@@ -2120,7 +2151,7 @@ void EncGirl_GenQuest_GetCoins(string qName)
 	ref sld = CharacterFromID("CangGirl");
 	ChangeCharacterAddress(sld, "None", ""); 
 	sld.lifeDay = 0; 
-	AddSimpleRumour("Вы слышали, что служанку " + pchar.GenQuest.EncGirl.name + " хозяйка выгнала только за то, что та не смогла собрать в джунглях её рассыпавшиеся жемчужины? Совсем народ стыд потерял!.. а совести и не имел никогда.", sti(sld.nation), 5, 1);
+	AddSimpleRumour("Вы слышали, что служанку по имени" + pchar.GenQuest.EncGirl.name + " хозяйка выгнала только за то, что та не смогла собрать в джунглях её рассыпавшиеся жемчужины? Совсем народ стыд потерял!.. а совести и не имел никогда.", sti(sld.nation), 5, 1); // belamour
 	ChangeCharacterComplexReputation(pchar,"nobility", -10);
 	AddQuestRecord("JungleGirl", "3");
 	AddQuestUserData("JungleGirl", "sSex", GetSexPhrase("","а"));
@@ -2552,6 +2583,10 @@ void EncGirl_SpeakTavernKeeper(string qName)
 	DeleteAttribute(pchar, "GenQuest.EncGirl");
 }
 
+void EncGerl_deleteisjangly(string qName) // лесник квест снова доступен
+{
+	DeleteAttribute(pchar, "GenQuest.EncGirl");
+}
 void EncGirl_GenQuest_GetBag(string qName)
 {
 	ref sld = CharacterFromID("CangGirl");
@@ -2832,10 +2867,11 @@ void Set_TreasureBarrel()
 //=====================================================================================================================================
 void CaptainComission_GenerateSituation(ref chref)
 {
-	if(CheckAttribute(chref, "RealEncounterType") && sti(chref.RealEncounterType) != ENCOUNTER_TYPE_ALONE && !CheckAttribute(pchar,"GenQuest.CaptainComission"))
+	if (CheckAttribute(chref, "RealEncounterType") && sti(chref.RealEncounterType) != ENCOUNTER_TYPE_ALONE && !CheckAttribute(pchar,"GenQuest.CaptainComission"))
 	{
 		aref chrShip;
 		makearef(chrShip, chref.Back.Ship);
+    ref origCap = CharacterFromID(chref.CaptanId); // mitrokosta фикс пасхалки с сундуками
 		if (CheckAttribute(chrShip, "Mode") && chrShip.Mode == "trade")
 		{
 			if(rand(4) == 1 || bBettaTestMode) // временно, для бетатеста 
@@ -2843,7 +2879,7 @@ void CaptainComission_GenerateSituation(ref chref)
 				pchar.GenQuest.CaptainComission = "Begin";
 				pchar.GenQuest.CaptainComission.CapId = chref.CaptanId;
 				pchar.GenQuest.CaptainComission.CapName = chref.Name;
-				pchar.GenQuest.CaptainComission.ShipType = GetCharacterShipType(chrShip);
+				pchar.GenQuest.CaptainComission.ShipType = GetCharacterShipType(origCap); // mitrokosta фикс пасхалки с сундуками
 			}	
 		}	
 	}
@@ -2921,9 +2957,19 @@ void CaptainComission_GetPirateIsland()
 			sld = CharacterFromID("Marlow");
 		break;
 		case 1:
+		if (!CheckAttribute(pchar, "questTemp.LongHappy"))  // лесник - если ДИС взято то уже марлоу.
+		{
+			
 			CityId = "LeFransua"; // Ле-Франсуа на Мартинике
 			PirateId = "Barbazon";
 			sld = CharacterFromID("Barbazon");
+		}
+        else
+		{
+           CityId = "PuertoPrincipe"; // Пуэрто-Принсипе, Куба 250912
+		   PirateId = "Marlow";
+		   sld = CharacterFromID("Marlow");
+		} 		
 		break;
 	}
 	pchar.GenQuest.CaptainComission.PiratesCity = CityId;
@@ -2959,6 +3005,7 @@ void CaptainComission_30DaysIsLeft(string qName) // прошло 30 дней п�
 			AddQuestUserData("CaptainComission1", "sSex2", GetSexPhrase("","ла"));
 			AddQuestUserData("CaptainComission1", "sCharName", pchar.GenQuest.CaptainComission.Name);
 			AddQuestUserData("CaptainComission1", "sCapName", pchar.GenQuest.CaptainComission.CapName);
+			ChangeCharacterHunterScore(pchar, NationShortName(sti(pchar.GenQuest.CaptainComission.Nation)) + "hunter", 50); // лесник - выдал охотников ибо 150к - это вам не копейки :D
 		}
 		if(pchar.GenQuest.CaptainComission.AfterTavernSpeak == "badSpeak")
 		{
@@ -2978,6 +3025,7 @@ void CaptainComission_PirateShipsOver(string qName)
 	AddQuestRecord("CaptainComission1", "26");
 	AddQuestUserData("CaptainComission1", "sSex", GetSexPhrase("","а"));
 	AddQuestUserData("CaptainComission1", "sPirateName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_DAT));
+	AddQuestUserData("CaptainComission1", "sPirateCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.PiratesCity + "Acc"));
 	pchar.GenQuest.CaptainComission.PirateShips = "goaway";
 	ChangeOfficersLoyality("bad_all", 1);
 }
@@ -3457,7 +3505,8 @@ void CaptainComission_PirateAttack_DieHard(string qName)
 	AddQuestUserData("CaptainComission1", "sSex", GetSexPhrase("","ла"));
 	AddQuestUserData("CaptainComission1", "sShipName1", pchar.GenQuest.CaptainComission.ShipName1);
 	AddQuestUserData("CaptainComission1", "sShipName2", pchar.GenQuest.CaptainComission.ShipName2);
-	AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_DAT));
+	AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.PiratesCity + "Gen"));
+	//AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_DAT));
 	pchar.GenQuest.CaptainComission.PirateShips = "goaway";
 	ChangeOfficersLoyality("bad_all",1);
 }
@@ -3554,6 +3603,7 @@ void CaptainComission_TimeIsOver(string qName)
 			sld.LifeDay = 0;
 			AddQuestRecord("CaptainComission2", "44");
 			AddQuestUserData("CaptainComission2", "sSex", GetSexPhrase("","а"));
+			AddQuestUserData("CaptainComission2", "sShipType", GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipType),"Name") + "Gen"))); //лесник - на тип корабля.
 			AddQuestUserData("CaptainComission2", "sName", pchar.GenQuest.CaptainComission.Name);
 			AddQuestUserData("CaptainComission2", "sCharName", GetName( NAMETYPE_ORIG, pchar.GenQuest.CaptainComission.CanoneerName, NAME_NOM));
 			CloseQuestHeader("CaptainComission2");
@@ -3770,7 +3820,7 @@ void CaptainComission_toShore() // вышвыриваем в бухту без �
 	CleanAllCabinBoxes();
 	
 	AddSimpleRumour(RandPhraseSimple("Капитан, как вам путешествие на пиратском корабле? Нормально? Вас там не обижали? Ха-ха-ха!!", 
-				"О-о-о, капитан, я слышал вам здорово досталось недавно.... Вы, батенька, теперь голодранец! Ха-ха-ха!!"), sti(pchar.GenQuest.CaptainComission.Nation), 5, 1);
+				"О-о-о, капитан, я слышал вам здорово досталось недавно.... Вы, батенька, теперь голодранец! Ха-ха-ха!!"), sti(pchar.GenQuest.CaptainComission.Nation), 5, 2);
 	pchar.quest.Munity = "Deads";
 	pchar.location.from_sea = pchar.GenQuest.CaptainComission.City + "_town";
 	
@@ -3789,30 +3839,50 @@ void CaptainComission_toShore() // вышвыриваем в бухту без �
 
 void CaptainComission_SailToShore(string qName)
 {
-	Log_QuestInfo("Отработало прерывание на постановку корабля в бухту");
+	Log_Info("Можно причаливать в бухту.");
 	ref sld = characterFromId("CapComission_1");
+
 	SetCharacterShipLocation(sld, pchar.GenQuest.CaptainComission.ShoreLocation);
 	SetFunctionLocationCondition("CaptainComission_MeetInShore", pchar.GenQuest.CaptainComission.ShoreLocation, false); 
+	SetFunctionTimerCondition("CaptainComission_SailToShoreOver", 0, 0, 1, false); // таймер лесник
 }
-
+void CaptainComission_SailToShoreOver(string qName) // мой код . лесник. если опоздали квест удаляется . 
+{
+			Group_DeleteGroup("Sea_CapComission_1"); 
+			ref sld = CharacterFromID("CapComission_1");
+			//pchar.GenQuest.CaptainComission.provalqvesta = "true";
+			sld.LifeDay = 0;	
+			AddQuestRecord("CaptainComission2", "8");
+			AddQuestUserData("CaptainComission2", "sSex", GetSexPhrase("","а"));
+			AddQuestUserData("CaptainComission2", "sName", pchar.GenQuest.CaptainComission.Name);
+			CloseQuestHeader("CaptainComission2");
+			pchar.GenQuest.CaptainComission = "close";
+			DeleteAttribute(pchar, "GenQuest.CaptainComission"); 			
+		
+}	
 // встречаемся на берегу
 void CaptainComission_MeetInShore(string qName)
 {
-	chrDisableReloadToLocation = true;
+      //chrDisableReloadToLocation = true; // лесник . а иначе она остается закрытой навечно при провале по времени встречи.
+	  pchar.quest.CaptainComission_SailToShoreOver.over = "yes"; // снятие таймера - лесник
 	pchar.quest.CaptainComission_TimeIsOver.over = "yes"; 
 	ref sld = characterFromId("CapComission_1");
 	if(pchar.GenQuest.CaptainComission.variant == "A1")
 	{	
+        chrDisableReloadToLocation = true; // лесник - закрыть локацию
 		sld.dialog.currentnode = "CaptainComission_315";	
 	}
 	if(pchar.GenQuest.CaptainComission.variant == "A2")
 	{
+		chrDisableReloadToLocation = true;  //лесник - закрытие локации 
 		sld.dialog.currentnode = "CaptainComission_383";
 		LAi_LocationDisableOfficersGen(pchar.GenQuest.CaptainComission.ConvoyShore, true);
 		pchar.quest.CaptainComission_CapEscapeTimer.over = "yes";	
 		DeleteAttribute(pchar,"GenQuest.CaptainComission.canSpeakBoatswain");
 		CaptainComission_GenerateGangInShore();
 	}
+	 
+	
 	PlaceCharacter(sld, "goto", "random_must_be_near");
 	LAi_SetActorTypeNoGroup(sld);
 	LAi_ActorDialog(sld, pchar, "", -1, 0);	
@@ -3859,13 +3929,17 @@ void CaptainComission_AfterShoreBattle(string qName)
 		AddQuestUserData("CaptainComission2", "sName", pchar.GenQuest.CaptainComission.Name);
 		CloseQuestHeader("CaptainComission2");	
 		DeleteAttribute(pchar, "GenQuest.CaptainComission");	
+     		
 	}
 	else
 	{
+		sld = characterFromId("CapComission_1"); // лесник . временно ,защита от дураков
+		LAi_SetImmortal(sld, true);
 		sld.dialog.currentnode = "CaptainComission_320";	
 		LAi_SetActorType(sld);
 		LAi_ActorDialog(sld, pchar, "", -1, 0);	
 	}
+	 
 }
 
 void CaptainComission_GenerateCoastalPatrol()
@@ -4033,11 +4107,11 @@ void CaptainComission_GenerateGangInShore()
 void CaptainComission_DialogInShore()
 {
 	ref sld = CharacterFromID("CapComission_1");
+	LAi_SetImmortal(sld, false);// лесник . защита от дурака снята. 
 	sld.CaptainComission.Name = pchar.GenQuest.CaptainComission.Name;
 	sld.CaptainComission.CapName = pchar.GenQuest.CaptainComission.CapName;
 	sld.CaptainComission.FullName = GetFullName(pchar);
 	sld.CaptainComission.ShipTypeVictim = pchar.GenQuest.CaptainComission.ShipTypeVictim;
-
 	bDisableCharacterMenu = true;
 	ChangeShowIntarface();
 	InterfaceStates.Buttons.Save.enable = false;
@@ -4101,18 +4175,24 @@ void CaptainComission_GangExit()
 	LAi_SetActorType(sld);
 	LAi_ActorGoToLocation(sld, "reload", LAi_FindNearestLocator("reload", locx, locy, locz), "none", "", "", "", -1.0);
 	sld.lifeDay = 0;
+	RemoveCharacterCompanion(pchar, sld);// выход корабля быашего компаньона . лесник
 	pchar.quest.CaptainComission_ExitFromShoreAfterGang.win_condition.l1 = "MapEnter";           	
     pchar.quest.CaptainComission_ExitFromShoreAfterGang.function = "CaptainComission_ExitFromShoreAfterGang";
 	InterfaceStates.Buttons.Save.enable = true; 
+	
 }
 
 void CaptainComission_ExitFromShoreAfterGang(string qName)
 {	
 	if (GetCharacterIndex("CapComission_2") > 0) 
 	{
+		DeleteAttribute(pchar, "GenQuest.CaptainComission");
 		characters[GetCharacterIndex("CapComission_2")].lifeDay = 0;
+		
 	}
 	DeleteAttribute(pchar, "GenQuest.CaptainComission");
+
+			
 }
 
 void CaptainComission_ChangeCaptain()
@@ -4193,6 +4273,7 @@ void CaptainComission_GangDied(string qName)
 		}
 		else
 		{
+			
 			sld.dialog.currentnode = "CaptainComission_401";	
 			LAi_SetActorType(sld);
 			LAi_ActorDialog(sld, pchar, "", -1, 0);	
@@ -4230,11 +4311,11 @@ void CaptainComission_Ship_Sink(string qName)
 // ветка №2
 void CaptainComission_GenerateRumourCaptainPrison()
 {
-	string sShipType = GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipType),"Name") + "Acc"));
-	AddSimpleRumourCity(LinkRandPhrase("Вы слышали, " + GetAddress_Form(pchar) + ", недавно арестовали капитана патрульного " + sShipType + " " + pchar.GenQuest.CaptainComission.Name + ". Оказывается, он подрабатывал контрабандой. Подумать только, до чего довёл колонию нынешний губернатор! Те, кто должен ловить пиратов, сами же нас и обворовывают!.. Поговаривают, что через неделю он будет казнён. Вот и поделом ему.",
+	string sShipType = GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipType),"Name") + "Gen"));
+	AddSimpleRumourCity(LinkRandPhrase("Вы слышали, " + GetAddress_Form(pchar) + ", что недавно был арестован капитан патрульного " + sShipType + " " + pchar.GenQuest.CaptainComission.Name + ". Оказывается, он подрабатывал контрабандой. Подумать только, до чего довёл колонию нынешний губернатор! Те, кто должен ловить пиратов, сами же нас и обворовывают!.. Поговаривают, что через неделю он будет казнён. Вот и поделом ему.",
 		"Поговаривают, что капитан патрульного " + sShipType + " " + pchar.GenQuest.CaptainComission.Name + " оказался организатором шайки контрабандистов. Его поймали и скоро повесят. Похоже, " + GetAddress_Form(pchar) + ", наш губернатор всерьёз взялся за наведение порядка в колонии.",
-		RandPhraseSimple("Вы представляете! Начальник форта разоблачил тайную организацию контрабандистов, которой удалось завербовать в свои ряды даже офицеров флота. Одного из них, " + pchar.GenQuest.CaptainComission.Name + ", уже поймали и вскоре повесят. О, " + GetAddress_Form(pchar) + ", я всегда говорил, что наш губернатор рано или поздно наведёт порядок в поселении.",
-		"Вы уже знаете, что капитана патрульного " + sShipType + " " + pchar.GenQuest.CaptainComission.Name + " арестовали? Властям стало известно, что он укрыл крупную партию товара, который конфисковывал у проходящих в акватории судов. Похоже, виселицы ему не избежать. А ведь, скажу я вам, он был одним из лучших в патрульной эскадре. Кто бы мог подумать...")),
+		RandPhraseSimple("Вы представляете! Начальник форта разоблачил тайную организацию контрабандистов, которой удалось завербовать в свои ряды даже офицеров флота. Одного из них, которого зовут " + pchar.GenQuest.CaptainComission.Name + ", уже поймали и вскоре повесят. О, " + GetAddress_Form(pchar) + ", я всегда говорил, что наш губернатор рано или поздно наведёт порядок в поселении.",
+		"Вы уже знаете, что капитан патрульного " + sShipType + " " + pchar.GenQuest.CaptainComission.Name + " арестован? Властям стало известно, что он укрыл крупную партию товара, который конфисковывал у проходящих в акватории судов. Похоже, виселицы ему не избежать. А ведь, скажу я вам, он был одним из лучших в патрульной эскадре. Кто бы мог подумать...")),
 		pchar.GenQuest.CaptainComission.City, 5, 3, "CaptainComission_rumourCapPrison");
 }
 
@@ -4243,7 +4324,7 @@ void CaptainComission_RumourCaptainPrison()
 	if(!CheckAttribute(pchar,"GenQuest.CaptainComission.GetRumour"))
 	{
 		AddQuestRecord("CaptainComission2", "18");
-		AddQuestUserData("CaptainComission2", "sShipType", GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipType),"Name") + "Acc"))); 
+		AddQuestUserData("CaptainComission2", "sShipType", GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipType),"Name") + "Gen"))); 
 		AddQuestUserData("CaptainComission2", "sName", pchar.GenQuest.CaptainComission.Name);				
 		pchar.GenQuest.CaptainComission.GetRumour = true;
 		SaveCurrentQuestDateParam("GenQuest.CaptainComission.GetRumour");	
@@ -4253,6 +4334,8 @@ void CaptainComission_RumourCaptainPrison()
 
 void CaptainComission_GetSecretTimeIsOut(string qName)
 {
+	ref sld = characterFromId("CapComission_1"); // лесник . удаление ,если опоздал .
+	sld.LifeDay = 0;
 	AddQuestRecord("CaptainComission2", "20");
 	AddQuestUserData("CaptainComission2", "sName", pchar.GenQuest.CaptainComission.Name);			
 	AddQuestUserData("CaptainComission2", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City + "Gen"));
@@ -4262,10 +4345,12 @@ void CaptainComission_GetSecretTimeIsOut(string qName)
 
 void CaptainComission_GenerateCaptainInPrison()
 {
+	
 	ref sld = GetCharacter(NPC_GenerateCharacter("CapComission_1" , "mercen_19", "man", "man", 10, sti(pchar.GenQuest.CaptainComission.Nation), -1, true, "quest"));
 	SetSPECIAL(sld, 10,9,10,5,10,9,10);
-	SetRandSelfSkill(sld, 75, 95);
-	SetRandShipSkill(sld, 75, 95); 
+	SetRandSelfSkill(sld, 65, 95);
+	SetRandShipSkill(sld, 65, 95); 
+	//LAi_SetHP(sld, 100+MOD_SKILL_ENEMY_RATE*30, 100+MOD_SKILL_ENEMY_RATE*30);
 	FantomMakeCoolFighter(sld, sti(pchar.rank) + rand(15), 95, 95, LinkRandPhrase("blade_13","blade_14","blade_09"), "pistol2"," grapeshot", 10);	
 	sld.name = pchar.GenQuest.CaptainComission.Name;
 	sld.lastname = "";
@@ -4286,15 +4371,19 @@ void CaptainComission_ExitFromTown(string qName)
 void CaptainComission_CapEscapeTimer(string qName)
 {
 	Log_QuestInfo("Отработало прерывание на бегство капитана");
+	Log_Info("Чёрт побери! Пленник сбежал!");
 	ref sld = characterFromId("CapComission_1");
 	RemovePassenger(pchar, sld);
 	ChangeCharacterAddress(sld, "none", "");
 	sld.lifeDay = 0; 
+	DeleteAttribute(pchar, "GenQuest.CaptainComission");
+	pchar.quest.CaptainComission_TimeIsOver.over = "yes"; // добавил сброс таймера на всяк слуяай.
 	pchar.GenQuest.CaptainComission = "CapEscape";
 	pchar.GenQuest.CaptainComission.canSpeakBoatswain = true;
 	pchar.TownEscape = true;
 	pchar.quest.CaptainComission_ExitFromTown.win_condition.l1 	= "EnterToSea";           	
 	pchar.quest.CaptainComission_ExitFromTown.function    		= "CaptainComission_ExitFromTown";
+	
 }
 
 void CaptainComission_GangDialogGetGoods()
@@ -4307,6 +4396,10 @@ void CaptainComission_GangDialogGetGoods()
 		if (i == 0) LAi_ActorDialog(sld, pchar, "", -1, 0); 
 		else LAi_ActorFollow(sld, &characters[GetCharacterIndex("Gang_0")], "", -1);
 	}	
+	sld = CharacterFromID("CapComission_1");
+   // LAi_SetWarriorType(sld); // так лучше . иначе его можно убить. лесник
+	LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);
+  							 
 }
 
 void CaptainComission_CheckCaptainAfterBattle(string qName)
@@ -4314,6 +4407,7 @@ void CaptainComission_CheckCaptainAfterBattle(string qName)
 	ref sld = characterFromId("CapComission_1");	
 	if (LAi_IsDead(sld)) // погиб
 	{
+		//pchar.quest.CaptainComission_Capitan_Cdoxul.over = "yes"; // лесник . снял событие ,иначе в СЖ не то пишут.
 		AddQuestRecord("CaptainComission2", "22");
 		AddQuestUserData("CaptainComission2", "sName", pchar.GenQuest.CaptainComission.Name);
 		CloseQuestHeader("CaptainComission2");	
@@ -4321,12 +4415,13 @@ void CaptainComission_CheckCaptainAfterBattle(string qName)
 	}
 	else // кэп выжил
 	{
-		if(GetCharacterEquipByGroup(sld, BLADE_ITEM_TYPE) == "") // снял клинок с трупа
-		{
+		//if(GetCharacterEquipByGroup(sld, BLADE_ITEM_TYPE) == "") // снял клинок с трупа. работает через раз..если чесна. лесник.
+		    sld = characterFromId("CapComission_1"); // защита от извращенцев :D/ лесник
+		    LAi_SetImmortal(sld, true);
 			string sEquipItem = GenQuest_GenerateGoodBlade();
 			AddItems(sld, sEquipItem, 1);
 			EquipCharacterByItem(sld, sEquipItem);
-		}	
+		//}	
 		sld.dialog.currentnode = "CaptainComission_387";	
 		LAi_SetActorType(sld);
 		LAi_ActorDialog(sld, pchar, "", -1, 0);	
@@ -4335,6 +4430,7 @@ void CaptainComission_CheckCaptainAfterBattle(string qName)
 
 void CaptainComission_CheckCaptainDied(string qName)
 {
+	
 	if(CheckAttribute(pchar,"GenQuest.CaptainComission.MayorTalkGood"))
 	{
 		AddQuestRecord("CaptainComission2", "28");
@@ -4362,13 +4458,22 @@ void CaptainComission_CheckCaptainDied(string qName)
 		pchar.quest.CaptainComission_MapEnter.win_condition = "CaptainComission_MapEnterCapDied";  
 	}
 }
+void CaptainComission_NaebalGubera(string qName) // лесник. если обманул губера
+{
+	OfficersReaction("bad");
+	ChangeCharacterComplexReputation(pchar,"nobility", -50);
+	AddQuestRecord("CaptainComission2", "52");
+}		
 
 void CaptainComission_SpeakMayorGoods(string qName)
 {
+	pchar.quest.CaptainComission_SpeakMayorGoods.over = "yes";  // лесник. на всяк слуай снял а то хз его знает .
 	AddQuestRecord("CaptainComission2", "29");
 	AddQuestUserData("CaptainComission2", "sSex", GetSexPhrase("","а"));
 	AddQuestUserData("CaptainComission2", "sName", pchar.GenQuest.CaptainComission.Name);
 	pchar.GenQuest.CaptainComission = "GetGoods";
+	CloseQuestHeader("CaptainComission2"); // лесник . в архив.
+	DeleteAttribute(pchar, "GenQuest.CaptainComission"); // лесник. удалил. а то снова хз его знает..
 }
 
 void CaptainComission_CapMeetInShore(string qName)
@@ -4388,6 +4493,8 @@ void CaptainComission_CapMeetInShore(string qName)
 		sld.dialog.currentnode = "CaptainComission_392";	
 		LAi_SetActorTypeNoGroup(sld);
 		LAi_ActorDialog(sld, pchar, "", -1, 0);	
+        pchar.GenQuest.Hunter2Pause = true;		// ОЗГи на паузу . лесник
+		chrDisableReloadToLocation = true;// закрыть локация лесник
 	}				
 }
 
@@ -4395,7 +4502,8 @@ void CaptainComission_CaptainDiedDuel(string qName)
 {
 	if(CheckAttribute(pchar, "GenQuest.CaptainComission.Duel"))
 	{
-		AddQuestRecord("CaptainComission2", "33");
+		pchar.quest.CaptainComission_Capitan_Cdox.over = "yes"; // лесник . снял событие ,иначе в СЖ не то пишут.
+		AddQuestRecord("CaptainComission2", "54");
 		AddQuestUserData("CaptainComission2", "sName", pchar.GenQuest.CaptainComission.Name);	
 	}
 	else
@@ -4419,8 +4527,11 @@ void CaptainComission_BattleInShore(string qName)
 	int iTemp = sti(pchar.GenQuest.CaptainComission.GangNum);
 	chrDisableReloadToLocation = true;
 	sld = CharacterFromID("CapComission_1");
-	LAi_SetWarriorType(sld);
 	LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);
+	//LAi_SetWarriorType(sld); // лесник. лишнее. иначе можно убить во время боя. 
+	pchar.quest.CaptainComission_Capitan_Cdox.win_condition.l1 = "NPC_Death"; // лесник . добавил событие на смерть капитана.
+	pchar.quest.CaptainComission_Capitan_Cdox.win_condition.l1.character = "CapComission_1"; // оставить ,если после боя сам завалит кэпа
+	pchar.quest.CaptainComission_Capitan_Cdox.win_condition = "CaptainComission_Capitan_Cdox";	// в след. раз будет думать:D																																					  
 	
 	for(int i = 0; i < iTemp; i++)
 	{
@@ -4468,11 +4579,11 @@ bool CaptainComission_CheckAllPassengersHired()
 // ветка №3
 void CaptainComission_GenerateRumourCaptainDeath()
 {
-	string sShipType = GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipType),"Name") + "Acc"));
-	AddSimpleRumourCity(LinkRandPhrase("Вы слышали, " + GetAddress_Form(pchar) + ", недавно повесили бывшего капитана патрульного " + sShipType +" " + pchar.GenQuest.CaptainComission.Name + ". Говорят, он ограбил какого-то купца. Вот ведь, как бывает, никому верить нельзя... И всю команду с ним за одно казнили. Сговор значит...",
+	string sShipType = GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipType),"Name") + "Gen"));
+	AddSimpleRumourCity(LinkRandPhrase("Вы слышали, " + GetAddress_Form(pchar) + ", что недавно был повешен капитан патрульного " + sShipType +" " + pchar.GenQuest.CaptainComission.Name + ". Говорят, он ограбил какого-то купца. Вот ведь, как бывает, никому верить нельзя... И всю команду с ним за одно казнили. Сговор значит...",
 		"Вы уже знаете, " + GetAddress_Form(pchar) + ", что бывший капитан патрульного " + sShipType + " " + pchar.GenQuest.CaptainComission.Name + " казнён? Поговаривают, что он пустил ко дну какое-то важное судно, а товар спрятал. И ведь никто из команды не признался где тайник. Так их всех и повесили...",
 		RandPhraseSimple("Вы представляете, " + GetAddress_Form(pchar) + "? Один из капитанов патрульной эскадры занимался морским разбоем. Так его недавно казнили вместе со всей командой. Говорят, что они грабили и пускали ко дну торговые суда.",
-		"Недавно казнили бывшего капитана " + pchar.GenQuest.CaptainComission.Name + " вместе с командой его патрульного " + sShipType + ". Поговаривают, что они укрыли крупную партию товара, который конфисковывали у проходящих в акватории судов. А ведь это был один из лучших патрульных экипажей. Я думаю, " + GetAddress_Form(pchar) +", что их намеренно оклеветали. Ведь товар так и не нашли..")), 
+		"Недавно казнили бывшего капитана по имени " + pchar.GenQuest.CaptainComission.Name + " вместе с командой его патрульного " + sShipType + ". Поговаривают, что они укрыли крупную партию товара, который конфисковывали у проходящих в акватории судов. А ведь это был один из лучших патрульных экипажей. Я думаю, " + GetAddress_Form(pchar) +", что их намеренно оклеветали. Ведь товар так и не нашли..")), 
 	pchar.GenQuest.CaptainComission.City, 5, 3, "CaptainComission_rumourCapDeath");
 }
 
@@ -4552,6 +4663,7 @@ void CaptainComission_MeetCanoneerInShore(string qName)
 		sld.LifeDay = 0;
 		AddQuestRecord("CaptainComission2", "44");
 		AddQuestUserData("CaptainComission2", "sSex", GetSexPhrase("","а"));
+		//AddQuestUserData("CaptainComission2", "sShipType", GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipType),"Name") + "Gen"))); //лесник - на тип корабля.
 		AddQuestUserData("CaptainComission2", "sName", pchar.GenQuest.CaptainComission.Name);
 		AddQuestUserData("CaptainComission2", "sCharName", GetName( NAMETYPE_ORIG, pchar.GenQuest.CaptainComission.CanoneerName, NAME_NOM));
 		CloseQuestHeader("CaptainComission2");
@@ -4588,6 +4700,7 @@ void CaptainComission_NoGangDialog(string qName)
 	AddQuestUserData("CaptainComission2", "sName", pchar.GenQuest.CaptainComission.Name);
 	AddQuestUserData("CaptainComission2", "sCharName", GetName( NAMETYPE_ORIG, pchar.GenQuest.CaptainComission.CanoneerName, NAME_NOM));
 	CloseQuestHeader("CaptainComission2");	
+    LAi_LocationFightDisable(&Locations[FindLocation(pchar.location)], false);	// лесник - открыть оружие снова.
 	DeleteAttribute(pchar, "GenQuest.CaptainComission");
 }
 
@@ -4597,8 +4710,11 @@ void CaptainComission_CheckGangAfterBattle(string qName)
 	int iGoods = GetSquadronFreeSpace(pchar, sti(pchar.GenQuest.CaptainComission.Goods)); 
 	if(iGoods < sti(pchar.GenQuest.CaptainComission.GoodsQty)) pchar.GenQuest.CaptainComission.GoodsQty = iGoods;	
 	SetCharacterGoods(pchar, sti(pchar.GenQuest.CaptainComission.Goods), GetCargoGoods(pchar, sti(pchar.GenQuest.CaptainComission.Goods)) + sti(pchar.GenQuest.CaptainComission.GoodsQty));// перегруз	
-	if (GetCharacterIndex("CapComission_Canoneer") > 0) // канонир остался жив
+	//if (GetCharacterIndex("CapComission_Canoneer") > 0) // канонир остался жив
+	sld = CharacterFromId("CapComission_Canoneer"); // лесник . изменил условие . прежнее не работало при смерти канонира.
+	 if (!LAi_IsDead(sld))
 	{
+		Log_Info("Весь товар загружен в трюм"); // лесник добавил лог
 		sld = CharacterFromId("CapComission_Canoneer");
 		AddPassenger(pchar, sld, false);
 		SetCharacterRemovable(sld, false);
@@ -4616,17 +4732,19 @@ void CaptainComission_CheckGangAfterBattle(string qName)
 	}
 	else // помер .. вот бедолага
 	{
+		Log_Info("Весь товар загружен в трюм"); // лесник добавил лог
 		AddQuestRecord("CaptainComission2", "46");
 		AddQuestUserData("CaptainComission2", "sSex", GetSexPhrase("","а"));
 		AddQuestUserData("CaptainComission2", "sName", pchar.GenQuest.CaptainComission.Name);
 		AddQuestUserData("CaptainComission2", "sCharName", GetName( NAMETYPE_ORIG, pchar.GenQuest.CaptainComission.CanoneerName, NAME_NOM));
-		AddQuestUserData("CaptainComission2", "sShipType", GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipType),"Name") + "Acc")));
+		AddQuestUserData("CaptainComission2", "sShipType", GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipType),"Name") + "Gen")));
 		AddQuestUserData("CaptainComission2", "sShipName", pchar.GenQuest.CaptainComission.ShipTypeName);
 		AddQuestUserData("CaptainComission2", "sSum", iGoods);
 		AddQuestUserData("CaptainComission2", "sGoods", GetStrSmallRegister(XI_ConvertString(Goods[sti(pchar.GenQuest.CaptainComission.Goods)].Name + "Gen")));
 		CloseQuestHeader("CaptainComission2");
 		OfficersReaction("bad");
 		ChangeCharacterComplexReputation(pchar,"nobility", -5);
+		DeleteAttribute(pchar, "GenQuest.CaptainComission"); // лесник . удалил квест.
 	}
 	CaptainComission_EnterToSeaAfterShoreBattle();
 	pchar.quest.CaptainComission_MapEnterAfterShoreBattle.win_condition.l1 = "MapEnter";
@@ -5201,13 +5319,15 @@ void ShipWreck_afterCabinFight(string qName)
 
 	sld = CharacterFromID("ShipWreck_0");
 	sld.dialog.currentnode = "ShipWreck_53";
-	LAi_SetStayType(sld);
+	//LAi_SetStayType(sld);
 	GetCharacterPos(pchar, &locx, &locy, &locz);
 	ChangeCharacterAddressGroup(sld, pchar.location, "rld", LAi_FindFarLocator("rld", locx, locy, locz));
-	LAi_SetActorType(pchar);
-	LAi_SetActorType(sld);
-	SetActorDialogAny2Pchar(sld.id, "", 0.0, 0.0);
-	LAi_ActorFollow(pchar, sld, "ActorDialog_Any2Pchar", -1);
+	//LAi_SetActorType(pchar); // лесник - всё лочим. иначе баг с заморозкой гГ 
+	//LAi_SetActorType(sld);
+	LAi_ActorDialog(sld, Pchar, "", 5.0, 0.0);
+	pchar.quest.prosralisrok.over = "yes"; // лесник сброс таймера. 
+	//SetActorDialogAny2Pchar(sld.id, "", 0.0, 0.0); // и тут тоже. так надо. и ниже.
+	//LAi_ActorFollow(pchar, sld, "ActorDialog_Any2Pchar", -1);
 }
 
 void ShipWreck_SetShipNew()
@@ -5262,6 +5382,7 @@ void ShipWreck_ShipSink(string qName)
 		}
 		sld.LifeDay = 0;
 	}
+	pchar.quest.prosralisrok.over = "yes"; // лесник сброс таймера.
 	AddQuestRecord("ShipWrecked", "19");
 	AddQuestUserData("ShipWrecked", "ShipType", GetStrSmallRegister(XI_ConvertString(ShipsTypes[sti(pchar.GenQuest.ShipWreck.StartShipType)].Name + "Acc")));
 	AddQuestUserData("ShipWrecked", "ShipName", pchar.GenQuest.ShipWreck.ShipTypeName);	

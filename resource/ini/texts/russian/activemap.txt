@@ -1,0 +1,22 @@
+CONTRABAND {Контрабанда}
+AGGRESSIVE {Агрессивный спрос}
+EXPORT {Экспорт}
+IMPORT {Импорт}
+No_price {Нет списка цен}
+No_profit {Нет выгодных сделок}
+Distance {Расстояние}
+To {Туда}
+From {Обратно}
+day {день}
+day2 {день}
+days {дней}
+hour {час}
+hour2 {час}
+hours {часов}
+hours2 {часа}
+nautical_mile {морская миля}
+nautical_mile2 {морская миля}
+nautical_miles {морских миль}
+nautical_miles2 {морские мили}
+TRAVEL_from {от}
+TRAVEL_to {до}

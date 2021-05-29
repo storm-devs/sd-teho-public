@@ -535,7 +535,6 @@ void CreateParticles(ref Location)
 	Particles.winddirection.y = 0;
 }
 
-
 void CreateHeaters(aref Location)
 {
 	aref locator_group;
@@ -553,14 +552,14 @@ void CreateHeaters(aref Location)
 	{
 		bool isHeatersEnable = true;
 		if(CheckAttribute(location, "heaters_night_only"))
-		{
+		{			
 			if(CheckAttribute(&Weathers[iCurWeatherNum], "Lights"))
 			{
 				if(sti(Weathers[iCurWeatherNum].Lights) == 0)
 				{
 					isHeatersEnable = false;
 				}
-			}
+			}			
 		}
 		if(CheckAttribute(location, "heaters_disable"))
 		{

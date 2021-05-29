@@ -1,5 +1,5 @@
 object NCSea;
-
+/*
 void NetClient_WhrDeleteSeaEnvironment()
 {
 	if (isEntity(&NCSea))
@@ -97,3 +97,4 @@ void NetClient_MoveSeaToLayers(string sExecuteLayer, string sRealizeLayer)
 	LayerAddObject(sExecuteLayer, &NCSea, 65530);
 	LayerAddObject(sRealizeLayer, &NCSea, 65530);
 }
+*/

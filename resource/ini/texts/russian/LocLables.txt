@@ -37,7 +37,7 @@ RockIsland {Северные Рифы}
 Providence {Провиденсия}
 SantaQuiteria {Санта-Квитерия}
 IslaDeVieques {Крабовый остров}
-IslaMona {Исла-Мона}
+IslaMona {Исла Мона}
 IslaDeCoche {Исла-де-Коче}
 
 SentJons_town {Сент-Джонс}
@@ -55,7 +55,7 @@ BasTer_town	{Бас-Тер}
 SantoDomingo_town	{Санто-Доминго}
 LaVega_town	{Ла Вега}
 PortPax_town	{Порт-о-Пренс}
-PortRoyal_town	{Порт Рояль}
+PortRoyal_town	{Порт-Ройял}
 Maracaibo_town	{Маракайбо}
 FortFrance_town	{Сен-Пьер}
 LeFransua_town	{Ле Франсуа}
@@ -114,7 +114,7 @@ Shore36	{бухта Портленд}
 Shore37	{бухта Гуахира}
 Shore38	{пляж Ламантен}
 Shore39	{бухта Ле Марен}
-Shore40	{пляж Гранд Кейс }
+Shore40	{пляж Гранд Кейс}
 Shore41	{залив Симпсон}
 Shore42	{залив Санди}
 Shore43	{залив Халф Мун}
@@ -167,7 +167,7 @@ Shore_mask {грот Стража}
 
 Mayak1 {Маяк Тринидада и Тобаго}
 Mayak2 {Маяк Барбадоса}
-Mayak3 {Маяк Порт Рояля}
+Mayak3 {Маяк Порт-Ройяла}
 Mayak4 {Маяк Гваделупы}
 Mayak5 {Маяк Сент-Кристофера}
 Mayak6 {Маяк Тортуги}
@@ -310,8 +310,8 @@ SanAndres Town {Сан-Андрес}
 SanAndres Fort {форт Сан-Андреса}
 SanAndres Port {порт Сан-Андреса}
 
-IslaMona {Исла-Мона}
-IslaMona Town {Исла-Мона}
+IslaMona {Исла Мона}
+IslaMona Town {Исла Мона}
 
 Minentown {рудник Лос-Текес}
 Minentown Town {рудник Лос-Текес}
@@ -328,6 +328,7 @@ ExitTown {выход в джунгли}
 Graveyard {кладбище}
 Port {Порт}
 Tavern {таверна}
+Tavern upstairs {комната в таверне}
 Store {магазин}
 Shipyard	{верфь}
 PackHouse {склад}

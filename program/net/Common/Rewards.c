@@ -3,7 +3,7 @@ float NetRewardAccuracy[3];
 float NetRewardVitality[3];
 float NetRewardVictorious[3];
 int iNetRanksNum;
-
+/*
 void Net_InitRank(int n, string sName, int iSunk, int iWon)
 {
 	NetRanks[n].Rank = sName;
@@ -83,3 +83,4 @@ int Net_GetRankNum(int iSunk, int iWon)
 	return 10;
 }
 
+*/

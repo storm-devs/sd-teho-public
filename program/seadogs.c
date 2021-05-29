@@ -35,7 +35,7 @@
 #include "net\net.c"
 #include "store\store.h"
 #include "interface\interface.c"
-
+#include "fleet_cmds.c"
 extern void InitBaseCannons();
 extern void InitCharacters();
 extern void InitBaseInterfaces();
@@ -57,6 +57,7 @@ extern void ActiveF7Control(); // boal debuger
 extern void ActiveF10Control(); // boal debuger
 extern void ActiveF12Control(); // boal debuger
 extern void ActiveINSERTControl(); // boal debuger
+extern void StartLoadingSegments();
 
 native float Bring2RangeNoCheck(float fMin1, float fMax1, float fMin2, float fMax2, float fValue);
 native float Bring2Range(float fMin1, float fMax1, float fMin2, float fMax2, float fValue);
@@ -234,9 +235,11 @@ void proc_break_video()
 
 void Main()
 {
+	iGlobalVar1 = BI_COMPARE_HEIGHT;
+	
     LayerCreate("realize", 1);
 	LayerCreate("sea_realize", 1);
-	LayerCreate("net_realize", 1);
+//	LayerCreate("net_realize", 1);
 	LayerCreate("iRealize", 1);
 	LayerCreate("fader_realize", 1);
 	LayerCreate("inf_realize", 1);
@@ -278,7 +281,7 @@ void Main_InitGame()
 {
     LayerCreate("realize", 1);
 	LayerCreate("sea_realize", 1);
-	LayerCreate("net_realize", 1);
+//	LayerCreate("net_realize", 1);
 	LayerCreate("iRealize", 1);
 	LayerCreate("fader_realize", 1);
 	LayerCreate("inf_realize", 1);
@@ -315,9 +318,12 @@ void Main_InitGame()
 	WeatherInit();
 	InitPerks();
 	// Init network, clear massives and load favorite list
+	
+/*	
 	Net_Init();
 	Net_ClientFirstInit();
 	Net_ServerFirstInit();
+*/
 	if(LoadSegment("store\initGoods.c"))
 	{
 		InitGoods();
@@ -391,7 +397,6 @@ void Main_Start()
 	StartLanguageSetting(LanguageGetLanguage());
  	LoadPlayerProfileDefault(); // boal
 	LaunchMainMenu();
-	//LaunchNetTopListScreen();
 
 	CharacterIsDead(GetMainCharacter());
 	
@@ -461,7 +466,6 @@ void LoadGame()
 	SetEventHandler("frame","LoadGame_continue",1);
 	
 	iCalculateSaveLoadCount("Load");
-//	isLoaded = true;
 }
 
 void LoadGame_continue()
@@ -560,11 +564,12 @@ void InterfaceDoExit()
 		    LaunchAboutScreen();
 		break;
 		case RC_INTERFACE_DO_RESUME_GAME:
-		break;
-		case RC_INTERFACE_NET_FINDGAME:
+		break;	
+/*		
+		case RC_INTERFACE_NET_FINDGAME:		
 			PrepareNetEnvironment();
-			LaunchNetFindGame();
-		break;
+			LaunchNetFindGame();			
+		break;	
 		case RC_INTERFACE_NET_CREATEGAME:
 			LaunchNetCreateGame();
 		break;
@@ -574,6 +579,7 @@ void InterfaceDoExit()
 		case RC_INTERFACE_NET_BUY:
 			LaunchNetBuyScreen();
 		break;
+*/		
 		case RC_INTERFACE_RANSACK_MAIN_EXIT:
 			Return2SeaAfterAbordage();
 			break;
@@ -637,9 +643,11 @@ void InterfaceDoExit()
 		case RC_INTERFACE_LAUNCH_GAMEMENU:
 			LaunchGameMenuScreen();
 			break;
+/*						
 		case INTERFACE_NET_ENDGAME:
 			ReturnToMainMenu();
 		break;
+*/	
 		// boal -->
   		case RC_INTERFACE_DO_BOAL_BETA:
 		     LaunchBoalBetaScreen();
@@ -720,7 +728,7 @@ void OnSave()
 void ClearLocationsSaveData()
 {
 	aref loc = GetEventData();
-	SendMessage(loc, "l", MSG_LOCATION_CLRCHRPOSITIONS);
+	if (loc) SendMessage(loc, "l", MSG_LOCATION_CLRCHRPOSITIONS);
 }
 
 int actLoadFlag = 0;
@@ -728,7 +736,9 @@ int actLoadFlag = 0;
 void OnLoad()
 {
 	actLoadFlag = 1;
-    
+	
+	if(iGlobalVar1 < 50) iGlobalVar1 = BI_COMPARE_HEIGHT;
+
 	DeleteAttribute( pchar, "abordage_active_count" );
 	FreezeGroupControls(curKeyGroupName,false);
 
@@ -769,7 +779,7 @@ void OnLoad()
 	InitParticles();
 	ReloadProgressUpdate();
 	//ImportFuncTest();
-
+	
 //	if(LoadSegment("items\initItems.c")) // ugeen fix 29.03.2020
 //	{
 //		InitItems();
@@ -779,7 +789,8 @@ void OnLoad()
 //	GenerateGenerableItems(); // <-- ugeen генерация предметов	
 
     fix30032020();
-
+    Fix_Pistol2(); // belamour запуск фикса дробовика
+    
 	WeatherInit();
 	ReloadProgressUpdate();
 
@@ -833,6 +844,10 @@ void OnLoad()
 	LoadGameOptions();
 
 	ReloadProgressEnd();
+
+    // fix by Hokkins
+    BattleInterface.ShifInfoVisible = InterfaceStates.enabledshipmarks;
+    BattleInterface.battleborder.used = InterfaceStates.ShowBattleMode;
 
 	if( CheckAttribute(&InterfaceStates,"WorldSituationUpdateStep") &&
 		sti(InterfaceStates.WorldSituationUpdateStep) < 10 )
@@ -1077,6 +1092,42 @@ void ProcessControls()
 			case "Ship_Fire": Ship_DoFire(); break;
 
 			case "Tele": Sea_ReloadStart(); break;
+			
+			case "FLT_LoadBalls" :
+                Log_SetStringToLog(xiStr("msg_AIShip_1"));
+                FLT_SendCommand(ControlName);
+                return;
+            break;
+            case "FLT_LoadGrapes" :
+                Log_SetStringToLog(xiStr("msg_AIShip_2"));
+                FLT_SendCommand(ControlName);
+                return;
+            break;
+            case "FLT_LoadChain" :
+                Log_SetStringToLog(xiStr("msg_AIShip_3"));
+                FLT_SendCommand(ControlName);
+                return;
+            break;
+            case "FLT_LoadBombs" :
+                Log_SetStringToLog(xiStr("msg_AIShip_4"));
+                FLT_SendCommand(ControlName);
+                return;
+            break;			
+            case "FLT_SailAway" :
+                Log_SetStringToLog(xiStr("msg_AIShip_5"));
+                FLT_SendCommand(ControlName);
+                return;
+            break;
+            case "FLT_LowerSails" :
+                Log_SetStringToLog(xiStr("msg_AIShip_6"));
+                FLT_SendCommand(ControlName);
+                return;
+            break;
+            case "FLT_ProtFlagship" :
+                Log_SetStringToLog(xiStr("msg_AIShip_7"));
+                FLT_SendCommand(ControlName);
+                return;
+            break;
 		}
 	}
 	else
@@ -1161,7 +1212,7 @@ void ProcessControls()
             	if (TimeScaleCounter > 8) TimeScaleCounter = 8; // суша
             }
         }
-        if (IsEntity(worldMap))
+        if (IsEntity(&worldMap))
         {
             if (TimeScaleCounter > 6) TimeScaleCounter = 6;
         }
@@ -1215,7 +1266,7 @@ void ProcessControls()
 		break;
 	
 		case "ChangeShowInterface":
-			bOk = bSeaActive || IsEntity(worldMap);
+			bOk = bSeaActive || IsEntity(&worldMap);
 			bOk1 = bLandInterfaceStart;			
 			if(bOk || bOk1) 
 			{ 
@@ -1290,7 +1341,7 @@ void ProcessControls()
 			{
 				pchar.OfficerAttRange = 35.0;
 				OfficersFollow();
-				Log_SetStringToLog("Officers Charge!");
+				Log_SetStringToLog("Офицеры, в атаку!");
 			}	
 		break;
 
@@ -1299,7 +1350,7 @@ void ProcessControls()
 			{
 				pchar.OfficerAttRange = 7.0;
 				OfficersFollow();
-				Log_SetStringToLog("Officers Follow!");
+				Log_SetStringToLog("Офицеры, за мной!");
 			}	
 		break;
 
@@ -1308,7 +1359,7 @@ void ProcessControls()
 			{
 				pchar.OfficerAttRange = 7.0;
 				OfficersHold();
-				Log_SetStringToLog("Officers Hold!");
+				Log_SetStringToLog("Офицеры, стоять!");
 			}	
 		break;
 		
@@ -1489,10 +1540,13 @@ void ProcessControls()
 
         case "BOAL_Control":
 		    // по F11 вызывает окно отладчика
+			 //ChangeShowIntarface();
+			
 		    if (MOD_BETTATESTMODE == "On" || MOD_BETTATESTMODE == "Test")
 		    {
 		       LaunchDebuderMenu();
 		    }
+			
 		break;
 
 		case "BOAL_Control3":
@@ -1511,7 +1565,7 @@ void ProcessControls()
 		
 	case "Say": // KEY_Y
 		// Интерфейс автозакупки товаров
-		if(bLandInterfaceStart && IsPCharHaveTreasurer() && CheckAttribute(PChar, "TransferGoods.Enable")) // Если есть казначей, включена автозакупка и ГГ находится на суше
+		if(bLandInterfaceStart && CheckFunctionalTreasurer() && CheckAttribute(PChar, "TransferGoods.Enable")) // Если есть казначей, включена автозакупка и ГГ находится на суше
 			LaunchTransferGoodsScreen();
 	break;
         
@@ -1558,23 +1612,37 @@ void ProcessControls()
 		break;
 
         case "BOAL_Control2": // F12
+//			int iChar = GetMainCharacterIndex();
+//			if(iChar != -1)
+//			{
+//				trace("1");
+//				Ship_DoFakeFire(&locShips[0], "cannonr", 2.0);
+//			}	
+//			PostEvent("Cannonfire", 8000 + rand(8000));	
+//			StartBackProcess("DailyEatCrewUpdate");
+//			StartBackProcess("CheckCharactersUpdateItems");
+		
             //Найти ближайшего видимого персонажа в заданном радиусе				
             if(LoadSegment("Debuger.c"))
         	{
                 ActiveF12Control(); // можно меять пряв в рабочей игре
         		UnloadSegment("Debuger.c");
         	}		
+			
         break;
 
         case "BOAL_ControlDebug": // VK_INSERT
+/*		
             if (MOD_BETTATESTMODE == "On")
 		    {
-                if(LoadSegment("Debuger.c"))
+                if(LoadSegment("gameutils.c"))
             	{
-                    ActiveINSERTControl();
-            		UnloadSegment("Debuger.c");
+                    //ActiveINSERTControl();
+					StartLoadingSegments();
+            		UnloadSegment("gameutils.c");
             	}
         	}
+*/			
         break;
         // boal <--
 	}
@@ -1724,10 +1792,12 @@ void GameOver(string sName)
 	}
 }
 
+/*
 void PrepareNetEnvironment()
 {
 	Net_Start();
 }
+*/
 
 string its(int iNumber)
 {
@@ -1841,4 +1911,19 @@ void fix30032020()
 	}
 }
 
+extern void ItemsFix_Pistol2(); // belamour направим в инит
 
+void Fix_Pistol2() // belamour  фикс дробовика
+{
+	ref MChref = GetMainCharacter();
+	if( !CheckAttribute(MChref, "ItemsFix_Pistol2") )
+	{
+		if( LoadSegment("items\initItems.c") )
+		{
+			ItemsFix_Pistol2();
+                        
+    			UnloadSegment("items\initItems.c");
+    			MChref.ItemsFix_Pistol2 = true;
+    		}
+	}
+}

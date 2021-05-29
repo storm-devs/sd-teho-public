@@ -1,11 +1,11 @@
-// espkk # ActiveMap 1.2 # 30/Mar/2017
+// espkk # ActiveMap 1.3 # 25/Sep/2017
 // configuration file for ActiveMap
 
 /* Show region boundaries on map
  * 0 - disabled
  * 1 - enabled
  */
-#define SHOW_BOUNDARIES 1
+#define SHOW_BOUNDARIES 0
 
 /* Boundaries opacity(1-100) and RGB(0-255) settings
  * Used when SHOW_BOUNDARIES is set to 1

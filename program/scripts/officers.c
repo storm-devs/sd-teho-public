@@ -144,7 +144,7 @@ void OfficersReactionResult()
 	
 	if (LAi_IsCapturedLocation) return;
 	if (chrDisableReloadToLocation) return; // идет некий другой квест с запретом выхода
-	if (CheckAttribute(Pchar,"questTemp.MunityOfficerIDX") && Pchar.questTemp.MunityOfficerIDX.begin == "1") return;
+	if (CheckAttribute(Pchar,"questTemp.MutinyOfficerIDX")) return;
 	
 	for (i = 0; i<GetPassengersQuantity(pchar); i++)
 	{   // любой пассажир у кого есть пристрастие может свалить если наши дела ему не по душе
@@ -167,11 +167,11 @@ void OfficersReactionResult()
 						DeleteAttribute(sld, "quest.officertype");
 	
 						LAi_SetActorType(sld);
-						LAi_ActorDialog(sld, pchar, "", 2.0, 0);
+						LAi_ActorDialog(sld, pchar, "OpenTheDoors", 2.0, 0);
 						//SetActorDialogAny2Pchar(sld.id, "pchar_back_to_player", 0.0, 0.0);
 			    		//LAi_ActorFollow(sld, pchar, "ActorDialog_Any2Pchar", 2.0);
 			    		chrDisableReloadToLocation = true;
-			    		DoQuestCheckDelay("OpenTheDoors", 5.0);
+			    		//DoQuestCheckDelay("OpenTheDoors", 5.0);
 						break; 
 					}
 				}
@@ -199,11 +199,11 @@ void OfficersReactionResult()
 		                    sld.greeting           = "Gr_Officer_Salary";
 		
 							LAi_SetActorType(sld);
-							LAi_ActorDialog(sld, pchar, "", 2.0, 0);
+							LAi_ActorDialog(sld, pchar, "OpenTheDoors", 2.0, 0);
 							//SetActorDialogAny2Pchar(sld.id, "pchar_back_to_player", 0.0, 0.0);
 				    		//LAi_ActorFollow(sld, pchar, "ActorDialog_Any2Pchar", 2.0);
 				    		chrDisableReloadToLocation = true;
-				    		DoQuestCheckDelay("OpenTheDoors", 5.0);
+				    		//DoQuestCheckDelay("OpenTheDoors", 5.0);
 							break; 
 						}
 					}

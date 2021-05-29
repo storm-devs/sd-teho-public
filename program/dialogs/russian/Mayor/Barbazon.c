@@ -70,7 +70,7 @@ void ProcessDialogEvent()
 			}
 			if (CheckAttribute(pchar, "questTemp.Saga.BarbTemptation") && pchar.questTemp.Saga.BarbTemptation == "terrax")
 			{
-				link.l1 = "Да когда же ты наконец перестанешь гавкать и начнешь разговаривать нормально, а Жак? Не ожидал меня увидеть, да?";
+				link.l1 = "Да когда же ты наконец перестанешь гавкать и начнёшь разговаривать нормально, а Жак? Не ожидал меня увидеть, да?";
 				link.l1.go = "terrax";
 			}
 			
@@ -82,24 +82,26 @@ void ProcessDialogEvent()
 					link.l1 = "Я по поводу твоего пленника.";
 					link.l1.go = "CapComission1";
 					DeleteAttribute(pchar,"GenQuest.CaptainComission.toMayor");
-				}	
-				if(CheckAttribute(pchar,"GenQuest.CaptainComission.PirateShips"))
+				}
+             	
+				if (pchar.GenQuest.CaptainComission.PirateShips == "died" || pchar.GenQuest.CaptainComission.PirateShips == "goaway") // лесник. новая проверка. искл. возможность сразу сдать задание,минуя 15 дней.
 				{
 					link.l1 = "Здравствуй, Жак, я по поводу твоего поручения.";
 					link.l1.go = "CapComission3";
 				}
-				if(CheckAttribute(pchar,"GenQuest.CaptainComission.RepeatSpeak"))
-				{
+				if(CheckAttribute(pchar,"GenQuest.CaptainComission.RepeatSpeak") && !CheckAttribute(pchar,"GenQuest.CaptainComission.vikupzaplatil")) 
+				{ // лесник . второй диалог с проверкой ,если ГГ ещё не принес деньги за выкуп.
 					link.l1 = "Я по поводу твоего пленника.";
 					link.l1.go = "CapComission6";
 				}
 			}	
 			if (CheckAttribute(pchar, "GenQuest.Marginpassenger") && pchar.GenQuest.Marginpassenger == "cabin")
 			{
-				link.l1 = "Я слышал, что ты занимаешься бизнесом, связанном с пленниками...";
+				link.l1 = "Я слышал, что ты занимаешься делами, связанными с пленниками...";
 				link.l1.go = "Marginpassenger";
 			}
 		break;
+			
 
  		case "Exit":
 			DialogExit();
@@ -132,19 +134,19 @@ void ProcessDialogEvent()
 				link.l1.go = "CapComission1";
 				DeleteAttribute(pchar,"GenQuest.CaptainComission.toMayor");
 			}	
-			if(CheckAttribute(pchar,"GenQuest.CaptainComission.PirateShips"))
+			if (pchar.GenQuest.CaptainComission.PirateShips == "died" || pchar.GenQuest.CaptainComission.PirateShips == "goaway")//  правка лесник,новая проверка ,исключающая тут же сдачу задания
 			{
 				link.l1 = "Здравствуй, Жак, я по поводу твоего поручения.";
 				link.l1.go = "CapComission3";
 			}
-			if(CheckAttribute(pchar,"GenQuest.CaptainComission.RepeatSpeak"))
+		/*	if(CheckAttribute(pchar,"GenQuest.CaptainComission.RepeatSpeak")) //лишний диалог лесник
 			{
 				link.l1 = "Я по поводу твоего пленника.";
 				link.l1.go = "CapComission6";
-			}
+			}*/
 			if (CheckAttribute(pchar, "GenQuest.Marginpassenger") && pchar.GenQuest.Marginpassenger == "cabin")
 			{
-				link.l1 = "Я слышал, что ты занимаешься бизнесом, связанном с пленниками...";
+				link.l1 = "Я слышал, что ты занимаешься делами, связанными с пленниками...";
 				link.l1.go = "Marginpassenger";
 			}
 		break;
@@ -164,18 +166,18 @@ void ProcessDialogEvent()
 		
 		case "Temptation_2":
 			dialog.text = "Хм... Ну что же, ты, наверное, уже слышал от 'добрых людей', что бывает с теми, кто пытается меня провести. Поэтому не буду тебя лишний раз смущать жуткими подробностями. Есть у меня одно небольшое поручение. Если справишься - решим твои финансовые проблемы.";
-			link.l1 = "Не сомневайся, я бывал во многих переделках, и еще ни разу...";
+			link.l1 = "Не сомневайся, я бывал во многих переделках, и ещё ни разу...";
 			link.l1.go = "Temptation_3";
 		break;
 		
 		case "Temptation_3":
-			dialog.text = "Заткнись и слушай, что я тебе говорю. Пару недель назад рядом с Синт-Маартеном голландский патруль прижал одного моего порученца. Тот вез для меня голландский парусный шелк. Это большая редкость в наших краях, голландцы завозят его мелкими партиями исключительно для нужд военного флота компании\nТак вот, мне удалось урвать шесть тюков этого шелка, а Симон Морель на бригантине 'Соленый пес' должен был его мне доставить, но случайно напоролся на голландский патруль. А может, и не случайно. Это я знаю со слов штурмана Мореля, который якобы единственный, кто спасся после боя с голландцами\nСудовой журнал Мореля, который он мне притащил, это подтверждает. Из него следует, что Морель, уходя от погони, выкинул весь груз вместе с моим шелком. Странно, правда? Шелк ведь весит мало. Лучше бы они выкинули пушки, все равно против патруля им ничего не светило.";
+			dialog.text = "Заткнись и слушай, что я тебе говорю. Пару недель назад рядом с Синт-Маартеном голландский патруль прижал одного моего порученца. Тот вёз для меня голландский парусный шёлк. Это большая редкость в наших краях, голландцы завозят его мелкими партиями исключительно для нужд военного флота компании\nТак вот, мне удалось урвать шесть тюков этого шёлка, а Симон Морель на бригантине 'Солёный пёс' должен был его мне доставить, но случайно напоролся на голландский патруль. А может, и не случайно. Это я знаю со слов штурмана Мореля, который якобы единственный, кто спасся после боя с голландцами\nСудовой журнал Мореля, который он мне притащил, это подтверждает. Из него следует, что Морель, уходя от погони, выкинул весь груз вместе с моим шёлком. Странно, правда? Шёлк ведь весит мало. Лучше бы они выкинули пушки, всё равно против патруля им ничего не светило.";
 			link.l1 = "Действительно, что-то здесь не сходится.";
 			link.l1.go = "Temptation_4";
 		break;
 		
 		case "Temptation_4":
-			dialog.text = "Все может быть. Я частенько имею дело с храбрецами, но вот умных людей среди них немного. Ты уж извини, если задел. Твоя задача проверить место, где Морель сбросил груз. Это в районе 21 гр. 10' северной широты и 61 гр. 30' западной долготы - так было указано в судовом журнале\nГолландцы наматывают этот шелк на стержни из пробки, так что из-за этого тюки не должны были затонуть и плавают на поверхности по сей день. Там должно быть шесть тюков. Отправляйся немедля, время дорого.";
+			dialog.text = "Всё может быть. Я частенько имею дело с храбрецами, но вот умных людей среди них немного. Ты уж извини, если задел. Твоя задача проверить место, где Морель сбросил груз. Это в районе 21 гр. 10' северной широты и 61 гр. 30' западной долготы - так было указано в судовом журнале\nГолландцы наматывают этот шёлк на стержни из пробки, так что из-за этого тюки не должны были затонуть и плавают на поверхности по сей день. Там должно быть шесть тюков. Отправляйся немедля, время дорого.";
 			link.l1 = "Уже в пути!";
 			link.l1.go = "Temptation_5";
 		break;
@@ -191,7 +193,7 @@ void ProcessDialogEvent()
 		break;
 		
 		case "Temptation_6":
-			dialog.text = "Прекрасно. Ну что, нашел мой шелк?";
+			dialog.text = "Прекрасно. Ну что, нашёл мой шёлк?";
 			link.l1 = "Да, все шесть тюков, как ты и говорил.";
 			link.l1.go = "temptation_wrong";
 			if (GetSquadronGoods(pchar, GOOD_SHIPSILK) >= 90)
@@ -202,13 +204,13 @@ void ProcessDialogEvent()
 		break;
 		
 		case "temptation_wrong":
-			dialog.text = "Это неправильный ответ. Тюков должно было быть девять. И если ты нашел шесть из них, то должен был найти и остальные. Так что ты либо крыса, либо лентяй и простофиля. Ты должен мне три тюка шелка и еще три в качестве моральной компенсации за попытку обмана.";
+			dialog.text = "Это неправильный ответ. Тюков должно было быть девять. И если ты нашёл шесть из них, то должен был найти и остальные. Так что ты либо крыса, либо лентяй и простофиля. Ты должен мне три тюка шёлка и ещё три в качестве моральной компенсации за попытку обмана.";
 			if (GetSquadronGoods(pchar, GOOD_SHIPSILK) >= 120)
 			{
-				link.l1 = "Ну ты и хитрец! Учту на будущее. Держи свой шелк и забудем о моей оплошности.";
+				link.l1 = "Ну ты и хитрец! Учту на будущее. Держи свой шёлк и забудем о моей оплошности.";
 				link.l1.go = "temptation_wrong_1";
 			}
-			link.l2 = "Тебе сказали, что тюков было шесть и ни одним больше. Я отдал тебе все, и мне плевать, что ты про это думаешь. Больше у меня все равно нет.";
+			link.l2 = "Тебе сказали, что тюков было шесть и ни одним больше. Я отдал тебе всё, и мне плевать, что ты про это думаешь. Больше у меня всё равно нет.";
 			link.l2.go = "temptation_wrong_2";
 		break;
 		
@@ -220,7 +222,7 @@ void ProcessDialogEvent()
 		break;
 		
 		case "temptation_wrong_2":
-			dialog.text = "Ах вот как мы запели! Ну, это тебе даром не пройдет. Я тебя сразу предупреждал - не пытайся меня надуть! Охрана! Крыса в резиденции!";
+			dialog.text = "Ах вот как мы запели! Ну, это тебе даром не пройдёт. Я тебя сразу предупреждал - не пытайся меня надуть! Охрана! Крыса в резиденции!";
 			link.l1 = "А-ать!";
 			link.l1.go = "temptation_wrong_fight";
 		break;
@@ -247,19 +249,19 @@ void ProcessDialogEvent()
 		
 		case "temptation_right":
 			RemoveCharacterGoods(pchar, GOOD_SHIPSILK, 80);
-			dialog.text = "Хорошая работа. Я проверял тебя на жадность, и ты прошел проверку. Тюков и должно было быть девять. Один из них достается тебе. Ну, а теперь мы можем поговорить всерьез. Сколько денег ты хочешь заработать?";
+			dialog.text = "Хорошая работа. Я проверял тебя на жадность, и ты прошёл проверку. Тюков и должно было быть девять. Один из них достаётся тебе. Ну, а теперь мы можем поговорить всерьёз. Сколько денег ты хочешь заработать?";
 			link.l1 = "Лишних денег не бывает, но меня вполне устроили бы пятьдесят тысяч песо.";
 			link.l1.go = "junior";
 		break;
 		
 		case "junior":
-			dialog.text = "У тебя есть возможность заработать даже больше. Один серьезный человек просил меня подыскать надежного парня вроде тебя для одного деликатного и опасного дела. Этот человек очень богат и сможет отблагодарить тебя по достоинству, если ты его не подведешь.";
+			dialog.text = "У тебя есть возможность заработать даже больше. Один серьёзный человек просил меня подыскать надёжного парня вроде тебя для одного деликатного и опасного дела. Этот человек очень богат и сможет отблагодарить тебя по достоинству, если ты его не подведёшь.";
 			link.l1 = "Я готов.";
 			link.l1.go = "junior_1";
 		break;
 		
 		case "junior_1":
-			dialog.text = "Слушай внимательно. Ты должен встретиться с его доверенным лицом по кличке Валет. Он капитан полакра 'Марлин', больше я о нем ничего не знаю. Ты найдешь его в Капстервиле. Пароль - 'охота уже началась'. От него ты узнаешь, что делать дальше. Мне ты ничего не должен. Я просто решил тебе помочь. Если удача не отвернется от тебя, мы еще встретимся.";
+			dialog.text = "Слушай внимательно. Ты должен встретиться с его доверенным лицом по кличке Валет. Он капитан полакра 'Марлин', больше я о нём ничего не знаю. Ты найдёшь его в Капстервиле. Пароль - 'охота уже началась'. От него ты узнаешь, что делать дальше. Мне ты ничего не должен. Я просто решил тебе помочь. Если удача не отвернётся от тебя, мы ещё встретимся.";
 			link.l1 = "Спасибо за участие. Отправляюсь немедленно!";
 			link.l1.go = "junior_2";
 		break;
@@ -273,19 +275,19 @@ void ProcessDialogEvent()
 		
 		case "terrax":
 			dialog.text = "Что?! Да я вырву у тебя...";
-			link.l1 = "Ничего ты не вырвешь, Барбазон. Вскроем карты! Я работаю на Яна Свенсона. Я раскрыл махинацию, которую вы затеяли вместе с Джекманом. Мне все известно: и что вы задумали, и какова была твоя роль. Джекман и его братец Валет мертвы - один оказался несговорчивым, а второй подписал себе приговор тогда, когда убил Блейза Шарпа. ";
+			link.l1 = "Ничего ты не вырвешь, Барбазон. Вскроем карты! Я работаю на Яна Свенсона. Я раскрыл махинацию, которую вы затеяли вместе с Джекманом. Мне всё известно: и что вы задумали, и какова была твоя роль. Джекман и его братец Валет мертвы - один оказался несговорчивым, а второй подписал себе приговор тогда, когда убил Блейза Шарпа. ";
 			link.l1.go = "terrax_1";
 		break;
 		
 		case "terrax_1":
-			dialog.text = "Черт возьми! Тиракс мне никогда этого не простит! Но я еще...";
-			link.l1 = "Не делай глупостей, Жак. Я прекрасно знал, что разговор будет непростым, поэтому принял меры предосторожности. Глянь в окно... твоя халупа окружена моими мушкетерами. Мой отряд рассредоточен в поселке, а у ворот стоит штурмовая группа. Хочешь устроить резню? Нет проблем!";
+			dialog.text = "Чёрт возьми! Тиракс мне никогда этого не простит! Но я ещё...";
+			link.l1 = "Не делай глупостей, Жак. Я прекрасно знал, что разговор будет непростым, поэтому принял меры предосторожности. Глянь в окно... твоя халупа окружена моими мушкетёрами. Мой отряд рассредоточен в посёлке, а у ворот стоит штурмовая группа. Хочешь устроить резню? Нет проблем!";
 			link.l1.go = "terrax_2";
 		break;
 		
 		case "terrax_2":
-			dialog.text = "Черт побери! Чего ты хочешь?";
-			link.l1 = "Ты не поверишь, Барбазон... Мира! Я хочу мира. Именно поэтому я не сказал и не скажу Тираксу о твоем участии в заговоре против него. Конечно, если ты пойдешь мне навстречу...";
+			dialog.text = "Дьявол, чего же ты хочешь?";
+			link.l1 = "Ты не поверишь, Барбазон... Мира! Я хочу мира. Именно поэтому я не сказал и не скажу Тираксу о твоём участии в заговоре против него. Конечно, если ты пойдёшь мне навстречу...";
 			link.l1.go = "terrax_3";
 		break;
 		
@@ -306,7 +308,7 @@ void ProcessDialogEvent()
 			if (!CheckAttribute(pchar, "questTemp.Saga.DodsonDie")) sTemp = "И Стивен Додсон на нашей стороне. ";
 			else sTemp = "";
 			dialog.text = "Вот как? Дай-ка подумать... А если я откажусь?";
-			link.l1 = "Тогда ты останешься один, Жак. Совсем один. Против тебя пойдут войной Свенсон, Тиракс и Хоук. "+sTemp+"Я всего лишь покажу им письмо Валета, братца Джекмана. Да и слову моему поверят... Как ты думаешь, сколько времени после этого ты просидишь на своем теплом месте?";
+			link.l1 = "Тогда ты останешься один, Жак. Совсем один. Против тебя пойдут войной Свенсон, Тиракс и Хоук. "+sTemp+"Я всего лишь покажу им письмо Валета, братца Джекмана. Да и слову моему поверят... Как ты думаешь, сколько времени после этого ты просидишь на своём тёплом месте?";
 			link.l1.go = "terrax_5";
 		break;
 		
@@ -317,36 +319,36 @@ void ProcessDialogEvent()
 		break;
 		
 		case "terrax_6":
-			dialog.text = "Да не друг мне Джекман! Черт бы тебя побрал! Ты загнал меня в угол!";
-			link.l1 = "Глупости. Твой голос в Совете за того, кого я назвал - и для тебя ровным счетом ничего не изменится. Я же сказал, Жак: я хочу мира. Я давно уже мог бы настроить против тебя всех баронов, но не сделал этого.";
+			dialog.text = "Да не друг мне Джекман! Чёрт бы тебя побрал! Ты загнал меня в угол!";
+			link.l1 = "Глупости. Твой голос в Совете за того, кого я назвал - и для тебя ровным счётом ничего не изменится. Я же сказал, Жак: я хочу мира. Я давно уже мог бы настроить против тебя всех баронов, но не сделал этого.";
 			link.l1.go = "terrax_7";
 		break;
 		
 		case "terrax_7":
 			GiveItem2Character(pchar, "splinter_jb"); // дать осколок
 			dialog.text = "Хорошо. Я согласен. Даю слово. Вот, держи мой каменный осколок - ведь тебе нужно это?";
-			link.l1 = "Точно. Я рад, что мы договорились, Жак. Забери себе на память письмо Валета. Хотя, лучше сожги - не дай Бог попадет в чужие руки. Но это еще не все...";
+			link.l1 = "Точно. Я рад, что мы договорились, Жак. Забери себе на память письмо Валета. Хотя, лучше сожги - не дай Бог попадёт в чужие руки. Но это ещё не всё...";
 			link.l1.go = "terrax_8";
 		break;
 		
 		case "terrax_8":
 			RemoveItems(pchar, "letter_chad", 1);
-			dialog.text = "Не все?! Что еще тебе от меня нужно?";
+			dialog.text = "Не всё?! Что ещё тебе от меня нужно?";
 			if (CheckAttribute(pchar, "questTemp.Mtraxx.Corrida.Barbazon"))
 			{
-				link.l1 = "Я тебе напомню кое-что. Не так давно ты хотел убить меня и подослал свою шавку, Игнасио Марко. Это я кокнул его. Это я сломал твои планы по захвату испанского галеона с золотом из Гаваны. Это я отправил с Синт-Маартена в лапы испанцев твого дружка Джимми Джокера, а также Бродягу и Упыря. Я - Чарли Принц! Теперь мы в расчете, Жак, но будь любезнее со мной при последующих встречах. Ведь мы не раз с тобой еще увидимся, я думаю. Не забывай, что за мной - все пиратские бароны, включая будущего главу Братства. А теперь - бывай, Барбазон...";
+				link.l1 = "Я тебе напомню кое-что. Не так давно ты хотел убить меня и подослал свою шавку, Игнасио Марко. Это я кокнул его. Это я сломал твои планы по захвату испанского галеона с золотом из Гаваны. Это я отправил с Синт-Маартена в лапы испанцев твоего дружка Джимми Джокера, а также Бродягу и Упыря. Я - Чарли Принц! Теперь мы в расчёте, Жак, но будь любезнее со мной при последующих встречах. Ведь мы не раз с тобой ещё увидимся, я думаю. Не забывай, что за мной - все пиратские бароны, включая будущего главу Братства. А теперь - бывай, Барбазон...";
 				link.l1.go = "terrax_9";
 			}
 			else
 			{
 				if (!CheckAttribute(pchar, "questTemp.Mtraxx.Corrida.Barbazon") && CheckAttribute(pchar, "questTemp.Mtraxx") && pchar.questTemp.Mtraxx == "full_complete_end")
 				{
-					link.l1 = "Я тебе напомню кое-что. Не так давно ты хотел убить меня и подослал свою шавку, Игнасио Марко. У него ничего не вышло, но за тобой должок. Я - Чарли Принц!  Так что будь любезнее со мной при последующих встречах, Жак. Ведь мы не раз с тобой еще увидимся, я думаю. Не забывай, что за мной - все пиратские бароны, включая будущего главу Братства. А теперь - бывай, Барбазон...";
+					link.l1 = "Я тебе напомню кое-что. Не так давно ты хотел убить меня и подослал свою шавку, Игнасио Марко. У него ничего не вышло, но за тобой должок. Я - Чарли Принц!  Так что будь любезнее со мной при последующих встречах, Жак. Ведь мы не раз с тобой ещё увидимся, я думаю. Не забывай, что за мной - все пиратские бароны, включая будущего главу Братства. А теперь - бывай, Барбазон...";
 					link.l1.go = "terrax_9";
 				}
 				else
 				{
-					link.l1 = "Будь любезнее со мной при последующих встречах, Жак. Ведь мы не раз с тобой еще увидимся, я думаю. Не забывай, что за мной - все пиратские бароны, включая будущего главу Братства. А теперь - бывай, Барбазон...";
+					link.l1 = "Будь любезнее со мной при последующих встречах, Жак. Ведь мы не раз с тобой ещё увидимся, я думаю. Не забывай, что за мной - все пиратские бароны, включая будущего главу Братства. А теперь - бывай, Барбазон...";
 					link.l1.go = "terrax_9";
 				}
 			}
@@ -380,12 +382,12 @@ void ProcessDialogEvent()
 			}
 			else
 			{
-				dialog.text = "А-а, ну наконец-то. Я уж было подумывал продать его к чёртовой матери этому плантатору с Барбадоса, он должен появиться у меня через неделю-другую... Ты выкуп привез"+ GetSexPhrase("","ла") +"?";
+				dialog.text = "А-а, ну наконец-то. Я уж было подумывал продать его к чёртовой матери этому плантатору с Барбадоса, он должен появиться у меня через неделю-другую... Ты выкуп привёз"+ GetSexPhrase("","ла") +"?";
 				link.l1 = "Слушай, тут такое дело... В общем, у меня нет таких денег. Но я готов"+ GetSexPhrase("","а") +" отработать.";
 				link.l1.go = "CapComission2_2";
 				if(makeint(pchar.money) > 150000)
 				{
-					link.l2 = "Хорошо, что не продал. Вот деньги - 150000 песо. Где я могу его забрать?"
+					link.l2 = "Хорошо, что не продал. Вот деньги - 150000 песо. Где я могу его забрать?";
 					link.l2.go = "CapComission2_3";
 				}	
 			}
@@ -408,22 +410,23 @@ void ProcessDialogEvent()
 			link.l1 = "Счастливо.";
 			link.l1.go = "exit";
 			AddQuestRecord("CaptainComission1", "10");
-			AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM));
+			AddQuestUserData("CaptainComission1", "sName", "Жак Барбазон");//правка лесник.  в СЖ запись ниже не работает																																				  
+			//AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM));
 			CaptainComission_GenerateManager();
 		break;
 		
 		case "CapComission2_2":
-			if(rand(1) == 0)
-			{
-				dialog.text = "Гхм-гхм... Есть у меня одно дело... Даже не знаю, как начать... В общем, нужно пустить ко дну одного зарвавшегося пирата.";
-				link.l1 = "А разве нельзя убрать его в джунглях?";
-				link.l1.go = "CapComission2_2_1";
-			}
-			else
+			if(rand(3) == 1)
 			{
 				dialog.text = "Ну, " + pchar.name + ", ты же знаешь, что так дела не делаются. Приходи с деньгами и получишь своего заморыша, хе-хе.";
 				link.l1 = "Ну ладно, до встречи.";
-				link.l1.go = "CapComission2_4";
+				link.l1.go = "CapComission2_4"; 
+			}
+			else
+			{
+				dialog.text = "Гхм-гхм... Есть у меня одно дело... Даже не знаю, как начать... В общем, нужно пустить ко дну одного зарвавшегося пирата.";
+				link.l1 = "А разве нельзя убрать его в джунглях?";
+				link.l1.go = "CapComission2_2_1";  
 			}
 		break;
 
@@ -439,7 +442,7 @@ void ProcessDialogEvent()
 			pchar.GenQuest.CaptainComission.ShipName2 = GenerateRandomNameToShip(sti(NPChar.nation));
 			pchar.GenQuest.CaptainComission.UnknownPirateName = "l" + rand(GetNamesCount(NAMETYPE_ORIG) - 1);
 			sLoc = XI_ConvertString(pchar.GenQuest.CaptainComission.Island + "Abl");
-			dialog.text = "Хм... В общем некий " + GetName( NAMETYPE_ORIG, pchar.GenQuest.CaptainComission.UnknownPirateName, NAME_NOM) + " убедил часть пиратов, что в нашем тайнике близ " + XI_ConvertString(pchar.GenQuest.CaptainComission.Island.Shore + "Gen") + " есть и их доля. Недавно они снялись с якоря и на двух судах '" + pchar.GenQuest.CaptainComission.ShipName1 + "' и '" + pchar.GenQuest.CaptainComission.ShipName2 + "' ушли к " + sLoc + ". Понимаешь теперь, почему я не могу поручить это дело своим людям?";
+			dialog.text = "Хм... В общем некий " + GetName( NAMETYPE_ORIG, pchar.GenQuest.CaptainComission.UnknownPirateName, NAME_NOM) + " убедил часть пиратов что в нашем тайнике, близ " + XI_ConvertString(pchar.GenQuest.CaptainComission.Island.Shore + "Gen") + ", есть и их доля. Недавно они снялись с якоря, и на двух судах, '" + pchar.GenQuest.CaptainComission.ShipName1 + "' и '" + pchar.GenQuest.CaptainComission.ShipName2 + "', ушли к " + sLoc + ". Понимаешь теперь, почему я не могу поручить это дело своим людям?";
 			link.l1 = "Понятно. И сколько у меня есть времени?";
 			link.l1.go = "CapComission2_2_3";
 		break;
@@ -452,7 +455,8 @@ void ProcessDialogEvent()
 		
 		case "CapComission2_2_4":
 			AddQuestRecord("CaptainComission1", "24");
-			AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM));
+			AddQuestUserData("CaptainComission1", "sName", "Жак Барбазон");//правка
+			//AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM));// в СЖ не работает имя . лесник
 			AddQuestUserData("CaptainComission1", "sShipName1", pchar.GenQuest.CaptainComission.ShipName1);
 			AddQuestUserData("CaptainComission1", "sShipName2", pchar.GenQuest.CaptainComission.ShipName2);
 			AddQuestUserData("CaptainComission1", "sShoreName", XI_ConvertString(pchar.GenQuest.CaptainComission.Island.Shore + "Abl"));
@@ -461,7 +465,7 @@ void ProcessDialogEvent()
             pchar.quest.CapComission_PirateAttack.win_condition.l1.location = pchar.GenQuest.CaptainComission.Island;
             pchar.quest.CapComission_PirateAttack.function = "CaptainComission_GeneratePirateShips"; 
 			SetFunctionTimerCondition("CaptainComission_PirateShipsOver", 0, 0, 15, false);
-			pchar.GenQuest.CaptainComission.PirateShips = "goaway";	
+			
 			DialogExit();
 		break;
 		
@@ -483,6 +487,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("CaptainComission1", "sCharName", pchar.GenQuest.CaptainComission.Name);
 			AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City));			
 			addMoneyToCharacter(pchar, -150000);
+			pchar.GenQuest.CaptainComission.vikupzaplatil = true; // новая проверка ,если шарль заплатил выкуп за пленника. лесник																																								
 			DialogExit();
 			AddDialogExitQuestFunction("CaptainComission_GeneratePassengerSlave");	
 		break;
@@ -491,7 +496,8 @@ void ProcessDialogEvent()
 			if(!CheckAttribute(pchar,"GenQuest.CaptainComission.RepeatSpeak"))
 			{
 				AddQuestRecord("CaptainComission1", "31");
-				AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM));
+				AddQuestUserData("CaptainComission1", "sName", "Жак Барбазон");		// лесник																												  
+				//AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM)); в СЖ не работает
 			}	
 			pchar.GenQuest.CaptainComission.RepeatSpeak = true;		
 			DialogExit();
@@ -541,8 +547,9 @@ void ProcessDialogEvent()
 			ChangeCharacterComplexReputation(pchar,"nobility", -2);
 			AddQuestRecord("CaptainComission1", "27");
 			AddQuestUserData("CaptainComission1", "sSex", GetSexPhrase("","ла"));
-			AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_DAT));
-			AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City + "Gen"));
+			AddQuestUserData("CaptainComission1", "sName", "Барбазоном"); // лесник																			  
+			//AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_DAT));// в СЖ не работает
+			AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City + "Acc"));
 			AddQuestUserData("CaptainComission1", "sCharName", pchar.GenQuest.CaptainComission.Name);
 			DeleteAttribute(pchar,"GenQuest.CaptainComission.PirateShips");
 			DialogExit();
@@ -552,8 +559,9 @@ void ProcessDialogEvent()
 			ChangeCharacterComplexReputation(pchar,"nobility", -2);
 			AddQuestRecord("CaptainComission1", "28");
 			AddQuestUserData("CaptainComission1", "sSex", GetSexPhrase("","а"));
-			AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM));
-			AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City + "Gen"));
+			AddQuestUserData("CaptainComission1", "sName", "Барбазон"); // правка	// лесник																	  
+			//AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM)); в сж не работает
+			AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City + "Acc"));
 			AddQuestUserData("CaptainComission1", "sCharName", pchar.GenQuest.CaptainComission.Name);
 			DeleteAttribute(pchar,"GenQuest.CaptainComission.PirateShips");
 			DialogExit();		
@@ -568,8 +576,9 @@ void ProcessDialogEvent()
 		case "CapComission4_6":
 			addMoneyToCharacter(pchar, -200000);
 			AddQuestRecord("CaptainComission1", "29");
-			AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM));
-			AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City + "Gen"));
+			AddQuestUserData("CaptainComission1", "sName", "Барбазон"); // правки имени в сж лесник
+			AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM));//в СЖ не работает
+			AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City + "Acc"));
 			AddQuestUserData("CaptainComission1", "sCharName", pchar.GenQuest.CaptainComission.Name);
 			DeleteAttribute(pchar,"GenQuest.CaptainComission.PirateShips");
 			pchar.GenQuest.CaptainComission.SlaveAddMoney = true;
@@ -586,15 +595,16 @@ void ProcessDialogEvent()
 		case "CapComission5_1":
 			AddQuestRecord("CaptainComission1", "34");
 			AddQuestUserData("CaptainComission1", "sName", pchar.GenQuest.CaptainComission.SlaveName);
-			AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City + "Gen"));
+			AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City + "Acc"));
 			AddQuestUserData("CaptainComission1", "sCharName", pchar.GenQuest.CaptainComission.Name);
 			DeleteAttribute(pchar,"GenQuest.CaptainComission.PirateShips");
 			DialogExit();		
 			AddDialogExitQuestFunction("CaptainComission_GeneratePassengerSlave");	
 		break;
 		
-		case "CapComission6":
-			dialog.text = "Ты выкуп привез"+ GetSexPhrase("","ла") +"? Ведь я не шутил, когда сказал, что продам его плантаторам.";			
+	   	/*case "CapComission6":    // ЕСЛИ В ПЕРВЫЙ РАЗ ОТКАЗАЛ В ЗАДАНИИ ,ТО ПУСТЬ БАБКИ ИЩЕТ
+		     ИНАЧЕ ПОВТОРНАЯ ДАЧА ЗАДАНИЯ ПРЕВРАЩАЕТ КВЕСТ В КАШУ.. лесник
+			dialog.text = "Ты выкуп привёз"+ GetSexPhrase("","ла") +"? Ведь я не шутил, когда сказал, что продам его плантаторам.";			
 			link.l1 = "Слушай, "+ NPChar.name +", тут такое дело... В общем, у меня нет таких денег. Но я готов"+ GetSexPhrase("","а") +" отработать.";
 			link.l1.go = "CapComission2_2";
 			if(makeint(pchar.money) > 150000)
@@ -602,23 +612,33 @@ void ProcessDialogEvent()
 				link.l2 = "Хорошо, что не продал. Вот деньги - 150000 песо. Где я могу его забрать?"
 				link.l2.go = "CapComission2_3";
 			}			
+		break;*/
+		  case "CapComission6":                        // лесник . пусть шарль бабло ищет,или забить на пленника.
+			dialog.text = "Ты выкуп привёз"+ GetSexPhrase("","ла") +"? Ведь я не шутил, когда сказал, что продам его плантаторам.";			
+			link.l1 = "Пока нет денег, "+ NPChar.name +", но я работаю над этим.";
+			link.l1.go = "exit";
+			if(makeint(pchar.money) > 150000)
+			{
+				link.l2 = "Хорошо, что не продал. Вот деньги - 150000 песо. Где я могу его забрать?"
+				link.l2.go = "CapComission2_3";
+			}			
 		break;
-		
+																																					 																																													  																																															
 //--------------------------------------------Похититель------------------------------------------------------
 		case "Marginpassenger":
-			dialog.text = "А тебе-то какое дело до того, чем я занимаюсь, а чем нет? Знаешь что, шел бы ты отс...";
-			link.l1 = "Тише, не кипятись. Я пришел к тебе по делу, причем именно по этому делу.";
+			dialog.text = "А тебе-то какое дело до того, чем я занимаюсь, а чем нет? Знаешь что, шёл бы ты отс...";
+			link.l1 = "Тише, не кипятись. Я пришёл к тебе по делу, причём именно по этому делу.";
 			link.l1.go = "Marginpassenger_1";
 		break;
 		
 		case "Marginpassenger_1":
-			dialog.text = "А-а, ну ладно. За кого ты привез выкуп?";
-			link.l1 = "Погоди. Я сюда пришел не для того, чтобы выкупать, а для того, чтобы предложить тебе купить одного моего пленника. Ну, а ты потом cможешь получить за него выкуп.";
+			dialog.text = "А-а, ну ладно. За кого ты привёз выкуп?";
+			link.l1 = "Погоди. Я сюда пришёл не для того, чтобы выкупать, а для того, чтобы предложить тебе купить одного моего пленника. Ну, а ты потом cможешь получить за него выкуп.";
 			link.l1.go = "Marginpassenger_2";
 		break;
 		
 		case "Marginpassenger_2":
-			dialog.text = "Хм. А зачем тебе понадобилось мое посредничество? Чего сам не хочешь получить денежки напрямую?";
+			dialog.text = "Хм. А зачем тебе понадобилось моё посредничество? Чего сам не хочешь получить денежки напрямую?";
 			link.l1 = "Для меня в данном случае это опасно. Могут быть проблемы с властями.";
 			link.l1.go = "Marginpassenger_3";
 		break;
@@ -646,7 +666,7 @@ void ProcessDialogEvent()
 		
 		case "Marginpassenger_money_1":
 			iTemp = makeint(sti(pchar.GenQuest.Marginpassenger.Dublon)*2*stf(pchar.GenQuest.Marginpassenger.Chance))*100;
-			dialog.text = "Да всегда пожалуйста, привози еще... Бывай!";
+			dialog.text = "Да всегда пожалуйста, привози ещё... Бывай!";
 			link.l1 = "И тебе всего доброго...";
 			link.l1.go = "exit";
 			AddMoneyToCharacter(pchar, iTemp);
@@ -666,8 +686,8 @@ void ProcessDialogEvent()
 			{
 				case 0: //бухта на южном мейне
 					SelectSouthshore();
-					while (!isLocationFreeForQuests(pchar.GenQuest.Marginpassenger.Shore)) SelectSouthshore();
-					dialog.text = "Приятно иметь дело со сметливым человеком, парень! Теперь слушай: через несколько дней к " + XI_ConvertString(pchar.GenQuest.Marginpassenger.Shore+"Dat") + " подойдет испанская экспедиция из Мейна, с запасами ценной древесины, и будет ждать корабля, который должен прийти и забрать груз. Если за неделю ты успеешь туда добраться - у тебя будет шанс забрать весь товар себе\nНа твоем месте я бы уже бежал к своей посудине. И потрудись доставить пленника сюда.";
+					while (!isLocationFreeForQuests(pchar.GenQuest.Marginpassenger.Shore)) SelectSouthshore(); // исправил окончание . лесник (строчка ниже)
+					dialog.text = "Приятно иметь дело со сметливым человеком, парень! Теперь слушай: через несколько дней к " + XI_ConvertString(pchar.GenQuest.Marginpassenger.Shore+"Abl") + " подойдёт испанская экспедиция из Мейна, с запасами ценной древесины, и будет ждать корабля, который должен прийти и забрать груз. Если за неделю ты успеешь туда добраться - у тебя будет шанс забрать весь товар себе\nНа твоём месте я бы уже бежал к своей посудине. И потрудись доставить пленника сюда.";
 					link.l1 = "Благодарю! Древесина послужит хорошей компенсацией за мои мытарства! А мой пассажир уже должен быть где-то у городских ворот. Его к тебе приведут.";
 					link.l1.go = "Marginpassenger_offer_1";
 				break;
@@ -675,7 +695,7 @@ void ProcessDialogEvent()
 				case 1: //просто кораблик
 					SelectSouthcity();
 					pchar.GenQuest.Marginpassenger.ShipName1 = GenerateRandomNameToShip(SPAIN);
-					dialog.text = "Приятно иметь дело со сметливым человеком, парень! Теперь слушай: приблизительно через неделю из "+XI_ConvertString("Colony"+pchar.GenQuest.Marginpassenger.Southcity+"Gen")+" выйдет испанская баркентина '"+pchar.GenQuest.Marginpassenger.ShipName1+"' с грузом ценной древесины и отправится в порт "+XI_ConvertString("Colony"+pchar.GenQuest.Marginpassenger.Southcity1+"Gen")+". Если не будешь зевать, то запросто перехватишь ее\nТы еще здесь? На твоем месте я бы уже бежал к своей посудине. И потрудись доставить пленника сюда.";
+					dialog.text = "Приятно иметь дело со сметливым человеком, парень! Теперь слушай: приблизительно через неделю из "+XI_ConvertString("Colony"+pchar.GenQuest.Marginpassenger.Southcity+"Gen")+" выйдет испанская баркентина '"+pchar.GenQuest.Marginpassenger.ShipName1+"' с грузом ценной древесины и отправится в порт "+XI_ConvertString("Colony"+pchar.GenQuest.Marginpassenger.Southcity1+"Gen")+". Если не будешь зевать, то запросто перехватишь её\nТы ещё здесь? На твоём месте я бы уже бежал к своей посудине. И потрудись доставить пленника сюда.";
 					link.l1 = "Благодарю! Древесина послужит хорошей компенсацией за мои мытарства! А мой пассажир уже должен быть где-то у городских ворот. Его к тебе приведут.";
 					link.l1.go = "Marginpassenger_offer_2";
 				break;
@@ -689,7 +709,7 @@ void ProcessDialogEvent()
 		case "Marginpassenger_offer_1":
 			DialogExit();
 			AddQuestRecord("Marginpassenger", "13");
-			AddQuestUserData("Marginpassenger", "sShore", XI_ConvertString(pchar.GenQuest.Marginpassenger.Shore+"Dat"));
+			AddQuestUserData("Marginpassenger", "sShore", XI_ConvertString(pchar.GenQuest.Marginpassenger.Shore+"Abl"));//лесник - окончание в СЖ
 			SetFunctionTimerCondition("Marginpassenger_SouthshoreOver", 0, 0, 7, false);
 			pchar.quest.Marginpassenger.win_condition.l1 = "location";
 			pchar.quest.Marginpassenger.win_condition.l1.location = pchar.GenQuest.Marginpassenger.Shore;
@@ -700,21 +720,21 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddQuestRecord("Marginpassenger", "16");
 			AddQuestUserData("Marginpassenger", "sCity", XI_ConvertString("Colony"+pchar.GenQuest.Marginpassenger.Southcity+"Gen"));
-			AddQuestUserData("Marginpassenger", "sCity1", XI_ConvertString("Colony"+pchar.GenQuest.Marginpassenger.Southcity1+"Gen"));
+			AddQuestUserData("Marginpassenger", "sCity1", XI_ConvertString("Colony"+pchar.GenQuest.Marginpassenger.Southcity1+"Acc")); // лесник - окончание в СЖ
 			AddQuestUserData("Marginpassenger", "sShipName", pchar.GenQuest.Marginpassenger.ShipName1);
 			SetFunctionTimerCondition("Marginpassenger_SouthshipInWorld", 0, 0, 5+rand(2), false);
 		break;
 		
 //---------------------------------------попытка залезть в сундуки --------------------------------------------
 		case "Man_FackYou":
-			dialog.text = LinkRandPhrase("Грабеж среди бела дня!!! Это что же такое делается?! Ну, погоди, "+ GetSexPhrase("приятель","подруга") +"...", "Эй, ты чего это там копаешься?! Никак, вздумал"+ GetSexPhrase("","а") +" ограбить меня? Ну, тогда тебе конец...", "Постой, ты куда это полез"+ GetSexPhrase("","ла") +"? Да ты вор"+ GetSexPhrase("","овка") +", оказывается! Ну, считай, что ты приплыл"+ GetSexPhrase("","а") +", родн"+ GetSexPhrase("ой","ая") +"...");
+			dialog.text = LinkRandPhrase("Грабёж среди бела дня!!! Это что же такое делается?! Ну, погоди, "+ GetSexPhrase("приятель","подруга") +"...", "Эй, ты чего это там копаешься?! Никак, вздумал"+ GetSexPhrase("","а") +" ограбить меня? Ну, тогда тебе конец...", "Постой, ты куда это полез"+ GetSexPhrase("","ла") +"? Да ты вор"+ GetSexPhrase("","овка") +", оказывается! Ну, считай, что ты приплыл"+ GetSexPhrase("","а") +", родн"+ GetSexPhrase("ой","ая") +"...");
 			link.l1 = LinkRandPhrase("Дьявол!!", "Каррамба!!", "А-ать, черт!");
 			link.l1.go = "PL_Q3_fight";
 		break;
 					
 // ----------------------------------------------блок нод angry--------------------------------------------------
 		case "AngryRepeat_1":
-            dialog.text = RandPhraseSimple(""+ GetSexPhrase("Пошел вон","Убирайся") +" отсюда!", "Вон из моего дома!");
+            dialog.text = RandPhraseSimple(""+ GetSexPhrase("Пошёл вон","Убирайся") +" отсюда!", "Вон из моего дома!");
 			link.l1 = "Ай...";
 		    link.l1.go = "AngryExitAgainWithOut";
             if (CheckAttribute(npchar, "angry.terms")) //примиряемся через 10 дней.
@@ -729,7 +749,7 @@ void ProcessDialogEvent()
             }
     	break;
 		case "AngryRepeat_2":
-            dialog.text = RandPhraseSimple("Все, никакого общения.", "Я не хочу с тобой общаться, так что тебе лучше меня не беспокоить.");
+            dialog.text = RandPhraseSimple("Всё, никакого общения.", "Я не хочу с тобой общаться, так что тебе лучше меня не беспокоить.");
 			link.l1 = RandPhraseSimple("Ну как знаешь...", "Хм, ну что же...");
 		    link.l1.go = "AngryExitAgain";
             if (CheckAttribute(npchar, "angry.terms")) //примиряемся через 10 дней.
@@ -756,7 +776,7 @@ void ProcessDialogEvent()
 		break;
 		
 		case "pirate_town":
-            dialog.text = "Решить проблему? Да ты сам понимаешь, чего ты наворотил? В общем, принесешь мне миллион песо - я уговорю ребят, чтобы они забыли твои 'подвиги'. Нет - можешь катиться на все четыре стороны.";
+            dialog.text = "Решить проблему? Да ты сам понимаешь, чего ты наворотил? В общем, принесёшь мне миллион песо - я уговорю ребят, чтобы они забыли твои 'подвиги'. Нет - можешь катиться на все четыре стороны.";
 			if (sti(Pchar.money) >= 1000000)
 			{
 				link.l1 = "Хорошо, я готов заплатить.";

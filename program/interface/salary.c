@@ -5,7 +5,7 @@ void InitInterface(string iniName)
 {
     // лочим квест и карту
     bQuestCheckProcessFreeze = true;
-    if(IsEntity(worldMap))
+    if(IsEntity(&worldMap))
     {
     	wdmLockReload            = true;
     }
@@ -137,7 +137,7 @@ void SkipSailorPayment()
 
 	if(AddCrewMorale(mchref, 0) <= I_MIN_MORALE)
     {
-		if (IsEntity(worldMap) && GetCrewQuantity(mchref) > 0 && !IsCharacterEquippedArtefact(mchref, "totem_02"))
+		if (IsEntity(&worldMap) && GetCrewQuantity(mchref) > 0 && !IsCharacterEquippedArtefact(mchref, "totem_02"))
     	{
             MunityOnShip("ShipMunity");
         }

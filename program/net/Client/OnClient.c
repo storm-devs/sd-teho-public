@@ -1,4 +1,4 @@
-
+/*
 void NetClient_OnClient(int iMsg)
 {
 	int iSubCode = NMGetByte(iMsg);
@@ -261,3 +261,4 @@ void NetClient_DownloadServerFile(string sFileName, int iEventID, int iEventSubI
 	NetClient_SendMessage(iSMsg, true);
 	NMDelete(iSMsg);
 }
+*/

@@ -19,14 +19,17 @@ bool LAi_group_Init()
 	if(CreateEntity(&LAi_grp_relations, "CharactersGroups") == 0) return false;
 	//Инициализация стандартной группы персонажей
 	LAi_group_Register(LAI_DEFAULT_GROUP);
+	LAi_group_SetPermanent(LAI_DEFAULT_GROUP);
 	//Группа игрока
 	LAi_group_Register(LAI_GROUP_PLAYER);
+	LAi_group_SetPermanent(LAI_GROUP_PLAYER);
 	LAi_group_SetLookRadius(LAI_GROUP_PLAYER, LAI_GROUP_PLA_LOOK);
 	LAi_group_SetHearRadius(LAI_GROUP_PLAYER, LAI_GROUP_PLA_HEAR);
 	LAi_group_SetSayRadius(LAI_GROUP_PLAYER, LAI_GROUP_PLA_SAY);
 	LAi_group_SetPriority(LAI_GROUP_PLAYER, LAI_GROUP_PPLAYER);
 	// BOAL 020804 Группа игрока  OWN
 	LAi_group_Register(LAI_GROUP_PLAYER_OWN);
+	LAi_group_SetPermanent(LAI_GROUP_PLAYER_OWN);
 	LAi_group_SetRelation(LAI_GROUP_PLAYER_OWN, LAI_GROUP_PLAYER, LAI_GROUP_FRIEND);
 	LAi_group_SetAlarmReaction(LAI_GROUP_PLAYER, LAI_GROUP_PLAYER_OWN, LAI_GROUP_ENEMY, LAI_GROUP_FRIEND);
 	LAi_group_SetLookRadius(LAI_GROUP_PLAYER_OWN, LAI_GROUP_PLA_LOOK);
@@ -35,6 +38,7 @@ bool LAi_group_Init()
 	LAi_group_SetPriority(LAI_GROUP_PLAYER_OWN, LAI_GROUP_PPLAYER);
 	
 	LAi_group_Register("ENGLAND_CITIZENS");
+	LAi_group_SetPermanent("ENGLAND_CITIZENS");
 	LAi_group_SetLookRadius("ENGLAND_CITIZENS", LAI_GROUP_GRD_LOOK);
 	LAi_group_SetHearRadius("ENGLAND_CITIZENS", LAI_GROUP_GRD_HEAR);
 	LAi_group_SetSayRadius("ENGLAND_CITIZENS", LAI_GROUP_GRD_SAY);	
@@ -43,6 +47,7 @@ bool LAi_group_Init()
 	LAi_group_SetAlarmDown("ENGLAND_CITIZENS", LAI_GROUP_PLAYER, 0.02);
 
 	LAi_group_Register("FRANCE_CITIZENS");
+	LAi_group_SetPermanent("FRANCE_CITIZENS");
 	LAi_group_SetLookRadius("FRANCE_CITIZENS", LAI_GROUP_GRD_LOOK);
 	LAi_group_SetHearRadius("FRANCE_CITIZENS", LAI_GROUP_GRD_HEAR);
 	LAi_group_SetSayRadius("FRANCE_CITIZENS", LAI_GROUP_GRD_SAY);
@@ -51,6 +56,7 @@ bool LAi_group_Init()
 	LAi_group_SetAlarmDown("FRANCE_CITIZENS", LAI_GROUP_PLAYER, 0.02);
 
 	LAi_group_Register("SPAIN_CITIZENS");
+	LAi_group_SetPermanent("SPAIN_CITIZENS");
 	LAi_group_SetLookRadius("SPAIN_CITIZENS", LAI_GROUP_GRD_LOOK);
 	LAi_group_SetHearRadius("SPAIN_CITIZENS", LAI_GROUP_GRD_HEAR);
 	LAi_group_SetSayRadius("SPAIN_CITIZENS", LAI_GROUP_GRD_SAY);
@@ -59,6 +65,7 @@ bool LAi_group_Init()
 	LAi_group_SetAlarmDown("SPAIN_CITIZENS", LAI_GROUP_PLAYER, 0.02);
 
 	LAi_group_Register("HOLLAND_CITIZENS");
+	LAi_group_SetPermanent("HOLLAND_CITIZENS");
 	LAi_group_SetLookRadius("HOLLAND_CITIZENS", LAI_GROUP_GRD_LOOK);
 	LAi_group_SetHearRadius("HOLLAND_CITIZENS", LAI_GROUP_GRD_HEAR);
 	LAi_group_SetSayRadius("HOLLAND_CITIZENS", LAI_GROUP_GRD_SAY);
@@ -67,6 +74,7 @@ bool LAi_group_Init()
 	LAi_group_SetAlarmDown("HOLLAND_CITIZENS", LAI_GROUP_PLAYER, 0.02);
 
 	LAi_group_Register("PIRATE_CITIZENS");
+	LAi_group_SetPermanent("PIRATE_CITIZENS");
 	LAi_group_SetLookRadius("PIRATE_CITIZENS", LAI_GROUP_GRD_LOOK);
 	LAi_group_SetHearRadius("PIRATE_CITIZENS", LAI_GROUP_GRD_HEAR);
 	LAi_group_SetSayRadius("PIRATE_CITIZENS", LAI_GROUP_GRD_SAY);
@@ -83,6 +91,7 @@ bool LAi_group_Init()
 
 	//Группа актёров
 	LAi_group_Register(LAI_GROUP_ACTOR);
+	LAi_group_SetPermanent(LAI_GROUP_ACTOR);
 	LAi_group_SetLookRadius(LAI_GROUP_GUARDS, LAI_GROUP_ACT_LOOK);
 	LAi_group_SetHearRadius(LAI_GROUP_GUARDS, LAI_GROUP_ACT_HEAR);
 	LAi_group_SetSayRadius(LAI_GROUP_GUARDS, LAI_GROUP_ACT_SAY);
@@ -96,6 +105,7 @@ bool LAi_group_Init()
 	
 	//Группа монстров
 	LAi_group_Register(LAI_GROUP_MONSTERS);
+	LAi_group_SetPermanent(LAI_GROUP_MONSTERS);
 	LAi_group_SetRelation(LAI_GROUP_MONSTERS, LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
 	LAi_group_SetLookRadius(LAI_GROUP_MONSTERS, LAI_GROUP_MNS_LOOK);
 	LAi_group_SetHearRadius(LAI_GROUP_MONSTERS, LAI_GROUP_MNS_HEAR);
@@ -104,6 +114,7 @@ bool LAi_group_Init()
 	
 	// Группа монстров Ксочитэма
 	LAi_group_Register("KSOCHITAM_MONSTERS");
+	LAi_group_SetPermanent("KSOCHITAM_MONSTERS");
 	LAi_group_SetRelation("KSOCHITAM_MONSTERS", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
 	LAi_group_SetLookRadius("KSOCHITAM_MONSTERS", LAI_GROUP_MNS_LOOK);
 	LAi_group_SetHearRadius("KSOCHITAM_MONSTERS", LAI_GROUP_MNS_HEAR);
@@ -112,6 +123,7 @@ bool LAi_group_Init()
 	
 	// Группа индейцев ица
 	LAi_group_Register("ITZA");
+	LAi_group_SetPermanent("ITZA");
 	LAi_group_SetLookRadius("ITZA", LAI_GROUP_GRD_LOOK);
 	LAi_group_SetHearRadius("ITZA", LAI_GROUP_GRD_HEAR);
 	LAi_group_SetSayRadius("ITZA", LAI_GROUP_GRD_SAY);
@@ -119,6 +131,7 @@ bool LAi_group_Init()
 	
 	// группы LSC
 	LAi_group_Register("LSC_NARVAL");
+	LAi_group_SetPermanent("LSC_NARVAL");
 	LAi_group_SetLookRadius("LSC_NARVAL", LAI_GROUP_GRD_LOOK);
 	LAi_group_SetHearRadius("LSC_NARVAL", LAI_GROUP_GRD_HEAR);
 	LAi_group_SetSayRadius("LSC_NARVAL", LAI_GROUP_GRD_SAY);
@@ -128,6 +141,7 @@ bool LAi_group_Init()
 	LAi_group_SetAlarmReaction("LSC_NARVAL", LAI_GROUP_ACTOR, LAI_GROUP_NEITRAL, LAI_GROUP_NEITRAL);
 	
 	LAi_group_Register("LSC_RIVADOS");
+	LAi_group_SetPermanent("LSC_RIVADOS");
 	LAi_group_SetLookRadius("LSC_RIVADOS", LAI_GROUP_GRD_LOOK);
 	LAi_group_SetHearRadius("LSC_RIVADOS", LAI_GROUP_GRD_HEAR);
 	LAi_group_SetSayRadius("LSC_RIVADOS", LAI_GROUP_GRD_SAY);
@@ -137,6 +151,7 @@ bool LAi_group_Init()
 	LAi_group_SetAlarmReaction("LSC_RIVADOS", LAI_GROUP_ACTOR, LAI_GROUP_NEITRAL, LAI_GROUP_NEITRAL);
 	
 	LAi_group_Register("LSC_SHARK");
+	LAi_group_SetPermanent("LSC_SHARK");
 	LAi_group_SetLookRadius("LSC_SHARK", LAI_GROUP_GRD_LOOK);
 	LAi_group_SetHearRadius("LSC_SHARK", LAI_GROUP_GRD_HEAR);
 	LAi_group_SetSayRadius("LSC_SHARK", LAI_GROUP_GRD_SAY);
@@ -146,6 +161,7 @@ bool LAi_group_Init()
 	LAi_group_SetAlarmReaction("LSC_SHARK", LAI_GROUP_ACTOR, LAI_GROUP_NEITRAL, LAI_GROUP_NEITRAL);
 	
 	LAi_group_Register("LSC_CITIZEN");
+	LAi_group_SetPermanent("LSC_CITIZEN");
 	LAi_group_SetLookRadius("LSC_CITIZEN", LAI_GROUP_GRD_LOOK);
 	LAi_group_SetHearRadius("LSC_CITIZEN", LAI_GROUP_GRD_HEAR);
 	LAi_group_SetSayRadius("LSC_CITIZEN", LAI_GROUP_GRD_SAY);
@@ -156,6 +172,7 @@ bool LAi_group_Init()
 	
 	// группа охраны плантаций
 	LAi_group_Register("PLANTATION_GUARD");
+	LAi_group_SetPermanent("PLANTATION_GUARD");
 	LAi_group_SetLookRadius("PLANTATION_GUARD", 15.0);
 	LAi_group_SetHearRadius("PLANTATION_GUARD", LAI_GROUP_GRD_HEAR);
 	LAi_group_SetSayRadius("PLANTATION_GUARD", 25.0);
@@ -204,6 +221,84 @@ void LAi_group_Release()
 	SendMessage(&LAi_grp_relations, "s", "SaveData");
 	//Удаляем объект групп
 	DeleteClass(&LAi_grp_relations);
+	
+	LAi_group_Clean(); // mitrokosta сборка мусора
+}
+
+// Не очищать группу при отсутствии в ней персонажей
+void LAi_group_SetPermanent(string sName) {
+	LAi_grp_relations.permanent.(sName) = true;
+}
+
+// Надо ли чистить группу?
+bool LAi_group_IsPermanent(string sName) {
+	if (sName == "" || CheckAttribute(&LAi_grp_relations, "permanent." + sName)) {
+		return true;
+	}
+	
+	return false;
+}
+
+// Чистка пустых групп
+void LAi_group_Clean() {
+	object oGrp;
+	aref arData, arRel;
+	ref chref, rGrp;
+	int i, j, nRel, nChar;
+	string sName, relName;
+	
+	makearef(arData, LAi_grp_relations.savedata);
+	makeref(rGrp, oGrp);
+	
+	// первый проход - запоминаем все группы
+	nRel = GetAttributesNum(arData);
+	for (i = 0; i < nRel; i++) {
+		arRel = GetAttributeN(arData, i);
+		
+		sName = arRel.name1;
+		if (!LAi_group_IsPermanent(sName)) {
+			rGrp.(sName) = true;
+		}
+		
+		sName = arRel.name2;
+		if (!LAi_group_IsPermanent(sName)) {
+			rGrp.(sName) = true;
+		}
+	}
+	
+	// второй проход - ищем непустые
+	nChar = GetArraySize(&characters);
+	for (i = 0; i < nChar; i++) {
+		makeref(chref, characters[i]);
+		if (CheckAttribute(chref, "chr_ai.group") && chref.chr_ai.group != "") {
+			DeleteAttribute(rGrp, chref.chr_ai.group);
+			//trace("Group " + chref.chr_ai.group + " is not empty, it has " + chref.id + ", skipping");
+		}
+	}
+	
+	// третий проход - удаляем отношения между пустыми группами
+	bool bDelete;
+	
+	for (i = 0; i < nRel; i++) {
+		arRel = GetAttributeN(arData, i);
+		relName = GetAttributeName(arRel);
+		bDelete = false;
+		
+		if (!LAi_group_IsPermanent(arRel.name1) && CheckAttribute(rGrp, arRel.name1)) {
+			bDelete = true;
+		}
+		
+		if (!LAi_group_IsPermanent(arRel.name2) && CheckAttribute(rGrp, arRel.name2)) {
+			bDelete = true;
+		}
+		
+		if (bDelete) {
+			//trace("Deleted group relation " + relName + " between " + arRel.name1 + " and " + arRel.name2);
+			DeleteAttribute(arData, relName);
+			i--;
+			nRel--;
+		}
+	}
 }
 
 void LAi_group_SaveInfo()
@@ -380,6 +475,12 @@ void LAi_group_FightGroupsEx(string group1, string group2, bool asignWarriarType
 	LAi_group_SetSayRadius(group1, 40000000.0);
 	LAi_group_SetHearRadius(group2, 40000000.0);	
 	LAi_group_SetSayRadius(group2, 40000000.0);
+}
+
+//вывести отладочную информацию о кол-ве групп
+void LAi_group_GetDbgInfo()
+{
+	SendMessage(&LAi_grp_relations, "s", "GetDbgInfo");
 }
 
 void LAi_group_NotFightPlayerVSGroup(string group2)

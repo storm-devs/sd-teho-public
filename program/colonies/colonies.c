@@ -43,8 +43,19 @@ int GetDistanceToColony2D(string _sColony) // Дистанция до колон
 	if(_sColony == "FortOrange") sColonyTown = "Shore36";
 	if(_sColony == "LaVega") sColonyTown = "LaVega_Port";
 	
-	float X1 = makefloat(worldMap.playerShipX)+1000;
-	float Z1 = -makefloat(worldMap.playerShipZ)+980;
+//	float X1 = makefloat(worldMap.playerShipX)+1000;
+//	float Z1 = -makefloat(worldMap.playerShipZ)+980;
+        float X1, Z1;
+	if(IsEntity(&worldMap))
+	{
+		X1 =  stf(worldMap.playerShipX);
+		Z1 = -stf(worldMap.playerShipZ);
+	}
+	else
+	{
+		X1 =  GetSeaShipX(stf(pchar.Ship.Pos.X))+1000;
+		Z1 = -GetSeaShipZ(stf(pchar.Ship.Pos.Z))+1000;
+	}
 	float X2 = makefloat(worldMap.islands.(sColonyIslandID).(sColonyTown).position.x)+1000;
 	float Z2 = -makefloat(worldMap.islands.(sColonyIslandID).(sColonyTown).position.z)+1000;
 	

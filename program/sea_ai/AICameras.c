@@ -1,4 +1,8 @@
-bool bSeePeoplesOnDeck = false; // Warship 08.06.09 Видеть матросов на палубе при виде от первого лица или нет
+bool bSeePeoplesOnDeck = false; // Warship 08.06.09 видеть матросов на палубе при виде от первого лица или нет
+
+// ugeen 13.09.20
+#define DEFAULT_CAM_PERSP 				1.285
+#define DEFAULT_CAM_PERSP_DEN 			1.25
 
 object	SeaCameras;
 aref	Crosshair;
@@ -16,6 +20,22 @@ void DeleteSeaCamerasEnvironment()
 	DelEventHandler(TELESCOPE_ACTIVE, "SeaCameras_TelescopeActive");
 }
 
+void SetPerspectiveSettings()
+{
+    float fCamPersp = CalcSeaPerspective();
+
+    SeaFreeCamera.Perspective = fCamPersp;
+	SeaShipCamera.Perspective = fCamPersp;
+}
+
+float CalcSeaPerspective()
+{
+    float fCamPerspAdj = 0.0;
+    fCamPerspAdj = SEA_CAM_PERSP / DEFAULT_CAM_PERSP_DEN;
+
+    return (DEFAULT_CAM_PERSP + fCamPerspAdj);
+}
+
 void CreateSeaCamerasEnvironment()
 {
 	bCanSwitchCameras = true;
@@ -29,22 +49,25 @@ void CreateSeaCamerasEnvironment()
 	LayerAddObject(SEA_EXECUTE, &SeaShipCamera, iShipPriorityExecute + 5);
 	LayerAddObject(SEA_EXECUTE, &SeaFreeCamera, 1);
 	LayerAddObject(SEA_EXECUTE, &SeaDeckCamera, iShipPriorityExecute + 5);
+	
+	SetPerspectiveSettings();
 
-	SeaFreeCamera.Perspective = 1.285;
+	//SeaFreeCamera.Perspective = 1.285;
 
 	// Ship camera paramerets
-	SeaShipCamera.Perspective = 1.285;
+	//SeaShipCamera.Perspective = 1.285;
 	SeaShipCamera.SensivityDistance = 30.0;
 	SeaShipCamera.SensivityHeightAngle = 0.02;
 	SeaShipCamera.SensivityHeightAngleOnShip = 0.005;
 	SeaShipCamera.SensivityAzimuthAngle = 0.04;
 	SeaShipCamera.MaxAngleX = 0.07;
 	SeaShipCamera.MinAngleX = -1.4;
-	SeaShipCamera.Distance = 69.0;
+	SeaShipCamera.Distance = 70.0;
 	SeaShipCamera.MinDistance = 25.0;
-	SeaShipCamera.MaxDistance = 90.0;
+	SeaShipCamera.MaxDistance = 1500.0; //90.0;
 	SeaShipCamera.MinHeightOnSea = 1.0;
-	SeaShipCamera.MaxHeightOnShip = 16.0;
+//	SeaShipCamera.MaxHeightOnShip = 16.0;
+	SeaShipCamera.MaxHeightOnShip = 5.0;
 	SeaShipCamera.InvertMouseX = 1.0;
 	SeaShipCamera.InvertMouseY = -1.0;
 
@@ -73,7 +96,7 @@ void CreateSeaCamerasEnvironment()
 		Crosshair.OutsideCamera = true;
 	}
 
-	Crosshair.Texture = "crosshair\crosshair.tga";
+	Crosshair.Texture = "crosshair\crosshair.tga.tx";
 	Crosshair.Size = 0.05;
 	Crosshair.Technique = "Crosshair";
 	Crosshair.SubTexX = 1;
@@ -105,7 +128,7 @@ void SeaCameras_TelescopeActive()
 	else
 	{
 		bCanSwitchCameras = true;
-		Crosshair.OutsideCamera = SeaCameras_isCameraOutside();
+		Crosshair.OutsideCamera = SeaCameras_isCameraOutside(); //|| CrosshairHidden();    // LDH 17Jan17
 	}
 }
 
@@ -130,8 +153,9 @@ void SeaCameras_Switch()
 			if (!LAi_IsDead(&Characters[nMainCharacterIndex]))
 			{
 				SeaCameras.Camera = "SeaDeckCamera";
-				Crosshair.OutsideCamera = false;
-				Sailors.IsOnDeck = !bSeePeoplesOnDeck;
+				Crosshair.OutsideCamera = false;//CrosshairHidden(); // was false;  LDH 17Jan17
+//				Sailors.IsOnDeck = !bSeePeoplesOnDeck;
+				Sailors.IsOnDeck = !CREW_ON_DECK;       // LDH 15Jan17 show crew on deck
 				bSwitch = true;
 			}
 		break;
@@ -195,3 +219,31 @@ void SeaCameras_SetShipForSeaCamera(object Character)
 	makeref(SeaShipCharacterForCamera, Character);
 	SeaCameras_UpdateCamera();
 }
+
+// LDH 17Jan17 hide crosshair -->
+void ToggleCrosshair()
+{
+    if (GetCurControlGroup() != "Sailing1Pers") return;
+
+    if ( ! CheckAttribute(Crosshair, "hidden")) Crosshair.hidden = 1;   // hide crosshair by default
+    switch (makeint(Crosshair.hidden))
+    {
+        case 0:
+            Crosshair.hidden = 1;           // hide the crosshair
+            Crosshair.OutsideCamera = true;
+        break;
+
+        case 1:
+            Crosshair.hidden = 0;           // show the crosshair
+            Crosshair.OutsideCamera = false;
+        break;
+    }
+}
+
+bool CrosshairHidden()
+{
+    if ( ! CheckAttribute(Crosshair, "hidden")) Crosshair.hidden = 1;   // hide crosshair by default
+    if (sti(Crosshair.hidden) == 1) return true;
+    return false;
+}
+// LDH 17Jan17 <--

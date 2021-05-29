@@ -27,10 +27,12 @@ void ProcessDialogEvent()
 		case "First time":			
 			chrDisableReloadToLocation = false;
    			LAi_LockFightMode(pchar, false);
+			// Captain Beltrop, 14.02.2021 - правка проверки репутации и навыков владения оружием
+			bool FencingSkills = (GetCharacterSkillToOld(Pchar, "FencingL") >= 8) || (GetCharacterSkillToOld(Pchar, "FencingS") >= 8) || (GetCharacterSkillToOld(Pchar, "FencingH") >= 8);
 			dialog.text = RandPhraseSimple("Кажется, здесь происходит что-то незаконное.",
                                      "Именем "+NationKingsName(npchar)+ ", прекратить творить беззаконие!!!");
 			Link.l1 = "Нет-нет, офицер. Мы с друзьями просто отдыхаем у моря.";
-			if (makeint(Pchar.reputation) >= 70 && GetSummonSkillFromNameToOld(Pchar, SKILL_LEADERSHIP) >= 5)
+			if (makeint(pchar.reputation.nobility) >= 70 && GetSummonSkillFromNameToOld(Pchar, SKILL_LEADERSHIP) >= 5)
 			{
 				Link.l1.go = "ThisTimeFree";
 			}
@@ -48,7 +50,7 @@ void ProcessDialogEvent()
 				Link.l2.go = "TryingToGiveBribe";
 			}
 			Link.l3 = "Проваливай, солдафон. Это тебя не касается!";
-			if(makeint(Pchar.reputation) <= 25 && GetSummonSkillFromNameToOld(Pchar, SKILL_FENCING) >= 8)
+			if(makeint(pchar.reputation.nobility) <= 25 && FencingSkills)
 			{
 				Link.l3.go = "GettingLostFromHere";
 			}

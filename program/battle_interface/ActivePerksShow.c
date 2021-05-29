@@ -5,12 +5,18 @@ object objActivePerkShower;
 
 void InitActivePerkShower()
 {
-	objActivePerkShower.ShowParam.PosRect.left		= sti(showWindow.right) - RecalculateHIcon(48+132);
-	objActivePerkShower.ShowParam.PosRect.top		= RecalculateVIcon(426);
-	objActivePerkShower.ShowParam.PosRect.right		= sti(showWindow.right) - RecalculateHIcon(48);
-	objActivePerkShower.ShowParam.PosRect.bottom	= sti(showWindow.bottom) - RecalculateVIcon(28);
-	objActivePerkShower.ShowParam.IconSize.horz		= RecalculateHIcon(48);
-	objActivePerkShower.ShowParam.IconSize.vert		= RecalculateVIcon(48);
+    InitShowPlaces();
+}
+
+void InitShowPlaces()
+{
+	float fHtRatio = stf(Render.screen_y) / iGlobalVar1;
+	objActivePerkShower.ShowParam.PosRect.left		= sti(showWindow.right) - RecalculateHIcon(makeint((48+132) * fHtRatio));
+	objActivePerkShower.ShowParam.PosRect.top		= RecalculateVIcon(makeint(445* fHtRatio));
+	objActivePerkShower.ShowParam.PosRect.right		= sti(showWindow.right) - RecalculateHIcon(makeint(48 * fHtRatio));
+	objActivePerkShower.ShowParam.PosRect.bottom	= sti(showWindow.bottom) - RecalculateVIcon(makeint(28 * fHtRatio));
+	objActivePerkShower.ShowParam.IconSize.horz		= RecalculateHIcon(makeint(48 * fHtRatio));
+	objActivePerkShower.ShowParam.IconSize.vert		= RecalculateVIcon(makeint(48 * fHtRatio));
 	objActivePerkShower.ShowParam.IconSpace.horz	= RecalculateHIcon(2);
 	objActivePerkShower.ShowParam.IconSpace.vert	= RecalculateVIcon(2);
 }
@@ -27,7 +33,7 @@ void LoadActivePerkShower()
 
 	DeleteAttribute(&objActivePerkShower,"PerkList.list");
 	DeleteAttribute(&objActivePerkShower,"Textures");
-
+	
 	// информация о текстурах
 	if(bSeaActive && !bAbordageStarted)
 	{	// морская часть
@@ -71,6 +77,8 @@ void LoadActivePerkShower()
 		LayerAddObject("execute",&objActivePerkShower,-1);
 		LayerAddObject("realize",&objActivePerkShower,-1);
 	}
+	InitShowPlaces();
+	SendMessage(&objActivePerkShower,"l",MSG_ACTIVE_PERK_ICON_REFRESH);
 }
 
 void UnloadActivePerkShower()
@@ -92,7 +100,11 @@ void AddPerkToActiveList(string perkID)
 	if( CheckAttribute(arRoot,perkID) ) return;
 
 	makearef(arCur,arRoot.(perkID));
-	arCur.texture = GetTextureIndex(GetPerkTextureName(perkID));
+
+	int nTex = GetTextureIndex(GetPerkTextureName(perkID));
+	if(nTex < 0)
+        return;
+	arCur.texture = nTex;
 	arCur.pic_idx = GetPerkPictureIndex(perkID);
 	SendMessage(&objActivePerkShower,"lsa",MSG_ACTIVE_PERK_LIST_REFRESH,"add",arCur);
 }
@@ -113,7 +125,7 @@ int GetPerkPictureIndex(string perkName)
 		break;
 		case "Sink":			return 43; break;
 		case "Repair":			return 55; break;
-		// boal зачем же так игру кастрировать? Грустно, однако :( -->
+		// boal зачем же так игру кастрировать? грустно, однако :( -->
 		case "Rush":	        return 28;	break;
 		case "LightRepair":		return 54; break;
 		case "InstantRepair":	return 55; break;

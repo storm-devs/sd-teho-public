@@ -1,3 +1,4 @@
+/*
 void InitInterface(string iniName)
 {
 	SendMessage(&GameInterface, "ls", MSG_INTERFACE_INIT, iniName);
@@ -15,3 +16,4 @@ void ICancelProcedure()
 {
 	IDoExit( RC_INTERFACE_NET_CHAT );
 }
+*/

@@ -341,7 +341,7 @@ string All_GetColony();
 			}	
 		}
     }
-    if (!IsEntity(worldMap)) // в море
+    if (!IsEntity(&worldMap)) // в море
     {
         return Sea_FindNearColony();
     }

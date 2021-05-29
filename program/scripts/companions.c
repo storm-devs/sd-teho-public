@@ -158,6 +158,11 @@ void SeaExchangeCharactersShips(ref rOneChr, ref rSecChr, bool _showLog, bool _s
     makearef(arCargoOne, rOneChr.Ship.Crew.Exp);
 	DeleteAttribute(arCargoOne,"");
 	CopyAttributes(arCargoOne,&oTmp);
+	// mitrokosta вернём тип фантома
+	if (CheckAttribute(rSecChr, "Ship.Mode")) {
+		rOneChr.Ship.Mode = rSecChr.Ship.Mode;
+		DeleteAttribute(rSecChr, "Ship.Mode");
+	}
 	
 	//вернем груз
 	if (_swapCargo)

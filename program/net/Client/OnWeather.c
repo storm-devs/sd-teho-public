@@ -1,3 +1,4 @@
+/*
 void NetClient_OnWeather(int iMsg)
 {
 	int iSubCode = NMGetByte(iMsg);
@@ -7,4 +8,4 @@ void NetClient_OnWeather(int iMsg)
 			NetClient_LightningAdd(iMsg);
 		break;
 	}
-}
+}*/

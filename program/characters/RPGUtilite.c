@@ -1660,29 +1660,32 @@ void Statistic_KillChar(aref _attack, aref _enemy, string _attrName)
 	if (sti(_attack.index) != GetMainCharacterIndex()) return; // оптимизация
 	string  name = GetCharType(_enemy);
 
-	switch (name)
-	{
-		case "Solder" 	:
-			Achievment_SetStat(_attack, 34, 1);
-		break;		
-		case "Citizen" 	:
-			Achievment_SetStat(_attack, 35, 1);
-		break;
-		case "Indian"	:
-			Achievment_SetStat(_attack, 36, 1);
-		break;
-		case "Monster"	:
-			Achievment_SetStat(_attack, 37, 1);
-		break;
-		case "Crab"		:
-			Achievment_SetStat(_attack, 38, 1);
-		break;	
-		case "Pirate"	:
-			Achievment_SetStat(_attack, 53, 1);
-		break;
-		case "Marginal"		:
-			Achievment_SetStat(_attack, 52, 1);
-		break;
+	if(GetSteamEnabled()) 
+	{	
+		switch (name)
+		{
+			case "Solder" 	:
+				Achievment_SetStat(_attack, 34, 1);
+			break;		
+			case "Citizen" 	:
+				Achievment_SetStat(_attack, 35, 1);
+			break;
+			case "Indian"	:
+				Achievment_SetStat(_attack, 36, 1);
+			break;
+			case "Monster"	:
+				Achievment_SetStat(_attack, 37, 1);
+			break;
+			case "Crab"		:
+				Achievment_SetStat(_attack, 38, 1);
+			break;	
+			case "Pirate"	:
+				Achievment_SetStat(_attack, 53, 1);
+			break;
+			case "Marginal"		:
+				Achievment_SetStat(_attack, 52, 1);
+			break;
+		}	
 	}	
 	
 	name = name + _attrName;
@@ -1695,84 +1698,87 @@ void Statistic_KillChar(aref _attack, aref _enemy, string _attrName)
 string Achievment_GetID(int achievNum)
 {
 	string id = "";
-	switch (achievNum)
-	{
-		case  1  :	id = "ach_01"; break;
-		case  2  :	id = "ach_02"; break;
-		case  3  :	id = "ach_03"; break;
-		case  4  :	id = "ach_04"; break;
-		case  5  :	id = "ach_05"; break;
-		case  6  :	id = "ach_06"; break;
-		case  7  :	id = "ach_07"; break;
-		case  8  :	id = "ach_08"; break;
-		case  9  :	id = "ach_09"; break;
-		case 10  :	id = "ach_10"; break;
-		case 11  :	id = "ach_11"; break;
-		case 12  :	id = "ach_12"; break;
-		case 13  :	id = "ach_13"; break;
-		case 14  :	id = "ach_14"; break;
-		case 15  :	id = "ach_15"; break;
-		case 16  :	id = "ach_16"; break;
-		case 17  :	id = "ach_17"; break;
-		case 18  :	id = "ach_18"; break;
-		case 19  :	id = "ach_19"; break;
-		case 20  :	id = "ach_20"; break;
-		case 21  :	id = "ach_21"; break;
-		case 22  :	id = "ach_22"; break;
-		case 23  :	id = "ach_23"; break;
-		case 24  :	id = "ach_24"; break;
-		case 25  :	id = "ach_25"; break;
-		case 26  :	id = "ach_26"; break;
-		case 27  :	id = "ach_27"; break;
-		case 28  :	id = "ach_28"; break;
-		case 29  :	id = "ach_29"; break;
-		case 30  :	id = "ach_30"; break;
-		case 31  :	id = "ach_31"; break;
-		case 32  :	id = "ach_32"; break;
-		case 33  :	id = "ach_33"; break;
-		case 34  :	id = "ach_34"; break;
-		case 35  :	id = "ach_35"; break;
-		case 36  :	id = "ach_36"; break;
-		case 37  :	id = "ach_37"; break;
-		case 38  :	id = "ach_38"; break;
-		case 39  :	id = "ach_39"; break;
-		case 40  :	id = "ach_40"; break;
-		case 41  :	id = "ach_41"; break;
-		case 42  :	id = "ach_42"; break;
-		case 43  :	id = "ach_43"; break;
-		case 44  :	id = "ach_44"; break;
-		case 45  :	id = "ach_45"; break;
-		case 46  :	id = "ach_46"; break;
-		case 47  :	id = "ach_47"; break;
-		case 48  :	id = "ach_48"; break;
-		case 49  :	id = "ach_49"; break;
-		case 50  :	id = "ach_50"; break;
-		case 51  :	id = "ach_51"; break;		
-		case 52  :	id = "ach_52"; break;
-		case 53  :	id = "ach_53"; break;
-		case 54  :	id = "ach_54"; break;
-		case 55  :	id = "ach_55"; break;
-//		case 56  :	id = "ach_56"; break;
-		case 57  :	id = "ach_57"; break;
-		case 58  :	id = "ach_58"; break;
-		case 59  :	id = "ach_59"; break;
-		case 60  :	id = "ach_60"; break;
-		case 61  :	id = "ach_61"; break;
-		case 62  :	id = "ach_62"; break;
-		case 63  :	id = "ach_63"; break;
-		case 64  :	id = "ach_64"; break;
-		case 65  :	id = "ach_65"; break;
-		case 66  :	id = "ach_66"; break;
-		case 67  :	id = "ach_67"; break;
-		case 68  :	id = "ach_68"; break;
-		case 69  :	id = "ach_69"; break;
-		case 70  :	id = "ach_70"; break;
-		case 71  :	id = "ach_71"; break;
-//		case 72  :	id = "ach_72"; break;
-//		case 73  :	id = "ach_73"; break;
-		case 79  :	id = "ach_79"; break;
-		case 80  :	id = "ach_80"; break;
-		case 81  :	id = "ach_81"; break;
+	if(bSteamAchievements && GetSteamEnabled())
+	{	
+		switch (achievNum)
+		{
+			case  1  :	id = "ach_01"; break;
+			case  2  :	id = "ach_02"; break;
+			case  3  :	id = "ach_03"; break;
+			case  4  :	id = "ach_04"; break;
+			case  5  :	id = "ach_05"; break;
+			case  6  :	id = "ach_06"; break;
+			case  7  :	id = "ach_07"; break;
+			case  8  :	id = "ach_08"; break;
+			case  9  :	id = "ach_09"; break;
+			case 10  :	id = "ach_10"; break;
+			case 11  :	id = "ach_11"; break;
+			case 12  :	id = "ach_12"; break;
+			case 13  :	id = "ach_13"; break;
+			case 14  :	id = "ach_14"; break;
+			case 15  :	id = "ach_15"; break;
+			case 16  :	id = "ach_16"; break;
+			case 17  :	id = "ach_17"; break;
+			case 18  :	id = "ach_18"; break;
+			case 19  :	id = "ach_19"; break;
+			case 20  :	id = "ach_20"; break;
+			case 21  :	id = "ach_21"; break;
+			case 22  :	id = "ach_22"; break;
+			case 23  :	id = "ach_23"; break;
+			case 24  :	id = "ach_24"; break;
+			case 25  :	id = "ach_25"; break;
+			case 26  :	id = "ach_26"; break;
+			case 27  :	id = "ach_27"; break;
+			case 28  :	id = "ach_28"; break;
+			case 29  :	id = "ach_29"; break;
+			case 30  :	id = "ach_30"; break;
+			case 31  :	id = "ach_31"; break;
+			case 32  :	id = "ach_32"; break;
+			case 33  :	id = "ach_33"; break;
+			case 34  :	id = "ach_34"; break;
+			case 35  :	id = "ach_35"; break;
+			case 36  :	id = "ach_36"; break;
+			case 37  :	id = "ach_37"; break;
+			case 38  :	id = "ach_38"; break;
+			case 39  :	id = "ach_39"; break;
+			case 40  :	id = "ach_40"; break;
+			case 41  :	id = "ach_41"; break;
+			case 42  :	id = "ach_42"; break;
+			case 43  :	id = "ach_43"; break;
+			case 44  :	id = "ach_44"; break;
+			case 45  :	id = "ach_45"; break;
+			case 46  :	id = "ach_46"; break;
+			case 47  :	id = "ach_47"; break;
+			case 48  :	id = "ach_48"; break;
+			case 49  :	id = "ach_49"; break;
+			case 50  :	id = "ach_50"; break;
+			case 51  :	id = "ach_51"; break;		
+			case 52  :	id = "ach_52"; break;
+			case 53  :	id = "ach_53"; break;
+			case 54  :	id = "ach_54"; break;
+			case 55  :	id = "ach_55"; break;
+	//		case 56  :	id = "ach_56"; break;
+			case 57  :	id = "ach_57"; break;
+			case 58  :	id = "ach_58"; break;
+			case 59  :	id = "ach_59"; break;
+			case 60  :	id = "ach_60"; break;
+			case 61  :	id = "ach_61"; break;
+			case 62  :	id = "ach_62"; break;
+			case 63  :	id = "ach_63"; break;
+			case 64  :	id = "ach_64"; break;
+			case 65  :	id = "ach_65"; break;
+			case 66  :	id = "ach_66"; break;
+			case 67  :	id = "ach_67"; break;
+			case 68  :	id = "ach_68"; break;
+			case 69  :	id = "ach_69"; break;
+			case 70  :	id = "ach_70"; break;
+			case 71  :	id = "ach_71"; break;
+	//		case 72  :	id = "ach_72"; break;
+	//		case 73  :	id = "ach_73"; break;
+			case 79  :	id = "ach_79"; break;
+			case 80  :	id = "ach_80"; break;
+			case 81  :	id = "ach_81"; break;
+		}
 	}
 	return id;
 }
@@ -1780,84 +1786,87 @@ string Achievment_GetID(int achievNum)
 string Stat_GetID(int achievNum)
 {
 	string id = "";
-	switch (achievNum)
-	{
-		case  1  :	id = "stat_03"; break;
-		case  2  :	id = "stat_02"; break;
-		case  3  :	id = "stat_03"; break;
-		case  4  :	id = "stat_04"; break;
-		case  5  :	id = "stat_05"; break;
-		case  6  :	id = "stat_06"; break;
-		case  7  :	id = "stat_07"; break;
-		case  8  :	id = "stat_08"; break;
-		case  9  :	id = "stat_09"; break;
-		case 10  :	id = "stat_10"; break;
-		case 11  :	id = "stat_11"; break;
-		case 12  :	id = "stat_12"; break;
-		case 13  :	id = "stat_13"; break;
-		case 14  :	id = "stat_14"; break;
-		case 15  :	id = "stat_15"; break;
-		case 16  :	id = "stat_16"; break;
-		case 17  :	id = "stat_17"; break;
-		case 18  :	id = "stat_18"; break;
-		case 19  :	id = "stat_19"; break;
-		case 20  :	id = "stat_20"; break;
-		case 21  :	id = "stat_21"; break;
-		case 22  :	id = "stat_22"; break;
-		case 23  :	id = "stat_23"; break;
-		case 24  :	id = "stat_24"; break;
-		case 25  :	id = "stat_25"; break;
-		case 26  :	id = "stat_26"; break;
-		case 27  :	id = "stat_27"; break;
-		case 28  :	id = "stat_28"; break;
-		case 29  :	id = "stat_29"; break;
-		case 30  :	id = "stat_30"; break;
-		case 31  :	id = "stat_31"; break;
-		case 32  :	id = "stat_32"; break;
-		case 33  :	id = "stat_33"; break;
-		case 34  :	id = "stat_34"; break;
-		case 35  :	id = "stat_35"; break;
-		case 36  :	id = "stat_36"; break;
-		case 37  :	id = "stat_37"; break;
-		case 38  :	id = "stat_38"; break;
-		case 39  :	id = "stat_39"; break;
-		case 40  :	id = "stat_40"; break;
-		case 41  :	id = "stat_41"; break;
-		case 42  :	id = "stat_42"; break;
-		case 43  :	id = "stat_43"; break;
-		case 44  :	id = "stat_44"; break;
-		case 45  :	id = "stat_45"; break;
-		case 46  :	id = "stat_46"; break;
-		case 47  :	id = "stat_47"; break;
-		case 48  :	id = "stat_48"; break;
-		case 49  :	id = "stat_49"; break;
-		case 50  :	id = "stat_50"; break;
-		case 51  :	id = "stat_51"; break;		
-		case 52  :	id = "stat_52"; break;
-		case 53  :	id = "stat_53"; break;
-		case 54  :	id = "stat_54"; break;
-		case 55  :	id = "stat_55"; break;
-//		case 56  :	id = "stat_56"; break;
-		case 57  :	id = "stat_57"; break;
-		case 58  :	id = "stat_58"; break;
-		case 59  :	id = "stat_59"; break;
-		case 60  :	id = "stat_60"; break;
-		case 61  :	id = "stat_61"; break;
-		case 62  :	id = "stat_62"; break;
-		case 63  :	id = "stat_63"; break;
-		case 64  :	id = "stat_64"; break;
-		case 65  :	id = "stat_65"; break;
-		case 66  :	id = "stat_66"; break;
-		case 67  :	id = "stat_67"; break;
-		case 68  :	id = "stat_68"; break;
-		case 69  :	id = "stat_69"; break;
-		case 70  :	id = "stat_70"; break;
-		case 71  :	id = "stat_71"; break;
-//		case 72  :	id = "stat_72"; break;
-//		case 73  :	id = "stat_73"; break;
-		case 79  :	id = "stat_79"; break;
-		case 80  :	id = "stat_80"; break;
-		case 81  :	id = "stat_81"; break;
+	if(bSteamAchievements && GetSteamEnabled())
+	{	
+		switch (achievNum)
+		{
+			case  1  :	id = "stat_03"; break;
+			case  2  :	id = "stat_02"; break;
+			case  3  :	id = "stat_03"; break;
+			case  4  :	id = "stat_04"; break;
+			case  5  :	id = "stat_05"; break;
+			case  6  :	id = "stat_06"; break;
+			case  7  :	id = "stat_07"; break;
+			case  8  :	id = "stat_08"; break;
+			case  9  :	id = "stat_09"; break;
+			case 10  :	id = "stat_10"; break;
+			case 11  :	id = "stat_11"; break;
+			case 12  :	id = "stat_12"; break;
+			case 13  :	id = "stat_13"; break;
+			case 14  :	id = "stat_14"; break;
+			case 15  :	id = "stat_15"; break;
+			case 16  :	id = "stat_16"; break;
+			case 17  :	id = "stat_17"; break;
+			case 18  :	id = "stat_18"; break;
+			case 19  :	id = "stat_19"; break;
+			case 20  :	id = "stat_20"; break;
+			case 21  :	id = "stat_21"; break;
+			case 22  :	id = "stat_22"; break;
+			case 23  :	id = "stat_23"; break;
+			case 24  :	id = "stat_24"; break;
+			case 25  :	id = "stat_25"; break;
+			case 26  :	id = "stat_26"; break;
+			case 27  :	id = "stat_27"; break;
+			case 28  :	id = "stat_28"; break;
+			case 29  :	id = "stat_29"; break;
+			case 30  :	id = "stat_30"; break;
+			case 31  :	id = "stat_31"; break;
+			case 32  :	id = "stat_32"; break;
+			case 33  :	id = "stat_33"; break;
+			case 34  :	id = "stat_34"; break;
+			case 35  :	id = "stat_35"; break;
+			case 36  :	id = "stat_36"; break;
+			case 37  :	id = "stat_37"; break;
+			case 38  :	id = "stat_38"; break;
+			case 39  :	id = "stat_39"; break;
+			case 40  :	id = "stat_40"; break;
+			case 41  :	id = "stat_41"; break;
+			case 42  :	id = "stat_42"; break;
+			case 43  :	id = "stat_43"; break;
+			case 44  :	id = "stat_44"; break;
+			case 45  :	id = "stat_45"; break;
+			case 46  :	id = "stat_46"; break;
+			case 47  :	id = "stat_47"; break;
+			case 48  :	id = "stat_48"; break;
+			case 49  :	id = "stat_49"; break;
+			case 50  :	id = "stat_50"; break;
+			case 51  :	id = "stat_51"; break;		
+			case 52  :	id = "stat_52"; break;
+			case 53  :	id = "stat_53"; break;
+			case 54  :	id = "stat_54"; break;
+			case 55  :	id = "stat_55"; break;
+	//		case 56  :	id = "stat_56"; break;
+			case 57  :	id = "stat_57"; break;
+			case 58  :	id = "stat_58"; break;
+			case 59  :	id = "stat_59"; break;
+			case 60  :	id = "stat_60"; break;
+			case 61  :	id = "stat_61"; break;
+			case 62  :	id = "stat_62"; break;
+			case 63  :	id = "stat_63"; break;
+			case 64  :	id = "stat_64"; break;
+			case 65  :	id = "stat_65"; break;
+			case 66  :	id = "stat_66"; break;
+			case 67  :	id = "stat_67"; break;
+			case 68  :	id = "stat_68"; break;
+			case 69  :	id = "stat_69"; break;
+			case 70  :	id = "stat_70"; break;
+			case 71  :	id = "stat_71"; break;
+	//		case 72  :	id = "stat_72"; break;
+	//		case 73  :	id = "stat_73"; break;
+			case 79  :	id = "stat_79"; break;
+			case 80  :	id = "stat_80"; break;
+			case 81  :	id = "stat_81"; break;
+		}
 	}
 	return id;
 }
@@ -1867,25 +1876,28 @@ string Stat_GetID(int achievNum)
 int AchievmentsDayUpdateCnt = 0;
 void AchievmentsDayUpdateStart()
 {	
-	trace("AchievmentsDayUpdateStart() " + AchievmentsDayUpdateCnt );
-	if(AchievmentsDayUpdateCnt == 0 ) 
-	{
-		AchievmentsDayUpdateCnt = 1;
-	}
-	PostEvent("EvAchievmentsDayUpdate", 500);	
+	if(bSteamAchievements && GetSteamEnabled())
+	{	
+		trace("AchievmentsDayUpdateStart() " + AchievmentsDayUpdateCnt );
+		if(AchievmentsDayUpdateCnt == 0 ) 
+		{
+			AchievmentsDayUpdateCnt = 1;
+		}
+		PostEvent("EvAchievmentsDayUpdate", 500);	
+	}	
 }
 
 void AchievmentsDayUpdate()
 {
 	if(AchievmentsDayUpdateCnt > 0)
 	{
-		trace("AchievmentsDayUpdate() " + AchievmentsDayUpdateCnt );
+		//trace("AchievmentsDayUpdate() " + AchievmentsDayUpdateCnt );
 		CheckAchievments(pchar, AchievmentsDayUpdateCnt);
 		AchievmentsDayUpdateCnt++;
 		if(AchievmentsDayUpdateCnt > MAX_ACHIEVMENTS) 
 		{
 			AchievmentsDayUpdateCnt = 0;
-			trace("reset AchievmentsDayUpdate() " + AchievmentsDayUpdateCnt );
+			//trace("reset AchievmentsDayUpdate() " + AchievmentsDayUpdateCnt );
 		}	
 		else PostEvent("EvAchievmentsDayUpdate", 500);
 	}
@@ -1900,7 +1912,7 @@ void CheckAchievments(ref _chref, int achievNum)
 	
     if (sti(_chref.index) != GetMainCharacterIndex()) return; // оптимизация, выходим если не ГГ
 	
-	if(!bSteamAchievements) return;	
+	if(!bSteamAchievements || !GetSteamEnabled()) return;	
 	
 	switch (achievNum)
 	{		
@@ -2016,7 +2028,7 @@ void Achievment_SetStat(ref _chref, int achievNum, int _add)
 	
     if(sti(_chref.index) != GetMainCharacterIndex()) return;
 	
-	if(!bSteamAchievements) return;
+	if(!bSteamAchievements || !GetSteamEnabled()) return;
 	
 	sAchiev = Achievment_GetID(achievNum);
 	achState = GetAchievement(sAchiev);
@@ -2815,7 +2827,7 @@ void SetNewDayHealth()
     }
     else
     {
-        if (!IsEntity(worldMap)) // не на карте
+        if (!IsEntity(&worldMap)) // не на карте
         {
             AddCharacterHealth(mainChr, 1 + add);
         }

@@ -16,7 +16,7 @@ float SPAWN_TIME = 168.0; //hours = 168.0
 
 void Items_LoadModel (ref _itemModel, ref _item)
 {
-	if (!IsEntity(_itemModel))
+	if (!IsEntity(&_itemModel))
 	{
 		string itemFolder = "items";
 		CreateEntity(&_itemModel, "MODELR");
@@ -655,7 +655,7 @@ void OpenBoxProcedure()
 	}
 	// God_hit_us  это такой прикол - задействовать в ловушки для сундуков(boal)
 	// токо сундуки и дома
-	if (sti(chr.GenQuest.God_hit_us) == 1 && rand(100) >= (85 + GetCharacterSkillToOld(chr, SKILL_FORTUNE)) && chr.location != "SentJons_HouseF3_Room2") // 280313
+	if (sti(chr.GenQuest.God_hit_us) == 1 && rand(100) >= (85 + GetCharacterSkillToOld(chr, SKILL_FORTUNE)) && chr.location != "SentJons_HouseF3_Room2" && chr.location != "IslaMona_TwoFloorHouse" && chr.location != "IslaMona_TwoFloorRoom") // 280313 лесник сняты ловушки с исла моны.
 	{
 		Log_Info("Ловушка!");
 		PlaySound("people\clothes1.wav");

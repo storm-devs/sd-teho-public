@@ -93,7 +93,6 @@ void InitInterface_RS(string iniName, ref _chr, string _type)
 	SetEventHandler("acceptaddofficer","AcceptAddOfficer",0);
 	SetEventHandler("ExitCrewWindow","ExitCrewWindow",0);
 	SetEventHandler("ExitCaptureWindow","ExitCaptureWindow",0);
-	SetEventHandler("ExitCaptureCrewWindow","ExitCaptureCrewWindow",0);
 	
 	SetEventHandler("ADD_ALL_BUTTON", "ADD_ALL_BUTTON", 0);
 	SetEventHandler("ADD_BUTTON","ADD_BUTTON",0);
@@ -300,7 +299,6 @@ void IDoExit(int exitCode)
 	DelEventHandler("acceptaddofficer","AcceptAddOfficer");
 	DelEventHandler("ExitCrewWindow","ExitCrewWindow");
 	DelEventHandler("ExitCaptureWindow","ExitCaptureWindow");
-	DelEventHandler("ExitCaptureCrewWindow","ExitCaptureCrewWindow");
 	
 	DelEventHandler("ADD_ALL_BUTTON", "ADD_ALL_BUTTON");
 	DelEventHandler("ADD_BUTTON","ADD_BUTTON");

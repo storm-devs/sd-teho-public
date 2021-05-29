@@ -2064,7 +2064,7 @@ int InitItems()
 	itm.Weight = 0.5;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
+	
 	
 	makeref(itm,Items[n]); //резервный предмет №12
 	itm.id = "Reserve_item_12"; 
@@ -3325,7 +3325,7 @@ int InitItems()
 	n = InitStdItem( n,  "mineral14", 	  "pursel", "ITEMS_29", 14,   0.05,   3,    55, 0,   3.0,   ITEM_TRADE_NORMAL);	// крыло вампира
 	n = InitStdItem( n,  "mineral15", 	  "pursel", "ITEMS_30", 11,   0.05,   1,    30, 0,   0.1,   ITEM_TRADE_NORMAL);	// Складной нож
 	n = InitStdItem( n,  "mineral16", 	  "pursel", "ITEMS_31",  8,   0.05,   1,    45, 0,   0.3,   ITEM_TRADE_NORMAL);	// оселок
-	n = InitStdItem( n,  "mineral17", 	  "elixir", "ITEMS_19", 16,   0.05,   1,    45, 0,   0.3,   ITEM_TRADE_NORMAL);	//пустой стеклянный флакон
+	n = InitStdItem( n,  "mineral17", 	  "elixir", "ITEMS_19", 16,   0.05,   1,    45, 0,   0.3,   ITEM_TRADE_NORMAL);	// пустой стеклянный флакон
 	n = InitStdItem( n,  "mineral18", 	  "elixir", "ITEMS_31",  7,   0.05,   1,   120, 0,   0.4,   ITEM_TRADE_NORMAL);	// коробка с курительным табаком		
 	n = InitStdItem( n,  "mineral19", 	        "", "ITEMS_30",  4,   0.05,   1,    90, 0,   0.1,   ITEM_TRADE_NORMAL);	// серебряная ложка		
 	n = InitStdItem( n,  "mineral20", 	        "", "ITEMS_30", 13,   0.05,   1,    40, 0,   0.1,   ITEM_TRADE_NORMAL);	// деревянная ложка			
@@ -4370,7 +4370,7 @@ void InitGuns()
 	//InitGunExt(id,	sAttr,  sBullet,  sGunPowder, DmgMin_NC, DmgMax_NC, DmgMin_C, DmgMax_C, EnergyP_NC, EnergyP_C, Stun_NC, Stun_C, MultiDamage, MisFire, SelfDamage, Explosion,Accuracy,ChargeSpeed,isDefault);
 	InitGunExt(		 "pistol1", "t1",  	     "cartridge",               "",  50.0, 150.0,  30.0, 130.0,  0.0,  0.0, 1, 0, 0, 0, 0, 0, 40, 20, 0);	
 	InitGunExt(		 "pistol1", "t2", 		    "bullet",      "gunpowder",  50.0, 150.0,  30.0, 130.0,  0.0,  0.0, 1, 0, 0, 0, 0, 0, 40, 40, 1);	
-	InitGunExt( 	 "pistol2", "t1", 	     "grapeshot",      "gunpowder",  45.0, 135.0,  10.0,  90.0,  0.0,  0.0, 0, 1, 0, 0, 1, 1, 40, 40, 1);	
+	InitGunExt( 	 "pistol2", "t1", 	     "grapeshot",      "gunpowder",  45.0, 135.0,  10.0,  90.0,  0.0,  0.0, 0, 1, 1, 0, 1, 1, 40, 40, 1);	
 	InitGunExt(		 "pistol3", "t1", 	     "grapeshot",      "gunpowder",  40.0,  90.0,  15.0,  55.0,  0.0,  0.0, 0, 1, 1, 2, 1, 1, 40, 40, 1);	
 	InitGunExt(		 "pistol4", "t1", 	     "cartridge",               "",  35.0, 135.0,  15.0, 115.0,  0.0,  0.0, 1, 0, 0, 0, 0, 0, 35, 30, 0);	
 	InitGunExt(		 "pistol4", "t2", 		    "bullet",      "gunpowder",  35.0, 135.0,  15.0, 115.0,  0.0,  0.0, 1, 0, 0, 0, 0, 0, 35, 60, 1);	
@@ -4715,4 +4715,17 @@ void ItemsFix_30032020()
         	InitGunExt("howdah", "t2","GunEchin",          "", 115.0, 215.0, 115.0, 215.0, 20.0, 20.0, 0, 1,     1, 0, 0, 0,                 20, 40, 0);
     	}
 
+}
+
+void ItemsFix_Pistol2() // belamour реинит дробовика
+{
+   int n = 0;
+   
+   n = GetItemIndex("Pistol2");
+	if( n > 0 )
+	{
+	    	trace("Pistol2 found : " + n);
+                InitStdGun(n, "pistol2", "pistol2",  "ITEMS_6", 5, 0.0001, 1, 4100, 30.0, 120.0, 4.5, 3, B_ORDINARY); // 3-х ствольный дробовик
+    		InitGunExt("pistol2", "t1","grapeshot","gunpowder",  45.0, 135.0,  10.0,  90.0,  0.0,  0.0, 0, 1, 1, 0, 1, 1, 40, 40, 1);	
+    	}
 }

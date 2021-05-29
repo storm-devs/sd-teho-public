@@ -120,5 +120,5 @@ void MoveRainToLayers(string sExecuteLayer, string sRealizeLayer)
 
 void ShowRain(int bShow)
 {
-	SendMessage(Rain,"ll",1,bShow);
+	SendMessage(&Rain,"ll",1,bShow);
 }

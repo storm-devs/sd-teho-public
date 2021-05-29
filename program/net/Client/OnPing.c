@@ -1,7 +1,7 @@
 int iClientLastPingCode;
 int iClientLastPingTime;
 int iClientLastPingCodeTime;
-
+/*
 void NetClient_PingInit()
 {
 	iClientLastPingCode = 0;
@@ -68,3 +68,4 @@ void NetClient_Pong(int iMsg, int iPingCode)
 		Trace("iPingCode != iClientLastPingCode");
 	}
 }
+*/

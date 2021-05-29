@@ -240,11 +240,15 @@ void AIAttack_CheckTask(string sGroupID)
 	int  newCommanderIndex = -1;
 	int iCharacterIndex;
 	// navy <--
+	int nChar1Idx = -1;
+	if(CheckAttribute(rCharacter1, "index"))
+        nChar1Idx = sti(rCharacter1.index);
+    int nNumChar = Group_GetCharactersNumR(rG1);
 	while (true)
 	{
 		iCharacterIndex = Group_GetCharacterIndexR(rG1, i);
 		i++;
-		if (iCharacterIndex < 0) { break; }
+		if (iCharacterIndex < 0 || i > nNumChar) { break; }
 		ref rCharacter = GetCharacter(iCharacterIndex);
 		if (LAi_IsDead(rCharacter))
 		{

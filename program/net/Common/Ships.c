@@ -1,6 +1,6 @@
 object NetShips[300];
 int iNetShipsNum = 0;
-
+/*
 int Net_GetShipsNum() { return iNetShipsNum; }
 ref Net_GetShipByName(string sName) { return &NetShips[Net_GetShipIndex(sName)]; }
 ref Net_GetShipByIndex(int iIndex) { return &NetShips[iIndex]; }
@@ -1161,3 +1161,4 @@ void Net_InitShips()
 	Trace("NetShips init = " + n);
 	iNetShipsNum = n;
 }
+*/

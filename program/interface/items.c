@@ -624,6 +624,11 @@ bool ThisItemCanBeEquip( aref arItem )
 	{
 		return false; // чтобы нарвал не отбирали
 	}
+	if (xi_refCharacter.id == "Danielle" && arItem.groupID == BLADE_ITEM_TYPE)
+	{
+		return false; // чтобы саблю не отбирали лесник - пусть сама рашает что ей лучше то и выбирает. как Мери. 	
+	}
+																		   
 	
 	if (arItem.groupID == GUN_ITEM_TYPE) 
 	{

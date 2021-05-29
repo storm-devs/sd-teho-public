@@ -50,11 +50,11 @@ int Whr_InitNight(int n)
 	Weathers[n].Stars.VisualMagnitude = 8.0;
 	
 	Weathers[n].Fog.Enable = true;
-	Weathers[n].Fog.Height = 200;
+	Weathers[n].Fog.Height = 450;
 	Weathers[n].Fog.Start = 10;
-	Weathers[n].Fog.Density = 0.0008;
-	Weathers[n].Fog.IslandDensity = 0.0004;
-	Weathers[n].Fog.SeaDensity = 0.0006;
+	Weathers[n].Fog.Density = 0.002;
+	Weathers[n].Fog.IslandDensity = 0.002;
+	Weathers[n].Fog.SeaDensity = 0.002;
 	Weathers[n].Fog.Color = argb(0,15,15,15);
 	
 	Weathers[n].Rain.NumDrops = 0;
@@ -231,12 +231,12 @@ int Whr_InitNight(int n)
 	Weathers[n].Stars.VisualMagnitude = 8.0;
 
 	Weathers[n].Fog.Enable = true;
-	Weathers[n].Fog.Height = 200;
+	Weathers[n].Fog.Height = 450;
 	Weathers[n].Fog.Start = 10;
-	Weathers[n].Fog.Density = 0.0008;
-	Weathers[n].Fog.IslandDensity = 0.0004;
-	Weathers[n].Fog.SeaDensity = 0.0006;
-	Weathers[n].Fog.Color = argb(0,10,10,10);
+	Weathers[n].Fog.Density = 0.002;
+	Weathers[n].Fog.IslandDensity = 0.002;
+	Weathers[n].Fog.SeaDensity = 0.002;
+	Weathers[n].Fog.Color = argb(0,20,15,15);
 		
 	Weathers[n].Rain.NumDrops = 0;
 	Weathers[n].Rain.Color = argb(0,73,73,73);
@@ -412,12 +412,12 @@ int Whr_InitNight(int n)
 	Weathers[n].Stars.VisualMagnitude = 8.0;
 		
 	Weathers[n].Fog.Enable = true;
-	Weathers[n].Fog.Height = 200;
+	Weathers[n].Fog.Height = 450;
 	Weathers[n].Fog.Start = 10;
-	Weathers[n].Fog.Density = 0.0008;
-	Weathers[n].Fog.IslandDensity = 0.0004;
-	Weathers[n].Fog.SeaDensity = 0.0006;
-	Weathers[n].Fog.Color = argb(0,10,10,10);
+	Weathers[n].Fog.Density = 0.002;
+	Weathers[n].Fog.IslandDensity = 0.002;
+	Weathers[n].Fog.SeaDensity = 0.002;
+	Weathers[n].Fog.Color = argb(0,15,15,15);
 	
 	Weathers[n].Rain.NumDrops = 0;
 	Weathers[n].Rain.Color = argb(0,73,73,73);
@@ -593,12 +593,12 @@ int Whr_InitNight(int n)
 	Weathers[n].Stars.VisualMagnitude = 8.0;
 	
 	Weathers[n].Fog.Enable = true;
-	Weathers[n].Fog.Height = 200;
+	Weathers[n].Fog.Height = 450;
 	Weathers[n].Fog.Start = 10;
-	Weathers[n].Fog.Density = 0.0008;
-	Weathers[n].Fog.IslandDensity = 0.0004;
-	Weathers[n].Fog.SeaDensity = 0.0006;
-	Weathers[n].Fog.Color = argb(0,10,10,10);
+	Weathers[n].Fog.Density = 0.003;
+	Weathers[n].Fog.IslandDensity = 0.003;
+	Weathers[n].Fog.SeaDensity = 0.003;
+	Weathers[n].Fog.Color = argb(0,15,15,15);
 		
 	Weathers[n].Rain.NumDrops = 0;
 	Weathers[n].Rain.Color = argb(0,73,73,73);
@@ -774,12 +774,12 @@ int Whr_InitNight(int n)
 	Weathers[n].Stars.VisualMagnitude = 8.0;
 	
 	Weathers[n].Fog.Enable = true;
-	Weathers[n].Fog.Height = 200;
+	Weathers[n].Fog.Height = 450;
 	Weathers[n].Fog.Start = 10;
-	Weathers[n].Fog.Density = 0.001;
-	Weathers[n].Fog.IslandDensity = 0.0005;
-	Weathers[n].Fog.SeaDensity = 0.0008;
-	Weathers[n].Fog.Color = argb(0,20,15,15);
+	Weathers[n].Fog.Density = 0.002;
+	Weathers[n].Fog.IslandDensity = 0.002;
+	Weathers[n].Fog.SeaDensity = 0.006;
+	Weathers[n].Fog.Color = argb(0,20,20,25);
 	
 	Weathers[n].Rain.NumDrops = 0;
 	Weathers[n].Rain.Color = argb(0,73,73,73);
@@ -955,12 +955,12 @@ int Whr_InitNight(int n)
 	Weathers[n].Stars.VisualMagnitude = 8.0;
 		
 	Weathers[n].Fog.Enable = true;
-	Weathers[n].Fog.Height = 200;
+	Weathers[n].Fog.Height = 450;
 	Weathers[n].Fog.Start = 10;
 	Weathers[n].Fog.Density = 0.002;
-	Weathers[n].Fog.IslandDensity = 0.001;
-	Weathers[n].Fog.SeaDensity = 0.0015;
-	Weathers[n].Fog.Color = argb(0,50,40,40);
+	Weathers[n].Fog.IslandDensity = 0.002;
+	Weathers[n].Fog.SeaDensity = 0.004;
+	Weathers[n].Fog.Color = argb(0,55,45,45);
 	
 	Weathers[n].Rain.NumDrops = 0;
 	Weathers[n].Rain.Color = argb(0,73,73,73);

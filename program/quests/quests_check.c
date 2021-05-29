@@ -28,7 +28,7 @@ bool TestIntValue(int nValue, int nCompareValue, string sOperation)
 	return false;
 }
 
-bool ProcessCondition(aref condition)
+bool ProcessCondition(aref condition, int n)
 {
 	bool bTmp;
 	int i;
@@ -67,7 +67,7 @@ bool ProcessCondition(aref condition)
 	{
 		// boal оптимизация -->
 		case "MapEnter":
-    		return IsEntity(worldMap);
+    		return IsEntity(&worldMap);
     	break;
 
     	case "ExitFromLocation":
@@ -322,7 +322,7 @@ bool ProcessCondition(aref condition)
 		break;
 		
 		case "Coordinates":
-			if(IsEntity(worldMap)) // если на глобальной карте
+			if(IsEntity(&worldMap)) // если на глобальной карте
 			{
 				if( GetMapCoordDegreeX(makefloat(worldMap.playerShipX)) == sti(condition.coordinate.degreeX) &&
 				    GetMapCoordDegreeZ(makefloat(worldMap.playerShipZ)) == sti(condition.coordinate.degreeZ) &&
@@ -352,7 +352,7 @@ bool ProcessCondition(aref condition)
 			}
 		break;
 	}
-	trace("ERROR: unidentified condition type()" + condition + " : " + sConditionName);
+	trace("n = " + n + " ERROR: unidentified condition type()" + condition + " : " + sConditionName);
 	return false;
 }
 
@@ -378,6 +378,7 @@ void QuestsCheck()
 		
 	nQuestsNum = GetAttributesNum(quests);
 	
+//	trace("nQuestsNum : " + nQuestsNum);
 	for(n = 0; n < nQuestsNum; n++)
 	{
         if (bQuestCheckProcessFreeze || dialogRun) continue;  // boal 230804 fix замораживать проверку квестов
@@ -397,6 +398,8 @@ void QuestsCheck()
 			}
 			makearef(conditions,quest.win_condition);
 			nConditionsNum = GetAttributesNum(conditions);
+//			trace("nConditionsNum : " + nConditionsNum);
+//			DumpAttributes(conditions);
 			if(nConditionsNum == 0)
 			{
 				// quest with no win condition; completed on first check
@@ -408,7 +411,7 @@ void QuestsCheck()
 			for(m = 0; m < nConditionsNum; m++)
 			{
 				condition = GetAttributeN(conditions,m);
-				if(ProcessCondition(condition) == false) 
+				if(ProcessCondition(condition, m) == false) 
 				{
 					bQuestCompleted = false;
 					break;
@@ -429,7 +432,7 @@ void QuestsCheck()
 			for(m = 0; m < nConditionsNum; m++)
 			{
 				condition = GetAttributeN(conditions,m);
-				if(ProcessCondition(condition) == true) 
+				if(ProcessCondition(condition, m) == true) 
 				{
 					OnQuestFailed(quest, sQuestName);
 					nQuestsNum = GetAttributesNum(quests);

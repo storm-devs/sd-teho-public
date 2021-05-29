@@ -1,3 +1,4 @@
+/*
 void NetClient_DeleteBallsEnvironment()
 {
 	DeleteClass(&NCBalls);
@@ -228,3 +229,4 @@ void NetClient_OnBallHitHull(int iMsg, int iBallIndex)
 	NCBalls.ClientDel = iBallIndex;
 }
 
+*/

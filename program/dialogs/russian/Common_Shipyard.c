@@ -94,11 +94,11 @@ void ProcessDialogEvent()
             if (LAi_grp_playeralarm > 0)
 			{
        			dialog.text = NPCharRepPhrase(pchar, 
-					LinkRandPhrase("В городе поднята тревога, тебя всюду ищут! На твоем месте я бы не стал здесь задерживаться.", "Вся городская стража рыщет по городу в поисках тебя. Я не идиот и разговаривать с тобой не буду!", "Беги, "+ GetSexPhrase("приятель","подруга") +", пока солдаты не сделали из тебя решето..."), 
+					LinkRandPhrase("В городе поднята тревога, тебя всюду ищут! На твоём месте я бы не стал здесь задерживаться.", "Вся городская стража рыщет по городу в поисках тебя. Я не идиот и разговаривать с тобой не буду!", "Беги, "+ GetSexPhrase("приятель","подруга") +", пока солдаты не сделали из тебя решето..."), 
 					LinkRandPhrase("Что тебе нужно, "+ GetSexPhrase("негодяй","мерзавка") +"?! Городская стража уже взяла твой след, далеко тебе не уйти"+ GetSexPhrase(", грязный пират","") +"!", "Грязн"+ GetSexPhrase("ый","ая") +" убийца, вон из моего дома! Стража!!", "Я не боюсь тебя, мерзав"+ GetSexPhrase("ец","ка") +"! Скоро тебя повесят в нашем форте, далеко тебе не уйти..."));
 				link.l1 = NPCharRepPhrase(pchar,
 					RandPhraseSimple("Хех, тревога для меня не проблема...", "Им меня ни за что не поймать."), 
-					RandPhraseSimple("Заткни свою пасть, " + GetWorkTypeOfMan(npchar, "") + ", а не то вырву твой поганый язык!", "Хех, " + GetWorkTypeOfMan(npchar, "") + ", а все туда же - пиратов ловить! Вот что я тебе скажу, приятель: сиди тихо и будешь жить..."));
+					RandPhraseSimple("Заткни свою пасть, " + GetWorkTypeOfMan(npchar, "") + ", а не то вырву твой поганый язык!", "Хех, " + GetWorkTypeOfMan(npchar, "") + ", а всё туда же - пиратов ловить! Вот что я тебе скажу, приятель: сиди тихо и будешь жить..."));
 				link.l1.go = "fight";
 				break;
 			}
@@ -109,7 +109,7 @@ void ProcessDialogEvent()
 				if (CheckAttribute(pchar, "questTemp.Sharlie.Rum") || CheckAttribute(pchar, "questTemp.Sharlie.Gigolo") || CheckAttribute(pchar, "questTemp.Sharlie.RescueDaughter"))
 				{
 					dialog.text = "Вы что-то хотели, месье?";
-					Link.l1 = "Я пришел посмотреть корабли, какие у вас есть... Но сейчас я немного занят - дело одно незаконченное осталось. Я еще загляну попозже, как только разберусь с ним.";
+					Link.l1 = "Я пришёл посмотреть корабли, какие у вас есть... Но сейчас я немного занят - дело одно незаконченное осталось. Я ещё загляну попозже, как только разберусь с ним.";
 					Link.l1.go = "exit";
 					break;
 				}
@@ -120,7 +120,7 @@ void ProcessDialogEvent()
 					Link.l1.go = "Sharlie";
 					break;
 				}
-				dialog.text = "Вы что-то еще хотели, месье?";
+				dialog.text = "Вы что-то ещё хотели, месье?";
 				Link.l1 = "Нет, пожалуй, ничего.";
 				Link.l1.go = "exit";
 				NextDiag.TempNode = "First time";
@@ -140,14 +140,14 @@ void ProcessDialogEvent()
 				}
 				if (pchar.questTemp.FMQM == "remove_oil1")
 				{
-					dialog.text = "Господин офицер, постойте! Это какая-то ошибка. Месье капитан тут совершенно ни при чем - он просто задержался, пока мы заканчивали ремонт его судна, рассчитался и собрался уходить. Что за бочки? О чем идет речь?";
+					dialog.text = "Господин офицер, постойте! Это какая-то ошибка. Месье капитан тут совершенно ни при чём - он просто задержался, пока мы заканчивали ремонт его судна, рассчитался и собрался уходить. Что за бочки? О чём идёт речь?";
 					link.l1 = "";
 					link.l1.go = "FMQM_oil_2";
 					break;
 				}
 				if (pchar.questTemp.FMQM == "remove_oil2")
 				{
-					dialog.text = "Господин офицер, я еще раз повторяю: капитан пришел заплатить деньги за ремонт судна. А бочки эти в подсобке - мои, и предназначены они для дела! Я мастер-корабел, и эта смола используется в моем производстве!";
+					dialog.text = "Господин офицер, я ещё раз повторяю: капитан пришёл заплатить деньги за ремонт судна. А бочки эти в подсобке - мои, и предназначены они для дела! Я мастер-корабел, и эта смола используется в моём производстве!";
 					link.l1 = "";
 					link.l1.go = "FMQM_oil_3";
 					break;
@@ -163,7 +163,7 @@ void ProcessDialogEvent()
 			// Addon 2016-1 Jason пиратская линейка
 			if (CheckAttribute(pchar, "questTemp.Mtraxx") && pchar.questTemp.Mtraxx == "silk_13" && pchar.location == "PortRoyal_shipyard")
 			{
-				dialog.text = "О! Это снова вы! Молодой человек, я вас узнал. Ведь это вы недавно поднимали вопрос об... улучшении ходовых качеств корабля при помощи шелка?";
+				dialog.text = "О! Это снова вы! Молодой человек, я вас узнал. Ведь это вы недавно поднимали вопрос об... улучшении ходовых качеств корабля при помощи шёлка?";
 				link.l1 = "У вас хорошая память, мастер."; 
 				link.l1.go = "mtraxx_x";
 				break;
@@ -171,15 +171,15 @@ void ProcessDialogEvent()
 	
 			if(NPChar.quest.meeting == "0") // первая встреча
 			{
-				dialog.Text = GetNatPhrase(npchar, LinkRandPhrase("Ха! В мою скромную мастерскую заглянул настоящий морской волк! Недавно в здешних водах, капитан?","Добро пожаловать, сэр! Если вы имеете отношение к морю и у вас есть корабль – вы не зря зашли ко мне!","Приветствую вас, сэр! вам повезло – вы зашли в лучшую корабельную мастерскую Британского Нового Света."), LinkRandPhrase("Месье, я не ошибусь, предположив, что вижу перед собой лихого капитана? Если да, то и вы не ошиблись, посетив мою скромную верфь!","Впервые у нас, месье капитан? Заходите, не побрезгуйте знакомством со скромным корабелом.","Будем знакомы, месье! Кораблю, как и женщине, нужна ласка, а кто лучше француза знает толк в ласках? Поверьте, вы не зря завернули именно ко мне!"), LinkRandPhrase("Никогда не встречал вас раньше, сеньор. Рад новому знакомству!","Я приветствую отважного покорителя морей! Вы ведь моряк, друг мой? А я здешний мастер корабельных дел, нам следует познакомиться.","Здравствуйте, кабальеро! Приветствую вас в своей мастерской!"),LinkRandPhrase("Добрый день, минхер. Я не встречал вас раньше, вы ко мне по делу?","Здравствуйте, минхер капитан. Не удивляйтесь, я видел столько капитанов, что без труда распознаю еще одного!","Прошу вас, минхер. Я здешний корабельный мастер, будем знакомы."));
-				Link.l1 = LinkRandPhrase("Очень рад знакомству. Меня зовут "+GetFullName(pchar)+", и я здесь совсем недавно. Вот, решил заглянуть на огонек.","Не смог пройти мимо вашей двери – так пахнуло свежей доской. Я - "+GetFullName(pchar)+", капитан корабля '"+pchar.ship.name+"'.","Позвольте представиться - "+GetFullName(pchar)+", капитан корабля '"+pchar.ship.name+"', рад знакомству. А вы, значит, строите и ремонтируете корабли?");
+				dialog.Text = GetNatPhrase(npchar, LinkRandPhrase("Ха! В мою скромную мастерскую заглянул настоящий морской волк! Недавно в здешних водах, капитан?","Добро пожаловать, сэр! Если вы имеете отношение к морю и у вас есть корабль – вы не зря зашли ко мне!","Приветствую вас, сэр! вам повезло – вы зашли в лучшую корабельную мастерскую Британского Нового Света."), LinkRandPhrase("Месье, я не ошибусь, предположив, что вижу перед собой лихого капитана? Если да, то и вы не ошиблись, посетив мою скромную верфь!","Впервые у нас, месье капитан? Заходите, не побрезгуйте знакомством со скромным корабелом.","Будем знакомы, месье! Кораблю, как и женщине, нужна ласка, а кто лучше француза знает толк в ласках? Поверьте, вы не зря завернули именно ко мне!"), LinkRandPhrase("Никогда не встречал вас раньше, сеньор. Рад новому знакомству!","Я приветствую отважного покорителя морей! Вы ведь моряк, друг мой? А я здешний мастер корабельных дел, нам следует познакомиться.","Здравствуйте, кабальеро! Приветствую вас в своей мастерской!"),LinkRandPhrase("Добрый день, минхер. Я не встречал вас раньше, вы ко мне по делу?","Здравствуйте, минхер капитан. Не удивляйтесь, я видел столько капитанов, что без труда распознаю ещё одного!","Прошу вас, минхер. Я здешний корабельный мастер, будем знакомы."));
+				Link.l1 = LinkRandPhrase("Очень рад знакомству. Меня зовут "+GetFullName(pchar)+", и я здесь совсем недавно. Вот, решил заглянуть на огонёк.","Не смог пройти мимо вашей двери – так пахнуло свежей доской. Я - "+GetFullName(pchar)+", капитан корабля '"+pchar.ship.name+"'.","Позвольте представиться - "+GetFullName(pchar)+", капитан корабля '"+pchar.ship.name+"', рад знакомству. А вы, значит, строите и ремонтируете корабли?");
 				Link.l1.go = "meeting";
 				NPChar.quest.meeting = "1";
 			}
 			else
 			{
-				dialog.Text = pcharrepphrase(LinkRandPhrase(LinkRandPhrase("О! К нам пожаловал гроза здешних вод, капитан "+GetFullName(pchar)+"! Чем могу быть полезен?","Сразу к делу, "+GetAddress_Form(NPChar)+", некогда мне болтать. Нужен ремонт или хотите сменить посудину?","Ба, да нас изволил посетить "+GetFullName(pchar)+"! Что случилось, "+GetAddress_Form(NPChar)+"? Беда постигла вашу лоханку?"),LinkRandPhrase("А вам что тут нужно, капитан? Ни минуты покоя от этих проходимцев, что за день такой...","Здравствуйте, "+GetAddress_Form(NPChar)+". Должен заметить, что ваш визит распугал мне всех клиентов. Будем надеяться, ваш заказ покроет мои убытки?","С делом ко мне, "+GetAddress_Form(NPChar)+"? Что же, давайте, излагайте свои дела, да побыстрее."),LinkRandPhrase("Что за дела привели вас ко мне, господин "+GetFullName(pchar)+"? Понимаю, при вашем образе жизни кораблю приходится нелегко...","Рад приветствовать благородного... о, простите, "+GetAddress_Form(NPChar)+", я обознался. С чем пожаловали?","Я не очень привечаю людей вашего склада, капитан, но и выгонять, конечно, не стану. Что вам нужно?")),LinkRandPhrase(LinkRandPhrase("Очень рад вам, господин "+GetFullName(pchar)+"! Как бегает ваша ласточка? Не нужен ли ремонт или кренгование?","Добро пожаловать, "+GetAddress_Form(NPChar)+"! Капитан "+GetFullName(pchar)+" всегда желанный гость в моей мастерской!","О, "+GetAddress_Form(NPChar)+" "+GetFullName(pchar)+"! Вы снова посетили меня! Надеюсь, с вашим красавцем все в порядке?"),LinkRandPhrase(""+GetAddress_Form(NPChar)+", как же я рад видеть вас снова! Как поживает ваш прекрасный корабль? Не нужна ли моя помощь?","О, "+GetAddress_Form(NPChar)+", приветствую вас! Как ваши дела? Не скрипят ли мачты, не нужно ли очистить днище? Для вас мои ребята расстараются!","Добрый день, капитан "+GetFullName(pchar)+". Я рад, что вы снова заглянули ко мне и всегда готов помочь вам."),LinkRandPhrase("Очень рад вашему визиту, капитан! Вы очень хороший клиент, "+GetAddress_Form(NPChar)+", и я желаю вам таковым и оставаться.","А-а, "+GetAddress_Form(NPChar)+" "+GetFullName(pchar)+"! Бесконечно рад вашему визиту! Чем могу быть полезен?","Капитан, вы снова посетили "+XI_ConvertString("Colony"+npchar.City+"Acc")+"! Поверьте, мы будем рады вам помочь.")));
-				Link.l1 = pcharrepphrase(RandPhraseSimple(RandPhraseSimple("Доставай инструменты, мастер, да помалкивай. Я сегодня не в духе.","Хорош трепаться, приятель. Мне нужна твоя помощь, а не пустая болтовня."),RandPhraseSimple("Я плачу – ты работаешь. Молча. Уяснил?","Давай, дружище, гони всех подальше – прибыл твой главный клиент!")),RandPhraseSimple(RandPhraseSimple("Я тоже рад вас видеть, мастер. Увы, времени у меня немного, так что давайте перейдем к делу.","И я приветствую вас, дружище. Готовы уделить внимание постоянному клиенту?"),RandPhraseSimple("Добрый день, любезный. Сразу перейдем к делам. Но обещаю, в следующий раз обязательно просто посидеть с бутылочкой.","Очень рад вам, мастер. К вам всегда приятно заглянуть, но сейчас мне нужна ваша помощь.")));
+				dialog.Text = pcharrepphrase(LinkRandPhrase(LinkRandPhrase("О! К нам пожаловал гроза здешних вод, капитан "+GetFullName(pchar)+"! Чем могу быть полезен?","Сразу к делу, "+GetAddress_Form(NPChar)+", некогда мне болтать. Нужен ремонт или хотите сменить посудину?","Ба, да нас изволил посетить "+GetFullName(pchar)+"! Что случилось, "+GetAddress_Form(NPChar)+"? Беда постигла вашу лоханку?"),LinkRandPhrase("А вам что тут нужно, капитан? Ни минуты покоя от этих проходимцев, что за день такой...","Здравствуйте, "+GetAddress_Form(NPChar)+". Должен заметить, что ваш визит распугал мне всех клиентов. Будем надеяться, ваш заказ покроет мои убытки?","С делом ко мне, "+GetAddress_Form(NPChar)+"? Что же, давайте, излагайте свои дела, да побыстрее."),LinkRandPhrase("Что за дела привели вас ко мне, господин "+GetFullName(pchar)+"? Понимаю, при вашем образе жизни кораблю приходится нелегко...","Рад приветствовать благородного... о, простите, "+GetAddress_Form(NPChar)+", я обознался. С чем пожаловали?","Я не очень привечаю людей вашего склада, капитан, но и выгонять, конечно, не стану. Что вам нужно?")),LinkRandPhrase(LinkRandPhrase("Очень рад вам, господин "+GetFullName(pchar)+"! Как бегает ваша ласточка? Не нужен ли ремонт или кренгование?","Добро пожаловать, "+GetAddress_Form(NPChar)+"! Капитан "+GetFullName(pchar)+" всегда желанный гость в моей мастерской!","О, "+GetAddress_Form(NPChar)+" "+GetFullName(pchar)+"! Вы снова посетили меня! Надеюсь, с вашим красавцем всё в порядке?"),LinkRandPhrase("О, "+GetAddress_Form(NPChar)+", как же я рад видеть вас снова! Как поживает ваш прекрасный корабль? Не нужна ли моя помощь?","О, "+GetAddress_Form(NPChar)+", приветствую вас! Как ваши дела? Не скрипят ли мачты, не нужно ли очистить днище? Для вас мои ребята расстараются!","Добрый день, капитан "+GetFullName(pchar)+". Я рад, что вы снова заглянули ко мне и всегда готов помочь вам."),LinkRandPhrase("Очень рад вашему визиту, капитан! Вы очень хороший клиент, "+GetAddress_Form(NPChar)+", и я желаю вам таковым и оставаться.","А-а, "+GetAddress_Form(NPChar)+" "+GetFullName(pchar)+"! Бесконечно рад вашему визиту! Чем могу быть полезен?","Капитан, вы снова посетили "+XI_ConvertString("Colony"+npchar.City+"Acc")+"! Поверьте, мы будем рады вам помочь.")));
+				Link.l1 = pcharrepphrase(RandPhraseSimple(RandPhraseSimple("Доставай инструменты, мастер, да помалкивай. Я сегодня не в духе.","Хорош трепаться, приятель. Мне нужна твоя помощь, а не пустая болтовня."),RandPhraseSimple("Я плачу – ты работаешь. Молча. Уяснил?","Давай, дружище, гони всех подальше – прибыл твой главный клиент!")),RandPhraseSimple(RandPhraseSimple("Я тоже рад вас видеть, мастер. Увы, времени у меня немного, так что давайте перейдём к делу.","И я приветствую вас, дружище. Готовы уделить внимание постоянному клиенту?"),RandPhraseSimple("Добрый день, любезный. Сразу перейдём к делам. Но обещаю в следующий раз обязательно просто посидеть с бутылочкой.","Очень рад вам, мастер. К вам всегда приятно заглянуть, но сейчас мне нужна ваша помощь.")));
 				Link.l1.go = "Shipyard";
 				if (GetNationRelation2MainCharacter(sti(NPChar.nation)) != RELATION_ENEMY) 
 				{
@@ -230,7 +230,7 @@ void ProcessDialogEvent()
 					link.l17.go = "Device_complete";
 				}
 				// <-- генератор Неудачливый вор
-				if(RealShips[sti(Pchar.Ship.Type)].BaseType != SHIP_CURSED_FDM)
+				if(sti(Pchar.Ship.Type) != SHIP_NOTUSED && RealShips[sti(Pchar.Ship.Type)].BaseType != SHIP_CURSED_FDM) // mitrokosta фикс ломаных диалогов
 				{
 					link.l12 = "Хочу изменить внешний вид парусов.";
 					link.l12.go = "SailsGerald";
@@ -254,7 +254,7 @@ void ProcessDialogEvent()
 				{
 					if (pchar.questTemp.WPU.Postcureer.TargetPortmanID == npchar.id)
 					{
-						link.l14 = "Я доставил чертеж корабля из города "+XI_ConvertString("Colony"+pchar.questTemp.WPU.Postcureer.StartCity+"Gen")+".";
+						link.l14 = "Я доставил чертёж корабля из города "+XI_ConvertString("Colony"+pchar.questTemp.WPU.Postcureer.StartCity+"Gen")+".";
 						link.l14.go = "Postcureer_LevelUp_ForAll";
 					}
 				} // patch-6
@@ -262,7 +262,7 @@ void ProcessDialogEvent()
 				{
 					if(pchar.GenQuest.EncGirl == "toLoverFather" && pchar.GenQuest.EncGirl.LoverFather == "shipyard_keeper" && pchar.GenQuest.EncGirl.LoverCity == npchar.city)
 					{
-						link.l7 = "Здравствуйте, я приш"+ GetSexPhrase("ел","ла") +" по приглашению вашего сына."; 
+						link.l7 = "Здравствуйте, я приш"+ GetSexPhrase("ёл","ла") +" по приглашению вашего сына."; 
 						link.l7.go = "EncGirl_4";
 						pchar.quest.EncGirl_GetLoverFather.over = "yes";
 					}	
@@ -293,7 +293,7 @@ void ProcessDialogEvent()
 				link.l15 = "Нет ли у вас дела, требующего сторонней помощи?";
 			    link.l15.go = "Tasks";
 				
-				if(RealShips[sti(Pchar.Ship.Type)].BaseType != SHIP_CURSED_FDM)
+				if(sti(Pchar.Ship.Type) != SHIP_NOTUSED && RealShips[sti(Pchar.Ship.Type)].BaseType != SHIP_CURSED_FDM) // mitrokosta фикс ломаных диалогов
 				{
 					link.l12 = "Хочу изменить внешний вид парусов.";
 					link.l12.go = "SailsGerald";
@@ -317,7 +317,7 @@ void ProcessDialogEvent()
 				{
 					if (pchar.questTemp.WPU.Postcureer.TargetPortmanID == npchar.id)
 					{
-						link.l14 = "Я доставил чертеж корабля из города "+XI_ConvertString("Colony"+pchar.questTemp.WPU.Postcureer.StartCity+"Gen")+".";
+						link.l14 = "Я доставил чертёж корабля из города "+XI_ConvertString("Colony"+pchar.questTemp.WPU.Postcureer.StartCity+"Gen")+".";
 						link.l14.go = "Postcureer_LevelUp_ForAll";
 					}
 				}
@@ -326,7 +326,7 @@ void ProcessDialogEvent()
 				{
 					if(pchar.GenQuest.EncGirl == "toLoverFather" && pchar.GenQuest.EncGirl.LoverFather == "shipyard_keeper" && pchar.GenQuest.EncGirl.LoverCity == npchar.city)
 					{
-						link.l8 = "Здравствуйте, я приш"+ GetSexPhrase("ел","ла") +" по приглашению вашего сына."; 
+						link.l8 = "Здравствуйте, я приш"+ GetSexPhrase("ёл","ла") +" по приглашению вашего сына."; 
 						link.l8.go = "EncGirl_4";
 						pchar.quest.EncGirl_GetLoverFather.over = "yes";
 					}	
@@ -354,8 +354,8 @@ void ProcessDialogEvent()
 
 		case "ship_tunning":
 			dialog.text = "Наша верфь занимается улучшением кораблей. Вам это интересно, капитан?";
-			Link.l1 = LinkRandPhrase("Замечательно! Может взглянете на мое судно, что с ним можно сделать?",
-			          "Очень интересно, мастер! Что вы сумеете изменить в моем корабле?",
+			Link.l1 = LinkRandPhrase("Замечательно! Может взглянете на моё судно, что с ним можно сделать?",
+			          "Очень интересно, мастер! Что вы сумеете изменить в моём корабле?",
 					  "Хм. Я привык к своему судну, но если вы сможете предложить что-либо интересное, обещаю подумать. Что скажете?");
 			Link.l1.go = "ship_tunning_start";
 		break;
@@ -387,7 +387,7 @@ void ProcessDialogEvent()
 				}
 				if(NPChar.city == "Havana" || NPChar.city == "PortoBello")
 				{
-					s2 = s2 + " На моей верфи можно увеличить количество орудийных портов в бортовых батареях или грузоподъемность судна.";
+					s2 = s2 + " На моей верфи можно увеличить количество орудийных портов в бортовых батареях или грузоподъёмность судна.";
 				}
 				if(NPChar.city == "Villemstad")
 				{
@@ -395,7 +395,7 @@ void ProcessDialogEvent()
 				}
 				if(NPChar.city == "Charles")
 				{
-					s2 = s2 + " На этой верфи можно улучшить маневренность или уменьшить минимальную численность экипажа.";
+					s2 = s2 + " На этой верфи можно улучшить манёвренность или уменьшить минимальную численность экипажа.";
 				}	
 				
 				dialog.Text = s2;
@@ -415,7 +415,7 @@ void ProcessDialogEvent()
 					}	
 					else
 					{
-						Link.l1 = LinkRandPhrase("О! Мое судно уже улучшено по профилю ваших работ. Спасибо, что уделили мне время!",
+						Link.l1 = LinkRandPhrase("О! Моё судно уже улучшено по профилю ваших работ. Спасибо, что уделили мне время!",
 						                         "Спасибо, мастер, но у меня уже есть улучшение, и как раз из перечисленных вами. Удачи с другими судами и их владельцами!",
 												 "Хех! Мой корабль уже переделывался прежним владельцем, не иначе, как на этой верфи. Спасибо ему за заботу, а вам и вашим умельцам за отличную работу!");
 						Link.l1.go = "ship_tunning_not_now_1";					
@@ -442,7 +442,7 @@ void ProcessDialogEvent()
 					}
 					else
 					{
-						Link.l1 = LinkRandPhrase("О! Мое судно уже улучшено по профилю ваших работ. Спасибо, что уделили мне время!",
+						Link.l1 = LinkRandPhrase("О! Моё судно уже улучшено по профилю ваших работ. Спасибо, что уделили мне время!",
 						                         "Спасибо, мастер, но у меня уже есть улучшение, и как раз из перечисленных вами. Удачи с другими судами и их владельцами!",
 												 "Хех! Мой корабль уже переделывался прежним владельцем, не иначе, как на этой верфи. Спасибо ему за заботу, а вам и вашим умельцам за отличную работу!");
 						Link.l1.go = "ship_tunning_not_now_1";					
@@ -463,7 +463,7 @@ void ProcessDialogEvent()
 					}	
 					else
 					{
-						Link.l1 = LinkRandPhrase("О! Мое судно уже улучшено по профилю ваших работ. Спасибо, что уделили мне время!",
+						Link.l1 = LinkRandPhrase("О! Моё судно уже улучшено по профилю ваших работ. Спасибо, что уделили мне время!",
 						                         "Спасибо, мастер, но у меня уже есть улучшение, и как раз из перечисленных вами. Удачи с другими судами и их владельцами!",
 												 "Хех! Мой корабль уже переделывался прежним владельцем, не иначе, как на этой верфи. Спасибо ему за заботу, а вам и вашим умельцам за отличную работу!");
 						Link.l1.go = "ship_tunning_not_now_1";					
@@ -475,7 +475,7 @@ void ProcessDialogEvent()
 						 (!CheckAttribute(&RealShips[sti(Pchar.Ship.Type)], "Tuning.MinCrew"));
 					if(ok)
 					{		
-						Link.l1 = "Увеличить маневренность.";
+						Link.l1 = "Увеличить манёвренность.";
 						Link.l1.go = "ship_tunning_TurnRate";
 						if(sti(RealShips[sti(pchar.Ship.Type)].Class) < 5)
 						{
@@ -487,7 +487,7 @@ void ProcessDialogEvent()
 					}
 					else
 					{
-						Link.l1 = LinkRandPhrase("О! Мое судно уже улучшено по профилю ваших работ. Спасибо, что уделили мне время!",
+						Link.l1 = LinkRandPhrase("О! Моё судно уже улучшено по профилю ваших работ. Спасибо, что уделили мне время!",
 						                         "Спасибо, мастер, но у меня уже есть улучшение, и как раз из перечисленных вами. Удачи с другими судами и их владельцами!",
 												 "Хех! Мой корабль уже переделывался прежним владельцем, не иначе, как на этой верфи. Спасибо ему за заботу, а вам и вашим умельцам за отличную работу!");
 						Link.l1.go = "ship_tunning_not_now_1";					
@@ -507,10 +507,10 @@ void ProcessDialogEvent()
 			Material 	= GetMaterialQtyUpgrade(pchar, NPChar, 1 );
 			WorkPrice 	= GetMaterialQtyUpgrade(pchar, NPChar, 2 );			
 			s2 = "Давайте посмотрим, что можно сделать. Сейчас дедвейт вашего судна - " + sti(RealShips[sti(pchar.Ship.Type)].Capacity);			
-			s2 = s2 + ". Для облегченных переборок мне понадобится: бакаута - " + Material + ".";
-			s2 = s2 + " В оплату за свою работу я возьму: дублонов " + WorkPrice + " - на рабочие расходы. Вроде бы все. Ах да - деньги вперед.";			
+			s2 = s2 + ". Для облегчённых переборок мне понадобится: бакаута - " + Material + ".";
+			s2 = s2 + " В оплату за свою работу я возьму: дублонов " + WorkPrice + " - на рабочие расходы. Вроде бы всё. Ах да - деньги вперёд.";			
             dialog.Text = s2;
-			Link.l1 = "Годится. Я принимаю условия. Все оговоренное будет доставлено.";
+			Link.l1 = "Годится. Я принимаю условия. Всё оговоренное будет доставлено.";
 			Link.l1.go = "ship_tunning_Capacity_start";
 			Link.l2 = "Нет. Меня это не устраивает.";
 			Link.l2.go = "ship_tunning_not_now_1";
@@ -527,7 +527,7 @@ void ProcessDialogEvent()
 			    NPChar.Tuning.ShipName      = RealShips[sti(Pchar.Ship.Type)].BaseName;			    
 				NextDiag.TempNode = "ship_tunning_Capacity_again";
                 dialog.text = "Вот и славно. Жду материал.";
-			    link.l1 = LinkRandPhrase("Уверяю, ждать долго не придется. Я умею решать такие задачки, смекаете?",
+			    link.l1 = LinkRandPhrase("Уверяю, ждать долго не придётся. Я умею решать такие задачки, смекаете?",
 										 "Считайте, что они уже у вас и придержите док, я буду скор, как ветер.",
 										 "Не вопрос. Вот только навещу пару-тройку владельцев затребованного, ха-ха-ха!");
 			    link.l1.go = "Exit";			    
@@ -549,10 +549,10 @@ void ProcessDialogEvent()
 		    if (sti(NPChar.Tuning.ShipType) == sti(Pchar.Ship.Type) && NPChar.Tuning.ShipName == RealShips[sti(Pchar.Ship.Type)].BaseName)
 		    {
                 NextDiag.TempNode = "ship_tunning_Capacity_again";
-				dialog.Text = "Время идет, а судно ждет. Вы все доставили, что я попросил?";
+				dialog.Text = "Время идёт, а судно ждёт. Вы всё доставили, что я попросил?";
 			    Link.l1 = "Да. Кое-что удалось достать.";
 			    Link.l1.go = "ship_tunning_Capacity_again_2";
-			    Link.l2 = "Нет. Еще добываю.";
+			    Link.l2 = "Нет. Ещё добываю.";
 			    Link.l2.go = "Exit";
 			}
 			else
@@ -574,7 +574,7 @@ void ProcessDialogEvent()
 			{
 				DeleteAttribute(NPChar, "Tuning");
                 NextDiag.TempNode = "First time";
-                dialog.text = "Замечательно, теперь все в наличии. Начинаю работу...";
+                dialog.text = "Замечательно, теперь всё в наличии. Начинаю работу...";
 			    link.l1 = "Жду.";
 			    link.l1.go = "ship_tunning_Capacity_complite";
 			}
@@ -638,7 +638,7 @@ void ProcessDialogEvent()
 			
 	        // finish <--
             NextDiag.TempNode = "First time";
-			dialog.Text = "...Вроде бы все... Можно грузиться по полной, качество работы гарантирую.";
+			dialog.Text = "...Вроде бы всё... Можно грузиться по полной, качество работы гарантирую.";
 			Link.l1 = "Спасибо! Проверю обязательно.";
 			Link.l1.go = "Exit";
 			
@@ -656,10 +656,10 @@ void ProcessDialogEvent()
 			Material 	= GetMaterialQtyUpgrade(pchar, NPChar,  1 );			
 			WorkPrice 	= GetMaterialQtyUpgrade(pchar, NPChar,  2 );
 			s2 = "Давайте посмотрим, что можно сделать. Сейчас скорость вашего корабля " + stf(RealShips[sti(Pchar.Ship.Type)].SpeedRate);	
-			s2 = s2 + " узлов. Для новых парусов мне понадобится: корабельного шелка - "+ Material + ".";
-			s2 = s2 + " В оплату за свою работу я возьму: дублонов " + WorkPrice + " - на рабочие расходы. Вроде бы все. Ах да - деньги вперед.";						
+			s2 = s2 + " узлов. Для новых парусов мне понадобится: корабельного шёлка - "+ Material + ".";
+			s2 = s2 + " В оплату за свою работу я возьму: дублонов " + WorkPrice + " - на рабочие расходы. Вроде бы всё. Ах да - деньги вперёд.";						
             dialog.Text = s2;
-			Link.l1 = "Годится. Я принимаю условия. Все оговоренное будет доставлено.";
+			Link.l1 = "Годится. Я принимаю условия. Всё оговоренное будет доставлено.";
 			Link.l1.go = "ship_tunning_SpeedRate_start";
 			Link.l2 = "Нет. Меня это не устраивает.";
 			Link.l2.go = "ship_tunning_not_now_1";
@@ -676,14 +676,14 @@ void ProcessDialogEvent()
 			    NPChar.Tuning.ShipName   	= RealShips[sti(Pchar.Ship.Type)].BaseName;
 				NextDiag.TempNode = "ship_tunning_SpeedRate_again";
                 dialog.text = "Вот и славно. Жду материал.";
-				link.l1 = LinkRandPhrase("Уверяю, ждать долго не придется. Я умею решать такие задачки, смекаете?",
+				link.l1 = LinkRandPhrase("Уверяю, ждать долго не придётся. Я умею решать такие задачки, смекаете?",
 										 "Считайте, что они уже у вас и придержите док, я буду скор, как ветер.",
 										 "Не вопрос. Вот только навещу пару-тройку владельцев затребованного, ха-ха-ха!");
 			    link.l1.go = "Exit";
 			    ReOpenQuestHeader("ShipTuning");
 			    AddQuestRecord("ShipTuning", "t1");
 				AddQuestUserData("ShipTuning", "sText", "За свою работу по увеличению скорости на " + GetStrSmallRegister(XI_ConvertString(RealShips[sti(Pchar.Ship.Type)].BaseName + "Voc")) + " '" + pchar.ship.name + "'" +
-				" мастер-корабел требует: корабельного шелка - " + NPChar.Tuning.Matherial + ". В качестве задатка было уплачено " + NPChar.Tuning.Money + " дублонов.");
+				" мастер-корабел требует: корабельного шёлка - " + NPChar.Tuning.Matherial + ". В качестве задатка было уплачено " + NPChar.Tuning.Money + " дублонов.");
 			}
 			else
 			{
@@ -698,10 +698,10 @@ void ProcessDialogEvent()
 		    if (sti(NPChar.Tuning.ShipType) == sti(Pchar.Ship.Type) && NPChar.Tuning.ShipName == RealShips[sti(Pchar.Ship.Type)].BaseName)
 		    {
                 NextDiag.TempNode = "ship_tunning_SpeedRate_again";
-				dialog.Text = "Время идет, а судно ждет. Вы все доставили, что я попросил?";
+				dialog.Text = "Время идёт, а судно ждёт. Вы всё доставили, что я попросил?";
 			    Link.l1 = "Да. Кое-что удалось достать.";
 			    Link.l1.go = "ship_tunning_SpeedRate_again_2";
-			    Link.l2 = "Нет. Еще добываю.";
+			    Link.l2 = "Нет. Ещё добываю.";
 			    Link.l2.go = "Exit";
 			}
 			else
@@ -723,18 +723,18 @@ void ProcessDialogEvent()
 			{
 				DeleteAttribute(NPChar, "Tuning");
                 NextDiag.TempNode = "First time";
-                dialog.text = "Замечательно, теперь все в наличии. Начинаю работу...";
+                dialog.text = "Замечательно, теперь всё в наличии. Начинаю работу...";
 			    link.l1 = "Жду.";
 			    link.l1.go = "ship_tunning_SpeedRate_complite";
 			}
 			else
 			{
 				NextDiag.TempNode = "ship_tunning_SpeedRate_again";
-				dialog.Text = "За вами осталось: корабельного шелка - "+ sti(NPChar.Tuning.Matherial) + ".";
+				dialog.Text = "За вами осталось: корабельного шёлка - "+ sti(NPChar.Tuning.Matherial) + ".";
 				link.l1 = "Хорошо.";
 				link.l1.go = "Exit";
                 AddQuestRecord("ShipTuning", "t1");
-				AddQuestUserData("ShipTuning", "sText",  "Мне осталось довезти: корабельного шелка - "+ sti(NPChar.Tuning.Matherial) + ".");
+				AddQuestUserData("ShipTuning", "sText",  "Мне осталось довезти: корабельного шёлка - "+ sti(NPChar.Tuning.Matherial) + ".");
 			}
 		break;
 		
@@ -754,6 +754,11 @@ void ProcessDialogEvent()
 	        shTo.Tuning.SpeedRate = true;
 			
 			shTo.WindAgainstSpeed   	= stf(shTo.WindAgainstSpeed) + 0.15 * stf(shTo.WindAgainstSpeed);
+			
+			if (stf(shTo.WindAgainstSpeed) > 1.985) { // mitrokosta фикс невозможных значений
+				shTo.WindAgainstSpeed = 1.985;
+			}
+			
 			shTo.DontTuning.WindAgainst = true;
 			
 			if(!CheckAttribute(pchar, "achievment.Tuning.stage1")) 
@@ -762,9 +767,9 @@ void ProcessDialogEvent()
 			}	
 	        // finish <--
             NextDiag.TempNode = "First time";
-			dialog.Text = "... Вот и все, капитан. Можете ловить ветер полными парусами. Хотите - проверьте!";
+			dialog.Text = "... Вот и всё, капитан. Можете ловить ветер полными парусами. Хотите - проверьте!";
 			Link.l1 = "Спасибо! Проверю обязательно.";
-			Link.l1.go = "Exit";			
+			Link.l1.go = "Exit";		
 			AddQuestRecord("ShipTuning", "End");
 			CloseQuestHeader("ShipTuning");
 		break;
@@ -773,11 +778,11 @@ void ProcessDialogEvent()
 		case "ship_tunning_TurnRate":
 			Material  = GetMaterialQtyUpgrade(pchar, NPChar, 1 );			
 			WorkPrice = GetMaterialQtyUpgrade(pchar, NPChar, 2 );
-			s2 = "Давайте посмотрим, что можно сделать. Сейчас маневренность этого корабля - " + stf(RealShips[sti(Pchar.Ship.Type)].TurnRate);			
+			s2 = "Давайте посмотрим, что можно сделать. Сейчас манёвренность этого корабля - " + stf(RealShips[sti(Pchar.Ship.Type)].TurnRate);			
 			s2 = s2 + " Для дополнительных парусов, чтоб его расшевелить, мне понадобится: канатов - "+ Material + ".";
-			s2 = s2 + " В оплату за свою работу я возьму: дублонов " + WorkPrice + " - на рабочие расходы. Вроде бы все. Ах да - деньги вперед.";										
+			s2 = s2 + " В оплату за свою работу я возьму: дублонов " + WorkPrice + " - на рабочие расходы. Вроде бы всё. Ах да - деньги вперёд.";										
             dialog.Text = s2;
-			Link.l1 = "Годится. Я принимаю условия. Все оговоренное будет доставлено.";
+			Link.l1 = "Годится. Я принимаю условия. Всё оговоренное будет доставлено.";
 			Link.l1.go = "ship_tunning_TurnRate_start";
 			Link.l2 = "Нет. Меня это не устраивает.";
 			Link.l2.go = "ship_tunning_not_now_1";
@@ -794,13 +799,13 @@ void ProcessDialogEvent()
 			    NPChar.Tuning.ShipName      = RealShips[sti(Pchar.Ship.Type)].BaseName;
 				NextDiag.TempNode = "ship_tunning_TurnRate_again";
                 dialog.text = "Вот и славно. Жду материал.";
-				link.l1 = LinkRandPhrase("Уверяю, ждать долго не придется. Я умею решать такие задачки, смекаете?",
+				link.l1 = LinkRandPhrase("Уверяю, ждать долго не придётся. Я умею решать такие задачки, смекаете?",
 										 "Считайте, что они уже у вас и придержите док, я буду скор, как ветер.",
 										 "Не вопрос. Вот только навещу пару-тройку владельцев затребованного, ха-ха-ха!");			    
 			    link.l1.go = "Exit";			    
 			    ReOpenQuestHeader("ShipTuning");
 			    AddQuestRecord("ShipTuning", "t1");
-				AddQuestUserData("ShipTuning", "sText", "За свою работу по увеличению маневренности на " + GetStrSmallRegister(XI_ConvertString(RealShips[sti(Pchar.Ship.Type)].BaseName + "Voc")) + " '" + pchar.ship.name + "'" +
+				AddQuestUserData("ShipTuning", "sText", "За свою работу по увеличению манёвренности на " + GetStrSmallRegister(XI_ConvertString(RealShips[sti(Pchar.Ship.Type)].BaseName + "Voc")) + " '" + pchar.ship.name + "'" +
 				" мастер-корабел требует: канатов - " + NPChar.Tuning.Matherial + ". В качестве задатка было уплачено " + NPChar.Tuning.Money + " дублонов.");
 			}
 			else
@@ -816,10 +821,10 @@ void ProcessDialogEvent()
 		    if (sti(NPChar.Tuning.ShipType) == sti(Pchar.Ship.Type) && NPChar.Tuning.ShipName == RealShips[sti(Pchar.Ship.Type)].BaseName)
 		    {
                 NextDiag.TempNode = "ship_tunning_TurnRate_again";
-				dialog.Text = "Время идет, а судно ждет. Вы все доставили, что я попросил?";
+				dialog.Text = "Время идёт, а судно ждёт. Вы всё доставили, что я попросил?";
 			    Link.l1 = "Да. Кое-что удалось доставить.";
 			    Link.l1.go = "ship_tunning_TurnRate_again_2";
-			    Link.l2 = "Нет. Еще добываю.";
+			    Link.l2 = "Нет. Ещё добываю.";
 			    Link.l2.go = "Exit";
 			}
 			else
@@ -841,7 +846,7 @@ void ProcessDialogEvent()
 			{
 				DeleteAttribute(NPChar, "Tuning");
                 NextDiag.TempNode = "First time";
-                dialog.text = "Замечательно, теперь все в наличии. Начинаю работу...";
+                dialog.text = "Замечательно, теперь всё в наличии. Начинаю работу...";
 			    link.l1 = "Жду.";
 			    link.l1.go = "ship_tunning_TurnRate_complite";
 			}
@@ -879,7 +884,7 @@ void ProcessDialogEvent()
 				pchar.achievment.Tuning.stage4 = true;
 			}	
             NextDiag.TempNode = "First time";
-			dialog.Text = "... Вроде все... Оцените, каково теперь крутить штурвал, капитан!";
+			dialog.Text = "... Вроде всё... Оцените, каково теперь крутить штурвал, капитан!";
 			Link.l1 = "Спасибо! Проверю обязательно.";
 			Link.l1.go = "Exit";
 			AddQuestRecord("ShipTuning", "End");
@@ -890,11 +895,11 @@ void ProcessDialogEvent()
 		case "ship_tunning_MaxCrew":
 			Material  = GetMaterialQtyUpgrade(pchar, NPChar, 1 );
 			WorkPrice = GetMaterialQtyUpgrade(pchar, NPChar, 2 );				
-			s2 = "Давайте посмотрим, что можно сделать. Сейчас максимальный экипаж вашего судна с учетом перегруза  " + sti(RealShips[sti(Pchar.Ship.Type)].MaxCrew) + " человек.";			
+			s2 = "Давайте посмотрим, что можно сделать. Сейчас максимальный экипаж вашего судна с учётом перегруза  " + sti(RealShips[sti(Pchar.Ship.Type)].MaxCrew) + " человек.";			
 			s2 = s2 + " Мне понадобится: бакаута - "+ Material + ".";
-			s2 = s2 + " В оплату за свою работу я возьму: дублонов " + WorkPrice + " - на рабочие расходы. Вроде бы все. Ах да - деньги вперед.";									
+			s2 = s2 + " В оплату за свою работу я возьму: дублонов " + WorkPrice + " - на рабочие расходы. Вроде бы всё. Ах да - деньги вперёд.";									
             dialog.Text = s2;
-			Link.l1 = "Годится. Я принимаю условия. Все оговоренное будет доставлено.";
+			Link.l1 = "Годится. Я принимаю условия. Всё оговоренное будет доставлено.";
 			Link.l1.go = "ship_tunning_MaxCrew_start";
 			Link.l2 = "Нет. Меня это не устраивает.";
 			Link.l2.go = "ship_tunning_not_now_1";
@@ -911,7 +916,7 @@ void ProcessDialogEvent()
 			    NPChar.Tuning.ShipName      = RealShips[sti(Pchar.Ship.Type)].BaseName;
 				NextDiag.TempNode = "ship_tunning_MaxCrew_again";
                 dialog.text = "Вот и славно. Жду материал.";
-				link.l1 = LinkRandPhrase("Уверяю, ждать долго не придется. Я умею решать такие задачки, смекаете?",
+				link.l1 = LinkRandPhrase("Уверяю, ждать долго не придётся. Я умею решать такие задачки, смекаете?",
 										 "Считайте, что они уже у вас и придержите док, я буду скор, как ветер.",
 										 "Не вопрос. Вот только навещу пару-тройку владельцев затребованного, ха-ха-ха!");
 			    link.l1.go = "Exit";			    
@@ -933,10 +938,10 @@ void ProcessDialogEvent()
 		    if (sti(NPChar.Tuning.ShipType) == sti(Pchar.Ship.Type) && NPChar.Tuning.ShipName == RealShips[sti(Pchar.Ship.Type)].BaseName)
 		    {
                 NextDiag.TempNode = "ship_tunning_MaxCrew_again";
-				dialog.Text = "Время идет, а судно ждет. Вы все доставили, что я попросил?";
+				dialog.Text = "Время идёт, а судно ждёт. Вы всё доставили, что я попросил?";
 			    Link.l1 = "Да. Кое-что удалось достать.";
 			    Link.l1.go = "ship_tunning_MaxCrew_again_2";
-			    Link.l2 = "Нет. Еще добываю.";
+			    Link.l2 = "Нет. Ещё добываю.";
 			    Link.l2.go = "Exit";
 			}
 			else
@@ -958,7 +963,7 @@ void ProcessDialogEvent()
 			{
 				DeleteAttribute(NPChar, "Tuning");
                 NextDiag.TempNode = "First time";
-                dialog.text = "Замечательно, теперь все в наличии. Начинаю работу...";
+                dialog.text = "Замечательно, теперь всё в наличии. Начинаю работу...";
 			    link.l1 = "Жду.";
 			    link.l1.go = "ship_tunning_MaxCrew_complite";
 			}
@@ -1006,9 +1011,9 @@ void ProcessDialogEvent()
 			WorkPrice 	= GetMaterialQtyUpgrade(pchar, NPChar, 2 );				
 			s2 = "Давайте посмотрим, что можно сделать. Сейчас минимальный экипаж вашего судна " + sti(RealShips[sti(Pchar.Ship.Type)].MinCrew) + " человек.";			
 			s2 = s2 + " Для улучшения управляемости корабля и сокращения численности экипажа я возьму : канатов - "+ Material + ".";
-			s2 = s2 + " В оплату за свою работу я возьму: дублонов " + WorkPrice + " - на рабочие расходы. Вроде бы все. Ах да - деньги вперед.";									
+			s2 = s2 + " В оплату за свою работу я возьму: дублонов " + WorkPrice + " - на рабочие расходы. Вроде бы всё. Ах да - деньги вперёд.";									
             dialog.Text = s2;
-			Link.l1 = "Годится. Я принимаю условия. Все оговоренное будет доставлено.";
+			Link.l1 = "Годится. Я принимаю условия. Всё оговоренное будет доставлено.";
 			Link.l1.go = "ship_tunning_MinCrew_start";
 			Link.l2 = "Нет. Меня это не устраивает.";
 			Link.l2.go = "ship_tunning_not_now_1";
@@ -1025,7 +1030,7 @@ void ProcessDialogEvent()
 			    NPChar.Tuning.ShipName      = RealShips[sti(Pchar.Ship.Type)].BaseName;
 				NextDiag.TempNode = "ship_tunning_MinCrew_again";
                 dialog.text = "Вот и славно. Жду материал.";
-				link.l1 = LinkRandPhrase("Уверяю, ждать долго не придется. Я умею решать такие задачки, смекаете?",
+				link.l1 = LinkRandPhrase("Уверяю, ждать долго не придётся. Я умею решать такие задачки, смекаете?",
 										 "Считайте, что они уже у вас и придержите док, я буду скор, как ветер.",
 										 "Не вопрос. Вот только навещу пару-тройку владельцев затребованного, ха-ха-ха!");
 			    link.l1.go = "Exit";			    
@@ -1047,10 +1052,10 @@ void ProcessDialogEvent()
 		    if (sti(NPChar.Tuning.ShipType) == sti(Pchar.Ship.Type) && NPChar.Tuning.ShipName == RealShips[sti(Pchar.Ship.Type)].BaseName)
 		    {
                 NextDiag.TempNode = "ship_tunning_MinCrew_again";
-				dialog.Text = "Время идет, а судно ждет. Вы все доставили, что я попросил?";
+				dialog.Text = "Время идёт, а судно ждёт. Вы всё доставили, что я попросил?";
 			    Link.l1 = "Да. Кое-что удалось достать.";
 			    Link.l1.go = "ship_tunning_MinCrew_again_2";
-			    Link.l2 = "Нет. Еще добываю.";
+			    Link.l2 = "Нет. Ещё добываю.";
 			    Link.l2.go = "Exit";
 			}
 			else
@@ -1072,7 +1077,7 @@ void ProcessDialogEvent()
 			{
 				DeleteAttribute(NPChar, "Tuning");
                 NextDiag.TempNode = "First time";
-                dialog.text = "Замечательно, теперь все в наличии. Начинаю работу...";
+                dialog.text = "Замечательно, теперь всё в наличии. Начинаю работу...";
 			    link.l1 = "Жду.";
 			    link.l1.go = "ship_tunning_MinCrew_complite";
 			}
@@ -1119,9 +1124,9 @@ void ProcessDialogEvent()
 			WorkPrice 	= GetMaterialQtyUpgrade(pchar, NPChar, 2 );			
 			s2 = "Давайте посмотрим, что можно сделать. Корпус судна сейчас " + sti(RealShips[sti(Pchar.Ship.Type)].HP);			
 			s2 = s2 + ". Чтобы укрепить обшивку, мне понадобится: смол - "+ Material + ".";
-			s2 = s2 + " В оплату за свою работу я возьму: дублонов " + WorkPrice + " - на рабочие расходы. Вроде бы все. Ах да - деньги вперед.";									
+			s2 = s2 + " В оплату за свою работу я возьму: дублонов " + WorkPrice + " - на рабочие расходы. Вроде бы всё. Ах да - деньги вперёд.";									
             dialog.Text = s2;
-			Link.l1 = "Годится. Я принимаю условия. Все оговоренное будет доставлено.";
+			Link.l1 = "Годится. Я принимаю условия. Всё оговоренное будет доставлено.";
 			Link.l1.go = "ship_tunning_HP_start";
 			Link.l2 = "Нет. Меня это не устраивает.";
 			Link.l2.go = "ship_tunning_not_now_1";
@@ -1138,7 +1143,7 @@ void ProcessDialogEvent()
 			    NPChar.Tuning.ShipName      = RealShips[sti(Pchar.Ship.Type)].BaseName;
 				NextDiag.TempNode = "ship_tunning_HP_again";
                 dialog.text = "Вот и славно. Жду материал.";
-				link.l1 = LinkRandPhrase("Уверяю, ждать долго не придется. Я умею решать такие задачки, смекаете?",
+				link.l1 = LinkRandPhrase("Уверяю, ждать долго не придётся. Я умею решать такие задачки, смекаете?",
 										 "Считайте, что они уже у вас и придержите док, я буду скор, как ветер.",
 										 "Не вопрос. Вот только навещу пару-тройку владельцев затребованного, ха-ха-ха!");
 			    link.l1.go = "Exit";
@@ -1160,10 +1165,10 @@ void ProcessDialogEvent()
 		    if (sti(NPChar.Tuning.ShipType) == sti(Pchar.Ship.Type) && NPChar.Tuning.ShipName == RealShips[sti(Pchar.Ship.Type)].BaseName)
 		    {
                 NextDiag.TempNode = "ship_tunning_HP_again";
-				dialog.Text = "Время идет, а судно ждет. Вы все доставили, что я попросил?";
+				dialog.Text = "Время идёт, а судно ждёт. Вы всё доставили, что я попросил?";
 			    Link.l1 = "Да. Кое-что удалось достать.";
 			    Link.l1.go = "ship_tunning_HP_again_2";
-			    Link.l2 = "Нет. Еще добываю.";
+			    Link.l2 = "Нет. Ещё добываю.";
 			    Link.l2.go = "Exit";
 			}
 			else
@@ -1185,7 +1190,7 @@ void ProcessDialogEvent()
 			{
 				DeleteAttribute(NPChar, "Tuning");
                 NextDiag.TempNode = "First time";
-                dialog.text = "Замечательно, теперь все в наличии. Начинаю работу...";
+                dialog.text = "Замечательно, теперь всё в наличии. Начинаю работу...";
 			    link.l1 = "Жду.";
 			    link.l1.go = "ship_tunning_HP_complite";
 			}
@@ -1226,7 +1231,7 @@ void ProcessDialogEvent()
 			
             NextDiag.TempNode = "First time";
 			
-			dialog.Text = "... Вроде бы все... Гарантирую, что развалить этот кораблик теперь будет очень непросто!";
+			dialog.Text = "... Вроде бы всё... Гарантирую, что развалить этот кораблик теперь будет очень непросто!";
 			Link.l1 = "Хех, верю на слово! Спасибо, мастер.";
 			Link.l1.go = "Exit";
 			
@@ -1240,10 +1245,10 @@ void ProcessDialogEvent()
 			WorkPrice 	= GetMaterialQtyUpgrade(pchar, NPChar, 2 );
 			fTmp = 180.0 - (stf(RealShips[sti(Pchar.Ship.Type)].WindAgainstSpeed) * 90.0);
 			s2 = "Давайте посмотрим, что можно сделать. Курсовой угол " + makeint(fTmp) + " градусов.";
-			s2 = s2 + ". Чтобы спустить под ветер преимущественный курс судна мне понадобится: корабельного шелка - "+ Material + ",";
-			s2 = s2 + " В оплату за свою работу я возьму: дублонов " + WorkPrice + " - на рабочие расходы. Вроде бы все. Ах да - деньги вперед.";									
+			s2 = s2 + ". Чтобы спустить под ветер преимущественный курс судна мне понадобится: корабельного шёлка - "+ Material + ",";
+			s2 = s2 + " В оплату за свою работу я возьму: дублонов " + WorkPrice + " - на рабочие расходы. Вроде бы всё. Ах да - деньги вперёд.";									
             dialog.Text = s2;
-			Link.l1 = "Говоря по-простецки, судно станет ходить быстрее по ветру? Годится. Я принимаю условия. Все оговоренное будет доставлено.";
+			Link.l1 = "Говоря по-простецки, судно станет ходить быстрее по ветру? Годится. Я принимаю условия. Всё оговоренное будет доставлено.";
 			Link.l1.go = "ship_tunning_WindAgainst_start";
 			Link.l2 = "Нет. Меня это не устраивает.";
 			Link.l2.go = "ship_tunning_not_now_1";
@@ -1260,7 +1265,7 @@ void ProcessDialogEvent()
 			    NPChar.Tuning.ShipName      = RealShips[sti(Pchar.Ship.Type)].BaseName;
 				NextDiag.TempNode = "ship_tunning_WindAgainst_again";
                 dialog.text = "Вот и славно. Жду материал.";
-				link.l1 = LinkRandPhrase("Уверяю, ждать долго не придется. Я умею решать такие задачки, смекаете?",
+				link.l1 = LinkRandPhrase("Уверяю, ждать долго не придётся. Я умею решать такие задачки, смекаете?",
 										 "Считайте, что они уже у вас и придержите док, я буду скор, как ветер.",
 										 "Не вопрос. Вот только навещу пару-тройку владельцев затребованного, ха-ха-ха!");
 			    link.l1.go = "Exit";
@@ -1268,7 +1273,7 @@ void ProcessDialogEvent()
 			    ReOpenQuestHeader("ShipTuning");
 			    AddQuestRecord("ShipTuning", "t1");
 				AddQuestUserData("ShipTuning", "sText", "За свою работу по изменению курсового угла на " + GetStrSmallRegister(XI_ConvertString(RealShips[sti(Pchar.Ship.Type)].BaseName + "Voc")) + " '" + pchar.ship.name + "'" +			
-				" мастер-корабел требует: корабельного шелка - " + NPChar.Tuning.Matherial + ". В качестве задатка было уплачено " + NPChar.Tuning.Money + " дублонов.");
+				" мастер-корабел требует: корабельного шёлка - " + NPChar.Tuning.Matherial + ". В качестве задатка было уплачено " + NPChar.Tuning.Money + " дублонов.");
 			}
 			else
 			{
@@ -1283,10 +1288,10 @@ void ProcessDialogEvent()
 		    if (sti(NPChar.Tuning.ShipType) == sti(Pchar.Ship.Type) && NPChar.Tuning.ShipName == RealShips[sti(Pchar.Ship.Type)].BaseName)
 		    {
                 NextDiag.TempNode = "ship_tunning_WindAgainst_again";
-			    dialog.Text = "Время идет, а судно ждет. Вы все доставили, что я попросил?";
+			    dialog.Text = "Время идёт, а судно ждёт. Вы всё доставили, что я попросил?";
 			    Link.l1 = "Да. Кое-что удалось доставить.";
 			    Link.l1.go = "ship_tunning_WindAgainst_again_2";
-			    Link.l2 = "Нет. Еще добываю.";
+			    Link.l2 = "Нет. Ещё добываю.";
 			    Link.l2.go = "Exit";
 			}
 			else
@@ -1308,18 +1313,18 @@ void ProcessDialogEvent()
 			{
 				DeleteAttribute(NPChar, "Tuning");
                 NextDiag.TempNode = "First time";
-                dialog.text = "Замечательно, теперь все в наличии. Начинаю работу...";
+                dialog.text = "Замечательно, теперь всё в наличии. Начинаю работу...";
 			    link.l1 = "Жду.";
 			    link.l1.go = "ship_tunning_WindAgainst_complite";
 			}
 			else
 			{
 				NextDiag.TempNode = "ship_tunning_WindAgainst_again";
-                dialog.Text = "За вами осталось: корабельного шелка - "+ sti(NPChar.Tuning.Matherial) + ".";
+                dialog.Text = "За вами осталось: корабельного шёлка - "+ sti(NPChar.Tuning.Matherial) + ".";
 				link.l1 = "Хорошо.";
 				link.l1.go = "Exit";
                 AddQuestRecord("ShipTuning", "t1");
-				AddQuestUserData("ShipTuning", "sText", "Мне осталось довезти: корабельного шелка - "+ sti(NPChar.Tuning.Matherial) + ".");
+				AddQuestUserData("ShipTuning", "sText", "Мне осталось довезти: корабельного шёлка - "+ sti(NPChar.Tuning.Matherial) + ".");
 			}
 		break;
 
@@ -1353,10 +1358,10 @@ void ProcessDialogEvent()
 			Material 	= GetMaterialQtyUpgrade(pchar, NPChar, 1 );			
 			WorkPrice 	= GetMaterialQtyUpgrade(pchar, NPChar, 2 );			
 			s2 = "Давайте посмотрим, что можно сделать. Сейчас орудий на вашем корабле " + sti(RealShips[sti(Pchar.Ship.Type)].CannonsQuantity) + ", максимально возможное количество - " + sti(RealShips[sti(Pchar.Ship.Type)].CannonsQuantityMax) + ".";			
-			s2 = s2 + " Вам это дело обойдется недешево, мне понадобится: смол - "+ Material + ",";
-			s2 = s2 + " В оплату за свою работу я возьму: дублонов " + WorkPrice + " - на рабочие расходы. Вроде бы все. Ах да - деньги вперед.";						
+			s2 = s2 + " Вам это дело обойдётся недёшево, мне понадобится: смол - "+ Material + ",";
+			s2 = s2 + " В оплату за свою работу я возьму: дублонов " + WorkPrice + " - на рабочие расходы. Вроде бы всё. Ах да - деньги вперёд.";						
 			dialog.Text = s2;		
-			Link.l1 = "Годится. Я принимаю условия. Все оговоренное будет доставлено.";
+			Link.l1 = "Годится. Я принимаю условия. Всё оговоренное будет доставлено.";
 			Link.l1.go = "ship_c_quantity_start";		
 			Link.l2 = "Нет. Меня это не устраивает.";
 			Link.l2.go = "ship_tunning_not_now_1";
@@ -1374,7 +1379,7 @@ void ProcessDialogEvent()
 				NPChar.Tuning.ShipName      = RealShips[sti(Pchar.Ship.Type)].BaseName;											    
 				NextDiag.TempNode = "ship_c_quantity_again";
 				dialog.text = "Вот и славно. Жду материал.";
-				link.l1 = LinkRandPhrase("Уверяю, ждать долго не придется. Я умею решать такие задачки, смекаете?",
+				link.l1 = LinkRandPhrase("Уверяю, ждать долго не придётся. Я умею решать такие задачки, смекаете?",
 										 "Считайте, что они уже у вас и придержите док, я буду скор, как ветер.",
 										 "Не вопрос. Вот только навещу пару-тройку владельцев затребованного, ха-ха-ха!");
 				link.l1.go = "Exit";			    
@@ -1396,10 +1401,10 @@ void ProcessDialogEvent()
 			if (sti(NPChar.Tuning.ShipType) == sti(Pchar.Ship.Type) && NPChar.Tuning.ShipName == RealShips[sti(Pchar.Ship.Type)].BaseName)
 			{
 				NextDiag.TempNode = "ship_c_quantity_again";
-				dialog.Text = "Время идет, а судно ждет. Вы все доставили, что я попросил?";
+				dialog.Text = "Время идёт, а судно ждёт. Вы всё доставили, что я попросил?";
 				Link.l1 = "Да. Кое-что удалось достать.";
 				Link.l1.go = "ship_c_quantity_again_2";
-				Link.l2 = "Нет. Еще добываю.";
+				Link.l2 = "Нет. Ещё добываю.";
 				Link.l2.go = "Exit";
 			}		
 			else
@@ -1421,7 +1426,7 @@ void ProcessDialogEvent()
 			{
 				DeleteAttribute(NPChar, "Tuning");
 				NextDiag.TempNode = "First time";
-				dialog.text = "Замечательно, теперь все в наличии. Начинаю работу...";
+				dialog.text = "Замечательно, теперь всё в наличии. Начинаю работу...";
 				link.l1 = "Жду.";
 				link.l1.go = "ship_c_quantity_complite";
 			}
@@ -1524,10 +1529,10 @@ void ProcessDialogEvent()
 					{
 						case 0:  
 							pchar.GenQuest.Device.Shipyarder.Type = "нутромер";
-							pchar.GenQuest.Device.Shipyarder.Describe = "две кованые полоски, соединенные шарниром, расклепанным на концах";
+							pchar.GenQuest.Device.Shipyarder.Describe = "две кованые полоски, соединённые шарниром, расклёпанным на концах";
 						break; 
 						case 1:  
-							pchar.GenQuest.Device.Shipyarder.Type = "потес";
+							pchar.GenQuest.Device.Shipyarder.Type = "потёс";
 							pchar.GenQuest.Device.Shipyarder.Describe = "топор на длинной круглой прямой рукояти с тонким полукруглым лезвием";
 						break; 
 						case 2:  
@@ -1536,14 +1541,14 @@ void ProcessDialogEvent()
 						break; 
 						case 3:  
 							pchar.GenQuest.Device.Shipyarder.Type = "стапельный уровень";
-							pchar.GenQuest.Device.Shipyarder.Describe = "выглядит, как две деревянных перекладины равной длины, соединенные такой же третьей, в центре которой находится вращающаяся плашка с пузырьком";
+							pchar.GenQuest.Device.Shipyarder.Describe = "выглядит, как две деревянных перекладины равной длины, соединённые такой же третьей, в центре которой находится вращающаяся плашка с пузырьком";
 						break;
 						case 4:  
 							pchar.GenQuest.Device.Shipyarder.Type = "барсик";
 							pchar.GenQuest.Device.Shipyarder.Describe = "похож на обычный цеп, только цепь у него особенная, стержневая, и двигается в одном направлении";
 						break; 
 					}
-					dialog.text = "Вы очень вовремя. Быть может, вы сможете мне помочь. У меня буквально вчера украли ценный инструмент - "+pchar.GenQuest.Device.Shipyarder.Type+". Второго такого у меня нет, и изготовить возможности нет - я заказывал его в Европе за немалые деньги. А без него я не могу нормально строить корабли, понимаете?\nИ что самое обидное - эта штука никому, кроме корабелов, не нужна, а я в колонии единственный корабел. Этот вор никому ее не продаст и просто выбросит. Может, вы попробуете разыскать вора, поспрашиваете в городе, а мне просто некогда отлучаться с верфи - надо срочно доводить до ума спецзаказ.";
+					dialog.text = "Вы очень вовремя. Быть может, вы сможете мне помочь. У меня буквально вчера украли ценный инструмент - "+pchar.GenQuest.Device.Shipyarder.Type+". Второго такого у меня нет, и изготовить возможности нет - я заказывал его в Европе за немалые деньги. А без него я не могу нормально строить корабли, понимаете?\nИ что самое обидное - эта штука никому, кроме корабелов, не нужна, а я в колонии единственный корабел. Этот вор никому её не продаст и просто выбросит. Может, вы попробуете разыскать вора, поспрашиваете в городе, а мне просто некогда отлучаться с верфи - надо срочно доводить до ума спецзаказ.";
 					link.l1 = "Хорошо. Я попробую. Только опишите мне, как выглядит этот ваш... прибор.";
 					link.l1.go = "Device";
 					link.l2 = "Мне это не интересно.";
@@ -1616,7 +1621,7 @@ void ProcessDialogEvent()
 			if (sti(pchar.rank) >= 5 && sti(pchar.rank) < 7) iType = SHIP_BRIG; 
 			if (sti(pchar.rank) >= 7) iType = SHIP_CORVETTE + rand(makeint(SHIP_GALEON_H - SHIP_CORVETTE)); 
 			pchar.GenQuest.Device.Shipyarder.Bonus = iType;
-			dialog.text = "Да, конечно, постараюсь объяснить понятнее. Это "+pchar.GenQuest.Device.Shipyarder.Describe+". Этот прибор единственный в своем роде, так что узнать его будет легко. Если вернете инструмент - я хорошо заплачу вам.";
+			dialog.text = "Да, конечно, постараюсь объяснить понятнее. Это "+pchar.GenQuest.Device.Shipyarder.Describe+". Этот прибор единственный в своём роде, так что узнать его будет легко. Если вернёте инструмент - я хорошо заплачу вам.";
 			link.l1 = "Понятно. Приступаю к поискам!";
 			link.l1.go = "exit";
 			pchar.GenQuest.Device.Shipyarder = "begin";
@@ -1688,7 +1693,7 @@ void ProcessDialogEvent()
 		break;
 		
 		case "Device_complete_5":
-			dialog.text = "Ну, как знаете. Еще раз спасибо и всего доброго!";
+			dialog.text = "Ну, как знаете. Ещё раз спасибо и всего доброго!";
 			link.l1 = "И вам удачи!";
 			link.l1.go = "exit";
 			DeleteAttribute(pchar, "GenQuest.Device.Shipyarder");
@@ -1730,19 +1735,19 @@ void ProcessDialogEvent()
 
 		case "EncGirl_1":
 			dialog.text = "Слушаю вас внимательно.";
-			link.l1 = "Я привел"+ GetSexPhrase("","а") +" вашу беглянку.";
+			link.l1 = "Я привёл"+ GetSexPhrase("","а") +" вашу беглянку.";
 			link.l1.go = "EncGirl_2";
 		break;
 		
 		case "EncGirl_2":
-			dialog.text = "Ах, капитан, спасибо вам большое! Как она? здорова, не пострадала? Уж скоро сутки, как убежала, негодница. Разве ж я ей плохого желаю? Замуж отдать собрался... Жених богатый, молодой, а что собою не пригож, так ведь с лица воду не пить. Нет! она все по-своему норовит - вся в мать, чтоб ее...\nХотя, и она бы на свет не появилась, если бы ее мамаша в свое время не сбежала с одним предприимчивым оболтусом... ну да что вспоминать... Молодость наивна, глупа... и жестока.";
+			dialog.text = "Ах, капитан, спасибо вам большое! Как она? здорова, не пострадала? Уж скоро сутки, как убежала, негодница. Разве ж я ей плохого желаю? Замуж отдать собрался... Жених богатый, молодой, а что собою не пригож, так ведь с лица воду не пить. Нет! она всё по-своему норовит - вся в мать, чтоб её...\nХотя, и она бы на свет не появилась, если бы её мамаша в своё время не сбежала с одним предприимчивым оболтусом... ну да что вспоминать... Молодость наивна, глупа... и жестока.";
 			link.l1 = "Конечно, вы отец и решать вам, но я бы не торопил"+ GetSexPhrase("ся","ась") +" со свадьбой...";
 			link.l1.go = "EncGirl_3";
 		break;
 		
 		case "EncGirl_3":
-			dialog.text = "Да что вы понимаете?.. У вас свои дети есть? Нету? Вот, когда будут - заходите, тогда и поговорим...\nДа... я обещал вознаграждение тому, кто ее вернет - примите пожалуйста.";
-			link.l1 = "Спасибо. И держите ее покрепче. Что-то мне подсказывает, что она на этом не остановится.";
+			dialog.text = "Да что вы понимаете?.. У вас свои дети есть? Нету? Вот, когда будут - заходите, тогда и поговорим...\nДа... я обещал вознаграждение тому, кто её вернет - примите пожалуйста.";
+			link.l1 = "Спасибо. И держите её покрепче. Что-то мне подсказывает, что она на этом не остановится.";
 			link.l1.go = "exit";
 			AddDialogExitQuestFunction("EncGirl_ToLoverParentsExit");
 		break;		
@@ -1750,26 +1755,26 @@ void ProcessDialogEvent()
 		case "EncGirl_4":
 			if(sti(pchar.GenQuest.EncGirl.LoverFatherAngry) == 0)
 			{
-				dialog.text = "А, так вы и есть "+ GetSexPhrase("тот капитан, который привез","та девушка, которая привезла") +", моего блудного сына с молодой невестой?";
+				dialog.text = "А, так вы и есть "+ GetSexPhrase("тот капитан, который привёз","та девушка, которая привезла") +", моего блудного сына с молодой невестой?";
 				link.l1 = "Да, это я помог"+ GetSexPhrase("","ла") +" им сбежать.";
 				link.l1.go = "EncGirl_5";
 			}
 			else
 			{
-				dialog.text = "А-а, явил"+ GetSexPhrase("ся, благодетель","ась, благодетельница") +". Небось награды ждешь?";
+				dialog.text = "А-а, явил"+ GetSexPhrase("ся, благодетель","ась, благодетельница") +". Небось награды ждёшь?";
 				link.l1 = "Ну, не то, чтобы награды, но благодарность услышать не мешало бы.";
 				link.l1.go = "EncGirl_6";			
 			}
 		break;
 		
 		case "EncGirl_5":
-			dialog.text = "Я очень вам благодарен, что не оставили мое чадо в затруднительном положении и помогли ему с честью выйти из столь щекотливой ситуации. Разрешите отблагодарить вас, как могу. Примите эту скромную сумму и подарок от меня лично.";
+			dialog.text = "Я очень вам благодарен, что не оставили моё чадо в затруднительном положении и помогли ему с честью выйти из столь щекотливой ситуации. Разрешите отблагодарить вас - примите эту скромную сумму и подарок от меня лично.";
 			link.l1 = "Благодарю вас, мне было приятно помогать этим молодым людям.";
 			link.l1.go = "EncGirl_5_1";
 		break;
 		
 		case "EncGirl_6":
-			dialog.text = "Какая благодарность?! за что благодарность?! Мало того, что этот оболтус уже полгода слоняется без работы, так еще и любезничать время нашел! Да я в его годы уже свое дело держал. А он, ишь, разохотился! У губернатора, вон, дочка на выданье, а этот приволок какую-то шалаву безродную, прости Господи, и благословения родительского испрашивает!";
+			dialog.text = "Какая благодарность?! за что благодарность?! Мало того, что этот оболтус уже полгода слоняется без работы, так ещё и любезничать время нашёл! Да я в его годы уже своё дело держал. А он, ишь, разохотился! У губернатора, вон, дочка на выданье, а этот приволок какую-то шалаву безродную, прости Господи, и благословения родительского испрашивает!";
 			link.l1 = "Хм, значит вы не верите в искренние чувства?";
 			link.l1.go = "EncGirl_6_1";		
 		break;
@@ -1793,7 +1798,7 @@ void ProcessDialogEvent()
 		case "EncGirl_6_2":
 			ChangeCharacterComplexReputation(pchar,"nobility", -1);
 			AddQuestRecord("JungleGirl", "19");
-			AddQuestUserData("JungleGirl", "sSex", GetSexPhrase("ел","ла"));
+			AddQuestUserData("JungleGirl", "sSex", GetSexPhrase("ёл","ла"));
 			AddQuestUserData("JungleGirl", "sSex1", GetSexPhrase("","а"));
 			CloseQuestHeader("JungleGirl");
 			DeleteAttribute(pchar, "GenQuest.EncGirl");
@@ -1815,7 +1820,7 @@ void ProcessDialogEvent()
 				                                                     "Клянусь дьяволом, тебе не обмануть меня! У пирса нет твоего корабля!"),
 													  pcharrepphrase("Я не вижу вашего корабля в порту, капитан " +GetFullName(pchar)+ ". Надеюсь, это не 'Летучий голландец'?",
 													                 "Капитан, удобнее грузить товар с пирса. Пришвартуйте корабль и приходите."));
-				link.l1 = NPCharRepPhrase(npchar, pcharrepphrase("" +RandSwear()+"Какая неприятность!!! Ладно, старый проныра, еще увидимся!",
+				link.l1 = NPCharRepPhrase(npchar, pcharrepphrase("" +RandSwear()+"Какая неприятность!!! Ладно, старый проныра, ещё увидимся!",
 				                                                 "Я не хотел"+ GetSexPhrase("","а") +" вас обмануть " +GetFullName(npchar)+ ", корабль на другой стороне острова."),
 												  pcharrepphrase("Нет. Мой корабль называется Black Perl. Что это ты побелел? Ха-ха! Шутка!",
 												                 "Спасибо за совет, обязательно им воспользуюсь."));
@@ -1837,7 +1842,7 @@ void ProcessDialogEvent()
 				                                                     "Клянусь дьяволом, тебе не обмануть меня! У пирса нет твоего корабля!"),
 													  pcharrepphrase("Я не вижу вашего корабля в порту, капитан " +GetFullName(pchar)+ ". Надеюсь, это не 'Летучий голландец'?",
 													                 "Капитан, удобнее грузить товар с пирса. Пришвартуйте корабль и приходите."));
-				link.l1 = NPCharRepPhrase(npchar, pcharrepphrase("" +RandSwear()+"Какая неприятность!!! Ладно, старый проныра, еще увидимся!",
+				link.l1 = NPCharRepPhrase(npchar, pcharrepphrase("" +RandSwear()+"Какая неприятность!!! Ладно, старый проныра, ещё увидимся!",
 				                                                 "Я не хотел"+ GetSexPhrase("","а") +" вас обмануть " +GetFullName(npchar)+ ", корабль на другой стороне острова."),
 												  pcharrepphrase("Нет. Мой корабль называется Black Perl. Что это ты побелел? Ха-ха! Шутка!",
 												                 "Спасибо за совет, обязательно им воспользуюсь."));
@@ -1867,7 +1872,7 @@ void ProcessDialogEvent()
 			else
 			{
 			    dialog.text = NPCharRepPhrase(npchar, pcharrepphrase("Дуришь меня? А где же твой корабль? У пирса его нет!","Клянусь дьяволом, тебе не обмануть меня! У пирса нет твоего корабля!"),pcharrepphrase("Я не вижу вашего корабля в порту, капитан " +GetFullName(pchar)+ ". Надеюсь, это не 'Летучий голландец'?","Капитан, удобнее грузить товар с пирса. Пришвартуйте корабль и приходите."));
-				link.l1 = NPCharRepPhrase(npchar, pcharrepphrase("" +RandSwear()+"Какая неприятность!!! Ладно, старый проныра, еще увидимся!","Я не хотел"+ GetSexPhrase("","а") +" вас обмануть " +GetFullName(npchar)+ ", корабль на другой стороне острова."), pcharrepphrase("Нет. Мой корабль называется Black Pearl. Что это ты побелел? Ха-ха! Шутка!","Спасибо за совет, обязательно им воспользуюсь."));
+				link.l1 = NPCharRepPhrase(npchar, pcharrepphrase("" +RandSwear()+"Какая неприятность!!! Ладно, старый проныра, ещё увидимся!","Я не хотел"+ GetSexPhrase("","а") +" вас обмануть " +GetFullName(npchar)+ ", корабль на другой стороне острова."), pcharrepphrase("Нет. Мой корабль называется Black Pearl. Что это ты побелел? Ха-ха! Шутка!","Спасибо за совет, обязательно им воспользуюсь."));
 			    link.l1.go = "exit";
 			}
 		break;
@@ -1911,7 +1916,7 @@ void ProcessDialogEvent()
 		
 		case "SailsTypeChooseDone":
 			AddMoneyToCharacter(Pchar, -sti(NPChar.SailsTypeMoney));
-			dialog.text = "Замечательно! Все сделаем в лучшем виде.";
+			dialog.text = "Замечательно! Всё сделаем в лучшем виде.";
 		    Link.l9 = "Спасибо.";
 			Link.l9.go = "exit";
 
@@ -1987,14 +1992,14 @@ void ProcessDialogEvent()
 		case "Sharlie_1":
 			if (GetQuestPastDayParam("questTemp.Sharlie_ship") > 3)
 			{
-				dialog.text = "Вы это сейчас наверное про люггер, за который внес залог в три тысячи песо Мишель де Монпе? Так этот корабль уже продан, потому что согласно договору, полная сумма должна была быть выплачена не позднее, чем за неделю после спуска корабля на воду\nВсе сроки прошли, денег я так и не увидел, поэтому люггер был продан. Так что не обессудьте, сударь.";
+				dialog.text = "Вы это сейчас наверное про люггер, за который внёс залог в три тысячи песо Мишель де Монпе? Так этот корабль уже продан, потому что согласно договору, полная сумма должна была быть выплачена не позднее, чем за неделю после спуска корабля на воду\nВсе сроки прошли, денег я так и не увидел, поэтому люггер был продан. Так что не обессудьте, сударь.";
 				link.l1 = "Да, вот как неудачно-то вышло... А другого корабля у вас точно нет?";
 				link.l1.go = "Sharlie_6";
 			}
 			else
 			{
 			dialog.text = "Хм. Да, действительно. Но...";
-			link.l1 = "И за него внесен залог - пять тысяч песо. Мишель де Монпе, внесший эти деньги, передает все права на этот корабль мне.";
+			link.l1 = "И за него внесён залог - пять тысяч песо. Мишель де Монпе, внесший эти деньги, передаёт все права на этот корабль мне.";
 			link.l1.go = "Sharlie_2";
 			}
 		break;
@@ -2003,7 +2008,7 @@ void ProcessDialogEvent()
 			int iDay = 3-sti(GetQuestPastDayParam("questTemp.Sharlie_ship"));
 			sTemp = "У вас осталось "+FindRussianDaysString(iDay)+"";
 			if (iDay == 0) sTemp = "Сегодня - последний день";
-			dialog.text = "Ну, раз такое дело, тогда продолжим нашу беседу, месье. Как вы правильно заметили, было внесено за корабль пять тысяч песо. Но полную стоимость корабля я оцениваю в двадцать две тысячи песо, вместе с боеприпасом. Так что с вас еще семнадцать тысяч - и корабль ваш\nПричем, согласно договору, вы должны выплатить эти деньги не позднее, чем через неделю после спуска корабля на воду. "+sTemp+", после чего я имею право продать этот корабль другому лицу. Кстати, покупатель уже есть, так что вам следует поторопиться.";
+			dialog.text = "Ну, раз такое дело, тогда продолжим нашу беседу, месье. Как вы правильно заметили, было внесено за корабль пять тысяч песо. Но полную стоимость корабля я оцениваю в двадцать две тысячи песо, вместе с боеприпасом. Так что с вас ещё семнадцать тысяч - и корабль ваш\nПричём, согласно договору, вы должны выплатить эти деньги не позднее, чем через неделю после спуска корабля на воду. "+sTemp+", после чего я имею право продать этот корабль другому лицу. Кстати, покупатель уже есть, так что вам следует поторопиться.";
 			if (sti(Pchar.money) >= 17000)
 			{
 				link.l1 = "Никуда мне торопиться не надо. У меня есть нужная сумма прямо сейчас. Вот, держите.";
@@ -2018,7 +2023,7 @@ void ProcessDialogEvent()
 			if (CheckAttribute(pchar, "questTemp.Sharlie.Rum") || CheckAttribute(pchar, "questTemp.Sharlie.Gigolo") || CheckAttribute(pchar, "questTemp.Sharlie.RescueDaughter"))
 			{
 				dialog.text = "Вы что-то хотели, месье?";
-				Link.l1 = "Я пришел посмотреть корабли, какие у вас есть... Но сейчас я немного занят - дело одно незаконченное осталось. Я еще загляну попозже, как только разберусь с ним.";
+				Link.l1 = "Я пришёл посмотреть корабли, какие у вас есть... Но сейчас я немного занят - дело одно незаконченное осталось. Я ещё загляну попозже, как только разберусь с ним.";
 				Link.l1.go = "exit";
 				break;
 			}
@@ -2040,7 +2045,7 @@ void ProcessDialogEvent()
 					}
 					else
 					{
-						link.l1 = "Нет, я еще работаю над этим.";
+						link.l1 = "Нет, я ещё работаю над этим.";
 						link.l1.go = "exit";
 						NextDiag.TempNode = "Sharlie_3";
 					}
@@ -2104,14 +2109,14 @@ void ProcessDialogEvent()
 		break;
 		
 		case "Sharlie_7":
-			dialog.text = "Тогда смотрите. Недавно я приобрел по сходной цене шлюп. Это бывшая пиратская посудина, ее прежних владельцев уже благополучно вздернули за многочисленные пригрешения. Корабль, прямо скажу, не ах, да и поврежден прилично, но в море выйти сможет\nМне некогда им сейчас заниматься - все мои работники заняты постройкой под заказ брига, так что можете купить его у меня в том состоянии, в каком он есть. Учитывая сказанное, уступлю дешевле обычного - пятнадцать тысяч песо, и это вместе с содержимым трюма.";
+			dialog.text = "Тогда смотрите. Недавно я приобрёл по сходной цене шлюп. Это бывшая пиратская посудина, её прежних владельцев уже благополучно вздернули за многочисленные прегрешения. Корабль, прямо скажу, не ах, да и повреждён прилично, но в море выйти сможет\nМне некогда им сейчас заниматься - все мои работники заняты постройкой под заказ брига, так что можете купить его у меня в том состоянии, в каком он есть. Учитывая сказанное, уступлю дешевле обычного - пятнадцать тысяч песо, и это вместе с содержимым трюма.";
 			link.l1 = "Я согласен. Главное - что сможет выйти в море, а до Гваделупы здесь рукой подать. Там и починю его, раз у вас нет возможности.";
 			link.l1.go = "Sharlie_8";
 		break;
 		
 		case "Sharlie_8":
 			AddMoneyToCharacter(pchar, -15000);
-			dialog.text = "Тогда поздравляю с покупкой. Корабль ваш. Думаю, он еще послужит вам верой и правдой.";
+			dialog.text = "Тогда поздравляю с покупкой. Корабль ваш. Думаю, он ещё послужит вам верой и правдой.";
 			link.l1 = "Спасибо!";
 			link.l1.go = "Sharlie_9";
 		break;
@@ -2150,7 +2155,7 @@ void ProcessDialogEvent()
 		break;
 		
 		case "Sharlie_shipwait":
-			dialog.text = "Ну, месье, вы все-таки вернулись с деньгами?";
+			dialog.text = "Ну, месье, вы всё-таки вернулись с деньгами?";
 			if (sti(Pchar.money) >= 15000)
 			{
 				link.l1 = "Да, думаю, у меня есть достаточная сумма для покупки хоть какого-то захудалого корабля.";
@@ -2158,7 +2163,7 @@ void ProcessDialogEvent()
 			}
 			else
 			{
-				link.l1 = "У меня еще нет достаточной суммы. Просто зашел посмотреть...";
+				link.l1 = "У меня ещё нет достаточной суммы. Просто зашел посмотреть...";
 				link.l1.go = "exit";
 				NextDiag.TempNode = "Sharlie_shipwait";
 			}
@@ -2194,7 +2199,7 @@ void ProcessDialogEvent()
 		break;
 		
 		case "FMQM_oil_4":
-			dialog.text = "Увы, монсеньор, но тут мы с вами погорели оба. Смолы конфискованы, и я впридачу потерял кругленькую сумму, дабы откупиться от тюрьмы. И откуда только эта чертова солдатня пронюхала? Наверняка, кто-то из моих работников подсмотрел и донес. Но я с этим еще разберусь, и если отыщу негодяя - мало ему не покажется!";
+			dialog.text = "Увы, монсеньор, но тут мы с вами погорели оба. Смолы конфискованы, и я впридачу потерял кругленькую сумму, дабы откупиться от тюрьмы. И откуда только эта чёртова солдатня пронюхала? Наверняка, кто-то из моих работников подсмотрел и донёс. Но я с этим ещё разберусь, и если отыщу негодяя - мало ему не покажется!";
 			link.l1 = "Значит, все мои старания были напрасны...";
 			link.l1.go = "FMQM_oil_5";
 		break;
@@ -2217,20 +2222,20 @@ void ProcessDialogEvent()
 		
 		// Addon 2016-1 Jason пиратская линейка
 		case "mtraxx_x":
-            dialog.text = "Я бы хотел вернуться к нашему разговору. Я готов предоставить вам очень большую скидку на работу над вашим судном... очень большую скидку в песо... если вы предоставите для работы неколько... больше шелка...";
-			link.l1 = "Мастер, не будем вилять. Я клянусь вам, что я не шпион, и не человек полковника Дойли. Более того - я работаю с Маркусом Тираксом, а это имя наверняка вам что-то да и говорит. Поэтому давайте начистоту. Я знаю, что вам постоянно нужен корабельный шелк, а Маркус Тиракс готов вам его поставлять. Тоже постоянно. Однако только в том случае, если мы сойдемся в цене. Так что давайте обсудим денежный вопрос, мастер.";
+            dialog.text = "Я бы хотел вернуться к нашему разговору. Я готов предоставить вам очень большую скидку на работу над вашим судном... очень большую скидку в песо... если вы предоставите для работы неколько... больше шёлка...";
+			link.l1 = "Мастер, не будем вилять. Я клянусь вам, что я не шпион, и не человек полковника Дойли. Более того - я работаю с Маркусом Тираксом, а это имя наверняка вам что-то да и говорит. Поэтому давайте начистоту. Я знаю, что вам постоянно нужен корабельный шёлк, а Маркус Тиракс готов вам его поставлять. Тоже постоянно. Однако только в том случае, если мы сойдёмся в цене. Так что давайте обсудим денежный вопрос, мастер.";
 			link.l1.go = "mtraxx_x_1";
 		break;
 		
 		case "mtraxx_x_1":
-            dialog.text = "Хорошо. Мне все равно деваться некуда - или в тюрьму, если вы человек Дойли, или на паперть, если срочно не найду большую партию шелка. Я готов платить за шелк золотом, по 25 дублонов за рулон. Но это при учете крупных партий, по 100 рулонов или около того.";
+            dialog.text = "Хорошо. Мне всё равно деваться некуда - или в тюрьму, если вы человек Дойли, или на паперть, если срочно не найду большую партию шёлка. Я готов платить за шёлк золотом, по 25 дублонов за рулон. Но это при учете крупных партий, по 100 рулонов или около того.";
 			link.l1 = "Такая цена меня устраивает. Думаю, Тиракс сможет поставлять объемы не менее 100 рулонов ежемесячно.";
 			link.l1.go = "mtraxx_x_2";
 		break;
 		
 		case "mtraxx_x_2":
             dialog.text = "Это было бы просто замечательно! Первую партию я готов принять хоть сегодня.";
-			link.l1 = "Сегодня не получится, а вот в ближайшее время - будет. Судно с товаром стоит в Капстервиле. Я сейчас отплываю туда и отправлю его к вам. Где проведем перегрузку?";
+			link.l1 = "Сегодня не получится, а вот в ближайшее время - будет. Судно с товаром стоит в Капстервиле. Я сейчас отплываю туда и отправлю его к вам. Где проведём перегрузку?";
 			link.l1.go = "mtraxx_x_3";
 		break;
 		
@@ -2241,8 +2246,8 @@ void ProcessDialogEvent()
 		break;
 		
 		case "mtraxx_x_4":
-            dialog.text = "Надеюсь, ваше судно прибудет в срок. Мне катастрофически не хватает шелка.";
-			link.l1 = "Не беспокойтесь, все будет в порядке. Всего доброго!";
+            dialog.text = "Надеюсь, ваше судно прибудет в срок. Мне катастрофически не хватает шёлка.";
+			link.l1 = "Не беспокойтесь, всё будет в порядке. Всего доброго!";
 			link.l1.go = "mtraxx_x_5";
 		break;
 		

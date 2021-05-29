@@ -1,5 +1,5 @@
 object oGameOver;
-
+/*
 void NetClient_OnEndGame()
 {
 	for (int i=0; i<NET_MAXCLIENTS; i++)
@@ -146,4 +146,4 @@ void NetClient_ControlActivation()
 			LaunchNetMenu();
 		break;
 	}
-}
+}*/

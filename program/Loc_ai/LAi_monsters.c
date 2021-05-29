@@ -3,7 +3,7 @@ void LAi_GenerateFantomFromMe(aref chr)
 {
 	//Проверяем возможность генерации фантома в данной локации
 	if(!TestRef(loadedLocation)) return;
-	if(!IsEntity(loadedLocation)) return;
+	if(!IsEntity(&loadedLocation)) return;
 	if(LAi_LocationIsFantomsGen(loadedLocation) == false) return;
 	//Проверяем возможность перерождения персонажа
 	if(LAi_CharacterIsReincarnation(chr) == false) return;
@@ -281,7 +281,7 @@ bool LAi_CreateEncounters(ref location)
 		return false;
 	}
 	//Можем ли генерить
-	if(CheckAttribute(location, "DisableEncounters")) return false;
+	if(CheckAttribute(location, "DisableEncounters") && location.DisableEncounters == true) return false; // mitrokosta фикс неправильного включения энкаунтеров
 	if(!CheckAttribute(location, "locators.encdetector") || !CheckNPCQuestDate(location, "Enc_date") || bDisableLandEncounters) return false;
 	if (CheckAttribute(location, "fastreload")) return false; //отсекаем локации exitTown у пиратских городов
     //boal 02.09.06 пауза случаек на один раз -->
@@ -331,6 +331,7 @@ bool LAi_CreateEncounters(ref location)
 	// bLandEncountersGen устанавливался вручную и не гарантиварол избежание пересечений квест-энкаункеры
 	if(!isLocationFreeForQuests(location.Id)) return false;
 	
+  Log_TestInfo("Генерируем энкаунтеры."); // mitrokosta для теста
 	//группа, куда будем помещать фантомов
 	encGroup = LAi_FindRandomLocator("encdetector");
 	str = "locators." + encGroup;
@@ -1097,7 +1098,7 @@ bool LAi_CreateCaveEncounters(ref location) // Jason 061012 пещерные э�
 			bLandEncountersGen = true;
 			return false;
 		}
-		if(CheckAttribute(location, "DisableEncounters")) return false;
+		if(CheckAttribute(location, "DisableEncounters") && location.DisableEncounters == true) return false; // mitrokosta фикс неправильного включения энкаунтеров
 		if (CheckAttribute(location, "enc") && GetNpcQuestPastDayParam(location, "enc") < 1) return false;
 		if (findsubstr(location.id, "Ksochitam_" , 0) != -1 || findsubstr(location.id, "mine_" , 0) != -1) return false;
 		if (CheckAttribute(pchar, "questTemp.Sharlie.Lock")) return false;

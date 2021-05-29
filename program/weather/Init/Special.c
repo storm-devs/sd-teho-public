@@ -67,7 +67,7 @@ int Whr_InitSpecial(int n)
 	Weathers[n].Rainbow.Enable = false;
 	Weathers[n].Rainbow.Texture = "weather\rainbow\rainbow.tga";
 
-	Weathers[n].Sun.Color = argb(0,80,80,68);
+	Weathers[n].Sun.Color = argb(0,60,60,68);
 	Weathers[n].Sun.Ambient = argb(0,40,30,20);
 	Weathers[n].Sun.AzimuthAngle = Degree2Radian(3.0);
 	Weathers[n].Sun.HeightAngle = 0.36;
@@ -131,7 +131,7 @@ int Whr_InitSpecial(int n)
 	Weathers[n].Sun.Reflection.Size = 500.0;
 	Weathers[n].Sun.Reflection.Color = argb(200, 200, 200, 200);
 
-	Weathers[n].Sea2.BumpScale = 0.05; //МЕЛКИЕ ВОЛНЫ
+	Weathers[n].Sea2.BumpScale = 0.05; //ћ?Ћ »? ¬ќЋЌџ
 	Weathers[n].Sea2.PosShift = 2.0; //остроконечность волн
 	
 	Weathers[n].Sea2.WaterColor = argb(0, 10, 55, 100);
@@ -145,7 +145,7 @@ int Whr_InitSpecial(int n)
 	Weathers[n].Sea2.Amp1 = 6.0; //амплитуда 1 волны
 	Weathers[n].Sea2.AnimSpeed1 = 10.0; //скорость анимации
 	Weathers[n].Sea2.Scale1 = 0.5; //размеры волны
-	Weathers[n].Sea2.MoveSpeed1 = "5.0, 0.0, 0.0"; //скорость движения
+	Weathers[n].Sea2.MoveSpeed1 = "5.0, 0.0, 0.0"; //скорость движени€
 
 	Weathers[n].Sea2.Amp2 = 0.75;
 	Weathers[n].Sea2.AnimSpeed2 = 3.0;
@@ -293,7 +293,7 @@ int Whr_InitSpecial(int n)
 	Weathers[n].Sea.SunRoad.Color1 = argb(0,164,55,0);
 	Weathers[n].Sea.SunRoad.Color2 = argb(0,255,200,50);
 	Weathers[n].Sea.SunRoad.Power = 0.2;
-	//угол, частота, высота волны в метрах, начальная позиция волны, скорость волны
+	//угол, частота, высота волны в метрах, начальна€ позици€ волны, скорость волны
 	Weathers[n].Sea.Harmonics.h1 = "0.0, 5.0, 1.0, 0.0, 250.0";
 	Weathers[n].Sea.Harmonics.h2 = "270.0, 1.0, 5.0, 0.0, 50.0";
 	Weathers[n].Sea.Harmonics.h3 = "45.0, 2.0, 3.0, 0.0, 150.0";
@@ -306,7 +306,7 @@ int Whr_InitSpecial(int n)
 	Weathers[n].Sun.Reflection.Size = 500.0;
 	Weathers[n].Sun.Reflection.Color = argb(200, 200, 200, 200);
 
-	Weathers[n].Sea2.BumpScale = 0.05; //МЕЛКИЕ ВОЛНЫ
+	Weathers[n].Sea2.BumpScale = 0.05; //ћ?Ћ »? ¬ќЋЌџ
 	Weathers[n].Sea2.PosShift = 1.9; //остроконечность волн
 	
 	Weathers[n].Sea2.WaterColor = argb(0, 65, 100, 110);
@@ -320,15 +320,15 @@ int Whr_InitSpecial(int n)
 	Weathers[n].Sea2.Amp1 = 6.0; //амплитуда 1 волны
 	Weathers[n].Sea2.AnimSpeed1 = 10.0; //скорость анимации
 	Weathers[n].Sea2.Scale1 = 0.8; //размеры волны
-	Weathers[n].Sea2.MoveSpeed1 = "0.0, 0.0, 3.0"; //скорость движения
+	Weathers[n].Sea2.MoveSpeed1 = "0.0, 0.0, 3.0"; //скорость движени€
 
 	Weathers[n].Sea2.Amp2 = 1.0;
 	Weathers[n].Sea2.AnimSpeed2 = 19.0;
 	Weathers[n].Sea2.Scale2 = 2.0;
 	Weathers[n].Sea2.MoveSpeed2 = "-2.0, 0.0, 0.0";
 
-	Weathers[n].Sea2.FoamK = 0.3;//яркость пены по высоте 0.1 - пена яркая с 10 метров 1.0 через метр после начала
-	Weathers[n].Sea2.FoamV = 2.8;//высота с которой начинается пена
+	Weathers[n].Sea2.FoamK = 0.3;//€ркость пены по высоте 0.1 - пена €рка€ с 10 метров 1.0 через метр после начала
+	Weathers[n].Sea2.FoamV = 2.8;//высота с которой начинаетс€ пена
 	Weathers[n].Sea2.FoamUV = 1.0; //тайлинг пены
 	Weathers[n].Sea2.FoamTexDisturb = 0.7;//сдвиг по нормали. х.з. что это надо поюзать. значение от 0.0 до 1.0
 

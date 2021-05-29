@@ -41,7 +41,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		
 		//Цена чахотки
 		case "Consumption":
-			dialog.text = "Да вы что, смеетесь? Этих Хуанов в любой колонии...";
+			dialog.text = "Да вы что, смеётесь? Этих Хуанов в любой колонии...";
 			link.l1 = "Ясно. Простите за беспокойство...";
 			link.l1.go = "exit";
 			npchar.quest.Consumption = "true";
@@ -49,7 +49,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		
 		// Страж Истины
 		case "guardoftruth":
-			dialog.text = LinkRandPhrase("Бросьте, капитан! Вы думаете, я держу у себя в памяти события многомесячной давности?","Сожалею, сеньор, но ничем помочь не могу.","Сударь, вы серьезно думаете, что я запоминаю подобные пустяки? У меня и своих дел по горло.");
+			dialog.text = LinkRandPhrase("Бросьте, капитан! Вы думаете, я держу у себя в памяти события многомесячной давности?","Сожалею, сеньор, но ничем помочь не могу.","Сударь, вы серьёзно думаете, что я запоминаю подобные пустяки? У меня и своих дел по горло.");
 			link.l1 = LinkRandPhrase("Ясно. Простите за беспокойство...","Жаль. Всего доброго.","");
 			link.l1.go = "exit";
 			npchar.quest.guardoftruth = "true";

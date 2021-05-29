@@ -1,5 +1,5 @@
 object NCSunGlow;
-
+/*
 void NetClient_WhrDeleteSunGlowEnvironment()
 {
 	if (isEntity(&NCSunGlow))
@@ -85,4 +85,4 @@ void NetClient_MoveSunGlowToLayers(string sExecuteLayer, string sRealizeLayer)
 {
 	LayerAddObject(sExecuteLayer, &NCSunGlow, -2);
 	LayerAddObject(sRealizeLayer, &NCSunGlow, -2);
-}
+}*/

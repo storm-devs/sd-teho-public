@@ -113,7 +113,7 @@ void ProcessDialogEvent()
 					if(!CheckAttribute(pchar,"GenQuest.CaptainComission.SpeakContra"))
 					{
 						pchar.GenQuest.CaptainComission.SpeakContra = true;
-						dialog.text = "Сегодня никаких сделок не будет. Во всех бухтах полно патруля, губернатор ищет груз, который капитан патрульного " + GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipType),"Name") + "Acc")) + " " + pchar.GenQuest.CaptainComission.Name + " якобы конфисковал у какого-то пирата и спрятал.";
+						dialog.text = "Сегодня никаких сделок не будет. Во всех бухтах полно патруля, губернатор ищет груз, который капитан патрульного " + GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipType),"Name") + "Gen")) + ", " + pchar.GenQuest.CaptainComission.Name + ", якобы конфисковал у какого-то пирата и спрятал.";
 						link.l1 = "А где сам капитан " + pchar.GenQuest.CaptainComission.Name + "?";
 						link.l1.go = "CapComission_1";
 						break;
@@ -197,9 +197,9 @@ void ProcessDialogEvent()
 		
 		case "CapComission_1":
 			if(pchar.GenQuest.CaptainComission.variant == "A2")
-			{
+			{    // лесник - изменения в диалоге про тайник. суть не менял.
 				dialog.text = "В подвале форта, где же ему ещё быть?.. Капитан в любой момент может выдать властям место, где спрятал груз, и тогда мы останемся с носом. Так что, пока не уляжется вся эта суета, даже не думайте о сделках.";
-				link.l1 = "Слушайте, вы же каждый камень на острове знаете. Неужели вам не известен тайник капитана " + pchar.GenQuest.CaptainComission.Name + "?";
+				link.l1 = "Слушайте, вы же каждый камень на острове знаете. Неужели вам не известно где капитан " + pchar.GenQuest.CaptainComission.Name + " устроил тайник?";
 				link.l1.go = "CapComission_4";
 			}
 			if(pchar.GenQuest.CaptainComission.variant == "A3")
@@ -210,9 +210,9 @@ void ProcessDialogEvent()
 			}	
 		break;
 		
-		case "CapComission_2":
-			dialog.text = "Мы наблюдали тот бой со скалы пока не стемнело. В трубу отчётливо было видно, что " + GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipTypeVictim),"Name"))) + " под Чёрным Роджером. А потом, спустя часов пять, мы увидели в темноте только вспышку, будто крюйт-камера рванула. За это время вполне можно было вывезти товар на берег.";
-			link.l1 = "А разве вам не известно, где тайник капитана " + pchar.GenQuest.CaptainComission.Name +"? Вы же каждый камень на острове знаете.";
+		case "CapComission_2": // лесник - изменил диалог про тайник . суть не менял
+			dialog.text = "Мы наблюдали тот бой со скалы пока не стемнело. В трубу отчётливо было видно, что " + GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipTypeVictim),"Name"))) + " под Весёлым Роджером. А потом, спустя часов пять, мы увидели в темноте только вспышку, будто крюйт-камера рванула. За это время вполне можно было вывезти товар на берег.";
+			link.l1 = "А разве вам не известно, где капитан " + pchar.GenQuest.CaptainComission.Name +" устроил тайник? Вы же каждый камень на острове знаете.";
 			link.l1.go = "CapComission_3";
 		break;
 		
@@ -222,9 +222,9 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			AddQuestRecord("CaptainComission2", "38");
 			AddQuestUserData("CaptainComission2", "sSex", GetSexPhrase("","а"));
-			AddQuestUserData("CaptainComission2", "sShipType", GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipType),"Name") + "Acc")));
+			AddQuestUserData("CaptainComission2", "sShipType", GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipType),"Name") + "Gen")));
 			AddQuestUserData("CaptainComission2", "sName", pchar.GenQuest.CaptainComission.Name);
-			AddQuestUserData("CaptainComission2", "sShipTypeQuest", GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipTypeVictim),"Name") + "Acc")));
+			AddQuestUserData("CaptainComission2", "sShipTypeQuest", GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipTypeVictim),"Name") + "Gen")));
 		break;
 		
 		case "CapComission_4":

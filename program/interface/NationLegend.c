@@ -4,7 +4,7 @@ void InitInterface(string iniName)
 {
     // лочим квест и карту
     bQuestCheckProcessFreeze = true;
-    if(IsEntity(worldMap))
+    if(IsEntity(&worldMap))
     {
     	wdmLockReload            = true;
     }

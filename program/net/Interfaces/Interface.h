@@ -1,6 +1,7 @@
 #ifndef NET_INTERFACE_H
 #define NET_INTERFACE_H
 
+
 #define NET_FG_LAN			0
 #define NET_FG_INTERNET		1
 #define NET_FG_FAVORITE		2
@@ -24,6 +25,7 @@ int iNumLanServersList, iNumInternetServersList, iNumFavServersList;
 
 object	LanServers[NET_MAX_SERVERS], InternetServers[NET_MAX_SERVERS];
 int		LanServersList[NET_MAX_SERVERS], InternetServersList[NET_MAX_SERVERS], FavServersList[NET_MAX_SERVERS];
+
 
 void Picture_SetPicture(string sPictureControl, string sTexture)
 {

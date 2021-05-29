@@ -1,4 +1,4 @@
-void NetServer_OnCamera(int wNetClientID, int iMsg)
+/*void NetServer_OnCamera(int wNetClientID, int iMsg)
 {
 	int iSubCode = NMGetByte(iMsg);
 
@@ -34,4 +34,4 @@ int NetServer_GetTeamRelation(int iOurTeam, int iCurrentTargetTeam)
 	if (sti(NetServer.GameType) == NETGAME_DEATHMATCH) return 2;	// enemy
 	if (iOurTeam != iCurrentTargetTeam) return 2;					// enemy
 	return 1;														// friend
-}
+}*/

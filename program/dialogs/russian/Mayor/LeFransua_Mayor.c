@@ -5,7 +5,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	{
 		case "quests":
 			dialog.text = NPCStringReactionRepeat(RandPhraseSimple("Что вы хотели? Спрашивайте.", "Я слушаю вас, что за вопрос?"), "Второй раз за день вы пытаетесь задать ворпос...", "В третий раз за день вы опять пытаетесь задать вопрос...",
-                          "Да когда же это кончится?! У меня дел полно по управлению делами города, а ты все вопросы пытаешься задать!", "block", 1, npchar, Dialog.CurrentNode);
+                          "Да когда же это кончится?! У меня полно работы по управлению делами города, а ты всё вопросы пытаешься задать!", "block", 1, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat(RandPhraseSimple("Я передумал"+ GetSexPhrase("","а") +"...", "Не сейчас, не место и не время..."), "Да, верно... Но не сейчас, позже...",
                       "Задам, задам... Только позже...", "Извините, " + GetAddress_FormToNPC(NPChar) + "...", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
@@ -31,7 +31,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			}
 			if (CheckAttribute(pchar, "GenQuest.Marginpassenger") && pchar.GenQuest.Marginpassenger == "cabin")
 			{
-				link.l1 = "Я слышал, что ты занимаешься бизнесом, связанном с пленниками...";
+				link.l1 = "Я слышал, что ты занимаешься бизнесом, связанным с пленниками...";
 				link.l1.go = "Marginpassenger";
 			}
 		break;
@@ -257,19 +257,19 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		
 		//Захват пассажиров
 		case "Marginpassenger":
-			dialog.text = "А тебе-то какое дело до того, чем я занимаюсь, а чем нет? Знаешь что, шел бы ты отс...";
-			link.l1 = "Тише, не кипятись. Я пришел к тебе по делу, причем именно по этому делу.";
+			dialog.text = "А тебе-то какое дело до того, чем я занимаюсь, а чем нет? Знаешь что, шёл бы ты отс...";
+			link.l1 = "Тише, не кипятись. Я пришёл к тебе по делу, причём именно по этому делу.";
 			link.l1.go = "Marginpassenger_1";
 		break;
 		
 		case "Marginpassenger_1":
-			dialog.text = "А-а, ну ладно. За кого ты привез выкуп?";
-			link.l1 = "Погоди. Я сюда пришел не для того, чтобы выкупать, а для того, чтобы предложить тебе купить одного моего пленника. Ну, а ты потом cможешь получить за него выкуп.";
+			dialog.text = "А-а, ну ладно. За кого ты привёз выкуп?";
+			link.l1 = "Погоди. Я сюда пришёл не для того, чтобы выкупать, а для того, чтобы предложить тебе купить одного моего пленника. Ну, а ты потом cможешь получить за него выкуп.";
 			link.l1.go = "Marginpassenger_2";
 		break;
 		
 		case "Marginpassenger_2":
-			dialog.text = "Хм. А зачем тебе понадобилось мое посредничество? Чего сам не хочешь получить денежки напрямую?";
+			dialog.text = "Хм. А зачем тебе понадобилось моё посредничество? Чего сам не хочешь получить денежки напрямую?";
 			link.l1 = "Для меня в данном случае это опасно. Могут быть проблемы с властями.";
 			link.l1.go = "Marginpassenger_3";
 		break;
@@ -282,7 +282,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		
 		case "Marginpassenger_4":
 			int iTemp = makeint(sti(pchar.GenQuest.Marginpassenger.Dublon)*2*stf(pchar.GenQuest.Marginpassenger.Chance))*100;
-			dialog.text = "Так-так... Если ты не врешь, то это может оказаться интересной сделкой. Пожалуй, я готов заплатить за этого человека "+iTemp+" песо, или, если хочешь, могу поделиться полезной информацией. Что тебе больше нравится.";
+			dialog.text = "Так-так... Если ты не врёшь, то это может оказаться интересной сделкой. Пожалуй, я готов заплатить за этого человека "+iTemp+" песо, или, если хочешь, могу поделиться полезной информацией. Что тебе больше нравится.";
 			link.l1 = "Давай лучше песо. Я уже вдоволь намаялся с этим делом, будь оно неладно...";
 			link.l1.go = "Marginpassenger_money";
 			link.l2 = "Ха! Лучше расскажи что-нибудь полезное. Уверен, ерунды ты мне не предложишь.";
@@ -297,7 +297,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		
 		case "Marginpassenger_money_1":
 			iTemp = makeint(sti(pchar.GenQuest.Marginpassenger.Dublon)*2*stf(pchar.GenQuest.Marginpassenger.Chance))*100;
-			dialog.text = "Да всегда пожалуйста, привози еще... Бывай!";
+			dialog.text = "Да всегда пожалуйста, привози ещё... Бывай!";
 			link.l1 = "И тебе всего доброго...";
 			link.l1.go = "exit";
 			AddMoneyToCharacter(pchar, iTemp);
@@ -318,7 +318,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				case 0: //бухта на южном мейне
 					SelectSouthshore();
 					while (!isLocationFreeForQuests(pchar.GenQuest.Marginpassenger.Shore)) SelectSouthshore();
-					dialog.text = "Приятно иметь дело со сметливым человеком, парень! Теперь слушай: через несколько дней к " + XI_ConvertString(pchar.GenQuest.Marginpassenger.Shore+"Dat") + " подойдет испанская экспедиция из Мейна, с запасами ценной древесины, и будет ждать корабля, который должен прийти и забрать груз. Если за неделю ты успеешь туда добраться - у тебя будет шанс забрать весь товар себе\nНа твоем месте я бы уже бежал к своей посудине. И потрудись доставить пленника сюда.";
+					dialog.text = "Приятно иметь дело со сметливым человеком, парень! Теперь слушай: через несколько дней к " + XI_ConvertString(pchar.GenQuest.Marginpassenger.Shore+"Dat") + " подойдёт испанская экспедиция из Мейна, с запасами ценной древесины, и будет ждать корабля, который должен прийти и забрать груз. Если за неделю ты успеешь туда добраться - у тебя будет шанс забрать весь товар себе\nНа твоём месте я бы уже бежал к своей посудине. И потрудись доставить пленника сюда.";
 					link.l1 = "Благодарю! Древесина послужит хорошей компенсацией за мои мытарства! А мой пассажир уже должен быть где-то у городских ворот. Его к тебе приведут.";
 					link.l1.go = "Marginpassenger_offer_1";
 				break;
@@ -326,7 +326,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				case 1: //просто кораблик
 					SelectSouthcity();
 					pchar.GenQuest.Marginpassenger.ShipName1 = GenerateRandomNameToShip(SPAIN);
-					dialog.text = "Приятно иметь дело со сметливым человеком, парень! Теперь слушай: приблизительно через неделю из "+XI_ConvertString("Colony"+pchar.GenQuest.Marginpassenger.Southcity+"Gen")+" выйдет испанская баркентина '"+pchar.GenQuest.Marginpassenger.ShipName1+"' с грузом ценной древесины и отправится в порт "+XI_ConvertString("Colony"+pchar.GenQuest.Marginpassenger.Southcity1+"Gen")+". Если не будешь зевать, то запросто перехватишь ее\nТы еще здесь? На твоем месте я бы уже бежал к своей посудине. И потрудись доставить пленника сюда.";
+					dialog.text = "Приятно иметь дело со сметливым человеком, парень! Теперь слушай: приблизительно через неделю из "+XI_ConvertString("Colony"+pchar.GenQuest.Marginpassenger.Southcity+"Gen")+" выйдет испанская баркентина '"+pchar.GenQuest.Marginpassenger.ShipName1+"' с грузом ценной древесины и отправится в порт "+XI_ConvertString("Colony"+pchar.GenQuest.Marginpassenger.Southcity1+"Gen")+". Если не будешь зевать, то запросто перехватишь её\nТы ещё здесь? На твоём месте я бы уже бежал к своей посудине. И потрудись доставить пленника сюда.";
 					link.l1 = "Благодарю! Древесина послужит хорошей компенсацией за мои мытарства! А мой пассажир уже должен быть где-то у городских ворот. Его к тебе приведут.";
 					link.l1.go = "Marginpassenger_offer_2";
 				break;

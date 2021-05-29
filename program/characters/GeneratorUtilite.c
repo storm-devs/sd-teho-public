@@ -632,32 +632,72 @@ float Sea_ApplyMaxSpeedZ(aref arCharShip, float fWindDotShip, ref rCharacter) //
 	ref		rShip = GetRealShip(sti(arCharShip.Type)); // база
     float   fMaxSpeedZ = 0.0;
     float   fWindAgainstSpeed;
+    float   BtWindR;
+    float   fkoeff;
 	
 	fMaxSpeedZ 			= stf(arCharShip.MaxSpeedZ);	
 	fWindAgainstSpeed   = FindShipWindAgainstSpeed(rCharacter);
-	arCharShip.WindAgainstSpeed = acos(1.0 - fWindAgainstSpeed) * 180.0/PI;
-		
-	float BtWindR = 1.0 -  stf(fWindAgainstSpeed);
-	// Jason: добавляю в формулу поправочный коэффициент. Без этого коэффициента корабли с косыми парусами превращаются в калек - никогда не достигают своей макс скорости согласно ТТХ даже на оптимальном курсе. Против ветра их скорость возрастает прямо пропорционально бейдевинду, в противном случае нахуя бейд вообще нужен вместе с повышалкой, если он только вредит в итоге. Таким образом при движении против ветра имеем следующее: чем выше бейд корабля - тем выше его скорость на тупых углах и тем более тупой угол можно взять до критического падения скорости.
-	float fkoeff = stf(fWindAgainstSpeed); // собственно бейдевинд + повышалка
-	if (stf(fkoeff) < 1) fkoeff = 1; // движение прямых парусов против ветра оставляем без изменений
+	arCharShip.WindAgainstSpeed = Radian2Degree(acos(1.0 - fWindAgainstSpeed));     // 41.4 - 126.8 градусов без амулета
 
-	if(fWindDotShip < BtWindR) // по ветру
+     // LDH 16Jan17 - new sailing model for fore and aft rigged ships
+     // LDH 18Feb17 - added mod toggle
+	if (ENHANCED_SAILING_MODE && stf(rShip.WindAgainstSpeed) >= 1.0)   // fore and aft rigged ships with mod enabled
 	{
-		fMaxSpeedZ = fMaxSpeedZ * (1.0 + 0.974 * (fWindDotShip - BtWindR) / (1.0 + BtWindR));
+		// convert radians to actual speed (radians * 6.5), these are estimates
+		fWindAgainstSpeed *= 6.5;
+		if (fWindDotShip > 0.0)  // with the wind
+        {
+            fMaxSpeedZ = fMaxSpeedZ * (1.0 - fWindDotShip / (0.5 + pow(fWindAgainstSpeed, 0.25)));
+        }
+        else                     // against the wind
+        {
+			fMaxSpeedZ = fMaxSpeedZ * (1.0 + AgainstWindFactor(rCharacter) * (fWindDotShip/3.2 - pow(abs(fWindDotShip), fWindAgainstSpeed)));
+            if (fMaxSpeedZ < 0.0) fMaxSpeedZ = 0.0;
+        }
 	}
-	else // против ветра
-	{
-		fMaxSpeedZ = fkoeff*fMaxSpeedZ * (1.0  - (fWindDotShip - BtWindR)/ 2.0);
-	}	
-	
+    else   // default sailing model for square rigged ships or if enhanced sailing mod not used
+	{		
+		BtWindR = 1.0 -  stf(fWindAgainstSpeed);
+		// Jason: добавляю в формулу поправочный коэффициент. Без этого коэффициента корабли с косыми парусами превращаются в калек - никогда не достигают своей макс скорости согласно ТТХ даже на оптимальном курсе. Против ветра их скорость возрастает прямо пропорционально бейдевинду, в противном случае нахуя бейд вообще нужен вместе с повышалкой, если он только вредит в итоге. Таким образом при движении против ветра имеем следующее: чем выше бейд корабля - тем выше его скорость на тупых углах и тем более тупой угол можно взять до критического падения скорости.
+		fkoeff = stf(fWindAgainstSpeed); // собственно бейдевинд + повышалка
+		if (stf(fkoeff) < 1) fkoeff = 1; // движение прямых парусов против ветра оставляем без изменений
+
+		if(fWindDotShip < BtWindR) // по ветру
+		{
+			fMaxSpeedZ = fMaxSpeedZ * (1.0 + 0.974 * (fWindDotShip - BtWindR) / (1.0 + BtWindR));
+		}
+		else // против ветра
+		{
+			fMaxSpeedZ = fkoeff*fMaxSpeedZ * (1.0  - (fWindDotShip - BtWindR)/ 2.0);
+		}	
+    }
 	return fMaxSpeedZ;
 }
 
+// LDH 17Feb17 - for fore and aft rigged ships, sail faster between beam and best course arrow
+// only used when sailing against the wind
+float AgainstWindFactor(ref rCharacter)
+{
+	float Wind = Radian2Degree(NormalizeAngle(stf(Weather.Wind.Angle)));
+	float Ship = Radian2Degree(NormalizeAngle(stf(rCharacter.ship.Ang.y)));
 
+	float Diff = abs(Ship - Wind);		// difference between your heading and the direction the wind is blowing
+	if (Diff > 180.0) Diff = abs(Diff - 360.0);
 
+	float BestCourse = FindShipWindAgainstSpeed(rCharacter);	// best course angle, includes Pilgrim's amulet
+	BestCourse = Radian2Degree(acos(1.0 - BestCourse));
 
+	float Factor = 1.0;						// Normal calculation for sailing closer to the wind than your best course arrows
+	if (Diff < BestCourse) Factor = 0.5;	// Ship sails faster between wind on the beam and best course arrows
 
+	return Factor;
+}
 
+// LDH 25Feb17
+float NormalizeAngle(float Angle)
+{
+	while (Angle >= PIm2) Angle -= PIm2;
+	while (Angle < 0.0)   Angle += PIm2;
 
-
+	return Angle;
+}

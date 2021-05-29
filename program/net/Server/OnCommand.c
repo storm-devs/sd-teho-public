@@ -1,4 +1,4 @@
-void NetServer_OnCommand(int wNetClientID, int iMsg)
+/*void NetServer_OnCommand(int wNetClientID, int iMsg)
 {
 	ref rClient = NetServer_GetClient(wNetClientID);
 
@@ -21,3 +21,4 @@ void NetServer_OnCommand(int wNetClientID, int iMsg)
 		break;
 	}
 }
+*/

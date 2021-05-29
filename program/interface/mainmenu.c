@@ -6,6 +6,7 @@ int	 DLCAppID = 0;
 
 int iChar;
 #event_handler("Control Activation","TempIControlProcess");
+#event_handler("CannonFire", "CannonFire");
 
 void TempIControlProcess()
 {
@@ -40,14 +41,14 @@ void InitInterface(string iniName)
 		CreateScreenShoter();
 	}
 	
-	if(bSteamAchievements)
+	if(bSteamAchievements || GetSteamEnabled())
 	{
 		DLCAppID = CheckUpdates();	
 	}
 	else
 	{ 
 		DLCAppID = 0;
-	}	
+	}
 
 	CreateBackEnvironment();
 
@@ -123,7 +124,7 @@ void CreditsPress()
 
 void UpdatesPress()
 {
-	if(DLCAppID > 0 && bSteamAchievements)
+	if(DLCAppID > 0 && bSteamAchievements && GetSteamEnabled())
 	{
 		DLCState = DLCStartOverlay(MAIN_APPID); // открываем окошко в стиме для главной игры а не для дополнения
 	}
@@ -176,7 +177,7 @@ void ProcCommand()
 		case "Options":		OptionsPress(); 	break;
 		case "Credits":		CreditsPress(); 	break;
 //		case "Credits":		MultiPress()(); 	break;
-		case "Updates":		UpdatesPress(); 	break;
+		//case "Updates":		UpdatesPress(); 	break;
 		case "Exit":		SetEventHandler("frame","QuitPress",0);  break;
 	}
 }
@@ -187,7 +188,7 @@ void UpdateInterface()
 	makearef(arMenu,InterfaceBackScene.menu);
 	bool isSteamOverlayEnabled = GetEventData();
 
-	if(!bSteamAchievements) return;
+	if(!bSteamAchievements || !GetSteamEnabled()) return;
 	trace("isSteamOverlayEnabled : " + isSteamOverlayEnabled );
 	
 	arMenu.l1.locname = "menu02";	arMenu.l1.sel = "mainmenu\menu02_active";	arMenu.l1.norm = "mainmenu\menu02_passive"; arMenu.l1.event = "New";			arMenu.l1.path = LanguageGetLanguage();
@@ -265,6 +266,7 @@ void CreateBackEnvironment()
 
 	// create ship
 	MainMenu_CreateShip();
+
 /*
 	if( Whr_IsNight() ) 
 	{
@@ -307,6 +309,7 @@ void MainMenu_CreateShip()
 {
 	//int
 	iChar = GenerateCharacter(rand(4), WITHOUT_SHIP, "citizen", MAN, 0, WARRIOR);   //PIRATE
+	characters[iChar].id = "menuCharacter";
 	ref	rCharacter = &characters[iChar];
 	int nChoosedBaseShipType = rand(SHIP_LUGGER) + 1;//SHIP_TARTANE;SHIP_LUGGER;SHIP_CARAVEL;
 	rCharacter.ship.type = GenerateShip(nChoosedBaseShipType, false);
@@ -319,7 +322,8 @@ void MainMenu_CreateShip()
 	Ship_SetTrackSettings( rCharacter );
 
 	rCharacter.Features.GeraldSails = true;
-	rCharacter.Ship.Speed.z = 1.0;
+	rCharacter.Ship.Speed.z = 2.0;
+	//rCharacter.Ship.Speed.z = 5.0;
 	//rCharacter.Ship.Stopped = true;
 	rCharacter.Ship.Pos.Mode = SHIP_WAR;
 	rCharacter.Ship.Pos.x = 38.175;
@@ -339,6 +343,9 @@ void MainMenu_CreateShip()
 	CreateEntity( rCharacter, "ship" );
 	ref rBaseShip = GetRealShip(sti(rCharacter.ship.type));
 	SendMessage( rCharacter, "laa", MSG_SHIP_CREATE, &rCharacter, &rBaseShip );
+	
+	PostEvent("Cannonfire", 3000);
+	//CannonFire();	
 }
 
 void DeleteBackEnvironment()
@@ -381,7 +388,7 @@ void MenuCreateLogo()
 
 void MainMenu_DeleteAnimals()
 {
-	if (IsEntity(Animals))
+	if (IsEntity(&Animals))
 		DeleteClass(Animals);
 }
 
@@ -424,6 +431,7 @@ void ICreateWeather()
 	Sea.isDone = "";
 
 	CreateCoastFoamEnvironment("MainMenu", "execute", "realize");
+
 	iBlendWeatherNum = -1; // залоченная погода
 }
 
@@ -433,7 +441,7 @@ int CheckUpdates()
 	int	 i;
 	int	 appID;
 
-	if(!bSteamAchievements) return 0;
+	if(!bSteamAchievements || !GetSteamEnabled()) return 0;
 	
 	dlcCount = GetDLCCount();
 	
@@ -443,10 +451,20 @@ int CheckUpdates()
         if( appID > 0 )
         {
 			bOk = GetDLCenabled(appID);
-			trace("GetDLCenabled : " + appID + " " + bOk);
+//			trace("GetDLCenabled : " + appID + " " + bOk);
 			if(!bOk) return appID;
 		}
 		else continue;	
 	}
 	return 0;
+}
+
+void CannonFire()
+{
+	int iChar = GetCharacterIndex("menuCharacter");
+	if(iChar != -1)
+	{
+		Ship_DoFakeFire(&characters[iChar], "cannonr", 2.0);
+		PostEvent("Cannonfire", 8000 + rand(8000));	
+	}
 }

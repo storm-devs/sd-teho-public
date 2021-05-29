@@ -134,6 +134,7 @@ void DailyRatsEatGoodsUpdate(ref chref)
         
         iQuantity = 1+ rand(makeint(iQuantity / (10+fSkill)));
 		if (IsCharacterPerkOn(chref, "HT2")) iQuantity = makeint(iQuantity/2) + 1;
+		if (CheckAttribute(chref, "quest.givemecat")) iQuantity = iQuantity * 0.75 + 1; // Митрокоста + Лесник - кошка на крбале ГГ снижение на 25%																			 
         RemoveCharacterGoodsSelf(chref, iGoods, iQuantity);
         //PlaySound("interface\notebook.wav");
         Log_SetStringToLog(RandSwear());
@@ -384,7 +385,7 @@ void DailyEatCrewUpdateForShip(ref rChar, bool IsCompanionTraveler) // IsCompani
 			if(CheckOfficersPerk(rChar, "IronWill")) nMoraleDecreaseQ /= 2;
 			if(rand(2) == 1 && nMoraleDecreaseQ > rand(10))
 			{
-				if(IsEntity(worldMap))
+				if(IsEntity(&worldMap))
 				{
 					rChar.GenQuest.SlavesMunity = true;
 					Log_Info("Рабы подняли восстание!");
@@ -435,7 +436,7 @@ void DailyEatCrewUpdateForShip(ref rChar, bool IsCompanionTraveler) // IsCompani
 		if(sti(rChar.Ship.Crew.Morale) <= MORALE_MIN || makeint(rChar.reputation.authority) < 5)
 		{
 			//int locidx = FindLocation(rChar.location); // не используется
-			if(IsEntity(worldMap) && GetCrewQuantity(rChar) > 0 && !IsCharacterEquippedArtefact(rChar, "totem_02"))
+			if(IsEntity(&worldMap) && GetCrewQuantity(rChar) > 0 && !IsCharacterEquippedArtefact(rChar, "totem_02"))
 			{
 				Log_Info("Бунт на корабле " + rChar.Ship.Name + "!!!! ");
 				MunityOnShip("ShipMunity");

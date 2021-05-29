@@ -54,8 +54,8 @@ void ProcessDialogEvent()
 			//--> eddy. квест мэра, закрываем выход с палубы и ноду даем нужную
 			if (CheckAttribute(pchar, "GenQuest.DestroyPirate") && pchar.GenQuest.CaptainId == "MQPirate")
 			{
-	    		dialog.text = RandPhraseSimple("Надо же, сам"+ GetSexPhrase("","а") +" к нам приш"+ GetSexPhrase("ел","ла") +"... Ну, раз приш"+ GetSexPhrase("ел","ла") +", то иди к кэпу. Поговоришь о делах своих скорбных...",
-	                                           "Хех, ну ты даешь, "+ GetSexPhrase("приятель","подруга") +"! Такого я еще не видал... Подойди к капитану, он с тобой будет говорить.");
+	    		dialog.text = RandPhraseSimple("Надо же, сам"+ GetSexPhrase("","а") +" к нам приш"+ GetSexPhrase("ёл","ла") +"... Ну, раз приш"+ GetSexPhrase("ёл","ла") +", то иди к кэпу. Поговоришь о делах своих скорбных...",
+	                                           "Хех, ну ты даёшь, "+ GetSexPhrase("приятель","подруга") +"! Такого я ещё не видал... Подойди к капитану, он с тобой будет говорить.");
 				Link.l1 = "Жаль...";
 				Link.l1.go = "exit";
 			}

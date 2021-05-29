@@ -1,5 +1,5 @@
 int iClientDeltaTimeFraction = 0;
-
+/*
 void NetClient_DeleteTimeEnvironment()
 {
 	DelEventHandler("frame", "NetClient_TimeFrame");
@@ -53,4 +53,4 @@ void NetClient_TimeFrame()
 
 	iClientDeltaTime = iClientTime - iPrevClientTime;
 	if (iClientDeltaTime < 0) { iClientDeltaTime = 0; }
-}
+}*/

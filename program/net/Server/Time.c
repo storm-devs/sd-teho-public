@@ -1,5 +1,5 @@
 int iServerDeltaTimeFraction = 0;
-
+/*
 void NetServer_DeleteTimeEnvironment()
 {
 	DelEventHandler("frame", "NetServer_TimeFrame");
@@ -29,3 +29,4 @@ void NetServer_TimeFrame()
 		iServerDeltaTimeFraction = iServerDeltaTimeFraction - (iMilliseconds * 1000);
 	}
 }
+*/

@@ -3,7 +3,7 @@
  * Ugeen - 12.08.09
  */
 //#event_handler("frame", "CheckCoordinateQuest");
- 
+
 #event_handler("EventCoordUpdate", "wdmCoordUpdate");
  
 #define WDM_RealCoordStartX		60	// начало координат по X - градусы западной долготы
@@ -46,7 +46,7 @@ void CheckQuestCoordinates()
 	int coordinateDegreeX = 70;
 	int coordinateDegreeZ = 15;
 
-	if(IsEntity(worldMap)) // если на глобальной карте
+	if(IsEntity(&worldMap)) // если на глобальной карте
 	{
 		Log_SetStringToLog("X : " + GetMapCoordDegreeX(makefloat(worldMap.playerShipX)) + " Z : " + GetMapCoordDegreeZ(makefloat(worldMap.playerShipZ)));
 		if( (GetMapCoordDegreeX(makefloat(worldMap.playerShipX)) == coordinateDegreeX) &&
@@ -206,7 +206,7 @@ string Map_GetRealCoordZ(float Z)
 }
 
 void wdmCoordUpdate()
-{		
+{
 	bool isLongitude = false;
 	bool isLatitude  = false;
 	
@@ -214,14 +214,14 @@ void wdmCoordUpdate()
 	string longitude = "W -- --'";
 	string latitude  = "N -- --'";
 		
-	if(IsEntity(worldMap))
-	{		
+	if(IsEntity(&worldMap))
+	{	
 		if(IsEquipCharacterByItem(pchar, "sextant2")) 
 		{
 			isLongitude = true;
 			isLatitude 	= true;
 		}
-	
+
 		if(!isLatitude && IsEquipCharacterByItem(pchar, "bussol")) 
 		{
 			isLatitude = true;
@@ -234,9 +234,14 @@ void wdmCoordUpdate()
 	
 		if(isLatitude) 	latitude 	= Map_GetRealCoordZ(makefloat(worldMap.playerShipZ));
 		if(isLongitude) longitude 	= Map_GetRealCoordX(makefloat(worldMap.playerShipX));
-	
+
 		sCoordinates = latitude + " " + longitude;
-		SendMessage(&worldMap,"ls",MSG_WORLDMAP_SET_COORDINATES, sCoordinates);
+		
+		if(isLongitude || isLatitude)
+		{	
+			SendMessage(&worldMap,"ls",MSG_WORLDMAP_SET_COORDINATES, sCoordinates);
+		}	
+		
 		PostEvent("EventCoordUpdate", 1000);	
 	}
 }

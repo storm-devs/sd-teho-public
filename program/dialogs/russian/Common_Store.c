@@ -370,7 +370,7 @@ void ProcessDialogEvent()
 									 "Покажи мне ядра, бомбы и прочие товары."));
 			link.l1.go = "trade_1";
 
-			if(IsPCharHaveTreasurer() && CheckAttribute(PChar, "TransferGoods.Enable")) // Автозакупка товаров
+			if(CheckFunctionalTreasurer() && CheckAttribute(PChar, "TransferGoods.Enable")) // Автозакупка товаров
 			{
 				link.l5 = "Мой казначей сделает необходимые закупки...";
 				link.l5.go = "TransferGoods";
@@ -448,7 +448,7 @@ void ProcessDialogEvent()
 		case "EncGirl_6_2":
 			ChangeCharacterComplexReputation(pchar,"nobility", -1);
 			AddQuestRecord("JungleGirl", "19");
-			AddQuestUserData("JungleGirl", "sSex", GetSexPhrase("ел","ла"));
+			AddQuestUserData("JungleGirl", "sSex", GetSexPhrase("ёл","ла"));
 			AddQuestUserData("JungleGirl", "sSex1", GetSexPhrase("","а"));
 			CloseQuestHeader("JungleGirl");
 			DeleteAttribute(pchar, "GenQuest.EncGirl");
@@ -534,6 +534,7 @@ void ProcessDialogEvent()
 						"Кэп, погрузка товара в трюм выбранного корабля начилась.");
 					link.l1 = "Спасибо. С вами приятно иметь дело.";
 					link.l1.go = "exit";
+          SetPriceListByStoreMan(rColony); // mitrokosta обновляем список цен
 					WaitDate("", 0, 0, 0, 1, 0); // Крутим время
 				}
 				else

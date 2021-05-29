@@ -393,10 +393,10 @@ void LAi_NPC_EquipPerk(ref chr, string kind)
     } 
 
 	NumPerks[PERK_TEMPLATE_SHIPDEFENCE] = 3;
-	NumPerks[PERK_TEMPLATE_REPAIR]      = 3;
+	NumPerks[PERK_TEMPLATE_REPAIR]      = 4;
 	NumPerks[PERK_TEMPLATE_CANNONS]     = 8;
 	NumPerks[PERK_TEMPLATE_COMMERCE]    = 3;
-	NumPerks[PERK_TEMPLATE_SAILING]     = 8;
+	NumPerks[PERK_TEMPLATE_SAILING]     = 7;
 	NumPerks[PERK_TEMPLATE_GRAPPLING]   = 5;
 	NumPerks[PERK_TEMPLATE_MELEE]       = 11;
 	NumPerks[PERK_TEMPLATE_PERSONAL]    = 4;
@@ -481,6 +481,10 @@ void LAi_NPC_EquipPerk(ref chr, string kind)
 		if (PerkTemplates[PERK_TEMPLATE_REPAIR] >= 3)
 		{
 			chr.perks.list.LightRepair = "1";
+			if (PerkTemplates[PERK_TEMPLATE_REPAIR] == 4) // mitrokosta & kokkai fix
+			{
+				chr.perks.list.Builder = "1";
+			}
 		}
 	}
 

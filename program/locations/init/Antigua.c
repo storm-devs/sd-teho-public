@@ -117,7 +117,7 @@ int LocationInitAntigua(int n)
 	locations[n].reload.l7.emerge = "reload1";
 	locations[n].reload.l7.autoreload = "0";
 	locations[n].reload.l7.label = "Church";
-	locations[n].reload.l7.close_for_night = 1;
+	//locations[n].reload.l7.close_for_night = 1;
 
 	locations[n].reload.l71.name = "reload71_back";
 	locations[n].reload.l71.go = "SentJons_church";

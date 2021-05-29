@@ -20,6 +20,42 @@ void EncountersInit()
 	ReleaseMapEncounters();
 }
 
+int FindEncounter(int type, int nat)
+{
+	int iTypes[2]; 
+	int i;
+	SetArraySize(&iTypes, MAX_ENCOUNTER_TYPES * 10);
+	for(i = 0; i < MAX_ENCOUNTER_TYPES*10; i++) iTypes[i] = -1;
+	int iNumTypes = 0;
+
+	ref rCharacter = GetMainCharacter();
+	int iCharacterRank = sti(rCharacter.rank);
+	
+	int iChance = rand(250);
+	
+	for (i=0; i<MAX_ENCOUNTER_TYPES; i++)
+	{
+		if(sti(EncountersTypes[i].Type) == type)
+		{
+			if(sti(EncountersTypes[i].Skip) || !Encounter_CanNation(i, nat)) { continue; }
+			// check chance
+			if (iChance > sti(EncountersTypes[i].Chance)) { continue; }
+			// check MinRank / MaxRank
+			if(sti(EncountersTypes[i].MinRank) > iCharacterRank || sti(EncountersTypes[i].MaxRank) < iCharacterRank) { continue; }
+			
+			iTypes[iNumTypes] = i;
+			iNumTypes++;
+		}
+	}
+	if(iNumTypes == 0) 
+	{
+		return -1;
+	}
+	int findnum = rand(iNumTypes-1);
+	while(findnum >=0 && iTypes[findnum] == -1) findnum--;
+	return iTypes[findnum];
+}
+
 int FindWarEncounter()
 {
 	int iTypes[100];
@@ -133,6 +169,9 @@ bool Encounter_GetClassesFromRank(int iEncounter, int iRank, ref rMClassMin, ref
 	rWClassMin = 0; rWClassMax = 0;
 
 	string sRank = "Rank." + iRank;
+	
+	trace("sRank : " + sRank + " iEncounter : " + iEncounter);
+	
 	if (!CheckAttribute(rEnc, sRank))
 	{
 		// find nearest rank 
@@ -168,6 +207,8 @@ bool Encounter_GetClassesFromRank(int iEncounter, int iRank, ref rMClassMin, ref
 
 	rWClassMin = rEnc.(sRank).3;
 	rWClassMax = rEnc.(sRank).2;
+	
+	trace("rMClassMin " + rMClassMin + " rMClassMax " + rMClassMax + " rWClassMin " + rWClassMin + " rWClassMax " + rWClassMax);
 	
 	return true;
 }

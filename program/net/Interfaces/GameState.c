@@ -1,4 +1,4 @@
-
+/*
 void InitInterface(string iniName)
 {
 	GameInterface.title = "titleNetGameState";
@@ -236,3 +236,4 @@ void RefreshTableByFrameEvent()
 	DelEventHandler("frame", "RefreshTableByFrameEvent");
 	SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE,"TABLE_LIST", 0 );
 }
+*/

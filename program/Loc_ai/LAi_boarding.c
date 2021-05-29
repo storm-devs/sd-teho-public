@@ -1236,6 +1236,12 @@ string LAi_GetBoardingModel(ref rCharacter, ref ani)
 			ani = "man";
 			return model;
         }
+	if (CheckAttribute(rCharacter, "questTemp.Mtraxx.CharleePrince")) //команда пиратов Fullback7
+	    {
+			model = "citiz_" + (rand(9) + 41);
+			ani = "man";
+			return model;
+		}
 	//<-- форма солдат на квестовиках
         if (isMainCharacterPatented() && sti(Items[sti(rCharacter.EquipedPatentId)].TitulCur) > 1) //форма только со звания капитан
         {
@@ -1312,6 +1318,11 @@ string LAi_GetBoardingMushketerModel(ref rCharacter)
             model = "mush_eng_"+(rand(5)+1);
 			return model;
         }
+		if (CheckAttribute(rCharacter, "questTemp.Mtraxx.CharleePrince")) //команда пиратов Fullback7
+	    {
+			model = "mush_ctz_"+(rand(2)+7);
+			return model;
+		}
 		//<-- форма солдат на квестовиках
         if (isMainCharacterPatented() && sti(Items[sti(rCharacter.EquipedPatentId)].TitulCur) > 1) //если есть патент, оставлю, хотя рудимент, форма только со звания капитан
         {

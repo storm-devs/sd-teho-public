@@ -55,7 +55,7 @@ void CreateParticleSystemEvent()
 
 bool CreateParticleEntity()
 {
-	if(IsEntity(Particles) == false)
+	if(IsEntity(&Particles) == false)
 	{
 		if (CreateEntity(&Particles,"particles") == false) return false;
 		//Trace("bool CreateParticleEntity()");

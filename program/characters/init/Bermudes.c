@@ -121,7 +121,7 @@ int CreateBermudesCharacters(int n)
 	LAi_SetLoginTime(ch, 11.0, 20.0);
 	LAi_SetWarriorType(ch);
 	LAi_group_MoveCharacter(ch, "PIRATE_CITIZENS");
-	//LAi_SetImmortal(ch, true);
+	LAi_RebirthOldName(ch); // Captain Beltrop, 05.01.2021, чтобы не сбрасывалось имя после смерти
 	n = n + 1;
 
 	return n;

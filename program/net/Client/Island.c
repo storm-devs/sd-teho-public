@@ -1,3 +1,4 @@
+/*
 void NetClient_DeleteIslandEnvironment()
 {
 	DeleteClass(&NCIsland);
@@ -33,3 +34,4 @@ void NetClient_CreateIslandEnvironment(int iMsg)
 	LayerAddObject("net_realize", &NCCoastFoam, 65534);
 	LayerAddObject("net_execute", &NCCoastFoam, 65535);
 }
+*/

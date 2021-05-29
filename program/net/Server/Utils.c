@@ -1,4 +1,4 @@
-
+/*
 bool NetServer_IsTeam(int wOurCharacterID, int wOtherCharacterID)
 {
 	return false;
@@ -63,4 +63,4 @@ int NetServer_GetNumTeams()
 	for (i=0; i<4; i++) { if (iTeams[i] > 0) { iNumNetTeams++; } } 
 
 	return iNumNetTeams;
-}
+}*/

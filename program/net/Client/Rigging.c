@@ -1,3 +1,4 @@
+/*
 void NetClient_DeleteRiggingEnvironment()
 {
 	DeleteClass(&NCSail);
@@ -156,3 +157,4 @@ void NetClient_OnShipSailDamage(int iMsg)
 
 	SendMessage(&NCSail, "lslll", MSG_SAIL_SCRIPT_PROCESSING, "SailMakeHole", wOurClientID, iSailIndex, iSailState);
 }
+*/

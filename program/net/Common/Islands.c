@@ -1,6 +1,6 @@
 int iNumNetIslands = 0;
 int iNetIslandsIndex[MAX_ISLANDS];
-
+/*
 ref Net_GetIsland(string sIslandID)
 {
 	return GetIslandByID(sIslandID);
@@ -58,3 +58,4 @@ void Net_InitIslands()
 		}
 	}
 }
+*/

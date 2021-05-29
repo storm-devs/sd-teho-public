@@ -1,5 +1,5 @@
 object NSSail;
-
+/*
 void NetServer_DeleteRiggingEnvironment()
 {
 	DeleteClass(&NSSail);
@@ -47,19 +47,7 @@ void NetServer_OnShipSailDamage()
 	ref rBallClient = NetServer_GetCLient(wBallClientID);
 	rBallClient.Stat.Hits = sti(rBallClient.Stat.Hits) + 1;
 
-	/*int wOurClientID = GetEventData();
-	int wBallClientID = GetEventData();
-	int iSailIndex = GetEventData();
-	int iSailState = GetEventData();
 
-	int iSMsg = NMCreate();
-	NMAddByte(iSMsg, NC_SHIP);
-	NMAddByte(iSMsg, NSC_SHIP_SAIL_STATE);
-	NMAddClientID(iSMsg, wOurClientID);
-	NMAddDword(iSMsg, iSailIndex);	// OPTIMIZATION
-	NMAddDword(iSMsg, iSailState);
-	NetServer_SendMessage(DST_ALL, iSMsg, false);
-	NMDelete(iSMsg);*/
 }
 
 bool NetServer_OnShipSailRepair( int wOurClientID )
@@ -151,3 +139,4 @@ float Net_OneSailDmgRepair(ref chref, aref arSailNode, aref arSail, float fDmgRe
 	arSail.dmg = fSailDmg;
 	return fDmgRepair;
 }
+*/

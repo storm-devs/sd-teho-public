@@ -1,3 +1,4 @@
+
 #include "Net\Common.h"
 #include "Net\Extern.h"
 #include "Net\Net_Defines.h"
@@ -14,7 +15,7 @@ object NetClient;
 
 string	sMasterServerAddress = "192.168.1.37";
 int		iMasterServerPort = 29029;
-
+/*
 extern void NetInterface_AddLocalServerToList(string sName, string sIP, int wPort, bool bSecure, string sGameType, int iCredit, int iMaxClass, string sWeatherID, string sIslandID, int iNumClients, int iMaxClients, int iPing);
 extern void NetInterface_AddInternetServerToList(string sName, string sIP, int wPort, bool bSecure, string sGameType, int iCredit, int iMaxClass, string sWeatherID, string sIslandID, int iNumClients, int iMaxClients, int iPing);
 
@@ -27,12 +28,12 @@ void NMAddClientID(int iSMsg, int iClientID)
 {
 	NMAddByte(iSMsg, iClientID);
 }
-
+*/
 bool IsNetActive() 
 {
 	return bNetActive;
 }
-
+/*
 void Net_Stop()
 {
 	bNetActive = false;
@@ -150,3 +151,4 @@ void ntrace(string sTrace)
 {
 	Trace(sTrace);
 }
+*/

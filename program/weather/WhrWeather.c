@@ -692,6 +692,8 @@ int Whr_BlendLong(float fBlend, int i1, int i2)
 
 int Whr_BlendColor(float fBlend, int col1, int col2)
 {
+	int a1 = shr(and(col1,4278190080), 24); // get alpha 1
+	int a2 = shr(and(col2,4278190080), 24); // get alpha 2
 	int r1 = shr(and(col1,16711680), 16); // get red color 1
 	int r2 = shr(and(col2,16711680), 16); // get red color 2
 
@@ -704,8 +706,9 @@ int Whr_BlendColor(float fBlend, int col1, int col2)
 	int r = r1 + MakeInt(fBlend * (r2-r1));
 	int g = g1 + MakeInt(fBlend * (g2-g1));
 	int b = b1 + MakeInt(fBlend * (b2-b1));
+	int a = a1 + MakeInt(fBlend * (a2-a1));
 
-	return argb(0,r,g,b);
+	return argb(a,r,g,b);
 }
 
 void Whr_TimeUpdate()
@@ -1230,6 +1233,10 @@ void Whr_WindChange()
 	
 	fWeatherAngle = stf(Weather.Wind.Angle);
 	fWeatherSpeed = stf(Weather.Wind.Speed);
+	if(DIRECTSAIL) 
+	{	
+		CheckIslandChange();
+	}	
 }
 
 bool Whr_isRainEnable()

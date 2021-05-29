@@ -18,7 +18,7 @@ string	sClientLightingPath;
 //#event_handler("EWhr_GetWindAngle", "NetClient_WhrGetWindAngle");
 //#event_handler("EWhr_GetWindSpeed", "NetClient_WhrGetWindSpeed");
 //#event_handler("EWhr_GetFogDensity", "NetClient_WhrGetFogDensity");
-
+/*
 string NetClient_WhrGetCurrentFog()
 {
 	return sClientCurrentFog;
@@ -196,4 +196,4 @@ bool NetClient_WhrIsDay() { return !bClientWeatherIsNight; }
 bool NetClient_WhrIsNight() { return bClientWeatherIsNight; }
 bool NetClient_WhrIsLight() { return bClientWeatherIsLight; }
 bool NetClient_WhrIsRain() { return bClientWeatherIsRain; }
-bool NetClient_WhrIsStorm() { return bClientWeatherIsStorm; }
+bool NetClient_WhrIsStorm() { return bClientWeatherIsStorm; }*/

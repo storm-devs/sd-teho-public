@@ -13,7 +13,7 @@ void ProcessDialogEvent()
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
-			dialog.text = "Что ты хотеть, белый человек? Зикомо не говорить с тобой. Говорить с Черным Эдди - он решать все вопросы.";
+			dialog.text = "Что ты хотеть, белый человек? Зикомо не говорить с тобой. Говорить с Чёрным Эдди - он решать все вопросы.";
 			link.l1 = "Хорошо...";
 			link.l1.go = "exit";			
 			NextDiag.TempNode = "First time";

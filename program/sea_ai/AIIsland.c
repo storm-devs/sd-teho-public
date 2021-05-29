@@ -54,3 +54,22 @@ string Island_FindNearestLocator2PChar(string group)
 	return Island_FindNearestLocator(group, stf(pchar.Ship.Pos.x), stf(pchar.Ship.Pos.z))
 }
 //navy <--
+string Island_FindRandomLocator(string sIslandID, string group)
+{
+	aref arGroup, arLocator;
+	string retStr = "";
+	int i, iNum;
+	int iIslandID = FindIsland(sIslandID);
+	if (iIslandID > -1) 
+	{
+        makearef(arGroup, Islands[iIslandID].(group));
+        iNum = GetAttributesNum(arGroup);
+        if (iNum > 0) 
+		{
+            i = rand(iNum - 1);
+            arLocator = GetAttributeN(arGroup, i);
+            retStr = GetAttributeName(arLocator);
+        }
+	}
+	return retStr;
+}

@@ -70,22 +70,32 @@ void ActiveF7Control()
 	}
 }
 
-void ActiveF10Control()
-{
-	/*Log_Info("Test F10 button");
-    LaunchPsHeroScreen();
-    trace("===================RUMOURS=======================");
-    for(int i = 0; i < MAX_RUMOURS; i++)
+void ActiveF10Control() {
+	Log_Info("Консоль вызвана.");
+	/*int iRank = 1;
+	for(int i = 1; i <= 4; i++)
 	{
-        DumpAttributes(&Rumour[i]);
-    	trace("===================");
+		
+		if (i < 4) {
+			sld = GetCharacter(NPC_GenerateCharacter("Guard_itza_mush_"+i, "mush_itza_"+(rand(2)+1), "man", "mushketer", iRank, PIRATE, -1, false, "quest"));
+			FantomMakeCoolFighter(sld, iRank, 1, 1, "", "mushket1", "cartridge", 1);
+			sld.MusketerDistance = 0;
+		} else {
+			sld = GetCharacter(NPC_GenerateCharacter("Guard_itza_mush_"+i, "itza_"+(rand(2)+1), "man", "man", iRank, PIRATE, -1, false, "quest"));
+		}
+		ChangeCharacterAddressGroup(sld, "Temple_great", "monsters", "mushketer"+i);
+		
+		LAi_SetWarriorType(sld);
+		LAi_warrior_SetStay(sld, true);
+		LAi_warrior_DialogEnable(sld, false);
+		LAi_group_MoveCharacter(sld, "ITZA");
 	}*/
-	
-	// Log_Info(GetStrSmallRegister(GetRussianNumberString(rand(999) - rand(999))));
-	
-	//Log_Info("PChar.curIslandId = '" + PChar.curIslandId + "'");
-	//Log_Info("LoadedLocation.islandId = '" + LoadedLocation.islandId + "'");
-	//Log_Info("Lighthouse Id = '" + Island_GetLighthouseId(PChar.curIslandId) + "'");
+	for(int i = 1; i <= 3; i++) {
+		sld = CharacterFromID("Guard_itza_mush_" + i);
+		sld.MusketerDistance = 20;
+	}
+	LAi_group_FightGroups("ITZA", LAI_GROUP_PLAYER, true);
+	Log_Info("Консоль отработала.");
 }
 
 ///  статы персонажа в близи

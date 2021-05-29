@@ -11,7 +11,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1.go = "exit";
 			if (pchar.questTemp.Slavetrader == "FindRatPortobello_1")
             {
-                link.l1 = "Добрый день. Я бы хотел"+ GetSexPhrase("","а") +" узнать, куда отправился капитан Франсуа Гонтьер на своем корвете. У меня для него важное поручение.";
+                link.l1 = "Добрый день. Я бы хотел"+ GetSexPhrase("","а") +" узнать, куда отправился капитан Франсуа Гонтьер на своём корвете. У меня для него важное поручение.";
                 link.l1.go = "Portobello_ratP_1";
             }
 		break;

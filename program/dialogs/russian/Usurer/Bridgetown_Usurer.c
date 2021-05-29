@@ -19,7 +19,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		
 		case "UsurerDone":
 			dialog.text = "Кредит для уважаемого негоцианта - это всегда пожалуйста. Какая сумма вам нужна? Давайте обсудим.";
-			link.l1 = "Хорошо. Я загружу трюмы, посчитаю, сколько еще останется места, прикину недостающую сумму и приду к вам.";
+			link.l1 = "Хорошо. Я загружу трюмы, посчитаю, сколько ещё останется места, прикину недостающую сумму и приду к вам.";
 			link.l1.go = "exit";	
 			npchar.quest.HWICTalked = "true";
 			pchar.questTemp.HWIC.Eng.BridgeCounter = sti(pchar.questTemp.HWIC.Eng.BridgeCounter)+1;

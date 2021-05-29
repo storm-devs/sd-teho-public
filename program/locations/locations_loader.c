@@ -257,6 +257,7 @@ bool LoadLocation(ref loc)
 			if(st.(sat) == "smg")
 			{
 				smg = "smg";
+                                break;
 			}
 		}			
 	}
@@ -283,6 +284,7 @@ bool LoadLocation(ref loc)
 					return 0;
 				}
 			}
+			ReloadProgressUpdate();
 		}
 		//Loading patches
 		if(CheckAttribute(loc, "models.day.charactersPatch") != 0)
@@ -330,6 +332,7 @@ bool LoadLocation(ref loc)
 					UnloadLocation(loc);
 					return 0;
 				}
+                                ReloadProgressUpdate();
 			}
 		}
 		
@@ -430,7 +433,10 @@ bool LoadLocation(ref loc)
 	//Particles============================================================================
 	CreateParticles(loc);
 	//Ships================================================================================
-	if (isNoBoarding && loc.environment.sea == "true") LocLoadShips(loc); // boal fix!!!!!!!!
+	if (isNoBoarding && loc.environment.sea == "true") 
+	{
+		LocLoadShips(loc); // boal fix!!!!!!!!
+	}	
 	//Animals===========================================================================
 	CreateAnimals(loc);
 	//Characters===========================================================================
@@ -539,6 +545,20 @@ bool LoadLocation(ref loc)
 		}
 		if(loc.type == "town")
 		{
+			// Почему бы орлу не летать над городом
+			if(rand(100) < 60)
+			{
+				crtAnimals = true;
+				if(!IsDay()) crtAnimals = false;
+				if(Whr_GetWindSpeed() > 10.0) crtAnimals = false;
+				if(Whr_IsRain()) crtAnimals = false;
+				if(Whr_IsStorm()) crtAnimals = false;
+				if(Whr_GetFogDensity() > 0.008) crtAnimals = false;
+				if(crtAnimals)
+				{
+					SendMessage(loc, "ls", MSG_LOCATION_EX_MSG, "AddEagle");
+				}
+			}
 			//Крысы
 			if(rand(100) < 35)
 			{
@@ -557,12 +577,19 @@ bool LoadLocation(ref loc)
 				}
 			}
 		}
+
 		// boal -->
         if (loc.id == "My_Deck_Medium" || loc.id == "My_Deck")
         {
             SendMessage(loc, "lsl", MSG_LOCATION_EX_MSG, "AddRats", 2 + rand(3));
         }
         // boal <--
+		// -->> ugeen
+		if(loc.type == "seashore" || loc.type == "port")
+		{		
+			SendMessage(loc, "lsl", MSG_LOCATION_EX_MSG, "AddCrabs", rand(5) - 1);
+		}	
+		// <<-- ugeen
 	}
 
     // boal debug info -->
@@ -657,7 +684,25 @@ bool LoadLocation(ref loc)
 		}
 	}
 	// ADDED BY VANO
-	
+	else
+	{
+		if(loc.type == "seashore" || loc.type == "port")
+		{
+			Sea.MaxSeaHeight 	= 1.01;
+            Sea.Sea2.LodScale 	= 1.0; 
+            Sea.Sea2.GridStep 	= 0.0375; 
+            Sea.Sea2.PosShift 	= 0.005;
+            Sea.Sea2.Amp1 		= 1.5; 
+            Sea.Sea2.Scale1 	= 2.50; 
+            Sea.Sea2.Amp2 		= 0.02;
+            Sea.Sea2.Scale2 	= 7.0; 
+            Sea.Sea2.AnimSpeed1 = 0.003;
+            Sea.Sea2.MoveSpeed1 = "0.6, 0.0, 0.003";
+            Sea.Sea2.AnimSpeed2 = 0.002;
+            Sea.Sea2.MoveSpeed2 = "0.7, 0.0, 0.003";
+            Sea.isDone = "";			
+		}			
+	}		
 	/////
 	/* if (CheckAttribute(loc, "time"))
 	{
@@ -895,12 +940,17 @@ bool LocLoadModel(aref loc, string sat, string addition)
 	bool res;
 	string tech = "";
 	int level = 10;
+	int dynamicLightsOn = DYNAMIC_LIGHTS;
 	attr = sat + ".tech";
 	if(CheckAttribute(loc, attr)) tech = loc.(attr);
+	if(tech == "LocationModelBlend" && dynamicLightsOn) tech = "DLightModel";
+	if(!CheckAttribute(loc, attr) && dynamicLightsOn)
+	{
+		tech = "DLightModel";
+	}		
     attr = sat + ".level";
     if(CheckAttribute(loc, attr)) level = MakeInt(loc.(attr));
     attr = sat + ".lights";
-    int dynamicLightsOn = 0;
     if(CheckAttribute(loc, attr)) dynamicLightsOn = MakeInt(loc.(attr));
     //Грузим модельку
     res = SendMessage(loc, "lssll", MSG_LOCATION_ADD_MODEL, loc.(sat) + addition, tech, level, dynamicLightsOn);

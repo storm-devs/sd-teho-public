@@ -6,7 +6,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	{
 		case "quests":
 			dialog.text = NPCStringReactionRepeat("Спрашивай, чего ты хочешь?",
-                          "Мы только что поднимали это тему. Вы, вероятно, запамятовали...", "Сегодня вы уже третий раз говорите о каком-то вопросе...",
+                          "Мы только что поднимали эту тему. Вы, вероятно, запамятовали...", "Сегодня вы уже третий раз говорите о каком-то вопросе...",
                           "Послушай, это магазин, здесь люди покупают что-то. Не отвлекай меня!", "block", 1, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat("Знаешь, " + NPChar.name + ", как-нибудь в следующий раз.", "Точно, "+ GetSexPhrase("забыл","забыла") +" что-то...",
                       "Да уж, действительно в третий раз...", "Гм, не буду...", npchar, Dialog.CurrentNode);
@@ -25,7 +25,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 		
 		case "patria_goods":
-			dialog.text = "Да, все верно, капитан, товар у меня, вас дожидается. Забираете?";
+			dialog.text = "Да, всё верно, капитан, товар у меня, вас дожидается. Забираете?";
 			link.l1 = "Да.";
 			link.l1.go = "patria_goods_1";
 			link.l2 = "Стоп, сначала я проверю, есть ли место для него в трюмах.";

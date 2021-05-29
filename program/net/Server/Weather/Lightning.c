@@ -1,5 +1,5 @@
 int iServerLightningSubTexX, iServerLightningSubTexY;
-
+/*
 void NetServer_WhrDeleteLightningEnvironment()
 {
 	DelEventHandler("NetServer_Lightning_DoIt", "NetServer_Lightning_DoIt");
@@ -134,3 +134,4 @@ void NetServer_Lightning_DoIt()
 		}
 	}
 }
+*/

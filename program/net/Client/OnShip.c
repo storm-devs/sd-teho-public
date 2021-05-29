@@ -1,6 +1,6 @@
 int iClientShipPriorityExecute = 2;
 int iClientShipPriorityRealize = 31;
-
+/*
 void NetClient_DeleteShipEnvironment()
 {
 	DelEventHandler("Control Activation", "NetClient_ShipControlActivation");
@@ -576,3 +576,4 @@ void NetClient_ShipChangeCharge(string sNewCharge)
 	NetClient_SendMessage(iSMSg, false);
 	NMDelete(iSMsg);
 }
+*/

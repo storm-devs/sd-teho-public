@@ -14,7 +14,7 @@ void ProcessDialogEvent()
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
-			dialog.text = "Ну чего тебе еще надо?";
+			dialog.text = "Ну чего тебе ещё надо?";
 			link.l1 = "Да нет, ничего.";
 			link.l1.go = "exit";			
 			NextDiag.TempNode = "First time";
@@ -35,7 +35,7 @@ void ProcessDialogEvent()
 			{
 				if (!CheckAttribute(pchar, "questTemp.LSC.nrv_friend")) 
 				{
-					dialog.text = "Стой, приятель! Дальше - территория нарвалов, куда посторонним вход запрещен. Пройти туда можно только по приглашению. Ты знаешь пароль для прохода?";
+					dialog.text = "Стой, приятель! Дальше - территория нарвалов, куда посторонним вход запрещён. Пройти туда можно только по приглашению. Ты знаешь пароль для прохода?";
 					link.l1 = "Да.";
 					link.l1.go = "Narval_warning_yes";
 					link.l2 = "Нет.";
@@ -69,14 +69,14 @@ void ProcessDialogEvent()
 		break;
 		
 		case "Narval_warning_yes":
-			dialog.text = "Тогда иди и скажи его вон тому суровому парню внизу. И смотри, не пытайся его обмануть - наши ребята с мушкетами свое дело знают. Так что если ты сейчас пытаешься хитрить - лучше развернись и уходи прочь. Я тебя предупредил.";
+			dialog.text = "Тогда иди и скажи его вон тому суровому парню внизу. И смотри, не пытайся его обмануть - наши ребята с мушкетами своё дело знают. Так что если ты сейчас пытаешься хитрить - лучше развернись и уходи прочь. Я тебя предупредил.";
 			link.l1 = "Хорошо, дружище. Я учту.";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Narval_warning_repeat";
 		break;
 		
 		case "Narval_warning_no":
-			dialog.text = "Тогда тебе нечего там делать, если ты, конечно, не решил таким способом свести счеты с жизнью. Или ты шутишь, а? Смеешься надо мной? Впрочем, меня это не интересует. Можешь идти вниз, мое дело предупреждать, а не задерживать. Но если ты действительно не знаешь пароля - назад ты уже не выйдешь.";
+			dialog.text = "Тогда тебе нечего там делать, если ты, конечно, не решил таким способом свести счеты с жизнью. Или ты шутишь, а? Смеёшься надо мной? Впрочем, меня это не интересует. Можешь идти вниз, мое дело предупреждать, а не задерживать. Но если ты действительно не знаешь пароля - назад ты уже не выйдешь.";
 			link.l1 = "Хорошо, дружище. Я учту.";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Narval_warning_repeat";
@@ -85,7 +85,7 @@ void ProcessDialogEvent()
 		case "Narval_warning_repeat":
 			if (!CheckAttribute(pchar, "questTemp.LSC.nrv_friend")) 
 			{
-				dialog.text = "Ну, чего тебе еще? Или иди вниз на 'Сан-Габриэль', или проваливай отсюда!";
+				dialog.text = "Ну, чего тебе ещё? Или иди вниз на 'Сан-Габриэль', или проваливай отсюда!";
 				link.l1 = "...";
 				link.l1.go = "exit";
 			}
@@ -120,7 +120,7 @@ void ProcessDialogEvent()
 		break;
 		
 		case "check_parol":
-			dialog.text = "Говори пароль, и произноси его четко, чтобы я хорошо расслышал.";
+			dialog.text = "Говори пароль, и произноси его чётко, чтобы я хорошо расслышал.";
 			link.l1.edit = 3;
 			link.l1 = "";	
 			link.l1.go = "check_parol_1";
@@ -178,19 +178,30 @@ void ProcessDialogEvent()
 			}
 			if (CheckAttribute(pchar, "questTemp.LSC.nrv_friend")) 
 			{
-				dialog.text = TimeGreeting()+", "+pchar.name+"! Если ты к боссу - заходи, дверь открыта.";
-				link.l1 = "Хорошо...";
-				link.l1.go = "exit";
-				NextDiag.TempNode = "Narval_residence";
-				DeleteAttribute(npchar, "protector.CheckAlways");
-				break;
+				if (stf(environment.time) >= 6.00 && stf(environment.time) < 21.00) // диалог от времени суток. лесник
+			    {
+					dialog.text = TimeGreeting()+", "+pchar.name+"! Если ты к боссу - заходи, дверь открыта.";
+					link.l1 = "Хорошо...";
+					link.l1.go = "exit";
+					NextDiag.TempNode = "Narval_residence";
+					DeleteAttribute(npchar, "protector.CheckAlways");
+				}
+				else
+				{
+                    dialog.text = TimeGreeting()+", "+pchar.name+"! Если ты к боссу - то он уже спит. Приходи утром.";
+					link.l1 = "Хорошо...";
+					link.l1.go = "exit";
+					NextDiag.TempNode = "Narval_residence";
+					DeleteAttribute(npchar, "protector.CheckAlways");	
+                }					
+				break;	
 			}
 			if (!CheckAttribute(pchar, "questTemp.LSC.nrv_friend") && CheckAttribute(pchar, "questTemp.LSC.rvd_friend")) 
 			{
 				dialog.text = "Друзьям и пособникам черномазых нечего тут делать. Прямой приказ босса - тебя к нему не пускать!";
 				if (CheckAttribute(pchar, "questTemp.LSC.Donald_enter"))
 				{
-					link.l1 = "И все-таки ему придется меня увидеть. У вас крупные неприятности, ребята. Я с официальным визитом от адмирала. Так что открывай эту чертову дверь!";
+					link.l1 = "И всё-таки ему придётся меня увидеть. У вас крупные неприятности, ребята. Я с официальным визитом от адмирала. Так что открывай эту чёртову дверь!";
 					link.l1.go = "negotiations";
 				}
 				else
@@ -202,11 +213,22 @@ void ProcessDialogEvent()
 				DeleteAttribute(npchar, "protector.CheckAlways");
 				break;
 			}
+			if (stf(environment.time) >= 6.00 && stf(environment.time) < 21.00) // лесник . диалог от времени суток .
+			{
 			dialog.text = "Ты к боссу? Хм, ну, проходи, если хочешь.";
 			link.l1 = "Спасибо, что разрешил...";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Narval_residence";
 			DeleteAttribute(npchar, "protector.CheckAlways");
+			}
+			else
+			{
+            dialog.text = "Ты к боссу? На сегодня приём окончен. Приходи утром.";
+			link.l1 = "Понятно...";
+			link.l1.go = "exit";
+			NextDiag.TempNode = "Narval_residence";
+			DeleteAttribute(npchar, "protector.CheckAlways");
+            }			
 		break;
 		
 		case "Narval_soldier":
@@ -266,7 +288,7 @@ void ProcessDialogEvent()
 			{
 				if (!CheckAttribute(pchar, "questTemp.LSC.rvd_friend")) 
 				{
-					dialog.text = "Немедленно стой! Территория за моей спиной принадлежит клану ривадос, куда посторонним вроде тебя вход воспрещен без приглашения. Ты знаешь пароль?";
+					dialog.text = "Немедленно стой! Территория за моей спиной принадлежит клану ривадос, куда посторонним вроде тебя вход воспрещён без приглашения. Ты знаешь пароль?";
 					link.l1 = "Да.";
 					link.l1.go = "Rivados_warning_yes";
 					link.l2 = "Нет.";
@@ -316,7 +338,7 @@ void ProcessDialogEvent()
 		case "Rivados_warning_repeat":
 			if (!CheckAttribute(pchar, "questTemp.LSC.rvd_friend")) 
 			{
-				dialog.text = "Ну, чего тебе надо? Или иди вперед, или проваливай отсюда!";
+				dialog.text = "Ну, чего тебе надо? Или иди вперёд, или проваливай отсюда!";
 				link.l1 = "...";
 				link.l1.go = "exit";
 			}
@@ -363,7 +385,7 @@ void ProcessDialogEvent()
 			sTemp = GetStrSmallRegister(dialogEditStrings[3]);
 			if (sTemp == sRvdParol && CheckAttribute(pchar, "questTemp.LSC.RParol_bye"))
 			{
-				dialog.text = "Все верно. Можешь проходить.";
+				dialog.text = "Всё верно. Можешь проходить.";
 				link.l1 = "Спасибо, приятель...";
 				link.l1.go = "exit";
 				NextDiag.TempNode = "Rivados_parol_repeat";
@@ -411,11 +433,22 @@ void ProcessDialogEvent()
 			}
 			if (CheckAttribute(pchar, "questTemp.LSC.rvd_friend")) 
 			{
+				if (stf(environment.time) >= 6.00 && stf(environment.time) < 21.00) // лесник . диалог от времени суток .
+				{
 				dialog.text = TimeGreeting()+", "+pchar.name+"! Если вы к Эдди и Чимисету - заходите, дверь открыта. Они будут рады вас видеть.";
 				link.l1 = "Хорошо...";
 				link.l1.go = "exit";
 				NextDiag.TempNode = "Rivados_residence";
 				DeleteAttribute(npchar, "protector.CheckAlways");
+				}
+				else // лесник - режим пропуска 
+				{	
+				dialog.text = TimeGreeting()+", "+pchar.name+"! Если вы к Эдди и Чимисету - то они уже отдыхают, приходите утром. Они будут рады вас видеть.";
+				link.l1 = "Хорошо...";
+				link.l1.go = "exit";
+				NextDiag.TempNode = "Rivados_residence";
+				DeleteAttribute(npchar, "protector.CheckAlways");
+				}
 				break;
 			}
 			if (CheckAttribute(pchar, "questTemp.LSC.nrv_friend") && !CheckAttribute(pchar, "questTemp.LSC.rvd_friend")) 
@@ -436,11 +469,22 @@ void ProcessDialogEvent()
 				DeleteAttribute(npchar, "protector.CheckAlways");
 				break;
 			}
-			dialog.text = "Ты к Эдди? Ну ладно, проходи, он найдет для тебя минутку.";
+			if (stf(environment.time) >= 6.00 && stf(environment.time) < 21.00) // лесник . диалог от времени суток .
+			{
+			dialog.text = "Ты к Эдди? Ну ладно, проходи, он найдёт для тебя минутку.";
 			link.l1 = "Спасибо, что разрешил...";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Rivados_residence";
 			DeleteAttribute(npchar, "protector.CheckAlways");
+			}
+			else // лесник режим пропуска.
+			{
+            dialog.text = "Ты к Эдди? На сегодня приём окончен, приходи утром и он найдёт для тебя минутку.";
+			link.l1 = "Понятно...";
+			link.l1.go = "exit";
+			NextDiag.TempNode = "Rivados_residence";
+			DeleteAttribute(npchar, "protector.CheckAlways");
+            }			
 		break;
 		
 		case "Rivados_soldier":
@@ -475,7 +519,7 @@ void ProcessDialogEvent()
 				link.l1.go = "shark_guard_fight";
 				break;
 			}
-			dialog.text = "Стой! Сюда вход запрещен!";
+			dialog.text = "Стой! Сюда вход запрещён!";
 			link.l1 = "Хорошо, как скажешь...";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Shark_storage";
@@ -494,7 +538,7 @@ void ProcessDialogEvent()
 			{
 				if (pchar.questTemp.LSC == "begin" || pchar.questTemp.LSC == "mary") // тока прибыл
 				{
-					dialog.text = "Стой! Ты не из наших людей... Акула назначил тебе встречу, или ты просто так приперся?";
+					dialog.text = "Стой! Ты не из наших людей... Акула назначил тебе встречу, или ты просто так припёрся?";
 					link.l1 = "Акула?! Стивен Додсон-Акула?";
 					link.l1.go = "first_talk_day";
 				}
@@ -538,7 +582,7 @@ void ProcessDialogEvent()
 		break;
 		
 		case "first_talk_night":
-			dialog.text = NPCStringReactionRepeat("Ты что, с луны свалился, или перепил? Разворачивайся назад и топай по висячему мосту, пройди прямо через два корабля - найдешь еще одни висячие мостки, они приведут тебя к таверне. Там и спи себе до утра.", 
+			dialog.text = NPCStringReactionRepeat("Ты что, с луны свалился, или перепил? Разворачивайся назад и топай по висячему мосту, пройди прямо через два корабля - найдешь ещё одни висячие мостки, они приведут тебя к таверне. Там и спи себе до утра.", 
 				"Ты что, издеваешься? Я же только что тебе объяснял. Проваливай!", 
 				"Иди проспись, пьяная рожа...",
 				"Пошел вон!!", "block", 1, npchar, Dialog.CurrentNode);
@@ -551,7 +595,7 @@ void ProcessDialogEvent()
 		
 		case "first_talk_day":
 			dialog.text = "Не делай круглые глаза, парень. Каждый дурак на этом острове знает, что Стив Акула - наш адмирал. У тебя к нему дело?";
-			link.l1 = "Да, черт побери! У меня к нему дело, и очень срочное.";
+			link.l1 = "Да, чёрт побери! У меня к нему дело, и очень срочное.";
 			link.l1.go = "first_talk_day_1";
 		break;
 		

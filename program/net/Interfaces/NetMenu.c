@@ -1,3 +1,4 @@
+/*
 void InitInterface(string iniName)
 {
 	GameInterface.title = "";
@@ -31,3 +32,4 @@ void IReturnToGame()
 {
 	IDoExit( INTERFACE_NET_NETMENU );
 }
+*/

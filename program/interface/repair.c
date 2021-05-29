@@ -203,7 +203,7 @@ void SetDescription()
 		{
 			int iCharacter = GameInterface.SHIPS_SCROLL.(attributeName).companionIndex;
 			sChrId = characters[iCharacter].id;
-			trace("sChrId " + sChrId);
+//			trace("sChrId " + sChrId);
 			xi_refCharacter = characterFromID(sChrId);
 		}
 	}
@@ -265,17 +265,17 @@ int GetMaxRepairTime()
 				tMast = sti(chr.repair.time_mast);
 				tSail = sti(chr.repair.time_sail);
 				
-				trace("tHull " + tHull + " tMast " + tMast + " tSail " + tSail + " chr.id " + chr.id);
+//				trace("tHull " + tHull + " tMast " + tMast + " tSail " + tSail + " chr.id " + chr.id);
 
 				if (tSail > 0 || tHull > 0 || tMast > 0)
 				{
 					chr.repair.totaltime = tHull/3.0 + tSail/5.0 + tMast;
 					chr.repair.totaltime = makeint(stf(chr.repair.totaltime) * ( 1.75 - GetCrewQuantity(chr)/GetOptCrewQuantity(chr)));
 
-					trace( "totaltime " + totaltime);
-					trace( "CrewQuantity : " + GetCrewQuantity(chr) + " OptCrewQuantity : " + GetOptCrewQuantity(chr));
-					trace( "GetCrewQuantity()/GetOptCrewQuantity() " + GetCrewQuantity(chr)/GetOptCrewQuantity(chr));
-					trace( "totalTime " +  chr.repair.totaltime + " chr.id " + chr.id); 
+//					trace( "totaltime " + totaltime);
+//					trace( "CrewQuantity : " + GetCrewQuantity(chr) + " OptCrewQuantity : " + GetOptCrewQuantity(chr));
+//					trace( "GetCrewQuantity()/GetOptCrewQuantity() " + GetCrewQuantity(chr)/GetOptCrewQuantity(chr));
+//					trace( "totalTime " +  chr.repair.totaltime + " chr.id " + chr.id); 
 
 					if(makeint(stf(chr.repair.totaltime)) > totalTime) totalTime = makeint(stf(chr.repair.totaltime));
 					if(totalTime < 1) totalTime = 1;
@@ -283,7 +283,7 @@ int GetMaxRepairTime()
 			}
 		}	
 	}	
-	trace("totaltime " + totaltime);
+//	trace("totaltime " + totaltime);
 	return totalTime;	
 }
 
@@ -307,7 +307,7 @@ void SetRepairData()
         {
 	        chr = GetCharacter(cn); 
 		
-			trace("Companion[" + i + "].chr.id = " + chr.id);
+//			trace("Companion[" + i + "].chr.id = " + chr.id);
 		
 			chr.repair.hull = 0;
 			chr.repair.mast = 0;		

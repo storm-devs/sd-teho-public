@@ -25,7 +25,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			//Голландский гамбит
 			if (CheckAttribute(pchar, "questTemp.HWIC.Eng") && pchar.questTemp.HWIC.Eng == "GotoBridgetown" && !CheckAttribute(npchar, "quest.HWICTalked"))
             {
-                link.l1 = "Я направляюсь в Блювельд, паприку продавать. Скажите, мистер, нет ли у вас сейчас пассажиров до Блювельда? Ну, или до Порт-Рояля. Было бы неплохо подвезти, глядишь, покрыли бы убытки на оплату команде. Я и так ее сократил до минимума, но все равно, канальи, денег-то просят...";
+                link.l1 = "Я направляюсь в Блювельд, паприку продавать. Скажите, мистер, нет ли у вас сейчас пассажиров до Блювельда? Ну, или до Порт-Рояля. Было бы неплохо подвезти, глядишь, покрыли бы убытки на оплату команде. Я и так её сократил до минимума, но всё равно, канальи, денег-то просят...";
                 link.l1.go = "PortofficeDone";
             }
 			// Страж Истины
@@ -79,6 +79,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		ok = (rColony.from_sea == "") || (Pchar.location.from_sea == rColony.from_sea);
 		if(sti(Pchar.Ship.Type) != SHIP_NOTUSED && ok)//проверка на наличие корабля в порту
 		{
+			pchar.quest.Regata_PU.over = "yes"; // mitrokosta снимаем прерывание
 			if (CheckAttribute(pchar, "questTemp.Regata.Breach") || !CheckAttribute(pchar, "questTemp.Regata.Sentjons") || GetCompanionQuantity(pchar) > 1 || sti(RealShips[sti(pchar.ship.type)].basetype) != SHIP_LUGGER || pchar.Ship.Name != "Сaнта-Kатepина")
 			{
 				dialog.text = "Хм... Вы нарушили правила регаты и я вынужден вас дисквалифицировать. Увы! В дальнейшем заплыве вы не участвуете. Я уже подготовил депешу в Порт-Рояль.";
@@ -89,7 +90,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			else
 			{
 				pchar.questTemp.Regata.FourthTransitionTime = GetPastTime("hour", sti(pchar.questTemp.Regata.StartYear), sti(pchar.questTemp.Regata.StartMonth), sti(pchar.questTemp.Regata.StartDay), stf(pchar.questTemp.Regata.StartTime), GetDataYear(), GetDataMonth(), GetDataDay(), GetTime());//истратил ГГ в часах на 1+2+3+4 переход
-				dialog.text = "Как вы заметили, капитан, у нас очень тревожная обстановка - город в осаде. Готовимся к атаке испанцев, мобилизуем все силы. Но регата продолжается\nТак, отмечаем: капитан "+ GetFullName(pchar) +", корабль - "+pchar.Ship.Name+"... Затрачено времени от старта регаты в часах - "+sti(pchar.questTemp.Regata.FourthTransitionTime)+". Все, ваш результат зафиксирован, можете продолжать путь.";
+				dialog.text = "Как вы заметили, капитан, у нас очень тревожная обстановка - город в осаде. Готовимся к атаке испанцев, мобилизуем все силы. Но регата продолжается\nТак, отмечаем: капитан "+ GetFullName(pchar) +", корабль - "+pchar.Ship.Name+"... Затрачено времени от старта регаты в часах - "+sti(pchar.questTemp.Regata.FourthTransitionTime)+". Всё, ваш результат зафиксирован, можете продолжать путь.";
 				link.l1 = "Скажите, а на каком я сейчас месте?";
 				link.l1.go = "Regata_info";
 			}
@@ -216,7 +217,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		break;
 		
 		case "caleuche_1":
-			dialog.text = "Сударь, с байками и загадками - в таверну, а здесь серьезное учреждение. Или скажите, как называется шебека этого вашего капитана, или не отнимайте мое время.";
+			dialog.text = "Сударь, с байками и загадками - в таверну, а здесь серьёзное учреждение. Или скажите, как называется шебека этого вашего капитана, или не отнимайте моё время.";
 			link.l1 = "Хорошо, я попытаюсь выяснить и вернусь к вам.";
 			link.l1.go = "exit";
 			npchar.questTemp.caleuche = "true";
@@ -232,14 +233,14 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		case "caleuche_name":
 			if (GetStrSmallRegister(dialogEditStrings[2]) == "гарпия")
 			{
-				dialog.text = "'Гарпия'? Ну конечно, я знаю шебеку 'Гарпия', ее капитана зовут Реджинальд Джексон. Но в Бриджтауне он давно уже не появляется. Я слышал, что его наняла на службу Голландская Вест-Индская Компания. Так что вам нужно в Виллемстад.";
+				dialog.text = "'Гарпия'? Ну конечно, я знаю шебеку 'Гарпия', её капитана зовут Реджинальд Джексон. Но в Бриджтауне он давно уже не появляется. Я слышал, что его наняла на службу Голландская Вест-Индская Компания. Так что вам нужно в Виллемстад.";
 				link.l1 = "Спасибо огромное! Вы мне очень помогли.";
 				link.l1.go = "caleuche_3";
 			}
 			else
 			{
 				dialog.text = "Это мне ни о чем не говорит, к сожалению. Вы уверены, что ваш капитан бывал в Бриджтауне?";
-				link.l1 = "Уверен. Ладно, надо еще подумать, может, соображу...";
+				link.l1 = "Уверен. Ладно, надо ещё подумать, может, соображу...";
 				link.l1.go = "exit";
 			}
 		break;

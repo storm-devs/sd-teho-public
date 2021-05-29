@@ -31,7 +31,7 @@ void CreateBallsEnvironment()
 	AIBalls.BallFlySoundStereoMultiplyer = 2.0;
 
 	AIBalls.SpeedMultiply = 3.0;
-	AIBalls.Texture = "AllBalls.tga";
+	AIBalls.Texture = "AllBalls.tga.tx";
 	AIBalls.SubTexX = 2;
 	AIBalls.SubTexY = 2;
 
@@ -168,7 +168,7 @@ void Ball_WaterHitEvent()
 	}
 	else
 	{
-		CreateParticleSystem("splash", X, Y, Z, 0.0, 0.0, 0.0, 5);
+	CreateParticleSystem("splash", X, Y, Z, 0.0, 0.0, 0.0, 5);
 	}
 
 	Play3DSound("ball_splash", x, y, z);

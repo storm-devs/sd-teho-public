@@ -1203,7 +1203,7 @@ int FindNonEnemyColonyForAdventure(int iNation, string sBeginColony, bool _check
 	
 	for (int i=0; i<MAX_COLONIES; i++)
 	{
-		if (colonies[i].nation != "none")
+		if (colonies[i].nation != "none" && colonies[i].id != "Panama" && colonies[i].id != "SanAndres")// mitrokosta 
 		{
 			if (_checkPort && CheckAttribute(&Colonies[i], "HasNoFort")) continue;  // без форта не берем
 			
@@ -1271,7 +1271,7 @@ string FindAlliedColonyForNationExceptColony(string sHomeColony)
 	
 	for (int i = 0; i<MAX_COLONIES; i++)
 	{
-		if(colonies[i].nation != "none" && colonies[i].id != sHomeColony && colonies[i].id != "Panama")
+		if(colonies[i].nation != "none" && colonies[i].id != sHomeColony && colonies[i].id != "Panama" && colonies[i].id != "SanAndres" && colonies[i].id != "Minentown")
 		{
 			if (sti(Colonies[i].nation) == iNation)
 			{

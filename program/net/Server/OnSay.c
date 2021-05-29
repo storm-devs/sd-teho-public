@@ -1,4 +1,4 @@
-void NetServer_OnSay(int wNetClientID, int iMsg)
+/*void NetServer_OnSay(int wNetClientID, int iMsg)
 {
 	int iSubCode = NMGetByte(iMsg);
 	string sSayString = NMGetString(iMsg);
@@ -32,4 +32,4 @@ void NetServer_OnSay(int wNetClientID, int iMsg)
 	}
 
 	NMDelete(iSMsg);
-}
+}*/

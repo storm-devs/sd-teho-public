@@ -1,4 +1,4 @@
-
+/*
 void InitInterface(string iniName)
 {
 	GameInterface.title = "titleNetTopList";
@@ -118,24 +118,6 @@ void TL_PlayerStatistic()
 	GameInterface.TABLE_LIST.(sRow).td8.str = iDamage;
 
 	// rewards icons
-	/*string sRewardsGroup = "CANNONS_UPGRADE_3";//"net_rewards";
-	GameInterface.TABLE_LIST.(sRow).td9.icon1.offset = "1,2";
-	GameInterface.TABLE_LIST.(sRow).td9.icon1.width = 27;
-	GameInterface.TABLE_LIST.(sRow).td9.icon1.height = 27;
-	GameInterface.TABLE_LIST.(sRow).td9.icon1.group = sRewardsGroup;
-	GameInterface.TABLE_LIST.(sRow).td9.icon1.icon = "cannons1";
-
-	GameInterface.TABLE_LIST.(sRow).td9.icon2.offset = "30,2";
-	GameInterface.TABLE_LIST.(sRow).td9.icon2.width = 27;
-	GameInterface.TABLE_LIST.(sRow).td9.icon2.height = 27;
-	GameInterface.TABLE_LIST.(sRow).td9.icon2.group = sRewardsGroup;
-	GameInterface.TABLE_LIST.(sRow).td9.icon2.icon = "cannons2";
-	
-	GameInterface.TABLE_LIST.(sRow).td9.icon3.offset = "59,2";
-	GameInterface.TABLE_LIST.(sRow).td9.icon3.width = 27;
-	GameInterface.TABLE_LIST.(sRow).td9.icon3.height = 27;
-	GameInterface.TABLE_LIST.(sRow).td9.icon3.group = sRewardsGroup;
-	GameInterface.TABLE_LIST.(sRow).td9.icon3.icon = "cannons3";*/
 
 	Table_UpdateWindow("TABLE_LIST");
 
@@ -144,3 +126,4 @@ void TL_PlayerStatistic()
 		TL_GetPlayerStatFromServer(iPIndex + 1);
 	}
 }
+*/

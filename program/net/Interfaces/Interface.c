@@ -1,4 +1,4 @@
-
+/*
 void NetClient_CreateInterfaceEnvironment()
 {
 	SetEventHandler("Control Activation", "NetClient_ProcessInterfaceControls", 0);
@@ -57,3 +57,4 @@ void FreezeMainNetLayers(bool bFreeze)
 		//LayerFreeze("Net_Execute",false);
 	}
 }
+*/

@@ -9,11 +9,11 @@ seg_Sailcloth	{парусины}
 seg_Planks		{досок}
 seg_Slaves		{рабов}
 seg_Wheat		{пшеницы}
-seg_Ebony		{черного дерева}
+seg_Ebony		{чёрного дерева}
 seg_Chocolate	{какао}
 seg_Sugar		{сахара}
 seg_Wine		{вина}
-seg_ShipSilk	{корабельного шелка}
+seg_ShipSilk	{корабельного шёлка}
 seg_Rum		    {рома}
 seg_Tobacco	    {табака}
 seg_Coffee		{кофе}

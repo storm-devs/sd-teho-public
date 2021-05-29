@@ -81,5 +81,6 @@
 
 // обновить список активированных способностей
 #define MSG_ACTIVE_PERK_LIST_REFRESH	47000
+#define MSG_ACTIVE_PERK_ICON_REFRESH	47001
 
 #endif

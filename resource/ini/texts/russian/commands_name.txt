@@ -21,12 +21,22 @@ sea_InstantBoarding {читовый абордаж}
 sea_Speak {Разговор}
 sea_Sneak {Прокрасться в город}
 sea_Repair {Починка}
+sea_SailDir {Уплыть на ..}
+sea_SailNW {Северо-Запад}
+sea_SailN {Север}
+sea_SailNE {Северо-Восток}
+sea_SailE {Восток}
+sea_SailSE {Юго-Восток}
+sea_SailS {Юг}
+sea_SailSW {Юго-Запад}
+sea_SailW {Запад}
+
 
 sea_Brander {Брандер}
 sea_ImmediateReload {Перезарядка}
 sea_LightRepair {Неотложный ремонт}
 sea_InstantRepair {Ремонт в бою}
-sea_SandbankManeuver {Маневры на мелководье}
+sea_SandbankManeuver {Манёвры на мелководье}
 sea_Turn180 {Быстрый разворот}
 
 
