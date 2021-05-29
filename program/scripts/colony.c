@@ -53,6 +53,8 @@ void CreateColonyCommanders()
 		colonies[i].commander = colonies[i].id + " Fort Commander";
 		
 		iChar = GenerateCharacter(sti(colonies[i].nation), WITH_SHIP, "officer", MAN, 1, FORT_COMMANDER);
+		
+		trace("characters[iChar].nation : " + characters[iChar].nation + " ship_type :" + characters[iChar].ship.type);
 		Nations[sti(colonies[i].nation)].fort = sti(Nations[sti(colonies[i].nation)].fort) + 1; // число фортов нации
 		characters[iChar].id = colonies[i].id + " Fort Commander";
 		characters[iChar].location = colonies[i].island;

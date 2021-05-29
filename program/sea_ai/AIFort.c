@@ -1,4 +1,4 @@
-#include "sail_msg.h"
+#include "storm-engine\sail_msg.h"
 
 #define		MAX_FORTS						16
 #define		MIN_CANNON_DAMAGE_DISTANCE		20.0
@@ -89,8 +89,8 @@ void Fort_Login(int iIslandIndex)
 			SendMessage(&Forts[iNumForts], "ls", MSG_MODEL_LOAD_GEO, sFortModel);
 			SendMessage(&Island, "li", MSG_ISLAND_ADD_FORT,  &Forts[iNumForts]);
 			//LayerAddObject(SEA_REALIZE, &Forts[iNumForts], 10000);
-			LayerAddObject("fort_cannon_trace", &Forts[iNumForts], 1);
-			LayerAddObject("sun_trace", &Forts[iNumForts], 1);
+			LayerAddObject(FORT_CANNON_TRACE, &Forts[iNumForts], 1);
+			LayerAddObject(SUN_TRACE, &Forts[iNumForts], 1);
 			SendMessage(SeaLighter, "ssi", "AddModel", arLocator.fort.model, &Forts[iNumForts]);
 			iNumForts++;
 

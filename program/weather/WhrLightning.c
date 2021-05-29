@@ -34,7 +34,7 @@ void WhrCreateLightningEnvironment()
 		CreateEntity(&Lightning,"Lightning");
 	}
 
-	LayerAddObject("sea_reflection", &Lightning, 10);
+	LayerAddObject(SEA_REFLECTION, &Lightning, 10);
 
 	SetEventHandler(WHR_LIGHTNING_SOUND,"Lightning_Sound",0);
 	SetEventHandler(WHR_LIGHTNING_DOIT,"Lightning_DoIt",0);
@@ -50,10 +50,10 @@ void WhrCreateLightningEnvironment()
 	PostEvent(WHR_LIGHTNING_DOIT,1000 + rand(1000));
 }
 
-void MoveLightningToLayers(string sExecuteLayer, string sRealizeLayer)
+void MoveLightningToLayers(int sExecuteLayer, int sRealizeLayer)
 {
-	LayerDelObject("execute",&Lightning);
-	LayerDelObject("realize",&Lightning);
+	LayerDelObject(EXECUTE,&Lightning);
+	LayerDelObject(REALIZE,&Lightning);
 	LayerDelObject(SEA_EXECUTE,&Lightning);
 	LayerDelObject(SEA_REALIZE,&Lightning);
 

@@ -1341,7 +1341,7 @@ void CopyPassForAztecSkull()
 		DeleteAttribute(pchar, "AztecSkull");
 		pchar.AztecSkull = "";
 		//заполняем архивную базу 
-		string sTemp,;
+		string sTemp;
 		aref	arFromBox, arToBox;
     	makearef(arFromBox, pchar.fellows.passengers.officers);
 		makearef(arToBox, pchar.AztecSkull);

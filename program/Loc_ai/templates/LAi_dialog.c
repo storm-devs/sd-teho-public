@@ -277,13 +277,13 @@ void LAi_tmpl_dialog_CharacterUpdate(aref chr, float dltTime)
 				CharacterPlayAction(chr, sTemp);
 			}
 			if(stf(tmpl.dlgtime) >= 0.0)
-			{
-				string snd = "male-citizen";
-				if(CheckAttribute(chr,"sex"))
-				{
-					if(chr.sex == "woman") snd = "female-citizen";
-				}
-				LAi_CharacterPlaySound(chr, snd);
+			{	//нет таких звуков - дает ошибку
+				//string snd = "male-citizen";
+				//if(CheckAttribute(chr,"sex"))
+				//{
+				//	if(chr.sex == "woman") snd = "female-citizen";
+				//}
+				//LAi_CharacterPlaySound(chr, snd);
 			}
 			chr.chr_ai.tmpl.phrasetime = 5 + rand(1);
 		}else{

@@ -209,7 +209,10 @@ void ChangeShowIntarface()
 	        {
 	            StartBattleLandInterface();
 	        }
-	        else EndBattleLandInterface();
+	        else 
+			{
+				EndBattleLandInterface();
+			}	
         }
     }
 }

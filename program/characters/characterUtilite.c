@@ -3284,100 +3284,129 @@ bool isShipInside(string _id)
 
     return ret;
 }
-void  Set_My_Cabin()
-{
-    int     n,i;
-    string  sTemp, newCab;
-    ref     rShip;
+void  Set_My_Cabin() {
+	int		n,i;
+	string	sTemp, newCab;
+	ref		rShip;
 
-    int nShipType = GetCharacterShipType(pchar);
-	if (nShipType == SHIP_NOTUSED)
-	{
-        newCab = "My_Cabin";
+	int nShipType = GetCharacterShipType(pchar);
+	if (nShipType == SHIP_NOTUSED) {
+		newCab = "My_Cabin";
 	}
-	else
-	{
-	    rShip = GetRealShip(nShipType);
-	    newCab = "My_" + rShip.CabinType;  // превратим из каюты типа корабля
+	else {
+		rShip = GetRealShip(nShipType);
+		newCab = "My_" + rShip.CabinType;  // превратим из каюты типа корабля
 	}
 
-    if (Pchar.SystemInfo.CabinType != newCab)
-    {
-        if (Pchar.SystemInfo.CabinType != "")
-        {
-            // переселить предметы
-            ref     loc, locTo;
-            aref    arFromBox;
-            aref    curItem;
-	        string  attr;
+	if (Pchar.SystemInfo.CabinType != newCab) {
+		if (Pchar.SystemInfo.CabinType != "") {
+			// переселить предметы
+			ref		loc, locTo;
+			aref	arFromBox;
+			aref	curItem;
+			aref	al;
+			aref	boxTo;
+			string	attr;
 
-            loc   = &locations[FindLocation(Pchar.SystemInfo.CabinType)];
-            locTo = &locations[FindLocation(newCab)];
-            locTo.box1.money = 0;
-            for (n = 1; n <= 4; n++)
-            {
-                sTemp = "box" + n;
-
-                if (CheckAttribute(loc, sTemp + ".money"))
-                {
-                    locTo.box1.money = sti(locTo.box1.money) + sti(loc.(sTemp).money);
-                }
-                makearef(arFromBox, loc.(sTemp).items);
-                for(i=0; i<GetAttributesNum(arFromBox); i++)
-                {
-                    curItem = GetAttributeN(arFromBox, i);
-                    attr = GetAttributeName(curItem);
-                    if (attr != "")
-                    {
-                        if (!CheckAttribute(locTo, "box1.items." + attr))
-                        {
-                            locTo.box1.items.(attr) = 0;
-                        }
-                        locTo.box1.items.(attr) = makeint(sti(locTo.box1.items.(attr)) + makeint(GetAttributeValue(curItem)));
-                    }
-                }
-                // del
-        		DeleteAttribute(loc, sTemp + ".items");
-        	    loc.(sTemp).items = "";
-        	    loc.(sTemp) = Items_MakeTime(0, 0, 1, 2003);
-        	    loc.(sTemp).money = 0;
-            }
-        }
-        Pchar.SystemInfo.CabinType = newCab;
-        n = FindLocation("My_Deck");
-        if (n != -1)
-        {
-            if (sti(rShip.Class) > 4)
-            {
-                Locations[n].reload.l1.go = Pchar.SystemInfo.CabinType;
-                Locations[n].reload.l1.emerge = "reload1";
-            }
-            else
-            {
-                Locations[n].reload.l1.go = "My_Deck_Medium";
-                Locations[n].reload.l1.emerge = "reload_hold";
-            }
-        }
-        n = FindLocation(Pchar.SystemInfo.CabinType);
-        if (n != -1)
-        {
-            if (sti(rShip.Class) > 4)
-            {
-                Locations[n].reload.l1.go = "My_Deck";
-                Locations[n].reload.l1.emerge = "reload1";
-            }
-            else
-            {
-                Locations[n].reload.l1.go = "My_Deck_Medium";
-                Locations[n].reload.l1.emerge = "reload_cabin";
-            }
-        }
-        n = FindLocation("My_Deck_Medium");
-        if (n != -1)
-        {
-            Locations[n].reload.l1.go = Pchar.SystemInfo.CabinType;
-        }
-    }
+			loc		= &locations[FindLocation(Pchar.SystemInfo.CabinType)];
+			locTo	= &locations[FindLocation(newCab)];
+			
+			string sat = "";
+			string time;
+			if (IsDay()) {
+				time = "day";
+			} else {
+				time = "night";
+			}
+			
+			if (CheckAttribute(locTo, "models." + time + ".locators")) {
+				sat = "models." + time + ".locators";
+			} else {
+				if (CheckAttribute(locTo, "models.always.locators")) {
+					sat = "models.always.locators";
+				}
+			}
+			
+			if (sat != "") {
+				CreateEntity(locTo, "location");
+				if(CheckAttribute(locTo, "filespath.models")) {		
+					SendMessage(locTo, "ls", MSG_LOCATION_MODELSPATH, locTo.filespath.models);
+				}
+				LocLoadModel(locTo, sat, "");
+				SendMessage(locTo, "l", MSG_LOCATION_UPDATELOCATORS);
+			}
+			
+			// полная зачистка
+			for (n = 1; n <= 4; n++) {
+				sTemp = "box" + n;
+				DeleteAttribute(locTo, sTemp + ".items");
+				locTo.(sTemp).items = "";
+				locTo.(sTemp) = Items_MakeTime(0, 0, 1, 2003);
+				locTo.(sTemp).money = 0;
+			}
+			
+			for (n = 1; n <= 4; n++) {
+				sTemp = "box" + n;
+				
+				if (FindLocator(locTo.id, sTemp, &al, true)) {
+					makearef(boxTo, locTo.(sTemp));
+				} else {
+					makearef(boxTo, locTo.box1);
+				}
+				
+				if (CheckAttribute(loc, sTemp + ".money")) {
+					boxTo.money = sti(boxTo.money) + sti(loc.(sTemp).money);
+				}
+				makearef(arFromBox, loc.(sTemp).items);
+				for(i=0; i<GetAttributesNum(arFromBox); i++)
+				{
+					curItem = GetAttributeN(arFromBox, i);
+					attr = GetAttributeName(curItem);
+					if (attr != "") {
+						if (!CheckAttribute(boxTo, "items." + attr)) {
+							boxTo.items.(attr) = 0;
+						}
+						
+						boxTo.items.(attr) = makeint(sti(boxTo.items.(attr)) + makeint(GetAttributeValue(curItem)));
+					}
+				}
+				// del
+				DeleteAttribute(loc, sTemp + ".items");
+				loc.(sTemp).items = "";
+				loc.(sTemp) = Items_MakeTime(0, 0, 1, 2003);
+				loc.(sTemp).money = 0;
+			}
+			
+			if (sat != "") {
+				DeleteClass(locTo);
+			}
+		}
+		Pchar.SystemInfo.CabinType = newCab;
+		n = FindLocation("My_Deck");
+		if (n != -1) {
+			if (sti(rShip.Class) > 4) {
+				Locations[n].reload.l1.go = Pchar.SystemInfo.CabinType;
+				Locations[n].reload.l1.emerge = "reload1";
+			} else {
+				Locations[n].reload.l1.go = "My_Deck_Medium";
+				Locations[n].reload.l1.emerge = "reload_hold";
+			}
+		}
+		n = FindLocation(Pchar.SystemInfo.CabinType);
+		if (n != -1) {
+			if (sti(rShip.Class) > 4) {
+				Locations[n].reload.l1.go = "My_Deck";
+				Locations[n].reload.l1.emerge = "reload1";
+			} else {
+				Locations[n].reload.l1.go = "My_Deck_Medium";
+				Locations[n].reload.l1.emerge = "reload_cabin";
+			}
+		}
+		n = FindLocation("My_Deck_Medium");
+		if (n != -1) {
+			Locations[n].reload.l1.go = Pchar.SystemInfo.CabinType;
+		}
+	}
 }
 
 int CheckItemInBox(string _itemID, string _locationID, string _box) // Addon 2016-1 Jason подсчет указанных предметов в конкретном сундуке конкретной локации

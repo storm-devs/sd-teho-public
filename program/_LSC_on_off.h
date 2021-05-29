@@ -2,7 +2,7 @@
 // здесь и далее ник boal - это разработческий ник ALexusB
 
 #define VERSION_NUMBER1       "Корсары: Каждому Свое  " // Корсары: КС modding base #1
-#define VERSION_NUMBER2       "ver. 1.7.3 (15.04.21)"
+#define VERSION_NUMBER2       "ver. 1.7.3 (15.04.21) x64"
 #define VERSION_NUMBER3       "BlackMark.bz"
 
 #define VERSION_NUM      99940  // текущий номер
@@ -12,7 +12,7 @@
 #define VERSION_WWW     "http://www.blackmark.bz"
 
 // Show special message for test game statment
-#define MOD_BETTATESTMODE			"Off"  // On -DEV version; Test - TST ver; Off - relize
+#define MOD_BETTATESTMODE			"On"  // On -DEV version; Test - TST ver; Off - relize
 
 // глобальные строковые переменные
 String sGlobalTemp;
@@ -31,7 +31,7 @@ bool    bDisableCharacterMenu  = false;
 // флаг - игрок читер
 bool    bPlayerIsCheater =  false;  // на перспективу, патчем
 // режим супер читов
-bool    bBettaTestMode = false; // в релизе убрать!!!!!!!!!!!!!
+bool    bBettaTestMode = true; // в релизе убрать!!!!!!!!!!!!!
 // показывать quest_reaction Log
 bool    bQuestLogShow  = false;
 // показывать инфу по балансу
@@ -63,7 +63,7 @@ bool startGameWeather = false;
 // отображение статусной инфы у кораблей в море и у противника на суше
 bool bDrawBars = true;
 // отправление полученных ачивок в стим; для внутренних тестов устанавливать в false !!!
-bool bSteamAchievements	= true;
+bool bSteamAchievements	= false;
 // дополнительный контент, для внутренних тестов ставим в true
 bool bAddonContent = true;
 
@@ -80,8 +80,8 @@ int iGlobalVar2 = 0;
 // <-- резервные глобальные переменные на всякий случай
 
 //int iScriptVersion = 15650;
-int iScriptVersion = 57853; 
-//int iScriptVersion = 54128;
+//int iScriptVersion = 57853; 
+int iScriptVersion = 54128;
 
 // дожди и шторма
 bool 	bRains						= true;
@@ -125,7 +125,7 @@ int MOD_SKILL_ENEMY_RATE   = 4;
 
 // boal 23.01.2004 доработка 091004 сколь угодно героев -->
 int    startHeroType 	= 1;
-int    MaxHeroQty		= 1;  // максимальное кол-во ГГ
+int    MaxHeroQty		= 4;  // максимальное кол-во ГГ
 int    MaxPGGQty		= 10; // максимальное кол-во ПГГ (+2 оставшихся ГГ)
 //int    heroFaceId    = 1;
 // boal 23.01.2004 <--

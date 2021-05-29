@@ -36,7 +36,7 @@ void InitInterface(string iniName)
 	Event("DoInfoShower","sl","MainMenuLaunch",false);
 
 	aref arScrShoter;
-	if( !FindClass(&arScrShoter,"scrshoter") ) 
+	if( !GetEntity(&arScrShoter,"scrshoter") ) 
 	{
 		CreateScreenShoter();
 	}
@@ -218,8 +218,8 @@ void UpdateInterface()
 object InterfaceBackScene;
 void CreateBackEnvironment()
 {
-	LayerFreeze("execute",false);
-	LayerFreeze("realize",false);
+	LayerFreeze(EXECUTE,false);
+	LayerFreeze(REALIZE,false); 	
 
 	if( CheckAttribute(&InterfaceStates,"BackEnvironmentIsCreated") && InterfaceStates.BackEnvironmentIsCreated=="1" ) 
 	{
@@ -239,8 +239,8 @@ void CreateBackEnvironment()
 	ICreateWeather();
 
 	CreateEntity(&InterfaceBackScene,"InterfaceBackScene");
-	LayerAddObject("execute", &InterfaceBackScene, -1);
-	LayerAddObject("realize", &InterfaceBackScene, 1000);
+	LayerAddObject(EXECUTE, &InterfaceBackScene, -1);
+	LayerAddObject(REALIZE, &InterfaceBackScene, 1000);
 	
 	SetEventHandler("evntSteamOverlayActivated","UpdateInterface",0);
 
@@ -350,8 +350,8 @@ void MainMenu_CreateShip()
 
 void DeleteBackEnvironment()
 {
-	LayerDelObject("execute", &InterfaceBackScene);
-	LayerDelObject("realize", &InterfaceBackScene);
+	LayerDelObject(EXECUTE, &InterfaceBackScene);
+	LayerDelObject(REALIZE, &InterfaceBackScene);
 
 	DelEventHandler("evntSteamOverlayActivated","UpdateInterface");
 	
@@ -424,13 +424,13 @@ void ICreateWeather()
 	InterfaceBackScene.current_weather = n;
 	InterfaceStates.mainmenuweather    = n;
 
-	CreateSea("execute","realize");
-	CreateWeather("execute","realize");
+	CreateSea(EXECUTE,REALIZE);
+	CreateWeather(EXECUTE,REALIZE);
 	CreateShipEnvironment();
 	Sea.MaxSeaHeight = 1.0;
 	Sea.isDone = "";
 
-	CreateCoastFoamEnvironment("MainMenu", "execute", "realize");
+	CreateCoastFoamEnvironment("MainMenu", EXECUTE, REALIZE);
 
 	iBlendWeatherNum = -1; // залоченная погода
 }

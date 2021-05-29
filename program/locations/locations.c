@@ -18,18 +18,6 @@ native void ExecuteTechnique(string techName);
 native string GetNextLineString();
 native void SetReloadNextTipsImage();
 
-native int SetAchievement(string id);
-native int GetAchievement(string id);
-native int SetStat(string id, int value);
-native int GetStat(string id);
-native int StoreStats();
-native int ClearAchievement(string id);
-native int ResetStats(int bAchievementsToo);
-
-native int NFGetTexture(string sGroupID, string sFilename);
-native void NFDelGroupTextures(string sGroupID);
-native int NFFindFiles(ref rObject, string sDirectory, string sMask, bool bRecursive);
-
 #libriary "ScriptLocationLibrary"
 
 

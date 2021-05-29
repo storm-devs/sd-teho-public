@@ -3297,8 +3297,8 @@ void CCS_SetNewMainCharacter(ref ch, int num)
 									  
 		break;
 		case 2: // Диего  де Монтойя
-			return;			
-/*			
+//			return;			
+			
 			ch.FaceId 				= 203;
 			ch.HeroModel 			= "Diego_1,Diego_1,Diego_1,Diego_1,Diego_1,protocusto,Diego_6";
 			ch.name 				= "Диего";
@@ -3313,11 +3313,11 @@ void CCS_SetNewMainCharacter(ref ch, int num)
 			ch.nation				= SPAIN;
 			ch.BaseNation			= SPAIN;
 			ch.info					= "Здесь будет описание Главного Героя Диего де Монтойя.";									
-*/			
+			
 		break;		
 		case 3: // Паттерсон
-			return;
-/*			
+//			return;
+			
 			ch.FaceId 				= 202;
 			ch.HeroModel 			= "Willy_1,Willy_1,Willy_1,Willy_1,Willy_1,protocusto,Willy_6";
 			ch.name 				= "Вильям";
@@ -3333,8 +3333,29 @@ void CCS_SetNewMainCharacter(ref ch, int num)
 			ch.BaseNation			= ENGLAND;
 			ch.info 				= "Благородные намерения этого молодого дворянина о честной торговле на благо нации и собственного кошелька разбились о реалии жестокой действительности." + 
 			                          " Пришлось обзаводиться каперским патентом и прокладывать себе путь к благосостоянию пушками и клинком, забыв о чванливых манерах Старого Света...";
-*/									  
+									  
 		break;
+		case 4: 
+//			return;
+			
+			ch.FaceId 				= 214;
+			ch.HeroModel 			= "Espinosa,Espinosa_Cirass,Espinosa_Cirass1,Espinosa_Cirass2,Espinosa_Cirass3,Espinosa,Espinosa";
+			ch.name 				= "Диего";
+			ch.lastname				= "Эспиноза";
+			ch.nameGen				= "Диего";
+			ch.lastnameGen			= "Эспинозу";
+			ch.nameDat				= "Диего";
+			ch.lastnameDat			= "Эспинозе";
+			ch.sex					= "man";
+			ch.model.animation 		= "man_A";
+			ch.HeroParam.HeroType 	= "HeroType_4";
+			ch.nation				= SPAIN;
+			ch.BaseNation			= SPAIN;
+			ch.info 				= "Благородные намерения этого молодого дворянина о честной торговле на благо нации и собственного кошелька разбились о реалии жестокой действительности." + 
+			                          " Пришлось обзаводиться каперским патентом и прокладывать себе путь к благосостоянию пушками и клинком, забыв о чванливых манерах Старого Света...";
+									  
+		break;
+
 	}	
 	
 	ch.model = GetSubStringByNum(ch.HeroModel, 0);

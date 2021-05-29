@@ -5,8 +5,8 @@ void InitWmInterface()
 	WM_SetParameterData();
 
 	CreateEntity(&BattleInterface,"WM_INTERFACE");
-	LayerAddObject("execute",&BattleInterface,-1);
-	LayerAddObject("realize",&BattleInterface,-1);
+	LayerAddObject(EXECUTE,&BattleInterface,-1);
+	LayerAddObject(REALIZE,&BattleInterface,-1);
 
 	SetEventHandler("BI_CommandEndChecking","WM_CommandEndChecking",0);
 	SetEventHandler("BI_LaunchCommand","WM_LaunchCommand",0);
@@ -79,7 +79,7 @@ void WM_LaunchCommand()
 	if( LAi_IsDead(chRef) ) return;
 
 	aref arFader;
-	if( FindClass(arFader,"fader") ) {return;}
+	if( GetEntity(arFader,"fader") ) {return;}
 
 	if(targetNum==-1 && locName=="cancel") {
 		SendMessage(&BattleInterface,"ls",MSG_BATTLE_LAND_MAKE_COMMAND,"cancel");

@@ -115,8 +115,6 @@ void WorldSituationsUpdate()
 			}
 			// калеуче - без НИ
 			if (CheckAttribute(pchar, "questTemp.Caleuche") && pchar.questTemp.Caleuche == "Start") DoQuestFunctionDelay("Caleuche_StartGo", 1.0);
-			// ФМК - без НИ
-			if (!CheckAttribute(pchar, "questTemp.FMQ.Success") && sti(pchar.rank) > 3) DoQuestFunctionDelay("FMQ_SetConditions", 1.0);
 			
 			AchievmentsDayUpdateStart();			
 		break;
@@ -139,7 +137,6 @@ void WorldSituationsUpdate()
 					OfficersReaction("bad");
 				}
 			}
-			if (!CheckAttribute(pchar, "questTemp.Mtraxx.BugsFixer")) Mtraxx_BugsFixer(); // правки релиза							
 		break;
 		
 		case 3:				
@@ -151,7 +148,6 @@ void WorldSituationsUpdate()
 				AddMoneyToCharacter(pchar, 100000);
 				log_info("Вы получили долю прибыли от Пуанси");
 			}
-			if (!CheckAttribute(pchar, "questTemp.Patria_BugsFixer")) Patria_BugsFixer(); // 17-add			
 			
 			// Jason Дороже золота
 			if(GetDLCenabled(DLC_APPID_5))
@@ -181,10 +177,6 @@ void WorldSituationsUpdate()
 		
 		case 4:		
 			QuestActions(); //eddy				
-			// belamour правки Большого патча
-			if (!CheckAttribute(pchar, "questTemp.BigPatch_BugsFixer")) BigPatch_BugsFixer();	
-			// belamour правки Большого патча 2 второй прогон
-			if (!CheckAttribute(pchar, "questTemp.BigPatch_BugsFixer2")) BigPatch_BugsFixer2();	
 		break;
 		
 		case 5:

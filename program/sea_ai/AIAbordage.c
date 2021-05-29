@@ -31,12 +31,12 @@ void Abordage_ReloadStartFade()
 	aref reload_fader = GetEventData();
 	LayerFreeze(SEA_EXECUTE,true);
 	LayerFreeze(SEA_REALIZE,true);
-	LayerFreeze("sea_reflection2",true);
-	LayerFreeze("execute",false);
-	LayerFreeze("realize",false);
+	LayerFreeze(SEA_REFLECTION2,true);
+	LayerFreeze(EXECUTE,false);
+	LayerFreeze(REALIZE,false);
 
-	MoveWeatherToLayers("execute", "realize");
-	MoveSeaToLayers("execute", "realize");
+	MoveWeatherToLayers(EXECUTE, REALIZE);
+	MoveSeaToLayers(EXECUTE, REALIZE);
     HideGrass();
     
 	SendMessage(&AIBalls, "l", MSG_MODEL_RELEASE);
@@ -60,7 +60,7 @@ void Go2LocationAfterAbordage()
 	
     SendMessage(&Particles,"l", PS_CLEAR_CAPTURED); // boal
 	PauseParticles(false);
-	LayerFreeze("sea_reflection2", false);
+	LayerFreeze(SEA_REFLECTION2, false);
 
 	Sea.MaxSeaHeight = fOldMaxSeaHeight;		// restore old MaxSeaHeight
 	DeleteAttribute(pchar, "abordage_active");
@@ -68,10 +68,10 @@ void Go2LocationAfterAbordage()
 
 void Return2SeaAfterAbordage()
 {
-	LayerFreeze("execute", true);
-	LayerFreeze("realize", true);
+	LayerFreeze(EXECUTE, true);
+	LayerFreeze(REALIZE, true);
 
-	LayerFreeze("sea_reflection2", false);
+	LayerFreeze(SEA_REFLECTION2, false);
 	LayerFreeze(SEA_EXECUTE, false);
 	LayerFreeze(SEA_REALIZE, false);
 

@@ -222,7 +222,6 @@ void Map_TraderSucces_quest(string sChar)
 {
 	ref character = CharacterFromID(sChar);
 	
-	
 	// Warship 08.07.09 Пасхалка с бригантиной Мэри Селест
 	if(sChar == "MaryCelesteCapitan")
 	{

@@ -67,8 +67,8 @@ void StartBattleLandInterface()
 	BLI_SetObjectData();
 	BLI_SetMessageParameters();
 	CreateEntity(&objLandInterface,"battle_land_interface");
-	LayerAddObject("execute",&objLandInterface,-1);
-	LayerAddObject("realize",&objLandInterface,-1);
+	LayerAddObject(EXECUTE,&objLandInterface,-1);
+	LayerAddObject(REALIZE,&objLandInterface,-1);
 
 	SetEventHandler(EVENT_CHANGE_OFFICERS,"BLI_UpdateOfficers",0);
 	SetEventHandler(EVENT_DIALOG_START,"BLI_DisableShow",0);
@@ -185,7 +185,7 @@ void BLI_ExecuteCommand()
 	string	evntName = GetEventData();
 
 	aref arFader;
-	if( FindClass(arFader,"fader") ) {return;}
+	if( GetEntity(arFader,"fader") ) {return;}
 
 	aref	uiref;
 	int		curLocIdx;

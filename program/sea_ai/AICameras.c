@@ -45,7 +45,7 @@ void CreateSeaCamerasEnvironment()
 	CreateEntity(&SeaShipCamera, "SHIP_CAMERA");
 	CreateEntity(&SeaDeckCamera, "DECK_CAMERA");
 
-	LayerAddObject("system_messages", &SeaCameras, 1);
+	//LayerAddObject("system_messages", &SeaCameras, 1);
 	LayerAddObject(SEA_EXECUTE, &SeaShipCamera, iShipPriorityExecute + 5);
 	LayerAddObject(SEA_EXECUTE, &SeaFreeCamera, 1);
 	LayerAddObject(SEA_EXECUTE, &SeaDeckCamera, iShipPriorityExecute + 5);
@@ -101,7 +101,7 @@ void CreateSeaCamerasEnvironment()
 	Crosshair.Technique = "Crosshair";
 	Crosshair.SubTexX = 1;
 	Crosshair.SubTexY = 1;
-	Crosshair.Colors.Default = argb(0, 255, 255, 255);
+	Crosshair.Colors.Default = argb(0, 255, 255, 0);
 	Crosshair.Colors.Enemy = argb(0, 255, 0, 0);
 	Crosshair.Colors.Friend = argb(0, 0, 255, 0);
 	Crosshair.Colors.Neutral = argb(0, 128, 128, 128);

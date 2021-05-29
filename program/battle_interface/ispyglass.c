@@ -436,39 +436,23 @@ void FillISpyGlassParameters()
 	objISpyGlass.captain.face.texture = "battle_interface\\portraits\\face_0.tga";
 	objISpyGlass.captain.face.pos = (sti(showWindow.right)-94)+","+(ntop+18)+","+(sti(showWindow.right)-30)+","+(ntop+82);//RecalculateHIconScaled(924)+","+(ntop+RecalculateVIconScaled(20)) + "," + RecalculateHIconScaled(988)+","+(ntop+RecalculateVIconScaled(84));
 	//
-	if( IsNetActive() ) {
-		objISpyGlass.captain.fencing.texture = "interfaces\\skills.tga";
-		objISpyGlass.captain.fencing.pos = (nHCenter+RecalculateHIconScaled(324))+","+(ntop+42)+","+(nHCenter+RecalculateHIconScaled(324)+48)+","+(ntop+90);//RecalculateHIconScaled(830)+","+(ntop+RecalculateVIconScaled(42)) + "," + RecalculateHIconScaled(878)+","+(ntop+RecalculateVIconScaled(90));
-		objISpyGlass.captain.fencing.uv = "0.5,0.75,0.625,0.875";
-		objISpyGlass.captain.cannon.texture = "interfaces\\skills.tga";
-		objISpyGlass.captain.cannon.pos = (nHCenter+RecalculateHIconScaled(252))+","+(ntop+42)+","+(nHCenter+RecalculateHIconScaled(252)+48)+","+(ntop+90);//RecalculateHIconScaled(758)+","+(ntop+RecalculateVIconScaled(42)) + "," + RecalculateHIconScaled(806)+","+(ntop+RecalculateVIconScaled(90));
-		objISpyGlass.captain.cannon.uv = "0.625,0.75,0.75,0.875";
-		objISpyGlass.captain.accuracy.texture = "interfaces\\skills.tga";
-		objISpyGlass.captain.accuracy.pos = (nHCenter+RecalculateHIconScaled(180))+","+(ntop+42)+","+(nHCenter+RecalculateHIconScaled(180)+48)+","+(ntop+90);//RecalculateHIconScaled(686)+","+(ntop+RecalculateVIconScaled(42)) + "," + RecalculateHIconScaled(734)+","+(ntop+RecalculateVIconScaled(90));
-		objISpyGlass.captain.accuracy.uv = "0,0.75,0.125,0.875";
-		objISpyGlass.captain.navigation.texture = "interfaces\\skills.tga";
-		objISpyGlass.captain.navigation.pos = (nHCenter+RecalculateHIconScaled(108))+","+(ntop+42)+","+(nHCenter+RecalculateHIconScaled(108)+48)+","+(ntop+90);//RecalculateHIconScaled(614)+","+(ntop+RecalculateVIconScaled(42)) + "," + RecalculateHIconScaled(662)+","+(ntop+RecalculateVIconScaled(90));
-		objISpyGlass.captain.navigation.uv = "0.875,0.875,1.0,1.0";
-		objISpyGlass.captain.boarding.texture = "interfaces\\skills.tga";
-		objISpyGlass.captain.boarding.pos = (nHCenter+RecalculateHIconScaled(36))+","+(ntop+42)+","+(nHCenter+RecalculateHIconScaled(36)+48)+","+(ntop+90);//RecalculateHIconScaled(542)+","+(ntop+RecalculateVIconScaled(42)) + "," + RecalculateHIconScaled(590)+","+(ntop+RecalculateVIconScaled(90));
-		objISpyGlass.captain.boarding.uv = "0.75,0.75,0.875,0.875";
-	} else {
-		objISpyGlass.captain.fencing.texture = "interfaces\\icons_spec.tga";
-		objISpyGlass.captain.fencing.pos = (nHCenter+RecalculateHIconScaled(324))+","+(ntop+42)+","+(nHCenter+RecalculateHIconScaled(324)+48)+","+(ntop+90);//RecalculateHIconScaled(830)+","+(ntop+RecalculateVIconScaled(42)) + "," + RecalculateHIconScaled(878)+","+(ntop+RecalculateVIconScaled(90));
-		objISpyGlass.captain.fencing.uv = "0.875,0.125,1.0,0.25";   // защита
-		objISpyGlass.captain.cannon.texture = "interfaces\\icons_spec.tga";
-		objISpyGlass.captain.cannon.pos = (nHCenter+RecalculateHIconScaled(252))+","+(ntop+42)+","+(nHCenter+RecalculateHIconScaled(252)+48)+","+(ntop+90);//RecalculateHIconScaled(758)+","+(ntop+RecalculateVIconScaled(42)) + "," + RecalculateHIconScaled(806)+","+(ntop+RecalculateVIconScaled(90));
-		objISpyGlass.captain.cannon.uv = "0.75,0.125,0.875,0.25";  // абордаж
-		objISpyGlass.captain.accuracy.texture = "interfaces\\icons_spec.tga";
-		objISpyGlass.captain.accuracy.pos = (nHCenter+RecalculateHIconScaled(180))+","+(ntop+42)+","+(nHCenter+RecalculateHIconScaled(180)+48)+","+(ntop+90);//RecalculateHIconScaled(686)+","+(ntop+RecalculateVIconScaled(42)) + "," + RecalculateHIconScaled(734)+","+(ntop+RecalculateVIconScaled(90));
-		objISpyGlass.captain.accuracy.uv = "0.375,0.125,0.5,0.25";  // орудия
-		objISpyGlass.captain.navigation.texture = "interfaces\\icons_spec.tga";
-		objISpyGlass.captain.navigation.pos = (nHCenter+RecalculateHIconScaled(108))+","+(ntop+42)+","+(nHCenter+RecalculateHIconScaled(108)+48)+","+(ntop+90);//RecalculateHIconScaled(614)+","+(ntop+RecalculateVIconScaled(42)) + "," + RecalculateHIconScaled(662)+","+(ntop+RecalculateVIconScaled(90));
-		objISpyGlass.captain.navigation.uv = "0.25,0.125,0.375,0.25"; // меткость
-		objISpyGlass.captain.boarding.texture = "interfaces\\icons_spec.tga";
-		objISpyGlass.captain.boarding.pos = (nHCenter+RecalculateHIconScaled(36))+","+(ntop+42)+","+(nHCenter+RecalculateHIconScaled(36)+48)+","+(ntop+90);//RecalculateHIconScaled(542)+","+(ntop+RecalculateVIconScaled(42)) + "," + RecalculateHIconScaled(590)+","+(ntop+RecalculateVIconScaled(90));
-		objISpyGlass.captain.boarding.uv = "0.5,0.125,0.625,0.25";  // навигация
-	}
+
+	objISpyGlass.captain.fencing.texture = "interfaces\\icons_spec.tga";
+	objISpyGlass.captain.fencing.pos = (nHCenter+RecalculateHIconScaled(324))+","+(ntop+42)+","+(nHCenter+RecalculateHIconScaled(324)+48)+","+(ntop+90);//RecalculateHIconScaled(830)+","+(ntop+RecalculateVIconScaled(42)) + "," + RecalculateHIconScaled(878)+","+(ntop+RecalculateVIconScaled(90));
+	objISpyGlass.captain.fencing.uv = "0.875,0.125,1.0,0.25";   // защита
+	objISpyGlass.captain.cannon.texture = "interfaces\\icons_spec.tga";
+	objISpyGlass.captain.cannon.pos = (nHCenter+RecalculateHIconScaled(252))+","+(ntop+42)+","+(nHCenter+RecalculateHIconScaled(252)+48)+","+(ntop+90);//RecalculateHIconScaled(758)+","+(ntop+RecalculateVIconScaled(42)) + "," + RecalculateHIconScaled(806)+","+(ntop+RecalculateVIconScaled(90));
+	objISpyGlass.captain.cannon.uv = "0.75,0.125,0.875,0.25";  // абордаж
+	objISpyGlass.captain.accuracy.texture = "interfaces\\icons_spec.tga";
+	objISpyGlass.captain.accuracy.pos = (nHCenter+RecalculateHIconScaled(180))+","+(ntop+42)+","+(nHCenter+RecalculateHIconScaled(180)+48)+","+(ntop+90);//RecalculateHIconScaled(686)+","+(ntop+RecalculateVIconScaled(42)) + "," + RecalculateHIconScaled(734)+","+(ntop+RecalculateVIconScaled(90));
+	objISpyGlass.captain.accuracy.uv = "0.375,0.125,0.5,0.25";  // орудия
+	objISpyGlass.captain.navigation.texture = "interfaces\\icons_spec.tga";
+	objISpyGlass.captain.navigation.pos = (nHCenter+RecalculateHIconScaled(108))+","+(ntop+42)+","+(nHCenter+RecalculateHIconScaled(108)+48)+","+(ntop+90);//RecalculateHIconScaled(614)+","+(ntop+RecalculateVIconScaled(42)) + "," + RecalculateHIconScaled(662)+","+(ntop+RecalculateVIconScaled(90));
+	objISpyGlass.captain.navigation.uv = "0.25,0.125,0.375,0.25"; // меткость
+	objISpyGlass.captain.boarding.texture = "interfaces\\icons_spec.tga";
+	objISpyGlass.captain.boarding.pos = (nHCenter+RecalculateHIconScaled(36))+","+(ntop+42)+","+(nHCenter+RecalculateHIconScaled(36)+48)+","+(ntop+90);//RecalculateHIconScaled(542)+","+(ntop+RecalculateVIconScaled(42)) + "," + RecalculateHIconScaled(590)+","+(ntop+RecalculateVIconScaled(90));
+	objISpyGlass.captain.boarding.uv = "0.5,0.125,0.625,0.25";  // навигация
+	
 
 	//==========================================================
 	float fBaseScale = stf(showWindow.width) / 1310.0;

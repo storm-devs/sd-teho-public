@@ -1,9 +1,8 @@
-
 void WhrDeleteSeaEnvironment()
 {
 	DeleteAttribute(&Sea,"");
 }
-	
+
 void WhrCreateSeaEnvironment()
 {
 	aref	aCurWeather = GetCurrentWeather();
@@ -33,7 +32,7 @@ void WhrCreateSeaEnvironment()
 	float FogSeaDensity = 1.0;
 
 	if (FindLocation(sLocation) != -1)
-		{
+	{
 			Sea.LodScale = 32.0;
 			Sea.MaxVertices = 1000;
 			Sea.MaxIndices = 1300;
@@ -49,15 +48,15 @@ void WhrCreateSeaEnvironment()
             {
 				fMaxSeaHeight = 0.5;
 			}
-			FogDensity = 20.0;
-			FogSeaDensity = 20.0;
+			FogDensity 		= 20.0;
+			FogSeaDensity 	= 20.0;
 
-			Sea.Sea2.LodScale = 2.0;
-			Sea.Sea2.GridStep = 0.15;
-			Sea.Sea2.BumpScale = 0.3;
-		}
-		else
-		{
+			Sea.Sea2.LodScale 	= 2.0;
+			Sea.Sea2.GridStep 	= 0.15;
+			Sea.Sea2.BumpScale 	= 0.3;
+	}
+	else
+	{
         if (CheckAttribute(aCurWeather, "Storm") && sti(aCurWeather.Storm) == true)
 		{
 		    SetSeaSettings();
@@ -76,7 +75,7 @@ void WhrCreateSeaEnvironment()
 				Sea.MinDim = 64;
 				Sea.GridStep = GridStepPC;
 				fMaxSeaHeight = SetMaxSeaHeight(i);
-				Sea.Sea2.LodScale = 1.0;
+				Sea.Sea2.LodScale = 1.0; 
 				Sea.Sea2.GridStep = 0.15;
 			}
 			else
@@ -100,13 +99,13 @@ void WhrCreateSeaEnvironment()
 	Sea.Fog.Start = Whr_GetFloat(aCurWeather, sCurFog + ".Start");
 	Sea.Fog.Density = Whr_GetFloat(aCurWeather, sCurFog + ".Density") * FogDensity;
 	Sea.Fog.SeaDensity = Whr_GetFloat(aCurWeather, sCurFog + ".SeaDensity") * FogSeaDensity;
-	
+
 	Sea.Pena.Color = Whr_GetColor(aSea,"Pena.Color");
 	Sea.Pena.DepthSmall = 20.0;
 	Sea.Pena.DepthBig = 20.0;
 	Sea.Pena.BigIslandMultiply = Whr_GetFloat(aCommon, "Pena.BigIslandMultiply");
 	Sea.Pena.SmallIslandMultiply = Whr_GetFloat(aCommon, "Pena.SmallIslandMultiply");
-	
+
 	Sea.Bump.Dir = Whr_GetString(aSea, "Bump.Dir");
 	Sea.Bump.Tile = Whr_GetFloat(aSea, "Bump.Tile");
 	Sea.Bump.Ang = Whr_GetFloat(aSea, "Bump.Ang");
@@ -139,9 +138,9 @@ void WhrCreateSeaEnvironment()
 		Sea.Sun.HeightAngle = Whr_GetFloat(aSea, "SunRoad.Special.HeightAngle");
 		Sea.Sun.AzimuthAngle = Whr_GetFloat(aSea, "SunRoad.Special.AzimuthAngle");
 	}
-	Sea.CubeMap.Size = 512;	
+	Sea.CubeMap.Size = 512;
 	Sea.CubeMap.VectorsSize = 256;
-	
+
 	Sea.CubeMap.Format = "r5g6b5";
 
 	Sea.Sky.Color = Whr_GetColor(aSea, "Sky.Color");
@@ -161,7 +160,7 @@ void WhrCreateSeaEnvironment()
 	Sea.Sea2.MoveSpeed2 = Whr_GetString(aSea2, "MoveSpeed2");
 
 	Sea.Sea2.PosShift = Whr_GetFloat(aSea2, "PosShift");
-	
+
 	Sea.Sea2.Reflection = Whr_GetFloat(aSea2, "Reflection");
 	Sea.Sea2.Transparency = Whr_GetFloat(aSea2, "Transparency");
 	Sea.Sea2.Attenuation = Whr_GetFloat(aSea2, "Attenuation");
@@ -173,10 +172,10 @@ void WhrCreateSeaEnvironment()
 	if(FindLocation(sLocation) == -1)
 	{
 		Sea.Sea2.FoamEnable = true;
-	Sea.Sea2.FoamK = Whr_GetFloat(aSea2, "FoamK");
-	Sea.Sea2.FoamV = Whr_GetFloat(aSea2, "FoamV");
-	Sea.Sea2.FoamUV = Whr_GetFloat(aSea2, "FoamUV");
-	Sea.Sea2.FoamTexDisturb = Whr_GetFloat(aSea2, "FoamTexDisturb");
+		Sea.Sea2.FoamK = Whr_GetFloat(aSea2, "FoamK");
+		Sea.Sea2.FoamV = Whr_GetFloat(aSea2, "FoamV");
+		Sea.Sea2.FoamUV = Whr_GetFloat(aSea2, "FoamUV");
+		Sea.Sea2.FoamTexDisturb = Whr_GetFloat(aSea2, "FoamTexDisturb");		
 	}
 
 	if(CheckAttribute(aSea2, "LodScale"))
@@ -222,46 +221,41 @@ void SetSeaGridStep(float SeaDetails)
 			return;
 		}
 	}
-
 	Sea.Sea2.GridStep = 0.07 + 0.1 * (1.0 - SeaDetails);
-
 	Sea.Sea2.SimpleSea = sti(InterfaceStates.SimpleSea);
 }
 
-// boal 14.09.06 относительная высота волны
 float GetScaleSeaHeight()
 {
 	/*
-	из ядра
 	float fScale = (fMaxSeaHeight >= _fAmp1 + _fAmp2) ? 1.0f : fMaxSeaHeight / (_fAmp1 + _fAmp2);
 
 		fAmp1 = _fAmp1 * fScale;
 		fAmp2 = _fAmp2 * fScale;
-		
-    будеи считать среднюю волну как (а1 + а2)/2
+
+    (a1 + a2)/2
 	*/
 	float fMaxSeaHeight = 0.0;
 
 	if (CheckAttribute(&Sea, "MaxSeaHeight")) { fMaxSeaHeight = stf(Sea.MaxSeaHeight); }
-	
+
 	aref arWeath = GetCurrentWeather();
 	float fAmp1, fAmp2;
-	
+
 	fAmp1 = stf(arWeath.Sea2.Amp1);
 	fAmp2 = stf(arWeath.Sea2.Amp2);
-	
+
 	float fScale;
 	if (fMaxSeaHeight >= (fAmp1 + fAmp2))
 	{
-		fScale = 1.0; 
+		fScale = 1.0;
 	}
 	else
 	{
 		fScale = fMaxSeaHeight / (fAmp1 + fAmp2);
 	}
-
 	fAmp1 = fAmp1 * fScale;
 	fAmp2 = fAmp2 * fScale;
-		
+
 	return (fAmp1 + fAmp2) / 2.0;
 }

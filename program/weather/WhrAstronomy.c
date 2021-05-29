@@ -25,42 +25,7 @@ void WhrCreateAstronomyEnvironment()
 
 	Astronomy.TimeScale = 1.0;
 
-	Astronomy.Stars.Enable = Whr_GetLong(aStars, "Enable");
-	if (sti(Astronomy.Stars.Enable))
-	{
-		Astronomy.Stars.Catalog = "resource\\hic.dat";
-		Astronomy.Stars.Texture = Whr_GetString(aStars, "Texture");
-		Astronomy.Stars.Color = Whr_GetColor(aStars, "Color");
-		Astronomy.Stars.Radius = Whr_GetFloat(aStars, "Radius");
-		Astronomy.Stars.Size = Whr_GetFloat(aStars, "Size");
-		Astronomy.Stars.HeightFade = Whr_GetFloat(aStars, "HeightFade");
-		Astronomy.Stars.SunFade = Whr_GetFloat(aStars, "SunFade");
-		
-		Astronomy.Stars.VisualMagnitude = Whr_GetFloat(aStars, "VisualMagnitude");
-		Astronomy.Stars.TelescopeMagnitude = 10.0;
-
-		Astronomy.Stars.TextureX = 4;
-		Astronomy.Stars.TextureY = 4;
-
-		Astronomy.Stars.Spectr.W = argb(0, 150, 243, 220);
-		Astronomy.Stars.Spectr.O = argb(0, 150, 243, 220);
-		Astronomy.Stars.Spectr.B = argb(0, 226, 244, 223);
-		Astronomy.Stars.Spectr.A = argb(0, 255, 243, 213);
-		Astronomy.Stars.Spectr.F = argb(0, 255, 243, 170);
-		Astronomy.Stars.Spectr.G = argb(0, 255, 244, 123);
-		Astronomy.Stars.Spectr.K = argb(0, 255, 187, 117);
-		Astronomy.Stars.Spectr.M = argb(0, 249, 142, 117);
-		Astronomy.Stars.Spectr.L = argb(0, 223, 142, 117);
-		Astronomy.Stars.Spectr.T = argb(0, 209, 155, 123);
-	}
-
-	FillAstronomyFadeValue();
-	/*Astronomy.Planets.Enable = Whr_GetLong(aPlanets, "Enable");
-	if (sti(Astronomy.Planets.Enable))
-	{
-		Astronomy.Planets.Scale = 1.0;
-		Astronomy.Planets.Speed = 10.0;
-	}*/
+	FillStars(aStars);
 
 	Astronomy.Planets.Planet.Mercury.Distance = 0.38710;	
 	Astronomy.Planets.Planet.Mercury.Speed = 48.8;			
@@ -127,6 +92,41 @@ void WhrCreateAstronomyEnvironment()
 	Astronomy.isDone = true;
 }
 
+void FillStars(ref aStars)
+{
+    if(!IsEntity(&Astronomy)) return;
+
+    Astronomy.Stars.Enable = Whr_GetLong(aStars, "Enable");
+	if (sti(Astronomy.Stars.Enable))
+	{
+		Astronomy.Stars.Catalog = "hic.dat";
+		Astronomy.Stars.Texture = Whr_GetString(aStars, "Texture");
+		Astronomy.Stars.Color = Whr_GetColor(aStars, "Color");
+		Astronomy.Stars.Radius = Whr_GetFloat(aStars, "Radius");
+		Astronomy.Stars.Size = Whr_GetFloat(aStars, "Size");
+		Astronomy.Stars.HeightFade = Whr_GetFloat(aStars, "HeightFade");
+		Astronomy.Stars.SunFade = Whr_GetFloat(aStars, "SunFade");
+
+		Astronomy.Stars.VisualMagnitude = Whr_GetFloat(aStars, "VisualMagnitude");
+		Astronomy.Stars.TelescopeMagnitude = 10.0;
+
+		Astronomy.Stars.TextureX = 4;
+		Astronomy.Stars.TextureY = 4;
+
+		Astronomy.Stars.Spectr.W = argb(0, 150, 243, 220);
+		Astronomy.Stars.Spectr.O = argb(0, 150, 243, 220);
+		Astronomy.Stars.Spectr.B = argb(0, 226, 244, 223);
+		Astronomy.Stars.Spectr.A = argb(0, 255, 243, 213);
+		Astronomy.Stars.Spectr.F = argb(0, 255, 243, 170);
+		Astronomy.Stars.Spectr.G = argb(0, 255, 244, 123);
+		Astronomy.Stars.Spectr.K = argb(0, 255, 187, 117);
+		Astronomy.Stars.Spectr.M = argb(0, 249, 142, 117);
+		Astronomy.Stars.Spectr.L = argb(0, 223, 142, 117);
+		Astronomy.Stars.Spectr.T = argb(0, 209, 155, 123);
+	}
+	FillAstronomyFadeValue();
+}
+
 void FillAstronomyFadeValue()
 {
 	Astronomy.Planets.Enable = Whr_GetLong(&Weathers[iCurWeatherNum],"Planets.Enable");
@@ -136,25 +136,32 @@ void FillAstronomyFadeValue()
 		Astronomy.Planets.Speed = 10.0;
 
 		Astronomy.Planets.FadeValue = 1.0;
-		if( iBlendWeatherNum<0 || Whr_GetLong(&Weathers[iBlendWeatherNum],"Planets.Enable") ) {
+		if( iBlendWeatherNum<0 || Whr_GetLong(&Weathers[iBlendWeatherNum],"Planets.Enable") )
+		{
 			Astronomy.Planets.FadeStartTime = -1.0;
-		} else {
+		} 
+		else 
+		{
 			Astronomy.Planets.FadeStartTime = makefloat(sti(Environment.Time)) + 0.2;
 		}
 		Astronomy.Planets.FadeTime = -0.2;
-	} else {
+	} 
+	else 
+	{
 		Astronomy.Planets.Scale = 1.0;
 		Astronomy.Planets.Speed = 10.0;
 
 		Astronomy.Planets.FadeValue = 0.0;
-		if( iBlendWeatherNum>=0 && Whr_GetLong(&Weathers[iBlendWeatherNum],"Planets.Enable") ) {
+		if( iBlendWeatherNum>=0 && Whr_GetLong(&Weathers[iBlendWeatherNum],"Planets.Enable") ) 
+		{
 			Astronomy.Planets.FadeStartTime = makefloat(sti(Environment.Time)) + 0.6;
-		} else {
+		} 
+		else 
+		{
 			Astronomy.Planets.FadeStartTime = -1.0;
 		}
 		Astronomy.Planets.FadeTime = 0.2;
 	}
-
 	Astronomy.Stars.Enable = Whr_GetLong(&Weathers[iCurWeatherNum], "Stars.Enable");
 	if (sti(Astronomy.Stars.Enable))
 	{
@@ -162,9 +169,12 @@ void FillAstronomyFadeValue()
 		Astronomy.Stars.HeightFade = Whr_GetFloat(&Weathers[iCurWeatherNum], "Stars.HeightFade");
 
 		Astronomy.Stars.FadeValue = 1.0;
-		if( iBlendWeatherNum<0 || Whr_GetLong(&Weathers[iBlendWeatherNum],"Stars.Enable") ) {
+		if( iBlendWeatherNum<0 || Whr_GetLong(&Weathers[iBlendWeatherNum],"Stars.Enable") ) 
+		{
 			Astronomy.Stars.FadeStartTime = -1.0;
-		} else {
+		}
+		else
+		{
 			Astronomy.Stars.FadeStartTime = makefloat(sti(Environment.Time)) + 0.2;
 		}
 		Astronomy.Stars.FadeTime = -0.2;
@@ -172,9 +182,12 @@ void FillAstronomyFadeValue()
 	else
 	{
 		Astronomy.Stars.FadeValue = 0.0;
-		if( iBlendWeatherNum>=0 && Whr_GetLong(&Weathers[iBlendWeatherNum],"Stars.Enable") ) {
+		if( iBlendWeatherNum>=0 && Whr_GetLong(&Weathers[iBlendWeatherNum],"Stars.Enable") ) 
+		{
 			Astronomy.Stars.FadeStartTime = makefloat(sti(Environment.Time)) + 0.6;
-		} else {
+		} 
+		else 
+		{
 			Astronomy.Stars.FadeStartTime = -1.0;
 		}
 		Astronomy.Stars.FadeTime = 0.2;

@@ -26,8 +26,8 @@ void Items_LoadModel (ref _itemModel, ref _item)
 		SendMessage(&_itemModel, "ls", MSG_MODEL_LOAD_GEO, itemFolder + "\" + _item.model);
 		SendMessage(&_itemModel, "ls", MSG_MODEL_SET_DIRPATH,"");
 		SendMessage(&_itemModel, "ls", MSG_MODEL_SET_TECHNIQUE, "RandItem");
-		LayerAddObject("execute", &_itemModel, ITEMS_LAYER);
-		LayerAddObject("realize", &_itemModel, ITEMS_LAYER);
+		LayerAddObject(EXECUTE, &_itemModel, ITEMS_LAYER);
+		LayerAddObject(REALIZE, &_itemModel, ITEMS_LAYER);
 
 		//Trace("ItemLogic: Loaded model "+itemFolder+"\"+_item.model);
 	}

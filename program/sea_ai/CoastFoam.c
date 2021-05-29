@@ -1,6 +1,6 @@
 object CoastFoam;
 
-void CreateCoastFoamEnvironment(string sFoamID, string sExecuteLayer, string sRealizeLayer)
+void CreateCoastFoamEnvironment(string sFoamID, int sExecuteLayer, int sRealizeLayer)
 {
 	CoastFoam.id = sFoamID;
 	CoastFoam.Edit = false;

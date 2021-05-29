@@ -343,7 +343,7 @@ object objControlsContainer;
 void RunControlsContainers()
 {
 	//CreateEntity(&objControlsContainer,"controls_container");
-	//LayerAddObject("iExecute",&objControlsContainer,1);
+	//LayerAddObject(INTERFACE_EXECUTE,&objControlsContainer,1);
 }
 
 void ControlsMakeInvert()

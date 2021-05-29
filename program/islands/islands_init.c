@@ -10,7 +10,6 @@ void InitIslands()
 		Islands[i].reload_enable = true;
 		Islands[i].visible = true;
 		Islands[i].colonyquantity = 1;
-		Islands[i].net = true;
 		
 		Islands[i].ImmersionDistance = 450000.0;
 		Islands[i].ImmersionDepth = 0.0;

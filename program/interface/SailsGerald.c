@@ -4,25 +4,25 @@ int    price;
 
 void InitInterface_R(string iniName, ref _shipyarder)
 {
-    StartAboveForm(true);
-    // лочим квест и карту
-    bQuestCheckProcessFreeze = true;
-    int    st = GetCharacterShipType(pchar);
-    shref = GetRealShip(st);
-    
-    price = GetSailsTuningPrice(Pchar, _shipyarder, SAILSGERALD_PRICE_RATE);
-    
-    SetEventHandler("GetInterfaceTexture", "ScrollGetTexture", 0);
-    EnumerateIcons("resource\textures\ships\gerald\", "*.tga.tx", "SCROLL_GERALD", 0);
-    
-    SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
-    
+	StartAboveForm(true);
+	// лочим квест и карту
+	bQuestCheckProcessFreeze = true;
+	int st = GetCharacterShipType(pchar);
+	shref = GetRealShip(st);
+
+	price = GetSailsTuningPrice(Pchar, _shipyarder, SAILSGERALD_PRICE_RATE);
+
+	SetEventHandler("GetInterfaceTexture", "ScrollGetTexture", 0);
+	LoadIcons("ships\gerald\", "*.tga.tx", "SCROLL_GERALD", 0);
+
+	SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
+
 	SetEventHandler("InterfaceBreak","ProcessBreakExit",0);
 	SetEventHandler("exitCancel","ProcessCancelExit",0);
 	SetEventHandler("ievnt_command","ProcCommand",0);
 	SetEventHandler("evntDoPostExit","DoPostExit",0);
 	SetEventHandler("ChangeSelectScrollImage", "ChangeSelectScrollImage", 0);
-	
+
 	if(!CheckAttribute(&GameInterface,"SCROLL_GERALD.current"))
 	{
 		GameInterface.SCROLL_GERALD.current = 0;
@@ -51,7 +51,7 @@ void IDoExit(int exitCode)
     DelEventHandler("GetInterfaceTexture", "ScrollGetTexture");
     DelEventHandler("ChangeSelectScrollImage", "ChangeSelectScrollImage");
     
-    NFDelGroupTextures("SCROLL_GERALD");
+    UnloadIcons("SCROLL_GERALD");
     
 	interfaceResultCommand = exitCode;
 	EndCancelInterface(true);
@@ -92,8 +92,9 @@ int ScrollGetTexture()
 	string sName = GetEventData();
 	int iPicIndex = GetEventData();
 	string sScrollID = GetEventData();
-	int iTexture = NFGetTexture(sScrollID, sName);
-	//Trace("ScrollGetTexture: " + iTexture + ", " + sName);
+	
+	string sAttr = "pic" + (iPicIndex + 1);
+	int iTexture = sti(GameInterface.(sScrollID).(sAttr).TexId);
 
 	return iTexture;
 }
@@ -120,7 +121,7 @@ void CheckChangeSailStatus()
 		int nEmblem = sti(GameInterface.SCROLL_GERALD.current);
 
 		string sattr = "pic"+(nEmblem+1);
-		if (GameInterface.SCROLL_GERALD.(sattr).FileName.Name != shref.ShipSails.Gerald_Name)
+		if (GameInterface.SCROLL_GERALD.(sattr).FileName != shref.ShipSails.Gerald_Name)
 		{
 			bNewValue = true;
 		}
@@ -134,7 +135,7 @@ void SetNewSailsGerald()
 	int nEmblem = sti(GameInterface.SCROLL_GERALD.current);
 
 	string sattr = "pic"+(nEmblem+1);
-	shref.ShipSails.Gerald_Name = GameInterface.SCROLL_GERALD.(sattr).FileName.Name;
+	shref.ShipSails.Gerald_Name = GameInterface.SCROLL_GERALD.(sattr).FileName;
 	Log_testInfo(shref.ShipSails.Gerald_Name);
 	AddMoneyToCharacter(Pchar, -price);
 	WaitDate("",0,0,0, 1, 30);

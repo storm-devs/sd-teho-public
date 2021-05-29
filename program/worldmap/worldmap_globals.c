@@ -554,11 +554,11 @@ void  wdmEmptyAllOldEncounter()
         enc = GetAttributeN(encs, i);
         if (CheckAttribute(enc, "needDelete") && enc.needDelete == "wdmEncounterDelete")
         {
+	        if (CheckAttribute(enc, "quest")) pchar.worldmap.shipcounter = sti(pchar.worldmap.shipcounter) - 1; // mitrokosta fix!!!!
 	        sdel  = "encounters."+GetAttributeName(enc);
 			DeleteAttribute(&worldMap, sdel);
 	        num--; //fix
 	        i--;
-	        if (CheckAttribute(enc, "quest")) pchar.worldmap.shipcounter = sti(pchar.worldmap.shipcounter) - 1;
         }
     }
 }
