@@ -59,18 +59,18 @@ bool CreateParticleEntity()
 	{
 		if (CreateEntity(&Particles,"particles") == false) return false;
 		//Trace("bool CreateParticleEntity()");
-		LayerAddObject("realize",Particles,65536);
-		LayerAddObject("execute",Particles,0);
+		LayerAddObject(REALIZE,Particles,65536);
+		LayerAddObject(EXECUTE,Particles,0);
 		LayerAddObject(SEA_REALIZE,Particles,65536);
 		LayerAddObject(SEA_EXECUTE,Particles,0);
 	}
 	return true;
 }
 
-void MoveParticlesToLayers(string sExecuteLayer, string sRealizeLayer)
+void MoveParticlesToLayers(int sExecuteLayer, int sRealizeLayer)
 {
-	LayerDelObject("execute", &Particles);
-	LayerDelObject("realize", &Particles);
+	LayerDelObject(EXECUTE, &Particles);
+	LayerDelObject(REALIZE, &Particles);
 	LayerDelObject(SEA_EXECUTE, &Particles);
 	LayerDelObject(SEA_REALIZE, &Particles);
 
@@ -93,7 +93,7 @@ int CreateBlast(float x,float y,float z)
 	object blast;
 	iRes = CreateEntity(&blast,"blast");
 	SendMessage(&blast,"lfff",LM_SETPOINT,x,y,z);
-	LayerAddObject("realize",blast,3);
+	LayerAddObject(REALIZE,blast,3);
 	LayerAddObject(SEA_REALIZE,blast,3);
 	return iRes;
 }
@@ -104,7 +104,7 @@ int CreateBlastX(float x,float y,float z,float ax,float ay,float az)
 	object blast;
 	iRes = CreateEntity(&blast,"blast");
 	SendMessage(&blast,"lffffff",LM_SETPOINTANDANGLES,x,y,z,ax,ay,az);
-	LayerAddObject("realize",blast,3);
+	LayerAddObject(REALIZE,blast,3);
 	LayerAddObject(SEA_REALIZE,blast,3);
 	return iRes;
 }

@@ -1,4 +1,4 @@
-#include "battle_interface\log_msg.h"
+#include "storm-engine\battle_interface\log_msg.h"
 
 #define LOG_FOR_SEA			1
 #define LOG_FOR_LAND		2
@@ -25,8 +25,8 @@ void InitLogInterface()
 	SetEventHandler(EVENT_LOCATION_LOAD,"LI_LocationLoad",0);
 	SetEventHandler("BI_FastCommand","BI_FastCommand",0);
 	SetEventHandler(BI_EVENT_SET_VISIBLE,"SetLogInterfaceVisible",0);
-	LayerAddObject("execute",&ILogAndActions,-257);
-	LayerAddObject("realize",&ILogAndActions,-1);
+	LayerAddObject(EXECUTE,&ILogAndActions,-257);
+	LayerAddObject(REALIZE,&ILogAndActions,-1);
 	LayerAddObject(SEA_EXECUTE,&ILogAndActions,-257);
 	LayerAddObject(SEA_REALIZE,&ILogAndActions,-1);
 
@@ -35,16 +35,16 @@ void InitLogInterface()
 
 void Log_RemoveFromSingleLayers()
 {
-	LayerDelObject("execute",&ILogAndActions);
-	LayerDelObject("realize",&ILogAndActions);
+	LayerDelObject(EXECUTE,&ILogAndActions);
+	LayerDelObject(REALIZE,&ILogAndActions);
 	LayerDelObject(SEA_EXECUTE,&ILogAndActions);
 	LayerDelObject(SEA_REALIZE,&ILogAndActions);
 }
 
 void Log_MoveToSingleLayers()
 {
-	LayerAddObject("execute",&ILogAndActions,-257);
-	LayerAddObject("realize",&ILogAndActions,-1);
+	LayerAddObject(EXECUTE,&ILogAndActions,-257);
+	LayerAddObject(REALIZE,&ILogAndActions,-1);
 	LayerAddObject(SEA_EXECUTE,&ILogAndActions,-257);
 	LayerAddObject(SEA_REALIZE,&ILogAndActions,-1);
 }
@@ -302,7 +302,7 @@ void BI_FastCommand()
 	if( LAi_IsDead(pchar) ) {return;}
 
 	aref arFader;
-	if( FindClass(arFader,"fader") ) {return;}
+	if( GetEntity(arFader,"fader") ) {return;}
 
 	bool bEC = false;
 

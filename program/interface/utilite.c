@@ -596,23 +596,47 @@ string GlobalStringConvert(string strID)
 	return LanguageConvertString( GlobalLngFileID(), strID );
 }
 
-void EnumerateIcons(string sDirectory, string sFileMask, string sControlName, int iAddListSize)
-{
-	object oTmp;
-	int iNumFiles = NFFindFiles(&oTmp, sDirectory, sFileMask, false);
-	Trace("Find files : " + iNumFiles);
-	for (int i=0; i<iNumFiles; i++)
-	{
-		string attrName = "pic" + (i + 1);
-		string sFile = "f" + i;
-		GameInterface.(sControlName).(attrName).name1 = oTmp.(sFile).FilePath;
-		GameInterface.(sControlName).(attrName).FileName = oTmp.(sFile).FileName;
-		GameInterface.(sControlName).(attrName).FileName.Name = oTmp.(sFile).Name;
-		GameInterface.(sControlName).(attrName).FileName.Ext = oTmp.(sFile).Ext;
-		Trace("Find file : " + oTmp.(sFile).FileName);
+void LoadIcons(string sDirectory, string sFileMask, string sControlName, int iAddListSize) {
+	object objFileFinder;
+	aref arList, arFile;
+	int iNumFiles;
+	string sFile, attrName, sName;
+	
+	objFileFinder.dir = "resource\textures\" + sDirectory;
+	objFileFinder.mask = sFileMask;
+	
+	CreateEntity(&objFileFinder, "FINDFILESINTODIRECTORY");
+	makearef(arList, objFileFinder.filelist);
+	iNumFiles = GetAttributesNum(arList);	
+		
+	for (int i = 0; i < iNumFiles; i++) {
+		arFile = GetAttributeN(arList, i);
+		sFile = GetAttributeValue(arFile);
+		
+		attrName = "pic" + (i + 1);
+		sName = "f" + i;
+		GameInterface.(sControlName).(attrName).name1 = sName;
+		GameInterface.(sControlName).(attrName).FileName = sFile;
+		GameInterface.(sControlName).(attrName).TexId = GetTexture(sDirectory + sFile);
 	}
+	
 	GameInterface.(sControlName).ListSize = iNumFiles + iAddListSize;
 	//SendMessage(&GameInterface,"lsl",MSG_INTERFACE_SCROLL_CHANGE,sControlName,-1);
+	DeleteClass(&objFileFinder);
+}
+
+void UnloadIcons(string sControlName) {
+	string sAttr;
+	aref arPics;
+	makearef(arPics, GameInterface.(sControlName));
+	int iNumPics = sti(GameInterface.(sControlName).ListSize);
+	
+	for (int i = 0; i < iNumPics; i++) {
+		sAttr = "pic" + (i + 1);
+		ReleaseTexture(sti(arPics.(sAttr).TexId));
+	}
+	
+	DeleteAttribute(&GameInterface, sControlName);
 }
 
 void CreateTooltip(string header, string text1, int color1, string text2, int color2, string text3, int color3, string text4, int color4, string picTexture, string picGroup, string picImage, int nPicWidth, int nPicHeight)

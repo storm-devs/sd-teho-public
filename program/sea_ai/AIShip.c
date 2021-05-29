@@ -33,8 +33,8 @@ void CreateRiggingEnvironment()
 	CreateEntity(&Sail, "Sail");
 	LayerAddObject(sCurrentSeaExecute, &Sail, iShipPriorityExecute + 1);
 	LayerAddObject(sCurrentSeaRealize, &Sail, iShipPriorityRealize + 1);
-	LayerAddObject("sails_trace", &Sail, 10);
-	LayerAddObject("sea_reflection2", &Sail, 3);
+	LayerAddObject(SAILS_TRACE, &Sail, 10);
+	LayerAddObject(SEA_REFLECTION2, &Sail, 3);
 	Sail.MinSpeed = 0.05;
 
 	CreateEntity(&Rope, "Rope");
@@ -44,7 +44,7 @@ void CreateRiggingEnvironment()
 	CreateEntity(&Flag, "Flag");
 	LayerAddObject(sCurrentSeaExecute, &Flag, iShipPriorityExecute + 3);
 	LayerAddObject(sCurrentSeaRealize, &Flag, iShipPriorityRealize + 3);
-	LayerAddObject("sea_reflection2", &Flag, 3);
+	LayerAddObject(SEA_REFLECTION2, &Flag, 3);
 	
 	CreateEntity(&Vant, "Vant");
 	LayerAddObject(sCurrentSeaExecute, &Vant, iShipPriorityExecute + 4);
@@ -94,7 +94,6 @@ void DeleteShipEnvironment()
 	DelEventHandler("frame", "Ship_VicSoundTime");
 	DelEventHandler("Ship_SailsMoveSound", "Ship_SailsMoveSound");
 	DelEventHandler("Ship_BortReloadEvent", "Ship_BortReloadEvent");
-	DelEventHandler("Ship_VolleyHeelEnd", "Ship_VolleyHeelEnd");
 	DelEventHandler(SHIP_SET_BLOT, "Ship_SetBlot");
 	DelEventHandler(SHIP_FAKE_FIRE, "Ship_EventFakeFire");
 
@@ -209,7 +208,6 @@ void CreateShipEnvironment()
 	SetEventHandler("frame", "Ship_VicSoundTime", 0);
 	SetEventHandler("Ship_SailsMoveSound", "Ship_SailsMoveSound", 0);
 	SetEventHandler("Ship_BortReloadEvent", "Ship_BortReloadEvent", 0);
-	SetEventHandler("Ship_VolleyHeelEnd", "Ship_VolleyHeelEnd", 0);
 	SetEventHandler(SHIP_SET_BLOT, "Ship_SetBlot", 0);
 	SetEventHandler(SHIP_FAKE_FIRE, "Ship_EventFakeFire", 0);
 }	
@@ -1977,8 +1975,8 @@ void Ship_BranderDetonate()
 		if(iDiffClass > 0) fMaxDamage += iDiffClass * 500.0;
 		fMaxDamage = fMaxDamage / 20.0 * MOD_SKILL_ENEMY_RATE;		
 	}	
-	if (!FindClass(&arShipObjects[0], "ship")) { return; }// can't be
-	while (FindClassNext(&arShipObjects[iBranderNumShips])) { iBranderNumShips++; }
+	if (!FindEntity(&arShipObjects[0], "ship")) { return; }// can't be
+	while (FindEntityNext(&arShipObjects[iBranderNumShips])) { iBranderNumShips++; }
 	
 	// enumerate ship and do damage
 	for (int i=0; i<iBranderNumShips; i++)
@@ -2122,10 +2120,10 @@ void Ship_SailDamage()
 {
 	float x, y, z;
 	int iCharacterIndex 	= GetEventData();
-	int	iBallCharacterIndex = GetEventData();
 	x = GetEventData();
 	y = GetEventData();
 	z = GetEventData();
+	int	iBallCharacterIndex = GetEventData();
 
 	ref	rBallCharacter 	= GetCharacter(iBallCharacterIndex);	// кто пуляет
 	ref	rOurCharacter 	= GetCharacter(iCharacterIndex);   		// по кому
@@ -4637,21 +4635,21 @@ void Ship_SetGhostShip(ref rCharacter, string sTech)
 void Ship_SetRiggingAlpha(ref rCharacter, int alpha)
 {
 	aref arVant;
-	if( FindClass(&arVant,"Vant") ) {
+	if( GetEntity(&arVant,"Vant") ) {
 		SendMessage(arVant,"lil",40400,rCharacter,alpha);
 		LayerDelObject(sCurrentSeaRealize, arVant);
 		LayerAddObject(sCurrentSeaRealize, arVant, 100001);
 	}
 
 	aref arRope;
-	if( FindClass(&arRope,"Rope") ) {
+	if( GetEntity(&arRope,"Rope") ) {
 		SendMessage(arRope,"lil",40400,rCharacter,alpha);
 		LayerDelObject(sCurrentSeaRealize, arRope);
 		LayerAddObject(sCurrentSeaRealize, arRope, 100001);
 	}
 
 	aref arSail;
-	if( FindClass(&arSail,"Sail") ) {
+	if( GetEntity(&arSail,"Sail") ) {
 		SendMessage(arSail,"lil",40400,rCharacter,alpha);
 		LayerDelObject(sCurrentSeaRealize, arSail);
 		LayerAddObject(sCurrentSeaRealize, arSail, 100001);

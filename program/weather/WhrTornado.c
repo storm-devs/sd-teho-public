@@ -53,7 +53,7 @@ void WhrCreateTornadoEnvironmentEx()
 	}
 	else
 	{
-		LayerAddObject("execute", &Tornado, 65535);
-		LayerAddObject("realize", &Tornado, 65535);
+	        LayerAddObject(SEA_EXECUTE, &Tornado, 65535);
+	        LayerAddObject(SEA_REALIZE, &Tornado, 65535);
 	}
 }

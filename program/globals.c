@@ -1,5 +1,5 @@
-#include "sound.h"
-#include "messages.h"
+#include "storm-engine\sound.h"
+#include "storm-engine\messages.h"
 #include "sound.c"
 
 string savefile_info = "ver 1.0.7";

@@ -171,23 +171,23 @@ bool LoadLocation(ref loc)
 		//Sea
 		if(loc.environment.sea == "true") 
 		{
-			CreateSea("execute","realize");
+			CreateSea(EXECUTE, REALIZE);
 			if (!CheckAttribute(loc, "notCrateFoam"))
 			{
-				CreateCoastFoamEnvironment(loc.id, "execute", "realize");
+				CreateCoastFoamEnvironment(loc.id, EXECUTE, REALIZE);
 			}
 		}
 		//Weather
-		if(loc.environment.weather == "true") CreateWeather("execute","realize");//CreateEntity(&locWeather, "weather");
+		if(loc.environment.weather == "true") CreateWeather(EXECUTE,REALIZE);//CreateEntity(&locWeather, "weather");
 		//Ship env
 		CreateShipEnvironment();
 	}
 	if(isFort)
 	{
 		//Sea
-		if(loc.environment.sea == "true") CreateSea("execute","realize");//CreateEntity(&locSea, "sea");
+		if(loc.environment.sea == "true") CreateSea(EXECUTE,REALIZE);//CreateEntity(&locSea, "sea");
 		//Weather
-		if(loc.environment.weather == "true") CreateWeather("execute","realize");//CreateEntity(&locWeather, "weather");
+		if(loc.environment.weather == "true") CreateWeather(EXECUTE,REALIZE);//CreateEntity(&locWeather, "weather");
 	}
 
 	ReloadProgressUpdate();
@@ -206,7 +206,14 @@ bool LoadLocation(ref loc)
 		SendMessage(loc, "ls", MSG_LOCATION_TEXTURESPATH, loc.filespath.textures);
 	}
 	//Set lighting path
-	SendMessage(loc, "ls", MSG_LOCATION_LIGHTPATH, GetLightingPath());
+	if(!DYNAMIC_LIGHTS)
+	{
+		SendMessage(loc, "ls", MSG_LOCATION_LIGHTPATH, GetLightingPath());
+	}	
+	else
+	{
+		SendMessage(loc, "ls", MSG_LOCATION_LIGHTPATH, "");
+	}
 	SendMessage(loc, "ls", MSG_LOCATION_SHADOWPATH, GetLmLightingPath());
 	//Loading always models================================================================
 	aref st, at, lit, lit1;
@@ -978,7 +985,7 @@ bool LocLoadModel(aref loc, string sat, string addition)
 			/*if (!isEntity(&Island))
 			{
 				CreateEntity(&Island, "Island");
-				LayerAddObject("realize", &Island, 65529);
+				LayerAddObject(REALIZE, &Island, 65529);
 			}
 
 			SendMessage(&Island, "liss", MSG_LOCATION_ADD_MODEL, &mdl, loc.id, loc.filespath.models);*/
@@ -1053,7 +1060,7 @@ bool LocLoadModel(aref loc, string sat, string addition)
 	attr = sat + ".sea_reflection";
 	if(CheckAttribute(loc, attr) != 0)
 	{
-		LayerAddObject("sea_reflection2", &mdl, 4);
+		LayerAddObject(SEA_REFLECTION2, &mdl, 4);
 	}
 	return 1;
 }

@@ -6,7 +6,7 @@ extern void InitShipLights();
 void SeaAI_GetLayers()
 {
 	aref oTmp = GetEventData();
-	SendMessage(oTmp, "lss", AI_MESSAGE_SET_LAYERS, sCurrentSeaExecute, sCurrentSeaRealize);
+	SendMessage(oTmp, "lll", AI_MESSAGE_SET_LAYERS, sCurrentSeaExecute, sCurrentSeaRealize);
 }
 
 void DeleteSea()
@@ -15,14 +15,14 @@ void DeleteSea()
 	DeleteClass(&ShipLights);
 }
 
-void CreateSea(string sExecuteLayer, string sRealizeLayer)
+void CreateSea(int sExecuteLayer, int sRealizeLayer)
 {
 	if (IsEntity(&Sea)) { Trace("ERROR: Sea Already Loaded!!!"); return; }
 
 	CreateEntity(&Sea, "sea");
 	MoveSeaToLayers(sExecuteLayer, sRealizeLayer);
 
-	LayerFreeze("sea_reflection2", false);
+	LayerFreeze(SEA_REFLECTION2, false);
 
 	if (LoadSegment("sea_ai\ShipLights.c"))
 	{
@@ -32,15 +32,15 @@ void CreateSea(string sExecuteLayer, string sRealizeLayer)
 	CreateEntity(&ShipLights, "ShipLights");		ReloadProgressUpdate();
 	LayerAddObject(sExecuteLayer, &ShipLights, 0);
 	LayerAddObject(sRealizeLayer, &ShipLights, -1);
-	LayerAddObject("sea_sunroad", &ShipLights, -1);
+	LayerAddObject(SEA_SUNROAD, &ShipLights, -1);
 
 	Sea.AbordageMode = false;
 }
 
-void MoveSeaToLayers(string sExecuteLayer, string sRealizeLayer)
+void MoveSeaToLayers(int sExecuteLayer, int sRealizeLayer)
 {
-	LayerDelObject("execute", &Sea);
-	LayerDelObject("realize", &Sea);
+	LayerDelObject(EXECUTE, &Sea);
+	LayerDelObject(REALIZE, &Sea);
 	LayerDelObject(SEA_EXECUTE, &Sea);
 	LayerDelObject(SEA_REALIZE, &Sea);
 
@@ -124,8 +124,8 @@ void AISea_ReturnFromAbordage()
 	MoveSeaToLayers(SEA_EXECUTE,SEA_REALIZE);
 	MoveWeatherToLayers(SEA_EXECUTE,SEA_REALIZE);
 
-	LayerFreeze("realize",true);
-	LayerFreeze("execute",true);
+	LayerFreeze(REALIZE,true);
+	LayerFreeze(EXECUTE,true);
 
 	LayerFreeze(SEA_EXECUTE,false);
 	LayerFreeze(SEA_REALIZE,false);

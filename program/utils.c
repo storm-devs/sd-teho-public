@@ -322,8 +322,8 @@ void CreateGrass(string sDataFile, string sTextureFile, float fScale, float fW,f
 	}
 	else
 	{
-		LayerAddObject("execute",&objGrass,1000);
-		LayerAddObject("realize",&objGrass,1000);
+		LayerAddObject(EXECUTE,&objGrass,1000);
+		LayerAddObject(REALIZE,&objGrass,1000);
 	}	
 	SendMessage(objGrass,"ls",41666, sTextureFile); // #define MSG_GRASS_SET_TEXTURE 41666
 	SendMessage(objGrass,"lffffff",42666, fScale, fW,fH, fMinDist,fMaxDist, fMinLod); // #define MSG_GRASS_SET_PARAM 42666
@@ -343,8 +343,8 @@ void HideGrass()
 {
 	if (IsEntity(&objGrass))
 	{
-        LayerDelObject("execute", &objGrass);
-		LayerDelObject("realize", &objGrass);
+        LayerDelObject(EXECUTE, &objGrass);
+		LayerDelObject(REALIZE, &objGrass);
 		LayerDelObject(SEA_EXECUTE, &objGrass);
 		LayerDelObject(SEA_REALIZE, &objGrass);
 	}
@@ -493,10 +493,10 @@ int GetCurrentModelrNumber()
 {
 	int n = 0;
 	aref arModel;
-	if (FindClass(&arModel, "modelr")) 
+	if (FindEntity(&arModel, "modelr")) 
 	{
 		n++;
-		while (FindClassNext(&arModel)) 
+		while (FindEntityNext(&arModel)) 
 		{
 			n++;
 		}

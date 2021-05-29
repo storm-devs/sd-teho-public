@@ -1,7 +1,7 @@
 #include "_settings_.h" 
 
-#include "sea_ai\Script_defines.h"
-#include "sea_ai\SeaPeople.h"
+#include "storm-engine\sea_ai\Script_defines.h"
+#include "storm-engine\sea_ai\SeaPeople.h"
 
 #include "sea_ai\AIGroup.c"
 #include "sea_ai\AIShip.c"
@@ -33,8 +33,8 @@
 
 #define PLAYER_GROUP	"OurGroup"
 
-string	sCurrentSeaExecute = "execute"; 
-string	sCurrentSeaRealize = "realize";
+int	sCurrentSeaExecute = EXECUTE; 
+int	sCurrentSeaRealize = REALIZE;
 
 int		iAITemplatesNum;
 bool	bSeaActive;
@@ -86,8 +86,8 @@ void DeleteSeaEnvironment()
 	bSeaActive = false;
 	bSeaLoaded = false;
 
-	sCurrentSeaExecute = "execute";
-	sCurrentSeaRealize = "realize";
+	sCurrentSeaExecute = EXECUTE;
+	sCurrentSeaRealize = REALIZE;
 
 	pchar.Ship.Stopped = true;
 	DeleteBattleInterface();
@@ -137,8 +137,8 @@ void DeleteSeaEnvironment()
 	LayerFreeze(SEA_EXECUTE, true);
 	LayerFreeze(SEA_REALIZE, true);
 
-	LayerFreeze("realize", false);
-	LayerFreeze("execute", false);
+	LayerFreeze(REALIZE, false);
+	LayerFreeze(EXECUTE, false);
 
 	DeleteClass(&AISea);
 
@@ -180,21 +180,21 @@ void CreateSeaEnvironment()
 
 	Ship_Walk_Init();
 
-	LayerFreeze("realize", true);
-	LayerFreeze("execute", true);
-	LayerCreate("sea_reflection", 1);
-	LayerFreeze("sea_reflection", false);
-	LayerCreate("sea_reflection2", 1);			// this layer enabled for sea and disabled for abordage
-	LayerFreeze("sea_reflection2", false);
+	LayerFreeze(REALIZE, true);
+	LayerFreeze(EXECUTE, true);
+	//LayerCreate("sea_reflection", 1);
+	LayerFreeze(SEA_REFLECTION, false);
+	//LayerCreate("sea_reflection2", 1);			// this layer enabled for sea and disabled for abordage
+	LayerFreeze(SEA_REFLECTION2, false);
 
 	InterfaceStates.Buttons.Resume.enable = true;
 	
 	bSeaActive = true;
 
-	LayerCreate(SEA_REALIZE, 1);
-	LayerSetRealize(SEA_REALIZE, 1);
-	LayerCreate(SEA_EXECUTE, 1);
-	LayerSetExecute(SEA_EXECUTE, 1);
+	//LayerCreate(SEA_REALIZE, 1);
+	LayerSetRealize(SEA_REALIZE);
+	//LayerCreate(SEA_EXECUTE, 1);
+	LayerSetExecute(SEA_EXECUTE);
 
 	LayerFreeze(SEA_EXECUTE, false);
 	LayerFreeze(SEA_REALIZE, false);
@@ -329,8 +329,8 @@ void Sea_LandLoad()
 	if (bSeaActive == false) return;
 	if (bCanEnterToLand == true)
 	{
-		LayerFreeze("realize", false);
-		LayerFreeze("execute", false);
+		LayerFreeze(REALIZE, false);
+		LayerFreeze(EXECUTE, false);
 		Reload(arIslandReload, sIslandLocator, sIslandID);
 		ReleaseMapEncounters();
 		EmptyAllFantomShips(); // boal
@@ -1547,8 +1547,8 @@ void Sea_LoadIsland(string sIslandID)
 
 		SendMessage(&Island, "lsss", MSG_ISLAND_LOAD_GEO, "islands", Islands[iIslandIndex].filespath.models, Islands[iIslandIndex].model);
 		LayerAddObject(SEA_REALIZE, &Island, 4);
-		LayerAddObject("mast_island_trace", &Island, 1);
-		LayerAddObject("sun_trace", &Island, 1);
+		LayerAddObject(MAST_ISLAND_TRACE, &Island, 1);
+		LayerAddObject(SUN_TRACE, &Island, 1);
 		fMaxViewDist = 6000.0;
 		if(CheckAttribute(&Islands[iIslandIndex], "maxviewdist"))
 		{
@@ -1561,7 +1561,7 @@ void Sea_LoadIsland(string sIslandID)
 		SendMessage(&IslandReflModel, "ls", MSG_MODEL_SET_LIGHT_PATH, GetLightingPath());
 		SendMessage(&IslandReflModel, "ls", MSG_MODEL_LOAD_GEO, sReflModel);
 		SendMessage(&IslandReflModel, "lllf", MSG_MODEL_SET_FOG, 1, 1, stf(Weather.Fog.IslandDensity));
-		LayerAddObject("sea_reflection2", &IslandReflModel, -1);
+		LayerAddObject(SEA_REFLECTION2, &IslandReflModel, -1);
 		SendMessage(&SeaLighter, "ssi", "AddModel", Islands[iIslandIndex].refl_model, &IslandReflModel);
 		
 		// Warship Вынес в метод - создание освещения маяка

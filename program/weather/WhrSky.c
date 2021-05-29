@@ -24,9 +24,11 @@ void WhrCreateSkyEnvironment()
 	if(!isEntity(&Sky))
 	{
 		CreateEntity(&Sky, "Sky");
-		LayerAddObject("sea_reflection", &Sky, 1);
+		if(bSeaActive)
+            LayerAddObject(SEA_REFLECTION,&Sky,1);
+        else
+            LayerAddObject(SEA_REFLECTION,&Sky,11);
 	}
-
 	FillSkyDir(&Sky);
 	//Sky.Dir = Whr_GetString(aSky, "Dir");
 
@@ -35,6 +37,22 @@ void WhrCreateSkyEnvironment()
 	Sky.Angle = Whr_GetFloat(aSky, "Angle");
 	Sky.Size = Whr_GetFloat(aSky, "Size");
 
+    if(bSeaActive) 
+	{
+        Sky.Size = Whr_GetFloat(aSky, "Size");
+        Sky.techSky = "Sky";
+        Sky.techSkyBlend = "SkyBlend";
+        Sky.techskyAlpha = "skyblend_alpha";
+        Sky.techSkyFog = "SkyFog";
+	}
+	else 
+	{
+	    Sky.Size = 2048; 
+	    Sky.techSky = "SkyLand";
+        Sky.techSkyBlend = "SkyBlendLand";
+        Sky.techskyAlpha = "skyblend_alphaLand";
+        Sky.techSkyFog = "SkyFogLand";
+	}
 	Sky.isDone = "";
 }
 
@@ -43,15 +61,15 @@ void UpdateSky()
 {
 	float windSpeed = 5.0;
 	float timeScale = 1.0 + TimeScaleCounter * 0.25; // Текущее ускорение времени
-	
+
 	// Вычисление делителя для ускорения, чтоб на x8 бешенно не крутились
 	if(timeScale <= 2)
 	{
-		timeScale = 1;
+		timeScale = 1.0;
 	}
 	else
 	{
-		timeScale /= 2;
+		timeScale /= 2.0;
 	}
 	
 	if(CheckAttribute(Weather, "Wind.Speed"))
@@ -61,7 +79,7 @@ void UpdateSky()
 	
 	if( ROTATE_SKY == 1)
 	{	
-	// Sky.RotateSpeed == 0.05 - это уже много
+		// Sky.RotateSpeed == 0.05 - это уже много
 		Sky.RotateSpeed = windSpeed / 8000 / timeScale;
 	}
 	else
@@ -91,10 +109,9 @@ void FillSkyDir(aref aSky)
 
 			satr = "d" + sti(Weathers[i].Hour.Min);
 			if( satr=="d24" ) {continue;}
-			
-//navy -->
+            //navy -->
 			sDir = Weathers[i].Sky.Dir;
-			if (CheckAttribute(&WeatherParams, "Rain.ThisDay") && sti(WeatherParams.Rain.ThisDay)) 
+			if (CheckAttribute(&WeatherParams, "Rain.ThisDay") && sti(WeatherParams.Rain.ThisDay))
 			{
 				nStart = sti(WeatherParams.Rain.StartTime);
 				nDur = MakeInt(sti(WeatherParams.Rain.Duration)/60 + 0.5);
@@ -103,20 +120,20 @@ void FillSkyDir(aref aSky)
 					sDir = "weather\skies\Storm01\";
 				}
 			}
-//navy <--
+            //navy <--
 			aSky.Dir.(satr) = sDir;
 		}
 		aSky.Dir = GetTime();
 	}
 }
 
-void MoveSkyToLayers(string sExecuteLayer, string sRealizeLayer)
+void MoveSkyToLayers(int sExecuteLayer, int sRealizeLayer)
 {
-	LayerDelObject("execute",&Sky);
-	LayerDelObject("realize",&Sky);
+	LayerDelObject(EXECUTE,&Sky);
+	LayerDelObject(REALIZE,&Sky);
 	LayerDelObject(SEA_EXECUTE,&Sky);
 	LayerDelObject(SEA_REALIZE,&Sky);
-
-	LayerAddObject(sExecuteLayer,&Sky,2);
-	LayerAddObject(sRealizeLayer,&Sky,3);
-}
+	
+        LayerAddObject(sExecuteLayer,&Sky,2);
+        LayerAddObject(sRealizeLayer,&Sky,3);
+	}

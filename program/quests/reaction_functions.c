@@ -14017,10 +14017,11 @@ void Deliver_lay(string qName)//пришли - а нету никого
 //zagolski - побег офицера
 void mOfficer_fc(string qName)
 {
+	ref sld;
 	if (!CheckAttribute(pchar, "questTemp.MutinyOfficerIDX")) {
 		return;
 	}
-	ref sld = &Characters[sti(Pchar.questTemp.MutinyOfficerIDX)];
+	sld = &Characters[sti(Pchar.questTemp.MutinyOfficerIDX)];
 	if (!CheckAttribute(sld, "quest.Mutiny")) { // mitrokosta если офф мертв или уволен
 		DeleteAttribute(pchar, "questTemp.MutinyOfficerIDX");
 		return;
@@ -14033,6 +14034,7 @@ void mOfficer_fc(string qName)
 
 	if (IsEntity(&worldMap))
     {
+		sld = &Characters[sti(Pchar.questTemp.MunityOfficerIDX)];
 		if(sti(sld.Payment) == true)
 		{
 			if (sti(sld.ship.type) != SHIP_NOTUSED)
@@ -25239,19 +25241,6 @@ void FMQL_PirateDead(string qName) //
 	pchar.questTemp.FMQL.PirateDead = "true";
 }
 
-void FMQ_BugsFixer() // 
-{
-	if (CheckAttribute(pchar, "questTemp.FMQ_BugsFixer.First")) return;
-	Log_TestInfo("Отработал багфиксер №1");
-	if (GetCharacterIndex("FMQT_mercen") != -1)
-	{
-		sld = CharacterFromID("FMQT_mercen");
-		LAi_SetImmortal(sld, false);
-	}
-	LAi_group_SetRelation("ENGLAND_CITIZENS", LAI_GROUP_PLAYER, LAI_GROUP_NEITRAL);
-	pchar.questTemp.FMQ_BugsFixer.First = "true";
-}
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///============================================================ Jason Пиратская линейка ================================================================================
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -31881,16 +31870,6 @@ void Mtraxx_RetributionComplete(string qName) // линейка пройдена
 	}
 }
 
-void Mtraxx_BugsFixer() // правки релиза
-{
-	log_Testinfo("Отработал багфиксер PirateLine");
-	pchar.questTemp.Mtraxx.BugsFixer = "true";
-	if (pchar.questTemp.Mtraxx == "full_complete" || pchar.questTemp.Mtraxx == "fail")
-	{
-		LocatorReloadEnterDisable("LaVega_port", "reload1_back", false);
-	}
-}
-
 /// Jason ----------------------------------------------------------- На службе Отечеству ------------------------------------------------------------------
 // ---------------------------------------------------------- задание 1 ---------------------------------------------------------------
 void Patria_SetInspector() // ставим инспектора
@@ -36273,19 +36252,6 @@ void Patria_EuropeMusic(string qName) // 7-add
 	SetMusic("music_alcove_1");
 }
 
-void Patria_BugsFixer() // 17-add
-{
-	if (GetCharacterIndex("Mary") != -1)
-	{
-		sld = characterFromId("Mary");
-		sld.name = "Мэри";
-		sld.lastname = "Каспер";
-	}
-	DeleteAttribute(pchar, "DisableChangeFlagMode"); // открываем флаг
-	if (CheckAttribute(pchar, "questTemp.Patria.BugsFixer")) DeleteAttribute(pchar, "questTemp.Patria.BugsFixer");
-	pchar.questTemp.Patria_BugsFixer = "true";
-}
-
 /// Jason ----------------------------------------------------------- Дороже золота ------------------------------------------------------------------
 void GoldenGirl_Start() // инициализация
 {
@@ -38943,138 +38909,4 @@ void LongHappy_GiveBaronPart() //
 	int iMoney;
 	iMoney = drand(50000)+50000;
 	pchar.questTemp.LongHappy.BaronMoney = sti(pchar.questTemp.LongHappy.BaronMoney)+iMoney;
-}
-
-void BigPatch_BugsFixer() //  belamour правки Большого патча
-{
-	log_Testinfo("Отработал багфиксер Большого Патча");
-	pchar.questTemp.BigPatch_BugsFixer = "true";
-	if (CheckAttribute(pchar, "questTemp.LongHappy") && pchar.questTemp.LongHappy == "end") // Почистить ДиС, если квест уже пройден
-	{
-		log_Testinfo("Отработал багфиксер ДиС");
-		//  belamour убрать бессмертие с избранницы 
-		if (CheckAttribute(pchar, "questTemp.LSC.Mary_officer") && GetCharacterIndex("Mary") != -1)
-		{ 
-			pchar.quest.Mary_giveme_sex.win_condition.l1 = "Timer";
-			pchar.quest.Mary_giveme_sex.win_condition.l1.date.hour  = sti(GetTime());
-			pchar.quest.Mary_giveme_sex.win_condition.l1.date.day   = GetAddingDataDay(0, 0, 14);
-			pchar.quest.Mary_giveme_sex.win_condition.l1.date.month = GetAddingDataMonth(0, 0, 14);
-			pchar.quest.Mary_giveme_sex.win_condition.l1.date.year  = GetAddingDataYear(0, 0, 14);
-			pchar.quest.Mary_giveme_sex.function = "Mary_GiveMeSex"; // вернуть Мэри ее поведение
-			sld = characterFromId("Mary");
-			LAi_RemoveCheckMinHP(sld);
-			LAi_SetImmortal(sld, false);
-		}
-		if (CheckAttribute(pchar, "questTemp.Saga.Helena_officer") && GetCharacterIndex("Helena") != -1) 
-		{
-			sld = characterFromId("Helena");
-			LAi_RemoveCheckMinHP(sld);
-			LAi_SetImmortal(sld, false);
-		}
-	}
-	if (CheckAttribute(pchar, "questTemp.GoldenGirl") && pchar.questTemp.GoldenGirl == "end") // почистить Дороже золота, если квест уже пройден
-	{
-		log_Testinfo("Отработал багфиксер Дороже Золота");
-		if (GetCharacterIndex("Cortny") != -1) // убрать кортни, если такой иеется
-		{
-			sld = characterFromId("Cortny");
-			//sld.LifeDay = 0; 
-			ChangeCharacterAddressGroup(sld, "none", "", "");
-		}
-		// Вернуть Бото на место
-		if(CheckAttribute(pchar, "questTemp.GoldenGirl.Julianna_Helper"))
-		{
-			sld = characterFromID("Julianna");
-			RemovePassenger(pchar, sld);
-			sld.dialog.currentnode = "Julianna_144";
-			ChangeCharacterAddressGroup(sld, "FortFrance_SecBrRoom", "goto", "goto4");
-			LAi_SetStayType(sld);
-			LAi_group_MoveCharacter(sld, "FRANCE_CITIZENS");
-		}
-	}
-	
-	// belamour правка входа-выхода резиденции куманы
-	int n = Findlocation("Cumana_TownhallRoom");
-	locations[n].reload.l2.name = "reload2";
-	locations[n].reload.l2.go = "Cumana_town"; 
-	locations[n].reload.l2.emerge = "reloadR1"; 
-	locations[n].reload.l2.autoreload = "0";
-	locations[n].reload.l2.label = "BedRoom";
-
-	locations[n].reload.l3.name = "reload3";
-	locations[n].reload.l3.go = "CommonBedroom"; 
-	locations[n].reload.l3.emerge = "reload1";
-	locations[n].reload.l3.autoreload = "0";
-	locations[n].reload.l3.label = "Street";
-	
-	n = Findlocation("Cumana_Town");
-	locations[n].reload.lR1.name = "reloadR1";
-	locations[n].reload.lR1.go = "Cumana_TownhallRoom";
-	locations[n].reload.lR1.emerge = "reload2"; 
-	
-	// mitrokosta -->
-	// снятие лишних прерываний на Тореро и Пуэблу
-	if (!CheckAttribute(pchar, "questTemp.Trial")) {
-		pchar.quest.Trial_Puebla_barque_abordage.over = "yes";
-		pchar.quest.Trial_Puebla_barque_Sink.over = "yes";
-	}
-	
-	if (!CheckAttribute(pchar, "questTemp.Mtraxx.Ignasio.Check")) {
-		pchar.quest.mtraxx_corrida_sink.over = "yes";
-		pchar.quest.mtraxx_corrida_capture.over = "yes";
-	}
-	
-	// нужно для совместимости с моими правками мятежных оффов
-	if (CheckAttribute(pchar, "questTemp.MunityOfficerIDX")) {
-		DeleteAttribute(pchar, "questTemp.MunityOfficerIDX");
-	}
-	
-	// второй шанс для карт диоса
-	PrepareAdmiralMaps();
-	
-	// фикс бухты губернатора
-	locations[FindLocation("Shore75")].reload.l2.emerge = "reload_1";
-	
-	// фикс поломки поручения капитана из-за дюнкерка, без ни
-	aref arQuest;
-	if (CheckAttribute(pchar, "GenQuest.CaptainComission")) {
-		makearef(arQuest, pchar.GenQuest.CaptainComission);
-		if (GetAttributesNum(arQuest) == 0) {
-			DeleteAttribute(pchar, "GenQuest.CaptainComission");
-		}
-	}
-	
-	// фикс закрытой на ночь церкви Сент-Джонса
-	DeleteAttribute(&locations[FindLocation("SentJons_town")], "reload.l7.close_for_night");
-	// <--
-}
-
-void BigPatch_BugsFixer2() //  belamour правки Большого патча второй прогон
-{
-	log_Testinfo("Отработал второй багфиксер Большого Патча");
-	pchar.questTemp.BigPatch_BugsFixer2 = "true";
-	// belamour -->
-	sld = characterFromID("SentJons_Priest"); // священник в церковь
-	LAi_RemoveLoginTime(sld); 
-	if (CheckAttribute(pchar, "questTemp.Sharlie") && pchar.questTemp.Sharlie == "escape") // открыть тюрьму и бордель Сен Пьера
-	{
-		LocatorReloadEnterDisable("FortFrance_town", "reload_jail", false);
-		LocatorReloadEnterDisable("FortFrance_town", "reload91", false);
-	}	
-	if (pchar.questTemp.Mtraxx == "full_complete_end" || pchar.questTemp.Mtraxx == "fail") // убрать остатки пиратов Тесака из Бастиона
-	{
-		int i;
-		for (i=1; i<=15; i++)
-		{
-			if (GetCharacterIndex("Mtr_CartahenaFort3Pirate_"+i) == -1) continue;
-			sld = CharacterFromID("Mtr_CartahenaFort3Pirate_"+i); 
-			sld.lifeday = 0; 
-		}
-	}
-	// <-- belamour
-	
-	// mitrokosta фикс регаты без НИ
-	if (!CheckAttribute(pchar, "questTemp.Regata") && CheckAttribute(pchar, "quest.Regata_PU")) {
-		pchar.quest.Regata_PU.over = "yes";
-	}
 }

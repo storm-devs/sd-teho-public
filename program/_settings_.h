@@ -29,6 +29,6 @@
 #define SEA_CAM_PERSP				0.25    // FLOAT 0.0 .. 1.0											
 											// Sea Camera Perspective	(0.0 - default value)					
 
-#define DYNAMIC_LIGHTS				0		// BOOL - 1 = ON
+#define DYNAMIC_LIGHTS				1		// BOOL - 1 = ON
 											//    0 is default game
 											//    Valid values 0 and 1

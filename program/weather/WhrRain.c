@@ -97,7 +97,7 @@ void FillRainData(int nw1, int nw2)
 		Rain.RainDrops.DropsNearRadius = Whr_BlendFloat( fBlend, Whr_GetFloat(aRain1, "DropsNearRadius"), Whr_GetFloat(aRain2, "DropsNearRadius"));
 		Rain.RainDrops.DropsFarRadius = Whr_BlendFloat( fBlend, Whr_GetFloat(aRain1, "DropsFarRadius"), Whr_GetFloat(aRain2, "DropsFarRadius"));
 		Rain.RainDrops.DropsLifeTime = Whr_BlendFloat( fBlend, Whr_GetFloat(aRain1, "DropsLifeTime"), Whr_GetFloat(aRain2, "DropsLifeTime"));
-		Rain.RainDrops.DropsSize = Whr_BlendFloat( fBlend, Whr_GetFloat(aRain1, "DropsSize"), Whr_GetFloat(aRain2, "DropsSize"));77
+		Rain.RainDrops.DropsSize = Whr_BlendFloat( fBlend, Whr_GetFloat(aRain1, "DropsSize"), Whr_GetFloat(aRain2, "DropsSize"));
 		Rain.RainDrops.DropsColor = Whr_GetLong(aRain1, "DropsColor"); //Whr_BlendColor( fBlend, Whr_GetColor(aRain1, "DropsColor"), Whr_GetColor(aRain2, "DropsColor"));
 		Rain.RainDrops.DropsTexture = Whr_GetString(aRain1, "DropsTexture");
 
@@ -107,10 +107,10 @@ void FillRainData(int nw1, int nw2)
 	}
 }
 
-void MoveRainToLayers(string sExecuteLayer, string sRealizeLayer)
+void MoveRainToLayers(int sExecuteLayer, int sRealizeLayer)
 {
-	LayerDelObject("execute",&Rain);
-	LayerDelObject("realize",&Rain);
+	LayerDelObject(EXECUTE,&Rain);
+	LayerDelObject(REALIZE,&Rain);
 	LayerDelObject(SEA_EXECUTE,&Rain);
 	LayerDelObject(SEA_REALIZE,&Rain);
 

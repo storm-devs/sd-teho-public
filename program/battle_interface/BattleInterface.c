@@ -1,11 +1,11 @@
-#include "battle_interface\msg_control.h"
-#include "sea_ai\script_defines.h"
+#include "storm-engine\battle_interface\msg_control.h"
+#include "storm-engine\sea_ai\script_defines.h"
 #include "battle_interface\landinterface.c"
 #include "battle_interface\ispyglass.c"
 #include "battle_interface\reload_tables.c"
 #include "battle_interface\utils.c"
 #include "battle_interface\ActivePerksShow.c"
-#include "battle_interface\backgroundtask.c"
+//#include "battle_interface\backgroundtask.c"
 #include "battle_interface\WmInterface.c"
 
 #define BI_ICONS_SHIPS_TEXTURE_NAME "battle_interface\icons.tga"
@@ -537,7 +537,7 @@ void BI_LaunchCommand()
 	if( LAi_IsDead(chRef) ) return;
 
 	aref arFader;
-	if( FindClass(arFader,"fader") ) {return;}
+	if( GetEntity(arFader,"fader") ) {return;}
 
 	if(targetNum==-1 && locName=="cancel") {
 		SendMessage(&BattleInterface,"ls",MSG_BATTLE_LAND_MAKE_COMMAND,"cancel");
@@ -2381,7 +2381,7 @@ ref procGetSailTextureData()
 			//if( CheckAttribute(&characters[chrIdx],"ShipSails.gerald_name") ) // не наследуется при обмене кораблей, потому не в  ship.
 			if( CheckAttribute(shref,"ShipSails.gerald_name") ) // 1.2.3 герб теперь атрибут корабля, а не НПС
 			{
-				BI_objRetValue.geraldTex = "Ships\Gerald\" + shref.ShipSails.gerald_name + ".tga";
+				BI_objRetValue.geraldTex = "Ships\Gerald\" + shref.ShipSails.gerald_name;
 			}
 			/*
 			switch(sti(Characters[chrIdx].nation))  // Не работает это :(
@@ -2778,7 +2778,7 @@ float GetRigDamage(int shootIdx, int iBallType, ref damage_chr)
 void MakeSailDmg(int chrIdx, float dmg)
 {
 	object objSail;
-	if( !FindClass(&objSail,"sail") )
+	if( !GetEntity(&objSail,"sail") )
 	{
 		return;
 	}
@@ -2853,7 +2853,7 @@ ref ProcessRandomSailDmg()
 void GetSailStatus(int chrIdx)
 {	
 	object objSail;
-	if( !FindClass(&objSail,"sail") )
+	if( !GetEntity(&objSail,"sail") )
 	{
 		return;
 	}

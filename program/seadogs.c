@@ -1,7 +1,8 @@
 // BOAL 07.09.03  Mods on_off mode -->
 #include "_LSC_on_off.h"
 // BOAL 07.09.03  Mods on_off mode <--
-#include "events.h"
+#include "storm-engine\layers.h"
+#include "storm-engine\events.h"
 #include "globals.c"
 #include "animals.c"
 #include "NumberUtilities.c" // Warship 26.07.09. Работа с числами
@@ -32,10 +33,10 @@
 #include "ITEMS\items.h"
 #include "ITEMS\itemLogic.c"
 #include "ITEMS\items_utilite.c"
-#include "net\net.c"
 #include "store\store.h"
 #include "interface\interface.c"
 #include "fleet_cmds.c"
+
 extern void InitBaseCannons();
 extern void InitCharacters();
 extern void InitBaseInterfaces();
@@ -57,7 +58,6 @@ extern void ActiveF7Control(); // boal debuger
 extern void ActiveF10Control(); // boal debuger
 extern void ActiveF12Control(); // boal debuger
 extern void ActiveINSERTControl(); // boal debuger
-extern void StartLoadingSegments();
 
 native float Bring2RangeNoCheck(float fMin1, float fMax1, float fMin2, float fMax2, float fValue);
 native float Bring2Range(float fMin1, float fMax1, float fMin2, float fMax2, float fValue);
@@ -69,10 +69,25 @@ native int RDTSC_E(int iRDTSC);
 native int SetTexturePath(int iLevel, string sPath);
 native int SetGlowParams(float fBlurBrushSize, int Intensivity, int BlurPasses);
 native int RPrint(int x, int y, string sPrint);
+native int GetTexture(string fileName);
+native void ReleaseTexture(int texId);
+
+native int GetSteamEnabled();
+native int GetDLCenabled(int enable);
+native int GetDLCCount();
+native int GetDLCData(int id);
+native int DLCStartOverlay(int id);
+native int SetAchievement(string id);
+native int GetAchievement(string id);
+native int SetStat(string id, int value);
+native int GetStat(string id);
+native int StoreStats();
+native int ClearAchievement(string id);
+native int ResetStats(int bAchievementsToo);
 
 #libriary "script_libriary_test"
-#libriary "dx8render_script_libriary"
-
+#libriary "dx9render_script_libriary"
+#libriary "SteamApiScriptLib"
 
 #event_handler(NEW_GAME_EVENT,"NewGame");
 #event_handler(GAME_OVER_EVENT,"GameOverE");
@@ -236,13 +251,6 @@ void Main()
 {
 	iGlobalVar1 = BI_COMPARE_HEIGHT;
 	
-    LayerCreate("realize", 1);
-	LayerCreate("sea_realize", 1);
-//	LayerCreate("net_realize", 1);
-	LayerCreate("iRealize", 1);
-	LayerCreate("fader_realize", 1);
-	LayerCreate("inf_realize", 1);
-
 	ControlsInit(GetTargetPlatform(),true);
 	nTeleportLocation = 1;
 
@@ -278,13 +286,6 @@ void Main()
 
 void Main_InitGame()
 {
-    LayerCreate("realize", 1);
-	LayerCreate("sea_realize", 1);
-//	LayerCreate("net_realize", 1);
-	LayerCreate("iRealize", 1);
-	LayerCreate("fader_realize", 1);
-	LayerCreate("inf_realize", 1);
-
 	nTeleportLocation      = 1;
     bDisableLandEncounters = false;
 	bDisableCharacterMenu  = false;
@@ -316,13 +317,7 @@ void Main_InitGame()
 	IslandsInit();
 	WeatherInit();
 	InitPerks();
-	// Init network, clear massives and load favorite list
-	
-/*	
-	Net_Init();
-	Net_ClientFirstInit();
-	Net_ServerFirstInit();
-*/
+
 	if(LoadSegment("store\initGoods.c"))
 	{
 		InitGoods();
@@ -410,7 +405,7 @@ void SaveGame()
 	DelEventHandler("evntSave","SaveGame");
 
 	aref arTmp;
-	if( !FindClass(arTmp,"fader") )
+	if( !GetEntity(arTmp,"fader") )
 	{
 		//implemet interface
 		//LaunchQuickSaveMenu();
@@ -485,13 +480,13 @@ void InterfaceDoExit()
 		{
 			if( bSeaActive && !bAbordageStarted )
 			{
-				LayerFreeze("sea_realize",false);
-				LayerFreeze("sea_execute",false);
+				LayerFreeze(SEA_REALIZE,false);
+				LayerFreeze(SEA_EXECUTE,false);
 			}
 			else
 			{
-				LayerFreeze("realize",false);
-				LayerFreeze("execute",false);
+				LayerFreeze(REALIZE,false);
+				LayerFreeze(EXECUTE,false);
 			}
 		}
 		DeleteAttribute(&GameInterface,"");
@@ -555,30 +550,14 @@ void InterfaceDoExit()
 		case RC_INTERFACE_DO_OPTIONS:
 			LaunchOptionScreen();
 			break;
-		/*case RC_INTERFACE_DO_CONTROLS:
-			LaunchControlsScreen();
-			break;
-			*/
+
 		case RC_INTERFACE_DO_CREDITS:
 		    LaunchAboutScreen();
 		break;
+
 		case RC_INTERFACE_DO_RESUME_GAME:
 		break;	
-/*		
-		case RC_INTERFACE_NET_FINDGAME:		
-			PrepareNetEnvironment();
-			LaunchNetFindGame();			
-		break;	
-		case RC_INTERFACE_NET_CREATEGAME:
-			LaunchNetCreateGame();
-		break;
-		case RC_INTERFACE_NET_PLAYERSETTINGS:
-			LaunchNetPlayerSettings();
-		break;
-		case RC_INTERFACE_NET_BUY:
-			LaunchNetBuyScreen();
-		break;
-*/		
+		
 		case RC_INTERFACE_RANSACK_MAIN_EXIT:
 			Return2SeaAfterAbordage();
 			break;
@@ -588,49 +567,16 @@ void InterfaceDoExit()
 			SetEventHandler("frame","NewGame",1);
 			InterfaceStates.doUnFreeze = false;
 		break;
-		
-		/*case RC_INTERFACE_SPEAK_EXIT_AND_CAPTURE:
-			string sTargetChr = pchar.speakchr;
-			
-			pchar.abordage = 1;
-			
-			Sea_AbordageStartNow(SHIP_ABORDAGE, GetCharacterIndex(sTargetChr), true, true);
-			
-			
-			SetTimeScale(1.0);
-			TimeScaleCounter = 0;
-			DelPerkFromActiveList("TimeSpeed"); //boal
-			
-			pchar.speakchr = 0;
-			pchar.whospeak = 0;
-		break;
-		
-		case RC_INTERFACE_SPEAK_EXIT_AND_TRADE:
-			LaunchStore(SHIP_STORE);
-		break;  */
-		
+				
 		case RC_INTERFACE_TO_CHAR:
 			pchar = GetMainCharacter();
 			LaunchCharacter(pchar);
 		break;
-		
-		/*
-		case RC_INTERFACE_TO_PASS:
-			pchar = GetMainCharacter();
-			LaunchPassengers(pchar);
-		break;
-		*/
-		
+				
 		case RC_INTERFACE_TO_SHIP:
 			LaunchShipState();
 		break;
-		
-		/*
-		case RC_INTERFACE_TO_TRADEBOOK:
-			LaunchTradeBook();
-		break;
-		*/
-		
+				
 		case RC_INTERFACE_TO_LOGBOOK:
 			LaunchQuestBook();
 		break;
@@ -642,11 +588,7 @@ void InterfaceDoExit()
 		case RC_INTERFACE_LAUNCH_GAMEMENU:
 			LaunchGameMenuScreen();
 			break;
-/*						
-		case INTERFACE_NET_ENDGAME:
-			ReturnToMainMenu();
-		break;
-*/	
+	
 		// boal -->
   		case RC_INTERFACE_DO_BOAL_BETA:
 		     LaunchBoalBetaScreen();
@@ -669,17 +611,17 @@ void EngineLayersOffOn(bool on)
 {
 	on = !on;
 	if( on ) {
-		LayerFreeze("realize",on);
-		LayerFreeze("execute",on);
-		LayerFreeze("sea_realize",on);
-		LayerFreeze("sea_execute",on);
+		LayerFreeze(REALIZE,on);
+		LayerFreeze(EXECUTE,on);
+		LayerFreeze(SEA_REALIZE,on);
+		LayerFreeze(SEA_EXECUTE,on);
 	} else {
 		if(bSeaActive && !bAbordageStarted) {
-			LayerFreeze("sea_realize",on);
-			LayerFreeze("sea_execute",on);
+			LayerFreeze(SEA_REALIZE,on);
+			LayerFreeze(SEA_EXECUTE,on);
 		} else {
-			LayerFreeze("realize",on);
-			LayerFreeze("execute",on);
+			LayerFreeze(REALIZE,on);
+			LayerFreeze(EXECUTE,on);
 		}
 	}
 }
@@ -777,19 +719,7 @@ void OnLoad()
 	
 	InitParticles();
 	ReloadProgressUpdate();
-	//ImportFuncTest();
-	
-//	if(LoadSegment("items\initItems.c")) // ugeen fix 29.03.2020
-//	{
-//		InitItems();
-//		UnloadSegment("items\initItems.c");
-//	}
-//	ReloadProgressUpdate();
-//	GenerateGenerableItems(); // <-- ugeen генерация предметов	
-
-    fix30032020();
-    Fix_Pistol2(); // belamour запуск фикса дробовика
-    
+   
 	WeatherInit();
 	ReloadProgressUpdate();
 
@@ -873,7 +803,6 @@ void OnLoad()
 			Log_TestInfo("Обновлен партикл огня");
 		}
 	}
-	//isLoaded = true;
 }
 
 void NewGame()
@@ -953,17 +882,10 @@ void NewGame_continue()
 	UpdateCrewInColonies(); // пересчет наемников в городах
 	
 	ReloadProgressEnd();
-	//isLoaded = false;
 }
 
 void InitGame()
-{
-	LayerCreate("realize", 1);
-	LayerCreate("sea_realize", 1);
-	LayerCreate("iRealize", 1);
-	LayerCreate("fader_realize", 1);
-	LayerCreate("inf_realize", 1);
-	
+{	
 	InitSound();
 
 	ReloadProgressUpdate();
@@ -1041,8 +963,13 @@ void InitGame()
 	InfoShowSetting();
 
 	bAddonContent = GetDLCenabled(DLC_APPID_1);
-	//bAddonContent = true;
-	trace("bAddonContent1 " + bAddonContent);
+//	bAddonContent = true;
+//	trace("bAddonContent1 " + bAddonContent);
+/*	
+	bAddon2 = GetDLCenabled(DLC_APPID_2);
+	//bAddon2 = true;
+	trace("bAddonContent2 " + bAddon2);
+*/	
 }
 
 int counter = 0;
@@ -1059,12 +986,10 @@ void ProcessControls()
 	//if (bBettaTestMode) Log_QuestInfo(ControlName);
     // boal <--
 	//trace("ProcessControls() : " + ControlName);
- 	if( !IsNetActive() )
-	{
-		if (ControlName == "QuickSave") { MakeQuickSave(); }
-		if (ControlName == "QuickLoad") { MakeQuickLoad(); }
-	}
-
+ 	
+	if (ControlName == "QuickSave") { MakeQuickSave(); }
+	if (ControlName == "QuickLoad") { MakeQuickLoad(); }
+	
     if (dialogRun) return;
 	if (sti(InterfaceStates.Launched)==true) return;
 	
@@ -1480,7 +1405,7 @@ void ProcessControls()
 			}	
 */			
 		break;
-		
+				
         case "BOAL_ActivateRush":  // boal KEY_F
 			if (bLandInterfaceStart && GetCharacterPerkUsing(pchar, "Rush") && CheckCharacterItem(pchar, "berserker_potion"))
             {
@@ -1526,7 +1451,7 @@ void ProcessControls()
 
         case "BOAL_Control":
 		    // по F11 вызывает окно отладчика
-			 //ChangeShowIntarface();
+//			 ChangeShowIntarface();
 			
 		    if (MOD_BETTATESTMODE == "On" || MOD_BETTATESTMODE == "Test")
 		    {
@@ -1597,38 +1522,22 @@ void ProcessControls()
 			}			
 		break;
 
-        case "BOAL_Control2": // F12
-//			int iChar = GetMainCharacterIndex();
-//			if(iChar != -1)
-//			{
-//				trace("1");
-//				Ship_DoFakeFire(&locShips[0], "cannonr", 2.0);
-//			}	
-//			PostEvent("Cannonfire", 8000 + rand(8000));	
-//			StartBackProcess("DailyEatCrewUpdate");
-//			StartBackProcess("CheckCharactersUpdateItems");
-		
+        case "BOAL_Control2": // F12		
             //Найти ближайшего видимого персонажа в заданном радиусе				
             if(LoadSegment("Debuger.c"))
         	{
                 ActiveF12Control(); // можно меять пряв в рабочей игре
         		UnloadSegment("Debuger.c");
-        	}		
-			
+        	}					
         break;
 
         case "BOAL_ControlDebug": // VK_INSERT
-/*		
+		
             if (MOD_BETTATESTMODE == "On")
 		    {
-                if(LoadSegment("gameutils.c"))
-            	{
-                    //ActiveINSERTControl();
-					StartLoadingSegments();
-            		UnloadSegment("gameutils.c");
-            	}
+
         	}
-*/			
+			
         break;
         // boal <--
 	}
@@ -1732,18 +1641,9 @@ void GameOver(string sName)
 
 	InitSound();
 	SetEventHandler(EVENT_END_VIDEO,"LaunchMainMenu_afterVideo",0);
-	//PlayStereoOGG("music_ship_dead");   // boal звук убиения
 	switch(sName)
 	{
 		case "sea":
-			/*nSelect = rand(1);
-			sFileName = "skeleton_on_beach";
-			switch(nSelect)
-			{
-				case 0: sFileName = "skeleton_on_beach"; break;
-				case 1: sFileName = "undersea"; break;
-			}
-			StartPostVideo(sFileName,1);   */
 			StartPictureAsVideo( "loading\seadeath.tga", 5.3 );
 			PlayStereoOGG("music_ship_dead");
 		break;
@@ -1777,13 +1677,6 @@ void GameOver(string sName)
 		break;
 	}
 }
-
-/*
-void PrepareNetEnvironment()
-{
-	Net_Start();
-}
-*/
 
 string its(int iNumber)
 {
@@ -1879,37 +1772,3 @@ int iCalculateSaveLoadCount(string _SaveLoad)
 	return iCount;
 }
 
-extern void ItemsFix_30032020();
-
-
-void fix30032020()
-{
-	ref MChref = GetMainCharacter();
-	if( !CheckAttribute(MChref, "fix30032020") )
-	{
-		if( LoadSegment("items\initItems.c") )
-		{
-			ItemsFix_30032020();
-
-    			UnloadSegment("items\initItems.c");
-    			MChref.fix30032020 = true;
-    		}
-	}
-}
-
-extern void ItemsFix_Pistol2(); // belamour направим в инит
-
-void Fix_Pistol2() // belamour  фикс дробовика
-{
-	ref MChref = GetMainCharacter();
-	if( !CheckAttribute(MChref, "ItemsFix_Pistol2") )
-	{
-		if( LoadSegment("items\initItems.c") )
-		{
-			ItemsFix_Pistol2();
-                        
-    			UnloadSegment("items\initItems.c");
-    			MChref.ItemsFix_Pistol2 = true;
-    		}
-	}
-}

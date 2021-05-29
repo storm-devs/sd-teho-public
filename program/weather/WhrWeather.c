@@ -8,7 +8,6 @@
 #include "weather\WhrAstronomy.c"
 
 #define WIND_NORMAL_POWER		20.0
-
 #define MAX_WEATHERS   34
 
 object	Weather, WeatherParams, WhrCommonParams;
@@ -21,7 +20,7 @@ int		iTotalNumWeathers = 0;
 string	sLightingPath = "day";
 string	sLmLightingPath = "day";
 string	sInsideBack = "";
-string	sNewExecuteLayer, sNewRealizeLayer;
+int	sNewExecuteLayer, sNewRealizeLayer;
 string	sCurrentFog;
 float	fWeatherDelta = 0.0;
 float	fWeatherAngle, fWeatherSpeed;
@@ -48,7 +47,7 @@ extern int InitWeather();
 void SetNextWeather(string sWeatherID)
 {
 	// find weather
-	iNextWeatherNum = -1; 
+	iNextWeatherNum = -1;
 	for (int i=0; i<MAX_WEATHERS; i++)
 	{
 		if (!CheckAttribute(&Weathers[i], "id")) { continue; }
@@ -67,8 +66,6 @@ void SetNextWeather(string sWeatherID)
 
 void WeatherInit()
 {
-	//DeleteAttribute(&WeatherParams,"");
-
 	if (LoadSegment("weather\WhrInit.c"))
 	{
 		iTotalNumWeathers = InitWeather();
@@ -84,8 +81,6 @@ void DeleteWeatherEnvironment()
 		DeleteClass(&Weather);
 	}
 	DeleteAttribute(&Weather,"");
-	//WeatherParams.Tornado = false;
-	//DeleteAttribute(&WeatherParams,"");
 
 	WhrDeleteRainEnvironment();
 	WhrDeleteSkyEnvironment();
@@ -103,7 +98,9 @@ void DeleteWeatherEnvironment()
 
 aref GetCurrentWeather()
 {
-	aref arWeather; 
+	if (iCurWeatherNum < 0)
+		iCurWeatherNum = iTotalNumWeathers - 1;
+	aref arWeather;
 	makearef(arWeather,Weathers[iCurWeatherNum]);
 	return arWeather;
 }
@@ -116,17 +113,17 @@ void CreateWeatherEnvironment()
 	int iNumWeatherFound = 0;
 	int iHour = MakeInt(GetHour());
 
-	bool bWhrStorm = false; 
-	bool bWhrTornado = false; 
+	bool bWhrStorm = false;
+	bool bWhrTornado = false;
 	bool bRain = false;
-	
-	if (CheckAttribute(&WeatherParams,"Storm")) { bWhrStorm = sti(WeatherParams.Storm); } 
-	if (CheckAttribute(&WeatherParams,"Tornado")) { bWhrTornado = sti(WeatherParams.Tornado); } 
 
-//navy --> Rain
+	if (CheckAttribute(&WeatherParams,"Storm")) { bWhrStorm = sti(WeatherParams.Storm); }
+	if (CheckAttribute(&WeatherParams,"Tornado")) { bWhrTornado = sti(WeatherParams.Tornado); }
+
+    //navy --> Rain
 	int iMonth = GetDataMonth();
 	int iTmp, iChance;
-	if (CheckAttribute(&WeatherParams,"Rain")) { bRain = sti(WeatherParams.Rain); } 
+	if (CheckAttribute(&WeatherParams,"Rain")) { bRain = sti(WeatherParams.Rain); }
 	if (!CheckAttribute(&WeatherParams, "Rain.ThisDay")) WeatherParams.Rain.ThisDay = false;
 
     //Время проверяется, т.к. нет ночной погоды для дождя!!! Ее в ГПК дорисовали??
@@ -134,11 +131,29 @@ void CreateWeatherEnvironment()
 	{
 		//шанс.
 		iChance = 0;
-		//Ха... эта строчка сезон дождей!!!! ифсЁ! Собственно 50/50 шансы, надо будет посмотреть - добавить/убрать
-		if (iMonth > 4 && iMonth < 9) iChance = 30;
-		//вот эта строчка ОТВЕЧАЕТ ЗА ДОЖДЬ! НЕ ТРОГАТЬ.
-		bRain = ((rand(50) + rand(50)) < (5 + iChance));
 		
+		int nMultiChance;
+		int nDuration;
+		bool bMultiChance = false;
+		
+		if (iMonth > 4 && iMonth < 11) 
+		{ // Май-Октябрь
+            iChance 	 = 15 + rand(15); 
+            nMultiChance =  25 + rand(25);
+            nDuration = 60 + rand(120) + rand(100);
+		}
+		else 
+		{
+            nMultiChance = 5 + rand(5);
+            nDuration = 60 + rand(120);
+		}
+		bRain = ((rand(50) + rand(50)) < (5 + iChance));
+		bMultiChance = (rand(100) < nMultiChance);
+        if(bMultiChance) 
+		{
+            int nMultiDays = rand(3) + 1;
+            nDuration += (nMultiDays * 24 * 60);
+        }	
 		bRain = bRain && bRains;				// ugeen
 
         //второй параметр, аттрибут ГГ, ставится через дебаггер, чтобы тестить дождь.
@@ -148,7 +163,7 @@ void CreateWeatherEnvironment()
 			WeatherParams.Rain.ThisDay   = true;
 			WeatherParams.Rain.StartTime = iHour + 2 + rand(2);
 			//продолжительность в минутах //1 час мин, иначе небо не успеет.
-			WeatherParams.Rain.Duration  = 60 + rand(120);
+			WeatherParams.Rain.Duration  = nDuration;
 
 			iTmp = sti(WeatherParams.Rain.StartTime);
 
@@ -170,7 +185,7 @@ void CreateWeatherEnvironment()
 			Weathers[iTmp].Sun.Glow.Enable = false;
 			Weathers[iTmp].Sun.Overflow.Enable = false;
 
-			Log_TestInfo("Will raining in : " + WeatherParams.Rain.StartTime);
+			trace("Will raining in : " + WeatherParams.Rain.StartTime + " duration : " + nDuration);
 		}
 	}
 
@@ -185,8 +200,7 @@ void CreateWeatherEnvironment()
 			WeatherParams.Rain.ThisDay = false;
 		}
 	}
-//navy <-- Rain
-
+    //navy <-- Rain
 
 	//Trace("bCurWeatherStorm = " + bCurWeatherStorm);
 
@@ -205,12 +219,12 @@ void CreateWeatherEnvironment()
 		{
 			//navy --> чистим текущую погоду от остатков предыдущего дождя... иначе сохранненный дождь пойдет...
 			//или нужно всю погоду инитить заново... но лучше наверно так.
-			if (!bRain && sti(Weathers[i].Rain.NumDrops) > 0 && sti(Weathers[i].Rain.NumDrops) < 5100) 
+			if (!bRain && sti(Weathers[i].Rain.NumDrops) > 0 && sti(Weathers[i].Rain.NumDrops) < 5100)
 			{
 				Weathers[i].Rain.NumDrops = 0;
 				Weathers[i].Lightning.Enable = false;
 			}
-			if (CheckAttribute(&WeatherParams, "Rain.ThisDay") && !sti(WeatherParams.Rain.ThisDay) && CheckAttribute(&Weathers[i], "Bak")) 
+			if (CheckAttribute(&WeatherParams, "Rain.ThisDay") && !sti(WeatherParams.Rain.ThisDay) && CheckAttribute(&Weathers[i], "Bak"))
 			{
 				Weathers[i].Fog.Color		= Weathers[i].Bak.Fog.Color;
 				Weathers[i].Fog.Height		= Weathers[i].Bak.Fog.Height;
@@ -223,11 +237,11 @@ void CreateWeatherEnvironment()
 
 				DeleteAttribute(&Weathers[i], "Bak");
 			}
-			if (!bRain) Weathers[i].Rainbow.Enable = false;	
+			if (!bRain) Weathers[i].Rainbow.Enable = false;
 			//navy <--
 			if (!CheckAttribute(&Weathers[i], "hour")) { continue; }
-			if (CheckAttribute(&Weathers[i], "skip")) 
-			{ 
+			if (CheckAttribute(&Weathers[i], "skip"))
+			{
 				if (sti(Weathers[i].skip)) { continue; }
 			}
 
@@ -246,7 +260,7 @@ void CreateWeatherEnvironment()
 			}
 			if (bWhrStorm != bCanStorm) { continue; }
 			if (bWhrTornado == true && bWhrTornado != bCanTornado) { continue; }
-			
+
 			iWeatherFound[iNumWeatherFound] = i;
 			iNumWeatherFound++;
 		}
@@ -267,9 +281,9 @@ void CreateWeatherEnvironment()
 	int iCurLocation;
 	int iTestWeather;
 	bool bQuestlockWeather;
-	
+
 	bQuestlockWeather = false;
-	sunIsShine = true; 
+	sunIsShine = true;
 
 	if(CheckAttribute(pchar, "location"))
 	{
@@ -318,8 +332,8 @@ void CreateWeatherEnvironment()
 				}
 			}
 		}
-		if(iCurLocation == -1)
-		{		
+		else
+		{
 			iCurLocation = FindIsland(pchar.location);
 			if(iCurLocation != -1)
 			{
@@ -393,7 +407,8 @@ void CreateWeatherEnvironment()
 
 	aref aCurWeather = GetCurrentWeather();
 
-	sLightingPath = Whr_GetString(aCurWeather,"Lighting");
+	sLightingPath = Whr_GetString(aCurWeather,"Lighting");	
+	
 	sLmLightingPath = Whr_GetString(aCurWeather,"LightingLm");
 	sInsideBack = Whr_GetString(aCurWeather,"InsideBack");
 	bWeatherIsNight = Whr_GetLong(aCurWeather,"Night");
@@ -402,14 +417,13 @@ void CreateWeatherEnvironment()
 	if(CheckAttribute(pchar, "wind.angle"))
 	{
 		Weather.Wind.Angle = pchar.wind.angle;
-		//DeleteAttribute(pchar, "wind.angle");		
+		//DeleteAttribute(pchar, "wind.angle");
 	}
 	else
 	{
-		Weather.Wind.Angle = frand(PIm2);//  Блин!!! это не градусы!!!!! frand(180.0);//Whr_GetFloat(aCurWeather,"Wind.Angle");
+		Weather.Wind.Angle = frand(PIm2);
 		pchar.wind.angle = Weather.Wind.Angle;
 	}
-
 	if (CheckAttribute(pchar, "wind.speed"))
 	{
 		Weather.Wind.Speed = pchar.wind.speed;
@@ -421,15 +435,15 @@ void CreateWeatherEnvironment()
 		pchar.wind.speed = Weather.Wind.Speed;
 	}
 	
-	trace("Before WorldMap : wind.angle = " + pchar.wind.angle + " wind.speed = " + pchar.wind.speed);
-	if(CheckAttribute(pchar,"Ship.Ang.y"))
-	{
-		trace("Whr_GetWindAngle() " + Whr_GetWindAngle() + "     ship(y)= " + pchar.Ship.Ang.y);
-	}
+//	trace("Before WorldMap : wind.angle = " + pchar.wind.angle + " wind.speed = " + pchar.wind.speed);
+//	if(CheckAttribute(pchar,"Ship.Ang.y"))
+//	{
+//		trace("Whr_GetWindAngle() " + Whr_GetWindAngle() + "     ship(y)= " + pchar.Ship.Ang.y);
+//	}
 	
 	if(CheckAttribute(pchar,"WorldMap.WindAngle")) //если идем с глобы на локальное море
 	{
-		trace("WorldMap.WindAngle = " + pchar.WorldMap.WindAngle);
+//		trace("WorldMap.WindAngle = " + pchar.WorldMap.WindAngle);
 //		if(stf(pchar.WorldMap.WindAngle) < 0.0) 
 //		{
 //			Weather.Wind.Angle = PIm2 + stf(pchar.WorldMap.WindAngle);
@@ -443,30 +457,29 @@ void CreateWeatherEnvironment()
 	}
 	if(CheckAttribute(pchar,"WorldMap.WindForce")) 
 	{
-		trace("WorldMap.WindForce = " + pchar.WorldMap.WindForce);
+//		trace("WorldMap.WindForce = " + pchar.WorldMap.WindForce);
 		Weather.Wind.Speed = stf(pchar.WorldMap.WindForce) * (WIND_NORMAL_POWER - 2.0);
 		pchar.wind.speed = Weather.Wind.Speed;
 		DeleteAttribute(pchar, "WorldMap.WindForce");				
 	}
 		
-	trace("After WorldMap : wind.angle = " + pchar.wind.angle + " wind.speed = " + pchar.wind.speed);
-	if(CheckAttribute(pchar,"Ship.Ang.y"))
-	{
-		trace("Whr_GetWindAngle() " + Whr_GetWindAngle() + "     ship(y)= " + pchar.Ship.Ang.y);
-	}	
+//	trace("After WorldMap : wind.angle = " + pchar.wind.angle + " wind.speed = " + pchar.wind.speed);
+//	if(CheckAttribute(pchar,"Ship.Ang.y"))
+//	{
+//		trace("Whr_GetWindAngle() " + Whr_GetWindAngle() + "     ship(y)= " + pchar.Ship.Ang.y);
+//	}	
 
 	pchar.quest.EraseWind.win_condition.l1 = "ExitFromSea";
 	pchar.quest.EraseWind.win_condition = "EraseWind";
 
 	sCurrentFog = "Fog";
-	if (bSeaActive) 
-	{ 
-		if (CheckAttribute(aCurWeather, "SpecialSeaFog")) { sCurrentFog = "SpecialSeaFog"; }	
+	if (bSeaActive)
+	{
+		if (CheckAttribute(aCurWeather, "SpecialSeaFog")) { sCurrentFog = "SpecialSeaFog"; }
 	}
-
 	FillWeatherData(iCurWeatherNum, iBlendWeatherNum);
 
-	if (iBlendWeatherNum < 0 || bQuestlockWeather) 
+	if (iBlendWeatherNum < 0 || bQuestlockWeather)
 	{
 		Weather.Time.time = GetTime();
 		Weather.Time.speed = 350.0; // количество секунд на смену погоды
@@ -501,7 +514,7 @@ void CreateWeatherEnvironment()
 	fWeatherAngle = stf(Weather.Wind.Angle);
 	//fWeatherAngle = GetAngleY(stf(worldMap.WindX), stf(worldMap.WindZ));
 	fWeatherSpeed = stf(Weather.Wind.Speed);
-	
+
     // boal -->
 	bRain = true; // тут не работает Whr_isRainEnable(); из-за гл меню :(
 	
@@ -513,7 +526,7 @@ void CreateWeatherEnvironment()
 	{
 		ref rLoc;
 		rLoc = &Locations[iLocation];
-		
+
 		if (CheckAttribute(rLoc, "environment.weather.rain") && !sti(rLoc.environment.weather.rain))
 		{
 			bRain = false;
@@ -537,8 +550,8 @@ void CreateWeatherEnvironment()
 				{
 					//нет дождя
 					bRain = false;
-				}
-			}
+		}
+	}
 		}
 	}
 	
@@ -556,9 +569,9 @@ void CreateWeatherEnvironment()
 	
 	WhrCreateSunGlowEnvironment();
 	WhrCreateLightningEnvironment();
+	WhrCreateAstronomyEnvironment();
 	WhrCreateSkyEnvironment();
 	WhrCreateSeaEnvironment();
-	WhrCreateAstronomyEnvironment();
 
 	if(iLocation != -1)
 	{
@@ -581,16 +594,11 @@ void CreateWeatherEnvironment()
 		Island.FogDensity = Weather.Fog.IslandDensity;
 		SendMessage(&IslandReflModel, "lllf", MSG_MODEL_SET_FOG, 1, 1, stf(Weather.Fog.IslandDensity));
 	}
-
-	//Trace("Whr: Select id = " + aCurWeather.id);
 }
 
 void Whr_UpdateWeather()
 {
 	if (!isEntity(&Weather)) { return; }
-
-//слишком много инитов
-//	WeatherInit();
 
 	CreateWeatherEnvironment();
 	MoveWeatherToLayers(sNewExecuteLayer, sNewRealizeLayer);
@@ -599,7 +607,6 @@ void Whr_UpdateWeather()
 void Whr_LoadNextWeather(int nPlus)
 {
 	if (!isEntity(&Weather)) { return; }
-	//WeatherInit();  //слишком много инитов
 
 	iCurWeatherHour = MakeInt(GetHour());
 	iCurWeatherNum = iCurWeatherNum + nPlus;
@@ -613,16 +620,16 @@ void Whr_LoadNextWeather(int nPlus)
 		iCurWeatherNum = 0;
 	}
 
-	if (CheckAttribute(&Weathers[iCurWeatherNum], "Skip")) 
-	{ 
-		if (sti(Weathers[iCurWeatherNum].skip)) 
-		{ 
+	if (CheckAttribute(&Weathers[iCurWeatherNum], "Skip"))
+	{
+		if (sti(Weathers[iCurWeatherNum].skip))
+		{
 			Whr_LoadNextWeather(nPlus);
 			return;
 		}
 	}
-	Log_TestInfo("ПОГОДА: " + Weathers[iCurWeatherNum].id + " ОСВЕЩЕНИЕ: " + Weathers[iCurWeatherNum].Lighting);
-	Log_TestInfo("Sun: HeightAngle: " + Weathers[iCurWeatherNum].Sun.HeightAngle);
+	trace("ПОГОДА: " + Weathers[iCurWeatherNum].id + " ОСВЕЩЕНИЕ: " + Weathers[iCurWeatherNum].Lighting);
+	trace("Sun: HeightAngle: " + Weathers[iCurWeatherNum].Sun.HeightAngle);
 
 	iNextWeatherNum = iCurWeatherNum;
 	CreateWeatherEnvironment();
@@ -714,9 +721,6 @@ int Whr_BlendColor(float fBlend, int col1, int col2)
 void Whr_TimeUpdate()
 {
 	float fTime = GetEventData();
-	//float fBlend = fTime - makeint(fTime);
-
-	//
 	Environment.time = fTime;
 	int nOldHour = sti(Environment.date.hour);
 	int nNewHour = makeint(fTime);
@@ -738,12 +742,13 @@ void Whr_TimeUpdate()
 	string sTmp;
 	int iTmp, iTime;
 	bool bRain = false;
-	if (CheckAttribute(&WeatherParams,"Rain")) { bRain = sti(WeatherParams.Rain); } 
+	if (CheckAttribute(&WeatherParams,"Rain")) { bRain = sti(WeatherParams.Rain); }
 	//navy <-- Rain
 	iCurWeatherNum = FindWeatherByHour( makeint(fTime) );
 	iBlendWeatherNum = FindBlendWeather( iCurWeatherNum );
 
 	//zagolski. динамическая смена тумана на островах и на море
+    if( iBlendWeatherNum < 0 ) {return;} 
 	if (bSeaActive)
 	{
 		Island.LightingPath = GetLightingPath();
@@ -753,7 +758,7 @@ void Whr_TimeUpdate()
 
 	//navy --> Rain
 	bool  bIsRainEnable = Whr_isRainEnable();
-	
+
 	if (bIsRainEnable) // не для локаций, где низя дождить
 	{
 		//это собственно генератор дождя...
@@ -786,7 +791,7 @@ void Whr_TimeUpdate()
 			{
 				iTmp = 0;
 			}
-			Log_TestInfo("Is Raining: " + iTime + " minutes, stage: " + iTmp);
+			trace("Is Raining: " + iTime + " minutes, stage: " + iTmp);
 			//в зависимости от заданной стадия моделируем дождь.
 			switch (iTmp)
 			{
@@ -798,13 +803,13 @@ void Whr_TimeUpdate()
 					//следующая стадия, начало мелкого дождя...
 					if (rand(100) < 40)
 					{
-						Log_TestInfo("Starting the Lightning...");
+						trace("Starting the Lightning...");
 						Weathers[iCurWeatherNum].Lightning.Enable = true;
 						Weathers[iCurWeatherNum].Lightning.SubTexX = 4;
 						Weathers[iCurWeatherNum].Lightning.SubTexY = 1;
 						Weathers[iCurWeatherNum].Lightning.ScaleX = 0.7;
 						Weathers[iCurWeatherNum].Lightning.ScaleY = 1.0;
-						Weathers[iCurWeatherNum].Lightning.Flash.Texture = "Weather\lightning\flash.tga";
+						Weathers[iCurWeatherNum].Lightning.Flash.Texture = "Weather\lightning\flash.tga.tx";
 					}
 					break;
 				case 2:
@@ -812,7 +817,7 @@ void Whr_TimeUpdate()
 					break;
 				case 3:
 					//заканчиваем...
-					if (CheckAttribute(&WeatherParams, "Rain.Sound") && sti(WeatherParams.Rain.Sound))
+				    if (CheckAttribute(&WeatherParams, "Rain.Sound") && sti(WeatherParams.Rain.Sound))
 					{
 						WeatherParams.Rain = false;
 						WeatherParams.Rain.Sound = false;
@@ -825,6 +830,8 @@ void Whr_TimeUpdate()
 	
 						DeleteAttribute(&WeatherParams, "Rain.StartTime");
 					}
+					WeatherParams.Rain = false;
+					Weathers[iCurWeatherNum].Rain.NumDrops = 0;
 					WeatherParams.Rain.ThisDay = false;
 					break;
 			}
@@ -868,10 +875,10 @@ void Whr_TimeUpdate()
 		else
 		{
 			//начинаем...
-			if (CheckAttribute(&WeatherParams, "Rain.ThisDay") && sti(WeatherParams.Rain.ThisDay) && sti(WeatherParams.Rain.StartTime) <= nOldHour)
+		    if (CheckAttribute(&WeatherParams, "Rain.ThisDay") && sti(WeatherParams.Rain.ThisDay) && sti(WeatherParams.Rain.StartTime) <= nOldHour)
 			{
 				//интенсивность.
-				Weathers[iBlendWeatherNum].Rain.NumDrops = 2000 + rand(3000);
+			    Weathers[iBlendWeatherNum].Rain.NumDrops = 2000 + rand(3000);
 				Weathers[iBlendWeatherNum].Rain.DropLength = 2 + rand(10);
 				Weathers[iBlendWeatherNum].Rain.Color = argb(0,23,23,23);
 
@@ -901,7 +908,7 @@ void Whr_TimeUpdate()
 				WeatherParams.Rain = true;
 				//звук
 				Whr_SetRainSound(true, sti(Weathers[iCurWeatherNum].Night));
-				Log_TestInfo("Rain Strated. Duration: " + WeatherParams.Rain.Duration + " minutes");
+				trace("Rain Started. Duration: " + WeatherParams.Rain.Duration + " minutes");
 			}
 		}
 	}
@@ -918,7 +925,7 @@ void Whr_TimeUpdate()
 
 	//update rain: rain drops, rain colors, rain size, rainbow
 	//navy -- попрбуем такую проверку, есть подозрение, что это оно. 5.03.07
-	if (bIsRainEnable) 
+	if (bIsRainEnable)
 	{
 		FillRainData(iCurWeatherNum, iBlendWeatherNum);
 		Rain.isDone = "";
@@ -937,30 +944,57 @@ void Whr_TimeUpdate()
 void Whr_UpdateWeatherHour()
 {
 	bool bOldIsDay = Whr_IsDay();
-	int i;
-	
+	bool doLightChange = false;
+	int i, j, iCharIdx;
+
 	bWeatherIsLight = Whr_GetLong(&Weathers[iCurWeatherNum],"Lights");
 	bWeatherIsNight = Whr_GetLong(&Weathers[iCurWeatherNum],"Night");
 
-	FillAstronomyFadeValue();
+	
+	aref aCurWeather = GetCurrentWeather();
+	aref aStars;
+	makearef(aStars, aCurWeather.Stars);
+	FillStars(aStars);
+	Astronomy.isDone = true;
 	Astronomy.TimeUpdate = 1;
 
 	if( Whr_IsDay() != bOldIsDay )
 	{ // меняем источники освещения
 		Whr_ChangeDayNight();
 		Event("eChangeDayNight");
+        doLightChange = true;
  	}
  	if (bSeaActive && !bAbordageStarted)
 	{
-        Whr_WindChange(); // диамическая смена ветра boal
+	    bool isSeaEnt = false;
+	    if (IsEntity(&Sea))
+		{
+            isSeaEnt = true;
+		}		
+        Whr_WindChange();
 		i = FindIsland(pchar.location)
-        if ( i != -1)
+		if (i != -1)
         {
-			if (stf(Sea.MaxSeaHeight) != SetMaxSeaHeight(i))
+			if (isSeaEnt) 
 			{
-	 			WhrCreateSeaEnvironment(); // boal смена волн на лету
+                if(stf(Sea.MaxSeaHeight) != SetMaxSeaHeight(i))
+                    WhrCreateSeaEnvironment();
 	 		}
  		}
+        if(doLightChange && isSeaEnt) 
+		{
+
+            ref rChar;
+            Sea.Lights = aCurWeather.Lights;
+            for(j = 0; j < iNumShips; j++) 
+			{
+                iCharIdx = Ships[j];
+                if (iCharIdx < 0 || iCharIdx >= TOTAL_CHARACTERS) continue;
+                rChar = GetCharacter(Ships[j]);
+                Ship_SetLightsAndFlares(rChar);
+                SendMessage(&characters[iCharIdx], "l", MSG_SHIP_LIGHTSRESET);
+            }
+        }
  	}
 }
 
@@ -978,7 +1012,7 @@ void Whr_ChangeDayNight()
 }
 
 void FillWeatherData(int nw1, int nw2)
-{	
+{
 	if( nw1<0 || nw1>=MAX_WEATHERS ) {return;}
 
 	string sCurFog = Whr_GetCurrentFog();
@@ -1041,7 +1075,7 @@ int FindBlendWeather(int iWeatherNum)
 	return FindWeatherByHour(nBlendWeatherHour);
 }
 
-void CreateWeather(string sExecuteLayer, string sRealizeLayer)
+void CreateWeather(int sExecuteLayer, int sRealizeLayer)
 {
 	CreateWeatherEnvironment();
 	MoveWeatherToLayers(sExecuteLayer, sRealizeLayer);
@@ -1052,10 +1086,10 @@ void DeleteWeather()
 	DeleteWeatherEnvironment();
 }
 
-void MoveWeatherToLayers(string sExecuteLayer, string sRealizeLayer)
+void MoveWeatherToLayers(int sExecuteLayer, int sRealizeLayer)
 {
-	LayerDelObject("execute",&Weather);
-	LayerDelObject("realize",&Weather);
+	LayerDelObject(EXECUTE,&Weather);
+	LayerDelObject(REALIZE,&Weather);
 	LayerDelObject(SEA_EXECUTE,&Weather);
 	LayerDelObject(SEA_REALIZE,&Weather);
 
@@ -1105,25 +1139,25 @@ ref Whr_GetShadowDensity()
 string	Whr_GetCurrentFog() { return sCurrentFog; }
 
 string	Whr_GetInsideBack() { return sInsideBack; }
-string	GetLightingPath()	
+string	GetLightingPath()
 {
-//navy -->
+    //navy -->
 	if (CheckAttribute(&WeatherParams, "Rain") && sti(WeatherParams.Rain))
 	{
 		return Whr_GetRainyLightningPath();
 	}
-//navy <--
-	return sLightingPath; 
+    //navy <--
+	return sLightingPath;
 }
-string	GetLmLightingPath() 
-{ 
-//navy -->
+string	GetLmLightingPath()
+{
+    //navy -->
 	if (CheckAttribute(&WeatherParams, "Rain") && sti(WeatherParams.Rain))
 	{
 		return "storm";
 	}
-//navy <--
-	return sLmLightingPath; 
+    //navy <--
+	return sLmLightingPath;
 }
 
 bool	Whr_IsDay() { return !bWeatherIsNight; }
@@ -1136,9 +1170,9 @@ int FindWeather(string sWeatherID)
 {
 	for (int i=0;i<MAX_WEATHERS;i++)
 	{
-		if (!CheckAttribute(&Weathers[i], "id")) 
-		{ 
-			continue; 
+		if (!CheckAttribute(&Weathers[i], "id"))
+		{
+			continue;
 		}
 		if(Weathers[i].id == sWeatherID)
 		{
@@ -1224,11 +1258,12 @@ void Whr_WindChange()
 	pchar.wind.angle = Weather.Wind.Angle;
 
 	Weather.Wind.Speed = Whr_GetFloat(aCurWeather,"Wind.Speed");
+
 	pchar.wind.speed = Weather.Wind.Speed;
-	
+
 	pchar.quest.EraseWind.win_condition.l1 = "ExitFromSea";
 	pchar.quest.EraseWind.win_condition = "EraseWind";
-	
+
 	trace("Whr_WindChange wind.angle = " + pchar.wind.angle + " wind.speed = " + pchar.wind.speed);
 	
 	fWeatherAngle = stf(Weather.Wind.Angle);
@@ -1247,7 +1282,7 @@ bool Whr_isRainEnable()
 	{
         if (CheckAttribute(loadedLocation, "environment.weather.rain") && !sti(loadedLocation.environment.weather.rain))
 		{
-			bRain = false;
+		    bRain = false;
 		}
 		/*else
 		{
@@ -1272,9 +1307,12 @@ bool Whr_isRainEnable()
 	{
 		if (bSeaActive && bAbordageStarted ) // в море не срабатывает bLandInterfaceStart
 		{
-			if (IsEntity(loadedLocation) && CheckAttribute(loadedLocation, "environment.weather.rain") && !sti(loadedLocation.environment.weather.rain))
+			if (IsEntity(&loadedLocation)) 
 			{
-				bRain = false;
+			    if(CheckAttribute(&loadedLocation, "environment.weather.rain")) 
+				{
+                    if(!sti(loadedLocation.environment.weather.rain)) bRain = false;
+			    }
 			}
 		}
 	}

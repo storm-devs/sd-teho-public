@@ -10,8 +10,8 @@ void InitBaseInterfaces()
 	GameInterface.GameTime.hour = InterfaceStates.GameTime.hour;
 	CreateEntity(&GameInterface,"xinterface");
 	DelEventHandler("GetQuestTextFileName","GetQuestTextFileName");
-	LayerAddObject("iExecute",&GameInterface,-100);
-	LayerAddObject("iRealize",&GameInterface,-100);
+	LayerAddObject(INTERFACE_EXECUTE,&GameInterface,-100);
+	LayerAddObject(INTERFACE_REALIZE,&GameInterface,-100);
 	if(!IsEntity(&LanguageObject))
 	{	CreateEntity(&LanguageObject,"obj_strservice");
 	}

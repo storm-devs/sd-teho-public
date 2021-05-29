@@ -507,7 +507,7 @@ void InitTimerInterface()
 	objTimerInterface.timerforecolor = argb(255,128,128,128);
 	CreateEntity( &objTimerInterface, "BITimer" );
 	LayerAddObject(SEA_REALIZE,&objTimerInterface,-1);
-	LayerAddObject("realize",&objTimerInterface,-1);
+	LayerAddObject(REALIZE,&objTimerInterface,-1);
 }
 
 void LaunchTimerInterface(float fTime,string questtype,string questname)

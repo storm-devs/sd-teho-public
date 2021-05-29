@@ -8,7 +8,7 @@ void InitShipLights()
 	ShipLights.CoronaTextureY = 1;
 	ShipLights.CoronaTexture = "ShipsFlares\corona.tga";
 	ShipLights.FlareSunRoadTexture = "ShipsFlares\FlareSunRoad.tga";
-	ShipLights.CoronaTechnique = "coronas";
+	ShipLights.CoronaTechnique = "Coronas";
 	ShipLights.SunRoadFlareSize = 4.0;
 
     makearef(rlights, ShipLights.LightTypes);

@@ -1,4 +1,4 @@
-#include "interface\messages.h"
+#include "storm-engine\interface\messages.h"
 #include "interface\utils\interface.c"
 #include "interface\utils\MessageBox.c"
 #include "interface\utils\IconSelector.c"
@@ -488,7 +488,7 @@ void LaunchGameMenuScreen()
 {
 	SetEventHandler("makescrshot","LaunchGameMenuContinue",0);
 	aref arScrShoter;
-	if( !FindClass(&arScrShoter,"scrshoter") ) {
+	if( !GetEntity(&arScrShoter,"scrshoter") ) {
 		CreateScreenShoter();
 		PostEvent("makescrshot",1);
 	} else {
@@ -518,14 +518,13 @@ void LaunchGameMenuContinue()
 void CreateScreenShoter()
 {
 	object scrshoter;
-	LayerCreate("realize",1);
-	LayerSetRealize("realize",1);
+	LayerSetRealize(REALIZE);
 	CreateEntity(&scrshoter,"scrshoter");
 	scrshoter.SavePath = "SAVE";
 	if(bSeaActive && !bAbordageStarted) {
 		LayerAddObject(SEA_REALIZE,&scrshoter,-1);
 	} else {
-		LayerAddObject("realize",&scrshoter,-1);
+		LayerAddObject(REALIZE,&scrshoter,-1);
 	}
 }
 
@@ -716,8 +715,7 @@ void LaunchNewMainMenu()
 
 void LaunchMainMenu()
 {
-	LayerCreate("realize",1);
-	LayerSetRealize("realize",1);
+	LayerSetRealize(REALIZE);
 
 	if(procEnableInterfaceLaunch(INTERFACE_MAINMENU)==false)
 	{
@@ -1338,8 +1336,8 @@ void _Procedure_EndVideoPlay()
 	DelEventHandler("ievntEndVideo","_Procedure_EndVideoPlay");
 	if(aviVideoObj.layer == "land")
 	{
-		LayerFreeze("realize",false);
-		LayerFreeze("execute",false);
+		LayerFreeze(REALIZE,false);
+		LayerFreeze(EXECUTE,false);
 	}
 	if(aviVideoObj.layer == "sea")
 	{
@@ -1406,8 +1404,8 @@ void RunHelpChooser()
 	bRunHelpChooser = true;
 	EngineLayersOffOn(false);
 	InterfaceStates.Launched=true;
-	LayerAddObject("iExecute",&objHelpChooser,10000);
-	LayerAddObject("iRealize",&objHelpChooser,10000);
+	LayerAddObject(INTERFACE_EXECUTE,&objHelpChooser,10000);
+	LayerAddObject(INTERFACE_REALIZE,&objHelpChooser,10000);
 }
 */
 
@@ -1481,7 +1479,7 @@ bool procInterfacePrepare(int interfaceCode)
 	if(interfaceCode != INTERFACE_FORTCAPTURE && interfaceCode != INTERFACE_RANSACK_MAIN)
 	{
 		aref arFader;
-		if( FindClass(arFader,"fader") ) {return false;}
+		if( GetEntity(arFader,"fader") ) {return false;}
 	}
 
 	if( LoadSegment(Interfaces[interfaceCode].SectionName) )
@@ -1495,8 +1493,8 @@ bool procInterfacePrepare(int interfaceCode)
 		DeleteAttribute(&GameInterface,"");
 		DeleteAttribute(&InterfaceStates,"tooltip");
 		if(IsPerkIntoList("TimeSpeed")) {SetTimeScale(1.0);}
-		LayerFreeze("irealize",false);
-		LayerFreeze("iexecute",false);
+		LayerFreeze(INTERFACE_REALIZE,false);
+		LayerFreeze(INTERFACE_EXECUTE,false);
 		return true;
 	}
 	else
@@ -1738,8 +1736,8 @@ void procInfoShow()
 
 			CreateEntity(&objInfoList[nInfoIdx],"InfoHandler");
 
-			LayerCreate("inf_realize", 1);
-			LayerSetRealize("inf_realize", 1);
+			//LayerCreate("inf_realize", 1);
+			LayerSetRealize(INFO_REALIZE);
 		}
 	}
 	else
@@ -1776,10 +1774,10 @@ void InfoShowSetting()
 		}
 
 		if( bMakeSet ) {
-			LayerAddObject("inf_realize",&objInfoList[i],-1);
+			LayerAddObject(INFO_REALIZE,&objInfoList[i],-1);
 			bAlreadySet = true;
 		} else {
-			LayerDelObject("inf_realize",&objInfoList[i]);
+			LayerDelObject(INFO_REALIZE,&objInfoList[i]);
 		}
 
 		if(i==2) {
@@ -1810,11 +1808,11 @@ void InfoShowSetting()
 	}
 
 	if(bAlreadySet) {
-		LayerFreeze("irealize",true);
-		LayerFreeze("iexecute",true);
+		LayerFreeze(INTERFACE_REALIZE,true);
+		LayerFreeze(INTERFACE_EXECUTE,true);
 	} else {
-		LayerFreeze("irealize",false);
-		LayerFreeze("iexecute",false);
+		LayerFreeze(INTERFACE_REALIZE,false);
+		LayerFreeze(INTERFACE_EXECUTE,false);
 	}
 }
 
@@ -1831,8 +1829,8 @@ void InfoShow_Control()
 			SendMessage(&GameInterface,"l",MSG_INTERFACE_LAUNCH_DASHBOARD);
 		}
 		else Event("evntLowStorageBreak");
-		LayerFreeze("irealize",false);
-		LayerFreeze("iexecute",false);
+		LayerFreeze(INTERFACE_REALIZE,false);
+		LayerFreeze(INTERFACE_EXECUTE,false);
 	}
 }
 
@@ -1844,8 +1842,8 @@ void InfoShow_Control2()
 	{
 		PostEvent("DoInfoShower",0,"sl","OptionsBreak",false);
 		Event("evntOptionsBreak");
-		LayerFreeze("irealize",false);
-		LayerFreeze("iexecute",false);
+		LayerFreeze(INTERFACE_REALIZE,false);
+		LayerFreeze(INTERFACE_EXECUTE,false);
 	}
 }
 
@@ -2198,12 +2196,11 @@ void MakeQuickLoad()
 
 void MakeQuickSave()
 {
-	if( IsNetActive() ) {return;}
 	if( bPlayVideoNow ) {return;}
 	if( dialogRun ) {return;}  // лесник - если диялог ,то быстре сохарнение отменяется. лесник
 
 	aref arTmp;
-	if( FindClass(arTmp,"fader") ) {return;}
+	if( GetEntity(arTmp,"fader") ) {return;}
 
 	if (!CheckSaveGameEnabled()) {return;}
 
@@ -2223,7 +2220,7 @@ void MakeQuickSave()
 	
 	// boal 09.07.06 <--
 	aref arScrShoter;
-	if( !FindClass(&arScrShoter,"scrshoter") ) {
+	if( !GetEntity(&arScrShoter,"scrshoter") ) {
 		SetEventHandler("makescrshot","QuickSaveContinue",0);
 		CreateScreenShoter();
 		PostEvent("makescrshot",1);
@@ -2262,7 +2259,7 @@ void MakeAutoSave()
 	if( InterfaceStates.Launched != 0 ) {return;}
 
 	aref arScrShoter;
-	if( !FindClass(&arScrShoter,"scrshoter") ) {
+	if( !GetEntity(&arScrShoter,"scrshoter") ) {
 		SetEventHandler("makescrshot","AutoSaveContinue",0);
 		CreateScreenShoter();
 		PostEvent("makescrshot",1);
@@ -2463,4 +2460,92 @@ string GetConvertStr(string _param, string _file)
     LanguageCloseFile(idLngFile);
 
     return totalInfo;
+}
+
+void Picture_SetPicture(string sPictureControl, string sTexture)
+{
+	SendMessage(&GameInterface, "lslls", MSG_INTERFACE_MSG_TO_NODE, sPictureControl, 2, false, sTexture);
+}
+
+void Picture_SetGroupPicture(string sPictureControl, string sGroup, string sPicture)
+{
+	SendMessage(&GameInterface, "lslss", MSG_INTERFACE_MSG_TO_NODE, sPictureControl, 6, sGroup, sPicture);
+}
+
+void Table_UpdateWindow(string sTableControl)
+{
+	SendMessage(&GameInterface, "lsl", MSG_INTERFACE_MSG_TO_NODE, sTableControl, 0);
+}
+
+void Table_Clear(string sTableControl, bool bClearHeader, bool bClearContent, bool bUpdateWindow)
+{
+	if (bClearHeader)
+	{
+	}
+
+	if (bClearContent)
+	{
+		for (int i=1; i<2000; i++) 
+		{
+			string sA = sTableControl + "." + "tr" + i;
+			if (!CheckAttribute(&GameInterface, sA)) { break; }
+			DeleteAttribute(&GameInterface, sA);
+		}
+	}
+
+	if (bUpdateWindow)
+	{
+		Table_UpdateWindow(sTableControl);
+	}
+}
+
+void Button_SetText(string sButtonControl, string sText)
+{
+	SendMessage( &GameInterface, "lsls", MSG_INTERFACE_MSG_TO_NODE, sButtonControl, 0, sText); 
+}
+
+void Button_SetEnable(string sButtonControl, bool bEnable)
+{
+	SetSelectable(sButtonControl, bEnable);
+}
+
+void CheckButton_SetDisable(string sControl, int iControlIndex, bool bDisableState)
+{
+	SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE, sControl, 5, iControlIndex, bDisableState);
+}
+
+int CheckButton_GetState(string sControl, int iControlIndex)
+{
+	return SendMessage(&GameInterface, "lsll", MSG_INTERFACE_MSG_TO_NODE, sControl, 3, iControlIndex);
+}
+
+void CheckButton_SetState(string sControl, int iControlIndex, bool bState)
+{
+	SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, sControl, 2, iControlIndex, bState);
+}
+
+void StringCollection_SetText(string sControl, int iControlIndex, string sText)
+{
+	SendMessage(&GameInterface, "lslls", MSG_INTERFACE_MSG_TO_NODE, sControl, 1, iControlIndex, sText);
+}
+
+void StringCollection_SetTextValue(string sControl, int iControlIndex, int iValue)
+{
+	string sValue = "#" + iValue;
+	SendMessage(&GameInterface, "lslls", MSG_INTERFACE_MSG_TO_NODE, sControl, 1, iControlIndex, sValue);
+}
+
+void ImageCollection_ChangeTextureGroup(string sControl, string sNewTextureGroup)
+{
+	SendMessage(&GameInterface, "lsls", MSG_INTERFACE_MSG_TO_NODE, sControl, 1, sNewTextureGroup);
+}
+
+void ImageCollection_SetColor(string sControl, int iCIndex, int Color)
+{
+	SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, sControl, 3, iCIndex, Color);
+}
+
+void ScrollImage_SetPosition(string sControl, int iPosition)
+{
+	SendMessage(&GameInterface, "lsll", MSG_INTERFACE_MSG_TO_NODE, sControl, 1, iPosition);
 }

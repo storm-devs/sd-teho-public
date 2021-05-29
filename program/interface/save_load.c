@@ -216,7 +216,7 @@ void FindScrshotClass()
 	if(bSeaActive && !bAbordageStarted) layerName = SEA_REALIZE;
 	else layerName = "realize";
 
-	if( !FindClass(&scrshot, "scrshoter") ) {
+	if( !GetEntity(&scrshot, "scrshoter") ) {
 		makearef(scrshot,emptyscrshot);
 	}
 }
@@ -683,7 +683,7 @@ void FillEmptySaveSlot(int nSlot)
 	ShowDataForSave(nSlot,"empty",0,"");
 }
 
-void ShowDataForSave(int nSlot, string picname, int picpointer, string strdata)
+void ShowDataForSave(int nSlot, string picname, ptr picpointer, string strdata)
 {
 	string nodname = "SAVEIMG" + (nSlot+1);
 	bool bClickable = bThisSave;
@@ -698,8 +698,9 @@ void ShowDataForSave(int nSlot, string picname, int picpointer, string strdata)
 			SendMessage( &GameInterface, "lslls", MSG_INTERFACE_MSG_TO_NODE, nodname, 2, 0,"interfaces\SaveIcons\SaveCorrupted.tga" );
 		}
 	}
-	if( picpointer!=0 ) {
-		SendMessage( &GameInterface, "lsll", MSG_INTERFACE_MSG_TO_NODE, nodname, 7, picpointer );
+	
+	if( picpointer ) {
+		SendMessage( &GameInterface, "lslp", MSG_INTERFACE_MSG_TO_NODE, nodname, 7, picpointer );
 		bClickable = true;
 	}
 	SetSelectable( nodname, bClickable );
@@ -813,7 +814,7 @@ void LoadInfo(int nInfoIdx, int nSaveIdx, string sSaveName)
 void procLoadOneSaveInfo()
 {
 	int i;
-	int pTex;
+	ptr pTex;
 	string strdata;
 	bool bYesScrShoter = IsEntity(&scrshot);
 	for( i=0; i<10; i++ )

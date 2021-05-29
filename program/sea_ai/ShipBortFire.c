@@ -60,28 +60,7 @@ void Ship_BortFire()
     // boal <--
 
 	SendMessage(&SeaOperator, "lisffffff", MSG_SEA_OPERATOR_FIRE, firedShip, bortName, dx, dy, dz, d2x, d2y, d2z);
-/*	
-	SetHeel_XZ(rCharacter,  &ax, &az);
-	if (bortName == "cannonr" || bortName == "cannonl")
-	{
-		vz = MAX_VOLLEY_HEEL_ANGLE + sti(RealShips[sti(rCharacter.Ship.Type)].Class) * 0.04;
-		if(bortName == "cannonr") az = az - vz;
-		if(bortName == "cannonl") az = az + vz;
-		SendMessage(rCharacter, "lff", MSG_SHIP_SET_HEEL_XZ, ax, az); 
-		PostEvent("Ship_VolleyHeelEnd", 6000, "a", rCharacter);
-	}
-*/	
+
 }
 
-void Ship_VolleyHeelEnd()
-{
-	float	ax = 0.0;
-	float 	az = 0.0;
 
-	aref aCharacter = GetEventData();
-	if(!LAi_IsDead(aCharacter))
-	{
-		SetHeel_XZ(aCharacter,  &ax, &az);	
-		SendMessage(aCharacter, "lff", MSG_SHIP_SET_HEEL_XZ, ax, az); 	
-	}	
-}

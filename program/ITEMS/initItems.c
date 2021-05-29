@@ -138,19 +138,20 @@ int InitItems()
 	n = InitStdBlade(n, "topor_03", "ITEMS_16", 12, TGT_MARGINAL,   B_ORDINARY, "FencingH", 6, 0.85, 1.15, 1, 10, 1, 		  0); // Годендаг
 	n = InitStdBlade(n, "topor_04", "ITEMS_17",  3,    TGT_QUEST,       B_GOOD, "FencingH", 8, 0.90, 1.15, 1, 15, 1, 		  0); // Секира
 	n = InitStdBlade(n, "topor_05", "ITEMS_16", 11,   TGT_YANKEE,       B_POOR, "FencingH", 2, 0.70, 1.10, 1, 10, 1, 		  0); // Томагавк
-	n = InitStdBlade(n, "topor_06", "ITEMS_17", 12,    TGT_QUEST,       B_GOOD, "FencingH", 18, 0.95, 1.15, 0, 0, 0, 		6000); // топор викинга
+	n = InitStdBlade(n, "topor_06", "ITEMS_17", 12,    TGT_QUEST,       B_GOOD, "FencingH", 18, 0.95, 1.15, 0, 0, 0, 	   6000); // топор викинга
 	n = InitStdBlade(n, "knife_01", "ITEMS_17",  8,    TGT_QUEST, 		B_POOR, "FencingL", 9, 0.50, 1.00, 0,  0, 0, 	   1000); // дага 
 	n = InitStdBlade(n, "blade_33", "ITEMS_17",  6,    TGT_QUEST,  B_EXCELLENT, "FencingH",16, 1.00, 1.10, 1, 15, 1, 		  0); // Меч Стража
-	n = InitStdBlade(n, "blade_34", "ITEMS_17", 12,    TGT_QUEST,  B_EXCELLENT, "FencingL", 19, 0.95, 1.15, 0, 0, 0, 		8000); // резервный клинок 1
-	n = InitStdBlade(n, "blade_35", "ITEMS_17", 12,    TGT_QUEST,  B_EXCELLENT, "FencingS", 20, 0.95, 1.15, 0, 0, 0, 		8000); // резервный клинок 2
-	n = InitStdBlade(n, "blade_36", "ITEMS_17", 12,    TGT_QUEST,  B_EXCELLENT, "FencingH", 21, 0.95, 1.15, 0, 0, 0, 		8000); // резервный клинок 3
+	n = InitStdBlade(n, "blade_34", "ITEMS_17", 12,    TGT_QUEST,  B_EXCELLENT, "FencingL", 19, 0.95, 1.15, 0, 0, 0, 	   8000); // резервный клинок 1
+	n = InitStdBlade(n, "blade_35", "ITEMS_17", 12,    TGT_QUEST,  B_EXCELLENT, "FencingS", 20, 0.95, 1.15, 0, 0, 0, 	   8000); // резервный клинок 2
+	n = InitStdBlade(n, "blade_36", "ITEMS_17", 12,    TGT_QUEST,  B_EXCELLENT, "FencingH", 21, 0.95, 1.15, 0, 0, 0, 	   8000); // резервный клинок 3
+	n = InitStdBlade(n, "shamshir", "ITEMS_40",  1,  TGT_PERSIAN,       B_GOOD, "FencingS",  4, 1.10, 1.05, 1,10, 1,          0); // шамшир
 	// негенерабельные дубликаты с повышающим эффектом - 6 шт
-	n = InitStdBlade(n, "q_blade_10", "ITEMS_16",  4,  TGT_QUEST,       B_GOOD, "FencingS", 10, 0.90, 1.05, 0, 0, 0, 		  5000); // Корд
-	n = InitStdBlade(n, "q_blade_13", "ITEMS_17",  2,  TGT_QUEST,       B_GOOD, "FencingH", 11, 0.95, 1.05, 0, 0, 0, 		  5400); // Офицерский палаш
-	n = InitStdBlade(n, "q_blade_16", "ITEMS_15",  6,  TGT_QUEST,       B_GOOD, "FencingL", 12, 0.95, 1.00, 0, 0, 0, 		  5800); // Смоллсворд
-	n = InitStdBlade(n, "q_blade_18", "ITEMS_15", 10,  TGT_QUEST,  B_EXCELLENT, "FencingL", 13, 1.05, 1.05, 0, 0, 0, 		  7500); // Паппенхаймер
-	n = InitStdBlade(n, "q_blade_19", "ITEMS_16",  8,  TGT_QUEST,  B_EXCELLENT, "FencingS", 14, 1.00, 1.05, 0, 0, 0, 		  7700); // Морская сабля
-	n = InitStdBlade(n, "q_blade_21", "ITEMS_17",  4,  TGT_QUEST,  B_EXCELLENT, "FencingH", 15, 0.95, 1.00, 0, 0, 0, 		  7900); // Клейбэг
+	n = InitStdBlade(n, "q_blade_10", "ITEMS_16",  4,  TGT_QUEST,       B_GOOD, "FencingS", 10, 0.90, 1.05, 0, 0, 0, 	   5000); // Корд
+	n = InitStdBlade(n, "q_blade_13", "ITEMS_17",  2,  TGT_QUEST,       B_GOOD, "FencingH", 11, 0.95, 1.05, 0, 0, 0, 	   5400); // Офицерский палаш
+	n = InitStdBlade(n, "q_blade_16", "ITEMS_15",  6,  TGT_QUEST,       B_GOOD, "FencingL", 12, 0.95, 1.00, 0, 0, 0, 	   5800); // Смоллсворд
+	n = InitStdBlade(n, "q_blade_18", "ITEMS_15", 10,  TGT_QUEST,  B_EXCELLENT, "FencingL", 13, 1.05, 1.05, 0, 0, 0, 	   7500); // Паппенхаймер
+	n = InitStdBlade(n, "q_blade_19", "ITEMS_16",  8,  TGT_QUEST,  B_EXCELLENT, "FencingS", 14, 1.00, 1.05, 0, 0, 0, 	   7700); // Морская сабля
+	n = InitStdBlade(n, "q_blade_21", "ITEMS_17",  4,  TGT_QUEST,  B_EXCELLENT, "FencingH", 15, 0.95, 1.00, 0, 0, 0, 	   7900); // Клейбэг
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//										ОГНЕСТРЕЛЬНОЕ ОРУЖИЕ
@@ -158,7 +159,7 @@ int InitItems()
 	
 	//n = InitStdGun(индекс, идентификатор, модель, текстура, картинка, редкость, мин.уровень, цена, мин. повреждение, макс.повреждение, вес, кол-во зарядов, качество);	
 	n = InitStdGun(n, "pistol1", 		    "pistol1", 	"ITEMS_6", 	8,    0.1, 	1,  	800, 	20.0, 	100.0, 	3.0, 	1, 	     B_POOR); // строевой пистолет
-	n = InitStdGun(n, "pistol2", 	        "pistol2",  "ITEMS_6", 	5, 0.0001, 	1,     4100, 	30.0, 	120.0, 	4.5, 	3, 	 B_ORDINARY); // 3-х ствольный пистолет
+    n = InitStdGun(n, "pistol2",            "pistol2",  "ITEMS_6",  5, 0.0001,  1,     4100,    30.0,   120.0,  4.5,    3,   B_ORDINARY); // 3-х ствольный дробовик
 	n = InitStdGun(n, "pistol3",       	    "pistol3",  "ITEMS_6",  7, 0.0001,  1,     1200,    50.0,   175.0,  4.0,    1,   B_ORDINARY); // тромбон
 	n = InitStdGun(n, "pistol4",            "pistol4",  "ITEMS_6",  3, 0.0001,  1,     4800,    40.0,   140.0,  6.0,    4,  B_EXCELLENT); // 4-х ствольный пистолет
 	n = InitStdGun(n, "pistol5",    	    "pistol5",  "ITEMS_6",  4, 0.0001,  1,     2500,    45.0,   170.0,  2.4,    1,  B_EXCELLENT); // Бретерский пистолет
@@ -175,6 +176,7 @@ int InitItems()
 	n = InitStdGun(n, "mushket5",   	    "shtuzer",  "ITEMS_6",  9, 0.0001,  1,    17000,   200.0,   300.0, 12.0,    1,     B_UNIQUE); // винтовальный штуцер
 	n = InitStdGun(n, "mushket6",   	  "portugize",  "ITEMS_6", 12, 0.0001,  1,    35000,    35.0,    60.0, 12.5,    5,     B_UNIQUE); // башенный мушкетон
 	n = InitStdGun(n, "mushket2x2",        "DBmusket",  "ITEMS_6", 10, 0.0001,  1,    12000,   180.0,   280.0, 15.0,    2,     B_UNIQUE); // охотничий штуцер
+	n = InitStdGun(n, "howdah",        "howdah_black", "ITEMS_40",  2, 0.0001,  1,    20000,    45.0,   160.0,  5.0,    2,  B_EXCELLENT); // гауда 
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//										КИРАСЫ И КОСТЮМЫ
@@ -2042,17 +2044,8 @@ int InitItems()
 	itm.ItemType = "QUESTITEMS";
 	n++;
 
-
-
-	/// пока оставляем здесь !!!!
-	n = InitStdBlade(n,"shamshir", "ITEMS_40", 1, TGT_PERSIAN, B_GOOD, "FencingS",4, 1.10, 1.05, 1, 10, 1, 0); 		
-	n = InitStdGun(n, "howdah","howdah_black","ITEMS_40", 2, 0.0001,1, 20000,45.0,160.0, 5.0, 2,B_EXCELLENT); 
-
-	InitGunExt("howdah", "t1","grapeshot","gunpowder",  25.0,  50.0,  15.0,  30.0,  5.0,  5.0, 1, 1,     1, 0, 0, 1,                 50, 40, 1);		
-	InitGunExt("howdah", "t2","GunEchin",          "", 115.0, 215.0, 115.0, 215.0, 20.0, 20.0, 0, 1,     1, 0, 0, 0,                 20, 40, 0);		
-
-/*
 	// резервные предметы для возможных дополнений - +10 шт
+/*
 	makeref(itm,Items[n]); //резервный предмет №11
 	itm.id = "Reserve_item_11"; 
 	itm.name = "itmname_Reserve_item_11";
@@ -2064,8 +2057,7 @@ int InitItems()
 	itm.Weight = 0.5;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-	
-	
+		
 	makeref(itm,Items[n]); //резервный предмет №12
 	itm.id = "Reserve_item_12"; 
 	itm.name = "itmname_Reserve_item_12";
@@ -2078,7 +2070,6 @@ int InitItems()
 	itm.ItemType = "QUESTITEMS";
 	n++;
 */
-	
 	makeref(itm,Items[n]); //резервный предмет №13
 	itm.id = "Reserve_item_13"; 
 	itm.name = "itmname_Reserve_item_13";
@@ -4370,7 +4361,7 @@ void InitGuns()
 	//InitGunExt(id,	sAttr,  sBullet,  sGunPowder, DmgMin_NC, DmgMax_NC, DmgMin_C, DmgMax_C, EnergyP_NC, EnergyP_C, Stun_NC, Stun_C, MultiDamage, MisFire, SelfDamage, Explosion,Accuracy,ChargeSpeed,isDefault);
 	InitGunExt(		 "pistol1", "t1",  	     "cartridge",               "",  50.0, 150.0,  30.0, 130.0,  0.0,  0.0, 1, 0, 0, 0, 0, 0, 40, 20, 0);	
 	InitGunExt(		 "pistol1", "t2", 		    "bullet",      "gunpowder",  50.0, 150.0,  30.0, 130.0,  0.0,  0.0, 1, 0, 0, 0, 0, 0, 40, 40, 1);	
-	InitGunExt( 	 "pistol2", "t1", 	     "grapeshot",      "gunpowder",  45.0, 135.0,  10.0,  90.0,  0.0,  0.0, 0, 1, 1, 0, 1, 1, 40, 40, 1);	
+    InitGunExt(      "pistol2", "t1","        grapeshot",      "gunpowder",  45.0, 135.0,  10.0,  90.0,  0.0,  0.0, 0, 1, 1, 0, 1, 1, 40, 40, 1);	
 	InitGunExt(		 "pistol3", "t1", 	     "grapeshot",      "gunpowder",  40.0,  90.0,  15.0,  55.0,  0.0,  0.0, 0, 1, 1, 2, 1, 1, 40, 40, 1);	
 	InitGunExt(		 "pistol4", "t1", 	     "cartridge",               "",  35.0, 135.0,  15.0, 115.0,  0.0,  0.0, 1, 0, 0, 0, 0, 0, 35, 30, 0);	
 	InitGunExt(		 "pistol4", "t2", 		    "bullet",      "gunpowder",  35.0, 135.0,  15.0, 115.0,  0.0,  0.0, 1, 0, 0, 0, 0, 0, 35, 60, 1);	
@@ -4397,6 +4388,8 @@ void InitGuns()
 	InitGunExt(		"mushket6", "t2", 	      "GunEchin",               "", 115.0, 180.0,  65.0, 115.0, 20.0, 20.0, 1, 1, 1, 0, 0, 1, 60, 25, 0);	
 	InitGunExt(	  "mushket2x2", "t1", 	     "cartridge",               "", 180.0, 280.0, 160.0, 260.0, 15.0, 15.0, 1, 1, 0, 0, 0, 0, 95, 15, 0);	
 	InitGunExt(	  "mushket2x2", "t2", 		    "bullet",      "gunpowder", 180.0, 280.0, 160.0, 260.0, 15.0, 15.0, 1, 1, 0, 0, 0, 0, 90, 30, 1);			
+    InitGunExt(       "howdah", "t1",        "grapeshot",      "gunpowder",  25.0,  50.0,  15.0,  30.0,  5.0,  5.0, 1, 1, 1, 0, 0, 1, 50, 40, 1);		
+    InitGunExt(       "howdah", "t2",         "GunEchin",               "", 115.0, 215.0, 115.0, 215.0, 20.0, 20.0, 0, 1, 1, 0, 0, 0, 20, 40, 0);	
 }
 
 void InitItemsRarity()
@@ -4692,40 +4685,4 @@ void InitItemsRarity()
 	InitStdItemRarity(		"gold_dublon", 	  "Solder_o", 	    0.20, 	1, 		5);
 	InitStdItemRarity(		"gold_dublon", 	    "Solder", 	    0.10, 	1, 		2);
 	InitStdItemRarity(		"gold_dublon", 	   "Warrior", 	    0.15, 	1, 		3);
-}
-
-void ItemsFix_30032020()
-{
-    int n = 0;
-    
-    	n = GetItemIndex("Reserve_item_11");
-	if( n > 0 )
-	{
-	    	trace("Reserve_item_11 found : " + n);
-    		InitStdBlade(n,"shamshir", "ITEMS_40", 1, TGT_PERSIAN, B_GOOD, "FencingS",4, 1.10, 1.05, 1, 10, 1, 0);
-        	GenerateGenerableItems();
-    	}
-    	n = GetItemIndex("Reserve_item_12");
-    	if( n > 0 )
-    	{
-    		trace("Reserve_item_12 found : " + n);
-        	InitStdGun(n, "howdah","howdah_black","ITEMS_40", 2, 0.0001,1, 20000,45.0,160.0, 5.0, 2,B_EXCELLENT); 
-
-        	InitGunExt("howdah", "t1","grapeshot","gunpowder",  25.0,  50.0,  15.0,  30.0,  5.0,  5.0, 1, 1,     1, 0, 0, 1,                 50, 40, 1);		
-        	InitGunExt("howdah", "t2","GunEchin",          "", 115.0, 215.0, 115.0, 215.0, 20.0, 20.0, 0, 1,     1, 0, 0, 0,                 20, 40, 0);
-    	}
-
-}
-
-void ItemsFix_Pistol2() // belamour реинит дробовика
-{
-   int n = 0;
-   
-   n = GetItemIndex("Pistol2");
-	if( n > 0 )
-	{
-	    	trace("Pistol2 found : " + n);
-                InitStdGun(n, "pistol2", "pistol2",  "ITEMS_6", 5, 0.0001, 1, 4100, 30.0, 120.0, 4.5, 3, B_ORDINARY); // 3-х ствольный дробовик
-    		InitGunExt("pistol2", "t1","grapeshot","gunpowder",  45.0, 135.0,  10.0,  90.0,  0.0,  0.0, 0, 1, 1, 0, 1, 1, 40, 40, 1);	
-    	}
 }
