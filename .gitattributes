@@ -1,5 +1,5 @@
-*.h text working-tree-encoding=cp1251 eol=crlf
-*.c text working-tree-encoding=cp1251 eol=crlf
-*.ini text working-tree-encoding=cp1251 eol=crlf
-*.ani text working-tree-encoding=cp1251 eol=crlf
-*.txt text working-tree-encoding=cp1251 eol=crlf
+*.h text eol=crlf
+*.c text eol=crlf
+*.ini text eol=crlf
+*.ani text eol=crlf
+*.txt text eol=crlf
