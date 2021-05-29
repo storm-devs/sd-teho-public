@@ -1,0 +1,66 @@
+
+
+Start_GoldFleet_t0 {They say that the flotilla, which is transporting gold and silver to the treasury of Spain, has recently left the harbor of Portobello and sailed to Havana.}
+Start_GoldFleet_t1 {A Spanish flotilla with a priceless load of Inca and Aztec silver and gold has recently sailed out of Portobello. The convoy is heading to Havana, and from there the treasures will be transported to Spain.}
+Start_GoldFleet_t2 {They say that a Spanish gold convoy sailed from Portobello to Havana with a load of silver and gold. The flotilla is escorted by frigates with two gun decks each; there are also other military ships.}
+
+End_GoldFleet_t0 {The Spanish gold convoy has successfully arrived in Cuba. Now all collected silver and gold will be safely transported to Spain.}
+End_GoldFleet_t1 {All ships of a Spanish gold convoy have successfully arrived to Havana. All silver and gold of Peru and Mexico will soon be delivered to Europe.}
+End_GoldFleet_t2 {A Spanish flotilla has arrived to Havana. The load of silver and gold is safe and soon will be delivered to Spain.}
+
+Defeat_GoldFleet_t0 {They say that the Spanish gold convoy sailing from Portobello to Havana never arrived at its destination. God only knows what could happen to it - terrible storms or pirates, perhaps.}
+Defeat_GoldFleet_t1 {The Spanish gold flotilla, transporting a cargo of silver and gold from Portobello, disappeared without a trace. No one knows for sure, but they say that it had fallen prey to the pirates!}
+Defeat_GoldFleet_t2 {A gold fleet transporting treasures from Portobello never arrived to Havana, although it should have long ago. What could possibly happen to it? Who knows - there are fierce storms this time of a year.}
+
+Attak_GoldFleet_t0 {They say that the Spanish gold fleet, transporting silver, gold and other treasures of the New World, was attacked, and several ships were lost as a result.}
+Attak_GoldFleet_t1 {The seas are unsafe! A Spanish gold fleet sailing from Portobello to Havana, was attacked either by the pirates or by English privateers - I don't know for sure! Really, what a daring! I would love to see them all hanged!}
+Attak_GoldFleet_t2 {It's getting worse with every coming day! A Spanish gold fleet, transporting silver, gold and other treasures of the New World from Portobello to Havana, was attacked by daring pirates! Oh, Holy Virgin! The end of days is surely coming!}
+
+Init_GoldFleet_t0 {They say that a Spanish gold fleet is preparing to sail out of Portobello. The exact day of departure is kept secret, but they say that the convoy will head to Cuba in the beginning of #sgold_month#.}
+Init_GoldFleet_t1 {They say that gold and silver is being loaded on the ships of the gold fleet. The convoy will set sail to Cuba in the first half of #sgold_month#.}
+Init_GoldFleet_t2 {The departure of a gold convoy from Portobello to Cuba is scheduled for the first half of #sgold_month#. By that time all acquired gold and silver will be loaded into the holds.}
+
+
+MerchantOnMapTo_t0 {They say that ship "#sShipName#" under the flag of #snation#  is heading our way from the colony of #ssColony# fully loaded with #sQuestGoodsIdx#.}
+MerchantOnMapTo_t1 {The local merchant is awaiting the arrival of ship "#sShipName#" under the flag of #snation#  from the colony of #ssColony# with the load of #sQuestGoodsIdx#.}
+MerchantOnMapTo_t2 {I heard that one merchant on the ship "#sShipName#" under the flag of #snation# is transporting a load of #sQuestGoodsIdx# from the colony of #ssColony#.}
+
+MerchantOnMap_t0 {They say that a merchant ship "#sShipName#" under the flag of #snation# is waiting for the tide to come in order to set sail to #ssNextColony# with the load of #sQuestGoodsIdx#.}
+MerchantOnMap_t1 {They say that a rich negotiant working under the patronage of #snation#, chartered the ship "#sShipName#". Soon enough it will set sail to #ssNextColony# with a cargo of #sQuestGoodsIdx#.}
+MerchantOnMap_t2 {The local merchant equipped the ship "#sShipName#" with a load of #sQuestGoodsIdx# for #snation#, and soon enough it shall depart for #ssNextColony#.}
+
+MerchantRumour_t0 {I heard rumors that the ship "#sShipName#" under the flag of #snation#, which sailed from #ssColony# to #ssNextColony# with a cargo of #sQuestGoodsIdx#, was sunk by an unknown pirate!}
+MerchantRumour_t1 {I heard rumors that the ship "#sShipName#" under the flag of #snation#, which sailed from #ssColony# with the load of #sQuestGoodsIdx# to #ssNextColony#, was lost with the cargo and the crew altogether!}
+MerchantRumour_t2 {There are terrible rumors that some pirate has recently boarded a merchant ship of #snation# sailing from the colony of #ssColony#. He had slaughtered the entire crew and taken the load of #sQuestGoodsIdx# for himself. Wasn't it you, by chance, captain?}
+
+GetColonyPrices_t0 {The quartermaster of a West India Company ship told me over a mug of rum about the prices in the store of #sColony#. (list of prices obtained)}
+GetColonyPrices_t0 {The captain of the merchant ship which had recently arrived from the town of #sColony#, told me about the prices in the local store. (list of prices obtained)}
+GetColonyPrices_t0 {Recently I have overheard in the tavern two captains discussing the prices in the store of the town of #sColony#. (list of prices obtained)}
+
+WaitInTavern_t0 {They say that #sPsHero_Name# had lost his ship and now is drowning his sorrows in rum in the tavern of #sTown_Name#.}
+WaitInTavern_t1 {I heard a drunken sailor, who was arrested yesterday for thievery, telling his drinking companions that #sPsHero_Name# has lost his ship in a game of cards and now is waiting for tail wing in the tavern of #sTown_Name#.}
+WaitInTavern_t2 {The sailord in the tavern are saying that #sPsHero_Name# had a stroke of a really bad luck recently. The customs officials have sunk his ship, and he barely escaped gallows in the town of #sTown_Name#.}
+
+WorkOnMayor_t0 {Today I have seen #sPsHero_Name# with our governor. It seems his Excellence gave him another "interesting" mission.}
+WorkOnMayor_t1 {They say that our governor has a new protege. Captain #sPsHero_Name# is a frequent visitor in the residence, undertakes delicate missions for him and apparently has a love affair with the daughter of His Excellence.}
+WorkOnMayor_t2 {The cook told me that she had heard from the housemaid of His Excellence that  #sPsHero_Name# is a good friend of his. Today early in the morning he was hurrying to the residence - certainly he had important business there.}
+
+SailToIsland_t0 {#sPsHero_Name# said that he was going to #sTo# #sTown_Name#. Perhaps there is something to buy.}
+SailToIsland_t1 {#sPsHero_Name# is sailing #sTo# #sTown_Name# on trade business - that's what I heard from one of his sailors in the tavern.}
+SailToIsland_t2 {Yesterday #sPsHero_Name# was drunk as a pig at the local tavern and he cried out loud that he was going #sTo# #sTown_Name#, where he had business.}
+
+WorkOnStore_t0 {One of the sailors at the tavern mentioned that #sPsHero_Name# undertook to deliver the cargo of #sGood# to #sTown_Name#.}
+WorkOnStore_t1 {Our trader's assistant told me that #sPsHero_Name# undertook to deliver the cargo of #sGood# from his boss' shop to the town of #sTown_Name#.}
+WorkOnStore_t2 {Our bartender said that  #sPsHero_Name# was hiring sailors at the tavern to sail to #sTown_Name# with the cargo of #sGood# from the local store.}
+
+WorkWithContra_t0 {I've seen #sPsHero_Name# talking with one shady person. They say he was a smuggler.}
+WorkWithContra_t1 {They say that #sPsHero_Name# has brought a full hold of smuggled goods. He might have already sold it by now - or maybe not...}
+WorkWithContra_t2 {I overheard #sPsHero_Name# speaking with our smuggler. They agreed to meet in a place by the name of #sContraPlace#.}
+
+DuelCoward_t0 {What a shame! #sName# has not shown up for a duel. Now everybody is saying that he is a coward!}
+DuelCoward_t1 {Ha-ha, #sName# has not shown up for a duel! I don't think he'll have the same success with women as he had before now.
+DuelCoward_t2 {Have you heard it? #sName# has not shown up for a duel! They say he was deadly drunk and simply could not stand on his two.
+
+DuelHero_t0 {Do you know that #sName# is a first-rate duellist? He has already killed #sKill# men. I wouldn't want to stand on his path.}
+DuelHero_t1 {They say that #sName# has sold his soul to the devil, and that's why he cannot be beaten in a duel! And the souls of those he kills, and he has already killed #sKill# men, are going straight to the Hell! They also say that if he ends his killing spree, the devil will claim his own soul.}
+DuelHero_t2 {That upstart #sName# is incredibly lucky! He has already killed #sKill# men in a duel and never got a scratch! Really, can you believe it?}

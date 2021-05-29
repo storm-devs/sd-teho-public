@@ -1,0 +1,63 @@
+
+sea_Cancel {Cancel}
+sea_Moor {Moor}
+sea_Cabin {Cabin}
+sea_SailTo {Sail To}
+sea_Board {Board}
+sea_LandTroops {Land Troops}
+sea_Map {Map}
+sea_Attack {Attack}
+sea_Abordage {Grappling}
+sea_Defend {Defend}
+sea_SailAway {Sail Away}
+sea_HeaveToDrift {Take down the sails}
+sea_Reload {Trade}
+sea_Charge {Reload}
+sea_Speed {Sails}
+sea_CCommand {Orders}
+sea_Ability {Ability}
+sea_ImmediateDeath {Destroy!}
+sea_InstantBoarding {Instant Boarding}
+sea_Speak {Talk}
+sea_Sneak {Sneak into the town}
+sea_Repair {Repair}
+
+sea_Brander {Brander}
+sea_ImmediateReload {Reloading}
+sea_LightRepair {Urgent repair}
+sea_InstantRepair {Combat repair}
+sea_SandbankManeuver {Maneuver in shallow water}
+sea_Turn180 {Turn Around}
+
+land_ItemsDead {Loot}
+land_FastReload {Go to}
+land_ItemsUse {Use}
+land_DialogStart {Dialog}
+land_ItemsChange {Exchange}
+land_TakeItem {Take}
+land_PlaceItem {Place}
+land_OutDoor {Open}
+land_UseBox {Open}
+land_ActivateRush {Use Ometochtli tincture}
+land_ActivateCabine {Captain's Cabin}
+land_DeActivateCabine {Land}
+land_Look {See}
+land_Exit {Sea}
+land_SelfRepair {Repair}
+land_Alchemy {Crafting}
+land_MapAtlas {Maps}
+
+go_store {Store}
+go_shipyard {Shipyard}
+go_tavern {Tavern}
+go_residence {Residence}
+go_port {Port}
+go_loanshark {Banker}
+go_church {Church}
+go_prison {Prison}
+go_brothel {Brothel}
+go_usurer {Usurer}
+go_portman {Harbor master}
+go_duel {Duel}
+
+worldmap_sea {To the Sea}

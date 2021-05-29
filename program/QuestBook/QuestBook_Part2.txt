@@ -1,0 +1,2153 @@
+#QUEST Gen_CityCapture
+Colony Looting Chronicles
+#TEXT t1
+<@sCity> was taken for the glory of  @<sNation>.
+#TEXT t2
+I have plundered @<sCity>.
+#TEXT t3
+I have captured @<sCity> for myself.
+#TEXT t3_1
+@<sName> was appointed to rule @<sCity>.
+#TEXT t3_2
+@<sName> of @<sCity> was released from his duties.
+#TEXT t4
+@<sCity> now belongs to @<sNation>.
+#TEXT t5
+@<sNation> has sieged @<sCity>. I have only @<sDay> to save it.
+#TEXT t5_1
+@<sNation> marines landed near @<sCity>. I have only @<sDay> to deal with them.
+#TEXT t6
+@<sNation> fleet is eliminated. @<sCity> is saved.
+#TEXT t6_1
+@<sNation> forces are destroyed. @<sCity> is saved.
+#TEXT t7
+Now I own @<sCity>.
+#TEXT t8
+I had a deal with governor-general of @<sNation>.  @<sCity> is mine.
+#TEXT dum
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#QUEST Gen_Contraband 
+Smuggling Business
+#TEXT t1
+They will be waiting for me on @<sIsland> at the place called @<sLoc>.
+#TEXT t1_1
+They will be waiting for me on the mainland, at the place called @<sLoc>.
+#TEXT dum
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#QUEST Gen_ContrabandTravel 
+Sailing With Smugglers
+#TEXT 1
+There is a possibility to get to @<sLocTo> which is not far from @<sPlaceTo>. Their ship will be waiting for me at @<sLoc> in @<sDays>.
+I need to find @<sPrice> pesos.
+#TEXT 2
+I paid for the voyage.
+#TEXT 3
+I was late. Now I have to wait for another ship.
+#TEXT 4
+Done. I am at @<sLocTo>. Time for landing.
+#TEXT 5
+We have reached the destination but I preferred to use the opportunity. Their ship is mine now. I've still got my head above water.
+#TEXT dum
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#QUEST Gen_StrangeInfo
+Odd Gossips
+#TEXT 1
+They say that @<sName> is going to meet smugglers at the place called @<sLoc>. Sounds like an illegal business. Perhaps, I should report about it?
+#TEXT dum
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#QUEST Gen_PGGQuest1
+Pirate's Offer
+#TEXT q1_Tavern
+I met some strange pirate in the tavern. He told me that he had an interesting offer for me. His ship is called "@<sShipName>", he is waiting for me. Perhaps, I should pay him a visit?
+#TEXT q1_Tavern_1
+I met some strange pirate in the tavern. He told me that he had an interesting offer for me. His ship is called "@<sShipName>", he is waiting for me. Perhaps, I should pay him a visit?
+#TEXT q1_Close
+His proposal didn't smell well so I've rejected.
+#TEXT q1_Detail_A
+Caravan of @<sNation> loaded with @<sGoods> is staying not far from @<sColony>. We can try to take some serious goods.
+#TEXT q1_Detail_B
+Caravan of @<sNation> loaded with @<sGoods> has suffered from the storm and sunk near @<sColony>. The crew managed to save some good and landed at @<sShore> bay.
+#TEXT q1_RefuseFight
+I rejected to fight against @<sNation> and @<sPsName> thought that I was going to do that business alone. His officers attacked me and his ship started fire as soon as I reached my own vessel.
+#TEXT q1_Accept
+I liked his offer. We have only @<nDays> to intercept.
+#TEXT q1_Accept_1
+I liked his offer. We have only @<nDays> to intercept.
+#TEXT q1_PGGDeadNoShips
+Unfortunately, @<sPsName> died during our voyage. I don't know where to look for the caravan. Too bad, this prey has escaped from me.
+#TEXT q1_PGGDeadNoShips_1
+Unfortunately, @<sPsName> died during our voyage. I can't do this alone. Too bad, this prey has escaped from me.
+#TEXT q1_PGGDeadShips
+Unfortunately, @<sPsName> died in a fight with caravan. All loot is mine then.
+#TEXT q1_PGGDead
+Unfortunately, @<sPsName> died during our voyage. All loot is mine then.
+#TEXT q1_Time2Late
+We were late, the prey has escaped.
+#TEXT q1_Fail
+Our booty wasn't that good as we were hoping for.
+#TEXT q1_FailPay
+@<sPsName> said that it was all my fault and I owe him now. I suppose, he is right. I paid him to avoid any complications.
+#TEXT q1_FailNotPay
+@<sPsName> said that it was all my fault and I owe him now. And I told him to piss off.
+#TEXT q1_OkShare
+The booty was divided according to the laws of the Brethren. Let's hope that it is not our last business together.
+#TEXT q1_OkNotShare
+To divide the booty? I'd better cut few throats and take it all.
+#TEXT dum
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#QUEST Rumour_GoldFleet
+Spanish Golden Fleet
+#TEXT 1
+There are whispers that the Spanish golden fleet has recently leaved Porto Bello and sailing towards Havana. Perhaps, they haven't reached it yet. I might try to intercept it.
+#TEXT 2
+There are whispers that the Spanish golden fleet has recently leaved Porto Bello and sailing towards Havana. Perhaps, they haven't reached it yet. I might try to intercept it.
+#TEXT 3
+There are whispers that the Spanish golden fleet has recently leaved Porto Bello and sailing towards Havana. Perhaps, they haven't reached it yet. Perhaps, I should intercept it?
+#TEXT 4
+Spanish golden convoy was sunk. It was hard but the prize was worth it...
+#TEXT 5
+By my efforts, the Spanish golden fleet, which was sailing from Porto Bello to Havana, didn't arrive at its destination. And its cargo is now in my hold.
+#TEXT 6
+I managed to destroy and loot golden fleet carrying treasures of Porto Bello.
+#TEXT  7
+They say that the Spanish golden fleet have reached Cuba. Gold and silver will be transferred to Spain under a reliable guard.
+#TEXT 8
+They say that the Spanish golden fleet have reached Cuba. Gold and silver will be transferred to Spain under a reliable guard.
+#TEXT 9
+They say that the Spanish golden fleet have reached Cuba. Gold and silver will be transferred to Spain under a reliable guard.
+#TEXT 10
+I found out that the Spanish golden fleet is preparing for a voyage in Porto Bello. It will be dispatched to Cuba at the beginning of @<smonth>.
+#TEXT 11
+I found out that the Spanish golden fleet is preparing for a voyage in Porto Bello. It will be dispatched to Cuba at the first half of @<smonth>.
+#TEXT 12
+I found out that the Spanish golden fleet is preparing for a voyage in Porto Bello. It will be dispatched to Cuba at the first half of @<smonth>.
+#TEXT 13
+We fought well with Spanish - few of their ships will never reach Havana. The booty could be better but we had to retreat.
+#TEXT 14
+We fought well with Spanish - few of their ships will never reach Havana. The booty could be better but we had to retreat.
+#TEXT 15
+We fought well with Spanish - few of their ships will never reach Havana. The booty could be better but we had to retreat.
+
+#TEXT 15_none
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#QUEST MerchantOnMap
+Easy Prey
+#TEXT 1
+I got information about trading ship "@<sShipName>" under the flag of @<snation>, sailing from @<sColony> to @<sNextColony> loaded with @<sQuestGoodsIdx>. I suppose I should release her from it.
+#TEXT 2
+I got information about trading ship "@<sShipName>" under the flag of @<snation>, sailing from @<sColony> to @<sNextColony> loaded with @<sQuestGoodsIdx>. I suppose I should release her from it.
+#TEXT 3
+I got information about trading ship "@<sShipName>" under the flag of @<snation>, sailing from @<sColony> to @<sNextColony> loaded with @<sQuestGoodsIdx>. I suppose I should release her from it.
+#TEXT 4
+I managed to capture "@<sShipName>" with @<sQuestGoodsIdx> in it.
+#TEXT 5
+"@<sShipName>" was sunk with all of her cargo!
+#TEXT 6
+Well trained soldiers of @<snation> had been waiting for me inside "@<sShipName>". It was a trap!
+
+#TEXT  7_NONE
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#QUEST	HeadHunter
+Bounty hunters
+#TEXT HeadHunter_free
+Mercs hired by @<sNation> were waiting for me at @<sLoc>.
+I managed to trick them.
+#TEXT HeadHunter_battle
+Mercs hired by @<sNation> were waiting for me at @<sLoc>.
+I had to teach them some fencing.
+#TEXT HeadHunter_Buy
+Mercs hired by @<sNation> were waiting for me at @<sLoc>.
+Money persuaded them to leave.
+#TEXT HeadHunter_GiveUp
+Mercs hired by @<sNation> were waiting for me at @<sLoc>.
+I decided to surrender and follow them.
+#TEXT HeadHunter_GiveUpFree
+I persuaded commandant of @<sCity> prison to let me go in piece. But the price of my head is still a heavy risk.
+#TEXT HeadHunter_Sea
+I was attacked by a punitive expedition of @<sNation>.
+#TEXT HeadHunter_NONE
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+#QUEST ShipTuning
+Upgrading the ship
+#TEXT t1
+@<sText>
+#TEXT End
+Upgrade was successful.
+#TEXT Lose
+I've changed my ship and the deal is off.
+#TEXT dum
+/////////////////////////////////////////////////////////
+
+#QUEST ShipRepair
+Restoring ship's hull
+#TEXT t1
+@<sText>
+#TEXT End
+Repair is done.
+#TEXT Lose
+I've changed my ship and the deal is off.
+#TEXT dum
+
+
+#QUEST	DELIVERY_TRADE_QUEST
+Goods delivering
+#TEXT	1
+I have to deliver @<sGoodQty> of @<sGoodGen> from @<sBaseColony> shop to @<sTargetColony>@<island>. I have @<sTermsDelivery>, reward is @<sMoney>.
+#TEXT	2
+The job was done in time.
+#TEXT   3
+I failed to deliver goods in time. Now I must return to my employer and explain myself.
+#TEXT   4
+Merchant of @<sTargetColony> cheated on me. He refused to take the cargo and suggested me to take it for myself.
+#TEXT   5
+I had to pay @<sMoney>, it was a fine for failing terms of delivering.
+At least I can get job again and my reputation among merchants is not ruined.
+#TEXT   6
+The owner of @<sTargetColony> shop accepted @<sGoodQty> of @<sGoodGen> back. Works for me.
+#TEXT   7
+The owner of @<sTargetColony> shop demands me to pay him @<sMoney> as a fine for loosing commercial profits.
+I won't be able to deliver goods until a pay the fine.
+#TEXT   8
+I don't have enough @<sGoodGen>. I need @<sHaveNotQty> more to finish the deal.
+I have to find more cargo or I won't be able to get any job like this again.
+#TEXT   8_NONE
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#QUEST Gen_LoanFindCitizen
+Bankers. Finding debtors.
+#TEXT   1
+@<sName> from @<sCity> owes @<sMoney> to @<sFromCity> usurer.
+My reward is @<sMyMoney>.
+#TEXT   2
+Such a failure! The debtor refused to pay. I must return to my employer and report him. I don't want problems.
+#TEXT   3
+It's done, I have money. I must return to my employer and deliver him the debt. I don't want problems.
+#TEXT   4
+Money was given to my employer.
+#TEXT   5
+I told employer that I was unable to get the debt.
+#TEXT   6
+I refused to do the job due to some complications with a debtor.
+
+
+#QUEST Gen_LoanTakeChest
+Bankers. Gold delivering.
+#TEXT   1
+Job's given by @<sFromCity> usurer.
+I have to deliver @<sQty> chests with gold to @<sCity> for the man called @<sName>. He is the local @<sType>.
+My reward is @<sMoney>. It must be done for @<sDay>.
+#TEXT   2
+I failed to deliver a credit in time. Now I must to return to my employer and explain myself or I won't get any job like this again otherwise.
+#TEXT   3
+Credit was delivered.
+#TEXT   4
+I had to replace chests with coins from my very own pocket.
+#TEXT   5
+I refused to do the job.
+#TEXT   5_NONE
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#QUEST convoy_quest
+Escorting
+#TEXT   1
+I assumed to escort a merchant to @<sCity> for @<sDay>. My reward is @<sMoney>.
+#TEXT   2
+Merchant tired to sail with me and wait until I deign to escort him. He has left my squadron.
+#TEXT   3
+Merchant is dead. My mission is completely failed.
+#TEXT   4
+I've done the job.
+#TEXT   5
+Merchant has left my squadron. Well, the fault is mine, I shouldn't try to attack him.
+
+
+#QUEST Gen_convoy_passenger
+Taking @<sName> to @<sCity>
+#TEXT   1
+I assumed to transport @<sName> to the tavern of @<sCity> in @<sDay>. He will pay me @<sMoney>.
+#TEXT   2
+Passenger tired to sail with me and wait until I deign to transport him. He has left my ship.
+#TEXT   3
+Passenger is dead and, surprisingly, he wasn't transported. The mission is failed.
+#TEXT   4
+I've done the job.
+#TEXT   5
+I can't make it in time. The passenger gave me one more week to do the job and lowered my promised reward, it is @<sMoney> now.
+#TEXT   6
+I have cheated on my passenger, he is my slave now.
+
+
+#QUEST MayorsQuestsList
+Assignments from governors
+#TEXT   1
+@<MayorName> the governor of @<ColonyName> has ordered me to search and destroy the gang within the jungles. The gang is ruled by @<GangName>.
+It has to be done in @<sDay>, my reward is @<sMoney>. 
+#TEXT   2
+The job is done, @<GangName> is dead and so is his gang. I suppose @<MayorName>  will be pleased. It's time to go and claim my reward.
+#TEXT   3
+@<MayorName> the governor of @<ColonyName> has ordered me to find and board a currier vessel '@<sShipName>' under the flag of @<sNation>. She will be passing @<sCity> in @<sDay>. I should find a mail inside the captain's cabin and deliver it to the governor. My reward is @<sMoney>.
+#TEXT   4
+I had found and boarded the vessel, I have the package. I can return and claim my reward.
+#TEXT   4-1
+I had found the vessel but I failed to get the package. I have to return with empty hands.
+#TEXT   5
+I had found the vessel but her captain was way too tough for me so I had to retreat. I have to return with empty hands.
+#TEXT   6
+@<MayorName> the governor of @<ColonyName> has ordered me to sneak inside @<sCity> on @<sIsland>, find there a local @<sWho> called @<SpyName> and get a package from him.
+This package must to be delivered to the governor's hands. My reward is @<sMoney>.
+An important note - I must to do it smooth and quite without any alarm or the agent won't contact.
+#TEXT   7
+The job of @<ColonyName> governor is done. I was able to find a @<SpyName> in @<sCity> and get the package. Let's not waste time, @<MayorName>  is eager to see these papers. 
+#TEXT   8
+@<MayorName> the governor of @<ColonyName> has ordered me to search and destroy an enemy transport ship '@<sShipName>' under the flag of @<sNation> loaded with munitions. It will reach @<sCity> in @<sDay>. My reward is @<sMoney>.
+#TEXT   8-1
+I was victorious - the cargo will never reach its destination. I may return for my reward.
+#TEXT   9
+@<MayorName> the governor of @<ColonyName> has ordered me to find and eliminate some reckless pirate named @<sName>. According to my information, the scum will be raiding on his ship '@<sShipName>' not far from @<sCity> in @<sDay>. My reward is @<sMoney>.
+#TEXT   9-1
+Job is done, he was killed with all of his crew. I may return for my reward.
+#TEXT   10
+@<MayorName> the governor of @<ColonyName> has ordered me to find deliver him a criminal named @<sName>. As far as I know, the man I need will be on a ship '@<sShipName>' which will leave @<sCity> in @<sDay1> and sail to @<sCityA>. It seems that I can count only for @<sDay2> to intercept them. My reward is @<sMoney>.
+#TEXT   10-1
+The ship I needed was found and boarded, criminal is now sitting inside my cargo hold. I may claim my coins.
+#TEXT   10-2
+I've found the ship, yet I was foolish enough to sink it with all of her crew and the man I needed. I don't think that his Excellency will be pleased.
+#TEXT   11
+@<MayorName> the governor of @<ColonyName> has ordered me to track down and kill smugglers who are planning to trade slaves in the nearest five days. That is all I know. Well, I will patrol local waters and check every ship I see. My reward is @<sMoney> and slaves as a war trophy.
+#TEXT   11-1
+Smugglers were tracked down and eliminated. I may return and claim my money.
+#TEXT   12
+@<MayorName> the governor of @<ColonyName> has ordered me to find and deliver a deserter named @<sName>. My reward is @<sMoney>. According my information, he is hiding in one of pirate lairs. Which one... Time to sail, I've only 30 days.
+#TEXT   12-1
+So, I have almost found my target. Barman said that I should look for the man on streets during the day.
+#TEXT   12-2
+So, I have almost found my target. Merchant said that I should look for the man at the tavern in the evening.
+#TEXT   12-3
+So, I have almost found my target. Local drunkard told me that I should look for the man at @<sShore> in the early morning.
+#TEXT   12-4
+I had a talk with the deserter, he persuaded me to leave him alone, it looks like the man had enough already and it would be unfair to deliver him to the tribunal. Besides, he granted me a compensation. Well, I will lie to my employer...
+#TEXT   20
+I didn't make it in time, @<MayorName> won't be happy about it.
+#TEXT   21
+I failed a mission of @<ColonyName> governor. I had found my target, yet I didn't manage to complete the task. @<MayorName> is so angry...
+
+
+#QUEST GivePrisonFree
+Prison business
+#TEXT   1
+I had an opportunity to release a prisoner called @<sName> from the @<sCity> prison. I have to try to deliver him alive inside the grotto on @<sIsland>. If I am lucky, we will share his treasures. 
+#TEXT   2
+A failure! @<sName> is dead. I won't find his treasure myself...
+#TEXT   3_1
+We have found the treasure and parted it. It's been a long time since I saw so many jewels!
+#TEXT   3_2
+We have found the treasure and parted it. It won't even compensate my costs. We've also got some Indian artifact which is mine now.
+#TEXT   3_3
+@<sName> cheated on me in order to gain his freedom. There wasn't any treasure. Only some munitions which were a payment for my effort. Better than nothing.
+#TEXT   3_4
+There wasn't any treasure. @<sName> had only piece of an actual map and, of course, it didn't help us much. I have taken it for myself, I should try to find the second part and reach the treasure.
+#TEXT   4
+It seems that I was tricked by @<sName>. There wasn't any treasure. I'd better be smarter about people next time.
+#TEXT   5
+I assumed to help a prisoner named @<sName> from @<sCity> prison. I should have a chat with the local commandant.
+#TEXT   6
+I wasn't able to release the prisoner for two days. Too bad, I suppose he will have to stay there. What a shame.
+#TEXT   7
+I failed to release the prisoner. Whatever, hell with his treasure.
+#TEXT   8
+A prisoner named @<sName> asked me to deliver a message to his fellows in town. They are hiding in one of the houses. I agreed, the message is with me and I've got only two days for deliver.
+#TEXT   9
+I failed to deliver a message in time.
+#TEXT   10
+I had delivered a message to the prisoner's friends. I didn't expect that they would try to kill me instead of rewarding me. Next time I shouldn't trust these scums. Had to kill them all.
+#TEXT   11
+It's done. Lads were too kind and gave me @<iMoney>. I am so damn proud about it.
+#TEXT   13
+Prisoner's buddies told me that two trading ships '@<sShipName1>' and '@<sShipName2>' will be sailing near @<sShoreName>  in the nearest @<sDay> loaded with @<sGoods>. I should consider intercepting them.
+#TEXT   13_1
+I am just in time! I see them. Time to fight.
+#TEXT   13_2
+I was too late and there was no sign of the ships. Next time perhaps...
+#TEXT   14
+Prisoner's buddies told me that currier vessel '@<sShipName>' would be sailing not far from @<sShoreName> in the nearest @<sDay> loaded with a lot of jewels. I should consider intercepting it.
+#TEXT   14_1
+I am just in time! I see them. Time to fight.
+#TEXT   14_2
+#TEXT   15
+I didn't find any trade ships there. Damn scums cheated on me, I should've not trusted men of their kind...
+#TEXT   16
+I have delivered the message to prisoner's pals. They offered me to buy some information for a lot of coins. I refused, their faces were not looking honest enough for me.
+#TEXT   17
+I have delivered the message and was robbed by the prisoner's fellows. Never again I will trust these scums...
+
+#QUEST  ShipyardsMap
+Industrial espionage 
+#TEXT   1
+Owner of @<sCity>'s shipyard is interested in some @<sShip> blueprints from another shipyard at @<sTarget>.
+#TEXT   2
+It's done. I've got blueprints. Now I must deliver them and claim my reward.
+#TEXT   3
+Damn it! The man refused to pay! I was unlucky to steal some junk.
+#TEXT   4
+Owner of @<sCity> shipyard had shown an interest in the blueprint I brought. I was paid well.
+#TEXT   5
+The door of @<sCity>'s shipyard will be opened for the whole day. I should use this...
+
+
+#QUEST  SeekMayorsRing
+Sleuth in the brothel
+#TEXT   1
+@<sName>, the governor of @<sCity>, has ordered me to find his wedding ring inside the brothel. I have no idea where it is, our good governor had a nice rest last night so he doesn't remember a thing.
+I have to find and return the ring before this day ends.
+#TEXT   2
+Turned out that he presented the ring to a whore called @<sName>! Drinking is bad. I managed to buy it from her for five thousand, now I can return it back. 
+#TEXT   3
+Turned out that he presented the ring to a whore called @<sName>! I've taken it from her and now I can return it back.  
+#TEXT   4
+I failed to find the ring in time. Failure.
+#TEXT   5
+I didn't find the ring. Failure.
+#TEXT   6
+I've found the ring. Now I should bring it back.
+#TEXT   7
+The ring was delivered.
+
+#QUEST  Church_NightGuard
+Night watch in @<sCity> church
+#TEXT   1
+Holy father asked me to guard a church for three night. He suspects that someone is planning to rob it. I have to stay inside from midnight till 6 a.m.
+#TEXT   2
+I missed my watch, the deal is off.
+#TEXT   3
+I've left the building during my night watch. Mission failed.
+#TEXT   4
+Three nights passed, I have fulfilled Holy father's ask. I should report to him.
+#TEXT   5
+I see the thieves! I am afraid that the fight is unavoidable...
+
+
+#QUEST  PortmansBook_Delivery
+@<sCity> harbor master's mission. Chasing captain @<sCapName>
+#TEXT   1
+@<sCity> harbor master asked me to find captain of @<sShipTypeName> '@<sShipName>' forgot his journal. I have to chase that absent-minded captain named @<sCapName> and return his journal.
+Harbor master told me that the captain is heading to @<sTargetCity>@<sAreal>.
+#TEXT   2
+I managed to find the man sailing to @<sTargetCity>. Mission is done.
+#TEXT   3
+I managed to find the man in @<sCity> inside the harbor master's office. Mission is done.
+#TEXT   4
+They say that captain @<sCapName> is sailing to @<sTargetCity>@<sAreal>.
+#TEXT   5
+Harbor master told me that captain @<sCapName> of @<sShipTypeName> '@<sShipName>' had gone to @<sTargetCity>@<sAreal>.
+
+
+#QUEST  Portmans_SeekShip
+@<sCity> harbor master's mission. Returning the stolen ship
+#TEXT   1
+@<sCity> harbor master have a serious assignment for me. Someone has stolen @<sShipTypeName> '@<sShipName>' and I was asked to return it.
+I don't have any clues. I have to be attentive in the sea and ask people in towns.
+#TEXT   2
+@<sCity> harbor master told me that captain @<sCapName> of @<sShipTypeName> '@<sShipName>' was sailing to @<sTargetCity>@<sAreal> in @<sDate> .
+#TEXT   3
+They say that @<sShipTypeName> '@<sShipName>' was sailing from @<sCity> to @<sTargetCity>@<sAreal>.
+#TEXT   4
+It looks like I have finally found the stolen ship. I tried to talk with her captain but he forced me to leave. I must board his vessel.
+#TEXT   5
+The stolen ship was boarded. I can return and claim my reward.
+#TEXT   6
+Job is done, money is paid.
+#TEXT   7
+I had to refuse to do this mission.
+#TEXT   8
+Damn it!!! I was unable to keep the ship undamaged, it has sunk! And what am I going to return to my employer?
+#TEXT   9
+I boarded the ship and yet it has sunk. This is a total failure. And what am I going to return to my employer?
+
+#QUEST  SCQ_NM_battle
+Searching for captains. Request from nobleman @<sName> from @<sCity>.
+#TEXT   1
+Citizen of @<sCity>, nobleman @<sName>  wants to deal with captain @<sCapName> who insulted him once.  I have to find and eliminate this captain. There is one clue: he sails on @<sShipTypeName> '@<sShipName>' and the ship was recently seen at @<sQCity>.
+#TEXT   2
+@<sCity> harbor master told me that captain @<sCapName> was sailing to @<sTargetCity>@<sAreal> in @<sDate>.
+#TEXT   3
+They say that captain @<sCapName> is sailing from @<sCity> to @<sTargetCity>@<sAreal>.
+#TEXT   4
+ @<sCapName> was found and eliminated. My job is done, now I may return to my employer in @<sCity> and claim my money. I can find the man in the local church from 8 till 10 a.m.
+#TEXT   5
+I have found the captain I seek and visited his ship. @<sName> is looking alerted and he forced me out of his ship. My goal is perfectly clear - I must to sink his @<sShipTypeName>. 
+
+#QUEST  SCQ_NM_prisoner
+Searching for captains. Request from nobleman @<sName> from @<sCity>.
+#TEXT   1
+Citizen of @<sCity>, nobleman @<sName> wants to deal with a man named @<sName1> who insulted him once. I have to find and deliver the man to my employer. There is one clue: he is serving on @<sShipTypeName> '@<sShipName>' under command of captain @<sCapName>. This ship was recently seen at @<sQCity>.
+#TEXT   2
+@<sCity> harbor master told me that captain @<sCapName> was sailing to @<sTargetCity>@<sAreal> in @<sDate>.
+#TEXT   3
+They say that captain @<sCapName> is sailing from @<sCity> to @<sTargetCity>@<sAreal>.
+#TEXT   4
+The captain I seek is dead. Now I won't be able to find his officer.
+#TEXT   5
+@<sName> is found and now he is sitting under arrest. Job is done, I may return to my employer in @<sCity> and claim my coins. I can find him in the local church from 8 till 10 a.m.
+#TEXT   6
+I have met the captain. He refused to give out his officer scum. Well, it's worse for him then. I have only one option now - I must board his ship.
+
+#QUEST  SCQ_NM_peace
+Searching for captains. Request from nobleman @<sName> from @<sCity>.
+#TEXT   1
+Citizen of @<sCity>, nobleman @<sName>  wants to meet his old friend named @<sCapName>. I have to find the man and tell him the nobleman's request. There is a clue: the man I seek is a captain of @<sShipTypeName> '@<sShipName>' and the ship was recently seen at @<sQCity>.
+#TEXT   2
+@<sCity> harbor master told me that captain @<sCapName> was sailing to @<sTargetCity>@<sAreal> in @<sDate>.
+#TEXT   3
+They say that captain @<sCapName> is sailing from @<sCity> to @<sTargetCity>@<sAreal>.
+#TEXT   4
+Captain @<sCapName> died. My mission is failed.
+#TEXT   5
+I was able to find the captain and tell him the nobleman's ask. My job is done, I may return to @<sCity> for my coins. My employer may be found in the local church from 6 p.m. till 8 p.m.
+
+#QUEST  SCQ_manSlave
+Ex slave's vengeance. Request from citizen @<sName> from @<sCity>.
+#TEXT   1
+Citizen @<sName> from @<sCity> got in trouble a year ago. Some captain of @<sShipTypeName> '@<sShipName>' named @<sCapName>  sold his passenger to slavery.
+Now @<sName2> is eager to revenge. I have to search and kill that treacherous captain.
+#TEXT   2
+@<sCity> harbor master told me that captain @<sCapName> was sailing to @<sTargetCity>@<sAreal> in @<sDate>.
+#TEXT   3
+They say that captain @<sCapName> is sailing from @<sCity> to @<sTargetCity>@<sAreal>.
+#TEXT   4
+Captain @<sCapName> is dead. My job is done, now I may return to my employer in @<sCity> and claim my coins.
+#TEXT   5
+There is the captain I seek. I managed to have a talk with him. My question concerning his passengers made him really angry. It seems that @<sName> is making a decent living with this business.
+It is all clear now. I must to sink @<sShipTypeName>.
+#TEXT   10
+The ship is gone. I won't be able to revenge the man.
+
+
+#QUEST  SCQ_womanHasband
+Searching for husband
+#TEXT   1
+@<sName> from @<sCity> asked me to find her husband, a merchant, who has been sailing for too long.
+I hope that he is fine.
+#TEXT   2
+@<sCity> harbor master told me that captain @<sCapName> was sailing to @<sTargetCity>@<sAreal> in @<sDate>.
+#TEXT   3
+They say that captain @<sCapName> is sailing from @<sCity> to @<sTargetCity>@<sAreal>.
+#TEXT   4
+@<sCapName> is dead. Shit. My mission is failed.
+#TEXT   5
+I've found the captain I was looking for. Turned out that he is too busy and unable to reject so many profitable dealings.
+Well, job is done. Now I may claim my coins.
+#TEXT   10
+The ship is gone. I won't be able to find the man.
+
+
+#QUEST  SCQ_manRapeWife
+Saving a wife of @<sCity> citizen.
+#TEXT   1
+Citizen of @<sCity> named @<sName> has lost his wife, she was kidnapped by some pirate. I've signed up to rescue her. Her name is @<sName2>. The pirate is called  @<sCapName>, he sails on @<sShipTypeName> '@<sShipName>'.
+I hope that I will manage to find the ship quickly enough.
+#TEXT   2
+@<sCity> harbor master told me that captain @<sCapName> was sailing to @<sTargetCity>@<sAreal> in @<sDate>.
+#TEXT   3
+They say that captain @<sCapName> is sailing from @<sCity> to @<sTargetCity>@<sAreal>.
+#TEXT   4
+Captain @<sCapName> died and so, apparently, did the poor woman. Mission is failed.
+#TEXT   5
+Captain @<sCapName> is found. Kidnapped woman is kept in his cabin. Now I must to board the ship, I likely won't be able to deal with pirate in a good way...
+#TEXT   6
+I managed to save a woman named @<sName>. That's my client. Now I may return her back to her husband in @<sCity>.
+#TEXT   10
+The ship is gone. I won't be able to help that poor man to find his wife.
+
+
+#QUEST  SCQ_manFriend
+Finding a @<sCity> citizen's countryman
+#TEXT   1
+I agreed to help a citizen of @<sCity> named @<sName>. I must find his countryman, merchant named @<sCapName>. He sails on @<sShipTypeName> '@<sShipName>'.
+I suppose I will find him easily.
+#TEXT   2
+@<sCity> harbor master told me that captain @<sCapName> was sailing to @<sTargetCity>@<sAreal> in @<sDate>.
+#TEXT   3
+They say that captain @<sCapName> is sailing from @<sCity> to @<sTargetCity>@<sAreal>.
+#TEXT   4
+@<sCapName> is dead. Damn. My mission is failed.
+#TEXT   5
+I managed to find the captain I needed and inform him that his fellow was looking for him. My job is done, time to return to @<sCity> and claim my coins.
+#TEXT   10
+The ship is gone. Now I won't be able to help my employer.
+
+
+#QUEST  SCQ_womanRevenge
+Rejected woman from @<sCity>
+#TEXT   1
+I agreed to fulfill quite an unusual ask for the woman. Her name is @<sName> and she is a citizen of @<sCity>. I have to find captain @<sCapName>. He sails on @<sShipTypeName> '@<sShipName>'.
+I must to find him, board his vessel and eliminate the man. Before I do so, I must inform him who is paying for his life.
+Well, only rejected women revenges that hard...
+#TEXT   2
+@<sCity> harbor master told me that captain @<sCapName> was sailing to @<sTargetCity>@<sAreal> in @<sDate>.
+#TEXT   3
+They say that captain @<sCapName> is sailing from @<sCity> to @<sTargetCity>@<sAreal>.
+#TEXT   4
+The captain is dead. I wasn't able to talk with him so the main term is broken. He wasn't informed why he died. Mission is failed.
+#TEXT   5
+Captain @<sCapName> is dead. I managed to do what my employer asked.
+Fury's mission is finished. Now I may return to @<sCity> and claim my coins.
+#TEXT   10
+The ship I seek is gone. Revenge is failed.
+
+
+#QUEST  SCQ_womanPirates
+Saving a husband from @<sCity>
+#TEXT   1
+I agreed  to help a citizen of @<sCity> named @<sName>. Her husband is being held captive by captain @<sCapName>. He sails on @<sShipTypeName> '@<sShipName>'. 
+I have to find the captain, board his @<sShipTypeName2> and release poor woman's husband whose name is @<sName2>.
+#TEXT   2
+@<sCity> harbor master told me that captain @<sCapName> was sailing to @<sTargetCity>@<sAreal> in @<sDate>.
+#TEXT   3
+They say that captain @<sCapName> is sailing from @<sCity> to @<sTargetCity>@<sAreal>.
+#TEXT   4
+Captain @<sCapName> died and so, apparently, did the woman's husband. Mission is failed.
+#TEXT   5
+Captain @<sName> is found. Now I must to board his @<sShipTypeName>.
+#TEXT   6
+I managed to release the prisoner. Job is done, time to return at @<sCity>.
+#TEXT   10
+The ship is gone. I won't be able to save the man.
+
+#QUEST Slavetrader
+Slave Trader
+#TEXT   1
+Usurer of @<sCity> called @<sName> offers me @<sSum> for @<sQty> slaves. Money is good and the job is easy, I'll do that. I'd better won't waste time, it seems that @<sName> has a serious business and I may make a lot of coins.
+#TEXT   2
+Slaves were delivered, money is received. Besides, @<sName> offered me to come in three weeks and take another mission. I should do so.
+#TEXT   3
+@<sName> ordered me to break his competitor's deal. I must capture '@<sShipName>' which is sailing to @<sShoreName> at @<sShoreType>. I have two weeks.
+#TEXT   3_1
+I was just in time! Captain of '@<sShipName>' is loading slave on a smuggler's vessel. I must board them both and claim their cargo.
+#TEXT	4
+Job is done. Time to see my employer.
+#TEXT	5
+My opponents were too tough for me and I had to retreat. I am afraid that it's a failure.
+#TEXT	5_5
+I failed the mission so @<sName> won't do any business with me again. What a shame...
+#TEXT	6
+@<sName> was pleased by my work. He paid me @<sMoney> pesos for @<sQty> slaves. I although have to see him in a month.
+#TEXT	7
+I was too late and '@<sShipName>' had already gone. I have to return with empty hands.
+#TEXT	7_1
+I was too slow and pinnace '@<sShipName>' had gone already. I have no idea where to find it. I have to return with empty hands.
+#TEXT	7_2
+Despite all of my efforts, I wasn't able to find '@<sShipName>'. I have to return with empty hands.
+#TEXT	8
+I refused to do the job. I am not a bounty hunter.
+#TEXT	9
+I was fool to work with this scum! Now I have to deal with bounty hunters...
+#TEXT	10
+@<sName> assigned me to do quite a risky task this time. I have to board pinnace @<sShipName> which is sailing not far from here. I must be careful and avoid being shot by the fort.
+#TEXT	11
+Enemy was to strong. I failed to board '@<sShipName>'. I suppose, I shouldn't even talk with my employer...
+#TEXT	12
+Pinnace '@<sShipName>' is at the bottom of the sea. No need to see my employer then...
+#TEXT	13
+Damn it! Pinnace '@<sShipName>' turned out to be a trap - there weren't any slaves inside it. Only armed soldiers. I should go and push my employer. It's time to put some burning fuses between his toes...
+#TEXT	14
+Looks like @<sName> was betrayed for real. Last words of pinnace's captain proves that. Evidences are now sailing with brigantine '@<sShipName>' towards @<sIsland> to governor-general. I must to board the ship and take the package with documents inside or my I will get troubles otherwise.
+#TEXT	15
+Damn it! I failed to capture brigantine '@<sShipName>'. Well, now it's time to visit a lawyer.
+#TEXT	16
+I managed to chase down and capture '@<sShipName>'. I also found papers I need. Now I can breath freely.
+#TEXT	17
+I managed to chase down and capture '@<sShipName>'. But there were no papers. Perhaps, they are fake? I have to see the usurer.
+#TEXT	18
+I have to find and capture a heavy galleon '@<sShipName>', it is sailing to @<sAreal> on Santiago. I must be attentive. There are three thousand slaves, truly a treasure!
+#TEXT	19
+That was unexpected. It wasn't a galleon, it was a goddamn battleship with a deadly skilled captain yet I defeated him.
+#TEXT	20
+@<sName> asked me to wait for five days before he would gather the sum to pay me and gave me fifteen credit chests in advance. I find hard to trust this scum yet I doubt that he will try to cheat on me.
+#TEXT	21
+@<sName> asked me to search and eliminate a traitor who was the reason of our troubles. It will be my pleasure. His name is Francois Gontier and last time he was seen in Panama. I am on it.
+#TEXT	21_1
+Bartender of Panama told me that Gontier has likely gone to Porto Bello.
+#TEXT	21_2
+Gontier bought a corvette there. I have to find out where he went.
+#TEXT	21_3
+According to my information, Gontier went to Jamaica. His corvette is called '@<sShip>'.
+#TEXT	21_4
+Gontier was in Maroon Town, he was renting a room there but now he is gone. I don't have any idea where to look for him.
+#TEXT	21_5
+Waitress told me that she is aware where Gontier went but she asks some pendent with gems in return. I must find this thing in order to reach Gontier.
+#TEXT	21_6
+Gontier went to Havana. Splendid. I guess, I will see him soon.
+#TEXT	21_7
+Interesting! Gontier had tried to get a Spanish privateer license but failed. Barman said that he decided to choose France. So, time to visit Tortuga!
+#TEXT	21_8
+Something is very wrong! No sign of a corvette, yet Gontier and his men are walking around the streets. I must search the town and its outskirts.
+#TEXT	21_9
+Rat was hiding in one of the houses. I was attacked by his fellows as soon as I entered the room. I had to kill them though I doubt that they will be missed. Gontier has escaped. His lover told me that his corvette was staying near the lighthouse of Tortuga. I must sail there before he is gone again!
+#TEXT	21_10
+I was too slow and Gontier has managed to run away. No clues are left. I may return to my employer and report about the mission failure.
+#TEXT	21_11
+This Gontier was too tough for me, so I decided to retreat. I may return to my employer and report about the mission failure.
+#TEXT	21_12
+It's done! That scum Gontier is feeding the sharks.
+#TEXT	21_13
+For eliminating the traitor I was presented by an excellent spyglass. Usurer also paid me 100 000 pesos and 50 000 as a compensation for my costs. It looks like my employer is standing up again. I must return in a month with a well-prepared squadron, next mission is going to be serious.
+#TEXT	21_14
+@<sName> was upset, yet he offered me to visit him in a month with a well-prepared squadron, next mission is going to be serious.
+#TEXT	22
+I was right. The barque had suffered a wreckage and all slaves had to hide at the Lighthouse. Tamango and his warriors attacked us but we have dealt with them. The rest of runaways accepted their fate and surrendered. In total, I was able to capture @<sQty> slaves.
+#TEXT	22_1
+@<sName> ordered me to sail to Curacao which has suffered from a great runaway of slaves. I must find out more about this incident.
+#TEXT	22_2
+I had an interesting talk with a barman, now I know all details concerning the riot. I also know that someone has stolen a barque. Barman is sure that slaves did that.
+#TEXT	22_3
+Harbor master told me only a barque's name - '@<sShipName>'. That is all I have, unfortunately. I can't even imagine where to dig next...
+#TEXT	22_4
+Surprisingly, I've learnt what I needed from a drunken sailor. The barque was seen at @<sAreal>. According to his story, the ship has suffered a wreckage. I should go there and search all the local bays.
+#TEXT	22_5
+@<sName> was pleased. He paid me 330000 pesos for Curacao guys and also @<sMoney> for the rest. I should see him in a month as usual.
+#TEXT	22_6
+@<sName> was pleased. He paid me @<sMoney> for @<sQty> slaves. I should see him in a month as usual.
+#TEXT	24
+Damn, I would never think that @<sName> is that serious! Now I have to capture fort of Havana, according to the information I got, there are 5 000 slaves. I am on my way.
+#TEXT	25
+The usurer was right. Two battleships are cruising near Havana's shores, they don't look really friendly. I must get rig of them before I will storm the fort.
+#TEXT	26
+Enemy's battleships were eliminated. Now it's time for the fort.
+#TEXT	26_1
+Enemy's battleships were eliminated, yet I am out of resources to assault Havana. I have to retreat. I suppose, there is no need to return to my employer...
+#TEXT	27
+Havana was taken, job is done. @<sQty> slaves were put in cargo holds. Time to return.
+#TEXT	27_1
+I failed the mission by attacking Havana from the landside. Slaves were kept inside the fort and defenders were able to prepare themselves. I suppose, there is no need to return to my employer...
+#TEXT	28
+I was too late and all slaves were taken to Cuba's plantations. I suppose, there is no need to return to my employer...
+#TEXT	29
+Damn it! Not all of slaves survived the voyage and the usurer wants 5 000, not a single slave less! I must find the rest in a week or I will get troubles otherwise.
+#TEXT	30
+I failed to deliver slaves in time. Now, there is no need to hurry - I have to sell slaves, visit agents, deal with bounty hunters...
+#TEXT	31
+I failed to gather 5 000 slaves in time. Now I must deal with bounty hunters...
+#TEXT	32
+Slaves were delivered to my employer. I should visit him in a week to collect my money. I will receive over a million for the job! Now, that why I should do this job! I can't even imagine what next mission will bring. Yes, this business will make me rich!
+#TEXT	33
+Fucking bastard has screwed me! When I arrived for my coins, it turned out that my dear 'partner' had run away, took my million and his investor's money. It's the first time I was cheated that hard! Yet he will get what he deserves. They all do. World is small, we might meet each other again. And the rat will pay for everything!
+
+
+#QUEST PrisonGun
+Guns for a fort
+#TEXT   1
+Commandant of @<sCity> fort offered me to collect @<sQty> of @<sText>. His terms - I must deliver all batch a month later. Not earlier. I agreed, considering a price of the deal - @<sSum> pesos.
+#TEXT   2
+Cannons were delivered, payment were received though not in coins but in credit chest. Works for me. So does for a commandant, I guess.
+#TEXT   3
+What a pity! Commandant refused to buy cannons. And what am I supposed to do with this load of iron? I can only to sell to the shipyard for a few coins...
+#TEXT   4
+I have spent to much time finding cannons and @<sName> bought them from another seller. My fault...
+
+#QUEST Fraht
+Harbor master's freights
+#TEXT   1
+I have provided my ship for freight services in @<sStartCity>. I must deliver @<sGoodQty> of @<sGoods> to @<sTargetColony> for @<sDay>. My reward is @<sMoney>.
+#TEXT   2
+Job is done, cargo is delivered in time and in one piece, coins are mine.
+#TEXT   3
+Time for delivering has run out and I should hurry up or my client will suspect me in something wrong...
+#TEXT   3_1
+I was too slow. There is no need to hurry now...
+#TEXT   4
+I am late for @<sDay>. My payment was reduced, 5% for every day, so I got @<sMoney>. I should try better next time... 
+#TEXT   5
+All terms are off now. If I want to deal with them again, I should visit the client and try to fix the situation...
+#TEXT   6
+I had to pay a fine - @<sMoney>. Though I can get a job again. I'd better check my trade journal now in order to find the best price for cargo...
+#TEXT   7
+These bureaucrats are damn too insolent! They wanted to rob me to my very cloth. I'd better hug the enemy then pay such sum those grafters.
+#TEXT   8
+Harbor master from @<sStartCity> has offered me to get and deliver @<sGoodQty> of @<sGoods> for their colony. He promised to pay @<sText> price. In total, I will get @<sMoney>.
+#TEXT   9
+I was too slow, a month has passed. No need to hurry now...
+
+#QUEST Postcureer
+Mail delivery
+#TEXT   1
+I agreed to deliver a mail to @<sTargetColony> for @<sDay>. My reward is @<sMoney>.
+#TEXT   2
+Job is done, mail is delivered, payment received.
+#TEXT   3
+I am out of timing and a mail is still undelivered. I should hurry...
+#TEXT   4
+I failed to deliver a mail for @<sDay>. My payment was reduced by 10% for a day. In total, I received @<sMoney>. I should try better next time.
+#TEXT   5
+All terms are off now. Perhaps, I should deliver the stuff after all - perhaps, there is still a chance.
+#TEXT   6
+I have got a special assignment from harbor master of @<sStartCity>. I must deliver @<sText> to @<sTargetColony> for @<sDay>. My reward is @<sMoney>.
+#TEXT   7
+All terms are off now. Perhaps, I should deliver a mail after all - perhaps, there is still a chance.
+#TEXT   8
+I failed to deliver a mail for @<sDay>.  My payment was reduced by 10% for a day. In total, I received @<sMoney>. I should try better next time.
+#TEXT   9
+I delivered a package. Although I didn't receive any coins, my reputation is clean.
+#TEXT   10
+Job is done, mail is delivered, payment received.
+#TEXT   11
+That was unlucky, I was forced to give a package to some scums. I must see my client and tell him the truth...
+#TEXT   12
+As soon as I left the harbor master's office, I was stopped by two masked guys. They looked like serious, professional mercenaries, I suppose. I preferred to fail my mission in order to stay alive. I should see harbor master and explain the situation.
+#TEXT   13
+As soon as I left the harbor master's office, I met some man who offered to follow him to a tavern and have a talk concerning the package. I refused, that smelled bad.
+#TEXT   14
+I was attacked by a frigate right at the port, it seems that it is the ship of that damn agent who tried to 'deal' with me.
+#TEXT   15
+I had a nice opportunity to make some coins - I let the man to copy those documents for @<sMoney>. Nice...
+#TEXT   16
+The agent tried to bribe me but failed. I am not Judas!
+#TEXT   17
+Well... My client noticed that the package was opened, looks like the agent was not that professional. I didn't get any coins for delivery and my reputation has suffered...
+
+#QUEST Escort
+Escorting trade ships
+#TEXT   1
+I have to escort a trade caravan to @<sTargetColony> for @<sDay>. My reward is @<sMoney>.
+#TEXT   2
+The mission is complete, ships are safe, payment is mine.
+#TEXT   3
+I am out of time and I haven't reached the destination yet. I should hurry...
+#TEXT   4
+I was late and my payment was reduced by 10% for an each day. My reward is @<sMoney>. I should try harder next time.
+#TEXT   5
+All terms are off. Ships have parted from my squadron. The mission is failed.
+#TEXT   6
+I have to escort a trade caravan to @<sTargetColony> for @<sDay>. My reward is @<sMoney>. I also should deliver @<sGoodQty> of @<sGoods> for extra @<sMoney1>.
+#TEXT   7
+All terms are off. Ships have leaved my squadron. The mission is failed. If I want to get this job again, I should see the client and try to fix the situation, at least to deliver a cargo...
+#TEXT   8
+I had to pay a fine - @<sMoney>. Though I can get a job again. I'd better check my trade journal now in order to find the best price for the cargo...
+#TEXT   9
+These bureaucrats are damn too insolent! They wanted to rob me to my very cloth. I'd better hug the enemy then pay such sum those grafters.
+#TEXT   10
+I was unable to keep ships safe. Mission is failed.
+#TEXT   11
+Unfortunately, one of the ships was sunken while fighting an enemy. I managed to save another though I didn't get any reward. I should learn more about tactics in order to avoid further mistakes...
+#TEXT   12
+Unfortunately, one of the ships was sunken while fighting an enemy. I managed to save another though I didn't get any reward. I should learn more about tactics in order to avoid further mistakes... They only paid for cargo delivery - @<sMoney>.
+#TEXT   13
+Voyage was extremely unfortunate - one of the ships was sunken while fighting an enemy. Besides, I've lost a significant amount of cargo. My client refused to pay, he also demanded to compensate a lost of the cargo - @<sMoney>. I decided to accept his terms, I don't want to make enemies. Well, I'd better check my trade journal now in order to find the best price for cargo...
+#TEXT   14
+These bureaucrats are damn too insolent! They wanted to rob me to my very cloth. I'd better hug the enemy then pay such sum those grafters.
+#TEXT   15
+I was unable to keep ships safe. Mission is failed. If I want to get this job again, I should see the client and try to fix the situation, at least to deliver a cargo...
+#TEXT   16
+All terms are off. The situation is critical. I should see the client and try to solve it.
+#TEXT   17
+Though I have lost all ships I was escorting, I still got my payment for the cargo delivered, only a half of coins - @<sMoney>. It'll do especially for such an awful voyage...
+#TEXT   18
+I've lost ships I supposed to protect and my payment was halved, there was also a fine for my delay - 10% for an each day. In total, my reward is @<sMoney>. It'll do especially for such an awful voyage...
+#TEXT   19
+I have to meet a vessel loaded with weapons at @<sTargetColony> and escort to @<sStartCity>. My reward is @<sMoney>. Time to sail, I don't have much time - only @<sDay>.
+#TEXT   20
+'@<sSName>' - ship with weapons is in my squadron now. We should sail back.
+#TEXT   21
+I was too slow and all terms are off now. Mission is failed.
+#TEXT   22
+I was too busy with my own problems and '@<sSName>' has left my squadron. My reward is lost...
+#TEXT   23
+I failed to preserve the ship. Mission is failed.
+#TEXT   24
+Job is done. The ship was escorted and my payment received.
+#TEXT   25
+I have to search for a lost ship '@<sSName>', convoy it to @<sStartCity> or bring any proof of its death. The ship had disappeared near @<sIsland>.
+#TEXT   26
+I've lost too much time dealing with my own problems. No need to sail to @<sIsland>. Mission is failed.
+#TEXT   27
+I managed to find  '@<sSName>' near the island. It is barely holding up, it lost its mast and the most of crew. It won't be able to sail without a serious repair. I have to buy materials in the nearest colony and deliver them here. I need: planks - @<sQty1>, sailcloth - @<sQty2>, cotton - @<sQty3>.
+#TEXT   28
+I wasted too much time and the captain of '@<sSName>' has already sailed away on his damaged vessel. Mission is failed.
+#TEXT   29
+I brought all needed materials. I have to deliver them to @<sShore>.
+#TEXT   30
+Repair is finished. We may head to @<sStartCity>.
+#TEXT   31
+I have escorted '@<sSName>' to @<sStartCity>. Captain compensated my costs and presented me an Indian amulet for my assistance.
+#TEXT   32
+I reported to harbor master and received @<sMoney> pesos.
+#TEXT   33
+I managed to find '@<sSName>' near the island. It was fighting against pirates and I joined the battle. There was storming yet we were able to destroy our enemy. Now I should talk with the captain.
+#TEXT   33_1
+I preferred to avoid wasting my time and talk with the captain of the lost ship. I saved them from pirates that is enough.
+#TEXT   34
+I managed to find '@<sSName>' near the island. It was fighting against pirates and I joined the battle. However I could not stop a storm from sinking the lost ship. Well, I did what I could and I know what really happened. I should return to @<sStartCity> and report about that sad event.
+#TEXT   35
+I managed to find  '@<sSName>' near the island. It was fighting against pirates and I joined the battle. There was storming and the enemy was too tough so I had to retreat. I won't report about it, it is my shame.
+#TEXT   36
+@<sSName>' is in my squadron. Time to sail back.
+#TEXT   37
+I have escorted '@<sSName>'  to @<sStartCity>. Captain and his crew presented me @<sMoney> and an Indian amulet for my assistance.
+#TEXT   38
+I didn't find '@<sSName>' near the shores of @<sIsland>, but I managed to find its captain and crew at the bay called @<sShore>. I have taken them aboard immediately, those Indians seemed to be clear in their intentions.
+#TEXT   39
+As soon as we reached the sea, we were attacked by a pirate corvette, it must be the corvette which the captain was talking about. I have destroyed pirates.
+#TEXT   40
+I have reached @<sStartCity>. The ex captain presented me @<sMoney> and an amulet for my assistance. His crew will stay with me.
+#TEXT   41
+Harbor master of @<sStartCity> asked me to interfere the fight not far from here - merchants are been attacked by pirates. I agreed to help. I must eliminate pirates and don't let them to sink trade ships.
+#TEXT   42
+I have wasted too much time on the shore - the fight ended without me. Mission is failed.
+#TEXT   43
+The fight was successful - all pirate ships were destroyed, no casualties from our side. I may return and claim my reward.
+#TEXT   44
+The fight was alright, but we have lost one trade ship. I should report about it.
+#TEXT   45
+The fight wasn't really lucky for us, all pirates were eliminated yet only one trade ship is remained. I should report about it.
+#TEXT   46
+The fight was really unlucky for us, all trade ships are gone. This is failure.
+#TEXT   47
+The enemy was too tough, I had to retreat. Such a shame on me.
+
+#QUEST Shadowtrader
+I Want Your Shop, Your Goods and Your Life
+#TEXT   1
+A merchant of @<sCity> is in trouble - he can't leave his shop for a second. I should deliver his letter to commandant till the end of the day. I will be paid 300 pesos.
+#TEXT   2
+It looks like someone is trying to destroy merchant's business by selling goods illegally and cheap. I signed up to help. I think I should start with the local smugglers, they must have something to do about it...
+#TEXT   3
+My talk with smugglers was worthless. My mistake, I suppose. No clues are left, I suppose the merchant will have to deal with it himself.
+#TEXT   4
+I was too slow. Mission is failed.
+#TEXT   5
+I managed to cheat on smugglers - the have appointed me a meeting. I should come to the local harbor master's office at night, they will meet me there and show the way to that illegal shop. I can either talk with commandant and let him to deal with them or I can do it all myself...
+#TEXT   6
+I missed the meeting. Mission is failed.
+#TEXT   7
+I decided to give all information to commandant. He ensured me that scums will be arrested tonight. I should visit the merchant in a few days and receive my reward.
+#TEXT   8
+I was lead to the lair where I met the competitor. I managed to frighten him, he ran away and paid me well. Now I may return to the merchant and claim my reward.
+#TEXT   9
+I was lead to the lair where I met the competitor. Negotiating was ended by a fight. I have killed two of his men and he begged for his life. I've let him go and confiscated all his things and coins. I doubt that he would risk trading in this town again. Now I may return to the merchant and claim my reward.
+#TEXT   10
+I was lead to the lair where I met the competitor. Negotiating was ended by a fight. I have killed the man and two his fellows. I suppose that is the best solution, he won't be able to harm people again. Now I may return to the merchant and claim my reward.
+#TEXT   11
+I have received 15 000 pesos for dealing with the competitor. Nice...
+
+#QUEST Wine
+Bottleneck Commodity
+#TEXT   0
+Soldiers gone wild! Now they order wine from the common folk. Should I buy him some or better tell his commander about it?
+#TEXT   1
+Soldier @<sName> asked me to buy him a batch of good French wine. From ten to sixty bottles. I agreed to do what he asked, I may make a decent coin here.
+#TEXT   2
+A week has passed and my friend soldier have probably gone to the sea as he told me. No need to worry now about his request...
+#TEXT   3
+I paid 1000 coins and now I know who sales wine in large numbers. It's @<sName>, he owns the local shop. I should see him.
+#TEXT   4
+Those merchants are way too greed. They won't tell you a single word for free. And I won't pay this scum.
+#TEXT   5
+Surprise. @<sName> doesn't trade wine. Looks like that huckster has lied to me. We should have a talk.
+#TEXT   6
+2000 coins and the huckster has written a note for the shop's owner. Now he will trade with me. It's fine, I will make my profit anyway.
+#TEXT   7
+Damn bastard has cheated on me, refused to return money and called guards! Hell with it...
+#TEXT   8
+I bought enough wine. Now I may return to the soldier.
+
+#QUEST Contraoffer
+Doubtful Proposal
+#TEXT   1
+I have to deliver @<sGoodQty> of @<sGoods> to @<sCity> for @<sDays>. My reward is @<sMoney>.
+#TEXT   2
+I was too late. Mission is failed.
+#TEXT   3
+Goods were delivered, payment received.
+#TEXT   4
+I have to deliver @<sGoodQty> slaves to @<sCity> for @<sDays>. My reward is @<sMoney>.
+#TEXT   5
+Cargo was delivered, payment received. Besides of coins, I also got an excellent cuirass.
+#TEXT   6
+Suddenly a patrol had arrived before I ended the bargain. How did they know? I had to pay a great sum to avoid any complications.
+#TEXT   7
+Suddenly a patrol had arrived before I ended the bargain. How did they know? I failed to bribe them, their commander is damn too honest. Or he was.
+#TEXT   8
+Suddenly a patrol had arrived before I ended the bargain. How did they know? I failed to bribe them, their commander is damn too honest. I had to go in prison. I am a captain after all so I think that they won't hold me here for too long.
+
+#QUEST Findship
+Searching for the ship
+#TEXT   1
+Shipyard's master of @<sCity>, offered me to find @<sShip> and bring it to him. Ship's characteristics and condition are irrelevant, only ship's type matters. I've got two month to do the job. My reward will be equal to one and a half value of the ship.
+#TEXT   2
+I was too late. Mission is failed.
+#TEXT   3
+I've found the ship and delivered it to my client. I received @<sMoney>.
+#QUEST Device
+Unfortunate Thief
+#TEXT   1
+Mysterious thief has stolen a valuable tool from @<sCity> shipyard's master. It's @<sName>. I should try asking locals, perhaps they have seen anyone. I've got a full description of the item I seek - @<sDesc>.
+#TEXT   2
+I have wasted too much time. Mission is failed.
+#TEXT   3
+I've found the thief. He was desperate and thrown away the item away outside the town near its gates.
+#TEXT   4
+I managed to find the thief. He has given me the stolen item. Smooth and easy. I may return to my client.
+#TEXT   5
+I have found the thief.  He demanded coins for @<sName>. I didn't need any complications so I paid the man. Now I've got a tool.
+#TEXT   6
+I have found the thief. He tried to play stupid, but I frightened him and he released himself from the stolen tool.
+#TEXT   7
+I have found the thief. He refused to part with the stolen item peacefully. I frightened him and he ran away. Now the stolen tool is forever lost for me...
+#TEXT   8
+I have found the thief. He refused to part with the stolen item peacefully and committed an armed resistance.
+#TEXT   9
+Locals told me that there was some tramp with the tool I seek. That is all I've got unfortunately. I doubt that the thief could run far away. I should search the town and its outskirts.
+#TEXT   10
+I was paid @<sMoney>. Not bad.
+
+#QUEST Sunplace
+Dirty business
+#TEXT   1
+@<sName> who owns the shop in @<sCity> asked me to do a really uncommon job. I have to deliver some troubles to his competitor - capture his ship with cargo or sink it. I agreed, normally I have to pay for the information about valuable prizes. And now I will be paid . The man promised @<sMoney>, the ship and @<sGoods> in it's cargo holds. I have to look for @<sType> '@<sSName>' not far from @<sShore> in @<sDay>.
+#TEXT   2
+I was too late. The ship has gone and I won't get any cargo. Perhaps I should solve the problem myself in a more radical way? To kill his competitor once and for all. The result will be the same... My target is living somewhere in @<sCity>.
+#TEXT   3
+I am just in time! I can see the target. To arms!
+#TEXT   4
+It was a good fight. I can return to my employer.
+#TEXT   5
+Damn it! Captain of this old tub was too good for me. Perhaps I should solve the problem myself in a more radical way? To kill his competitor once and for all. The result will be the same... My target is living somewhere in @<sCity>.
+#TEXT   6
+Barman told me that @<sName> is in the local shop now. Well, it's time to pay him a visit.
+#TEXT   7
+Barman told me that @<sName> is having a sea trip now. I should look for his lugger.
+#TEXT   8
+@<sName> is eliminated. I suppose that my client will be pleased. No man - no problem.
+#TEXT   9
+I've changed my mind. Killing an unarmed man is not my style.
+#TEXT   10
+I decided to leave merchant's lugger alone. Killing a peaceful man is not my style.
+#TEXT   11
+I have changed my mind and I am not going to take part in their fight.
+#TEXT   12
+Client was satisfied and paid me well.
+#TEXT   13
+Really?! I have overdone my job and he is not happy! I don't trust in his words about 'heavy sins' - the man is definitely lacking conscience. Looks like he had his own plans. Hell with him, he paid me anyway.
+#TEXT   14
+I am just in time. Surprisingly, '@<sSName>' is not a @<sType>, it is a heavy galleon. It looks like the client was mistaken. But, perhaps, there is no any @<sGoods> in its cargo holds? Anyway, I have to fight.
+
+#QUEST TraderEscort
+Escorting
+#TEXT   1
+I have to escort a merchant from @<sStartCity> @<sAdd> for @<sDay>. My reward is @<sMoney>.
+#TEXT   2
+I was too slow and a merchant has leaved me. Mission is failed.
+#TEXT   3
+Merchant's ship was sunken. Mission is failed.
+#TEXT   4
+I have escorted a merchant yet he refused to pay for my services due to my low effort in protecting him. Well, if we meet again...
+#TEXT   5
+I have escorted a merchant yet he paid only half of the sum due to my low effort in protecting him.
+#TEXT   6
+I have escorted my client and got a reward - @<sMoney>.
+#TEXT   7
+I have escorted my client yet he wasn't able to pay me. He told me where I can find his fellow merchant's fleet loaded with @<sAdd>. I should sail to uninhabited island @<sIsland> - my target will be there in two weeks.
+#TEXT   8
+I was too slow and a merchant has already leaved the place. What a shame...
+#TEXT   9
+I managed to board a trader's flute. There truly was a lot of @<sAdd>. Works for me.
+#TEXT   10
+My opponent was to strong and I preferred to retreat. Hell with the cargo.
+#TEXT   11
+Cursed scum has decoyed me into an ambush - there was a pirate squadron. I had to fight with them and my former companion.
+#TEXT   12
+We were attacked by pirates as soon as we reached the island. The victory was mine.
+#TEXT   13
+We were attacked by pirates as soon as we reached the island. We were outnumbered so I retreated and left my companion. Mission is failed.
+#TEXT   14
+The reckless bastard has risen the black flag as soon as we reached the island. I had to fight.
+#TEXT   15
+I have sunk the flute. Too bad, I won't get the cargo.
+
+#QUEST Racing
+Sea marathon
+#TEXT   1
+I had a talk with some insolent merchant in @<sStartCity>. The man claims that he will reach @<sCity> for @<sDay>. I will receive @<sMoney> if I reach @<sCity> faster than him. Time to sail.
+#TEXT   2
+Ha! I've beaten that merchant - there is no flute in @<sCity> port. I will stay in a tavern and wait for my unlucky competitor.
+#TEXT   3
+Seriously… I was in full sail and this merchant has beaten me, there is his flute in the port. I have to see him in a tavern.
+#TEXT   4
+I have received my prize from barman. Good. Perhaps, there are other self-confident merchants?
+#TEXT   5
+I lost this time but there must be other merchants like him. And we will see then!
+#TEXT   6
+I have changed my mind - I won't take part in this absurd race. I'll let the man to have his prize and be happy about it.
+#TEXT   7
+I was too angry because of my fail, so I have attacked the merchant right in the port. Such an idiot I am. Blind fury so they say...
+
+#QUEST RedChieftain
+A Chief of Redskins
+#TEXT   1
+Kanauri, the Indian Chief asked for my assistance. His tribesmen were enslaved by @<sText1> ship. Chief asked me to free his people who are forced to dive for pearls. I agreed, I will get all of their catch after all. Two schooners are watching Indians and there is a well defended camp on the shore. An important detail - I must approach them on a small ship like lugger or sloop in order to stay hidden long enough.
+I have got only one month to do the job. So I'd better not waste any time.
+#TEXT   2
+I was too slow and Indians must be already taken away. Eh, my fault.. I will land Kanauri in the nearest port, I failed him.
+#TEXT   3
+I managed to stay hidden long enough to engage the enemy. Bastards are shooting at unarmed fishers. I must destroy them as soon as possible before Indians are dead.
+#TEXT   4
+I was warned by the chief to use a single small ship! No sign of Indian tartans, it seems that Indians were driven away to the jungles. Damn it! I can leave now...
+#TEXT   5
+Enemy schooners are destroyed. Now I should land and clear the bay of soldiers to let Indians escape in jungles. Besides, I am confident that I can find some loot in the fisher's camp…
+#TEXT   6
+Schooners were too tough for me. Of course! I had only one ship which is weaker then any of them… I had enough, Kanauri will be landed in the nearest port, he'd better find another 'savior'...
+#TEXT   7
+The fight was awful, all Indian tartans destroyed. There is no one to save now. I will land Kanauri in the nearest port, I failed him.
+#TEXT   8
+All enemies are dead. Indians paid me well and went to the jungles. I respect people like Kanauri, he is a true chief of his tribe.
+
+#QUEST FalseTrace
+False Trace
+#TEXT   1
+I had an interesting meeting in the port of @<sCity1>. A man called Adam Rayner offered me a deal. He told me about galleon '@<sShip>' loaded with silver. It is sailing from Cartagena to @<sCity2>. He demanded one tenth of the booty. I accepted his terms, considering that he will sail with me and he even asked to take part in the boarding party. Adam didn't tell me any timing yet I suppose that I have only two or three weeks.
+#TEXT   2
+Despite of my efforts, I failed to board the galleon. Whatever, hell with the silver.
+#TEXT   3
+I have sunk the galleon with all of it's silver. How could I be that inattentive...
+#TEXT   4
+Isn't that something! There was no silver inside the galleon. Captain says that it's only a fodder ship supposed to deliver provision. But there was also a woman, she is obviously the captain's lover. Right, I should call Adam in my cabin and have a talk. Let's see what this bastard will tell me in excuse. And he'd better try damn hard to save his neck from a rope...
+#TEXT   5
+Adam Rayner admitted that his plan was to capture the galleon with my help and to get his wife who has run away from him. Her name is Katerine Rayner. He offers to tell me about gold of some Squint-Eyed Solly as a reward for my 'services'. But, first, I have to deliver him and his wife to @<sCity>. Should I trust this rogue? Perhaps, I have to talk with his wife first, she might know something important...
+#TEXT   6
+It is getting more interesting. Katerine hates Adam just like a dog hates a cat... That is why she ran away from him. But it is just their family matters and their problems. I didn't like Katerine and her proposal so I'd risk to trust Adam again. To @<sCity> then.
+#TEXT   7
+It is getting more interesting. Katerine hates Adam just like a dog hates a cat... That is why she ran away from him. Katerine is eager to revenge her husband for organizing the attack which lead to her lover's death. She offered me to kill her husband and she will tell me about his hidden cache in return. I don't trust Adam anymore, so I have accepted her terms. I will sail to @<sCity> but I will land on the nearest shore not in the town. I will deal with Adam there.
+#TEXT   8
+It is getting more interesting. Katerine hates Adam just like a dog hates a cat... That is why she ran away from him. Katerine claims that her captain can offer more for their freedom. I should go and talk to the prisoner.
+#TEXT   9
+Captain's offer was much more suspicious than Adam's. It looks like he is trying to set a trap for me. Not a chance! I'd better trust Adam one more time. I am heading to @<sCity>.
+#TEXT   10
+Captain's offer seemed much more profitable and interesting than Adam's one. Who lied once - will do it again. I will arrest Rayner and put him in the cargo hold.
+#TEXT   11
+Adam Rayner is arrested though he offered resistance. Now he is chained and I am heading to @<sShore>.
+#TEXT   12
+I was too slow and Adam Rayner had stolen a boat, took his wife and escaped from my ship. I doubt that I will see them again...
+#TEXT   13
+I was too slow and Squint-Eyed Solly has already taken his treasures. I should have tried better...
+#TEXT   14
+I have transported Adam and his wife to @<sCity>. Adam told me that Solly has left his booty inside the grotto at San Juan del Norte bay. I am heading there, only five days remaining.
+#TEXT   15
+I was too slow and Squint-Eyed Solly has already taken his treasures. I should have tried better...
+#TEXT   16
+That was hell of a fight! Solly's bandits eliminated. There are so much treasures that it will take several voyages to transport it.
+#TEXT   17
+As soon as I got aboard, I saw Solly's ship. Well, too bad for him then.
+#TEXT   18
+As soon as I got aboard, I saw Solly's ship. He was too strong for me, so I had to retreat and leave all the booty on the shore...
+#TEXT   19
+My former prisoner has kept his word and gave me an information - in two weeks, heavy galleon loaded with golden ore will be sailing from @<sCity> to Europe. I am on it. No need to worry about Adam, I suppose...
+#TEXT   20
+Despite of all my efforts, I failed to capture the galleon. Fine, hell with the gold.
+#TEXT   21
+I have sunk the galleon with all of its gold. Such an idiot...
+#TEXT   22
+Heavy galleon was captured. Captain was right, there was a lot of gold!
+#TEXT   23
+Adam Rayner was killed in sight of his wife's as she have desired. It's odd but she was really pleased by the scene of his death. She told me about Adam's hidden cache - Port-au-Prince, lighthouse.
+#TEXT   24
+I've found Adam's cache. His gang attacked me while I was heading back to my boat. Katerine prepared the ambush, she wanted to revenge for her lover's death. It wasn't easy but I managed to kill all four bandits. Katerine was too confident and decided to watch my execution. And got a bullet in a skull for her treachery. No more surprises.
+#TEXT   25
+I've found Adam's cache. His gang attacked me while I was heading back to my boat. Katerine prepared the ambush, she wanted to revenge for her lover's death. It wasn't easy but I managed to kill all four bandits. Katerine was too confident and decided to watch my execution. I didn't harm her and let her stay on the island.
+#TEXT   26
+I was attacked as soon as I got aboard. Katerine's threat turned to be true. I engaged the enemy and destroyed it.
+#TEXT   27
+I was attacked as soon as I got aboard. Katerine's threat turned to be true. I preferred to stay away and retreated.
+
+#QUEST Portugal
+Long Way to Gallows
+#TEXT   1
+I have heard an interesting story from some drunk bounty hunter! It seems that a famous pirate Bartolomeo the Portuguese is somewhere in Philipsburg, he is looking for a doctor. Dutch West India Company will pay a great coin for his head. Hugo is right, I don't want to loose a chance like this. I should search the town and find the rat before it's gone!
+#TEXT   2
+I failed to find the pirate and I won't see any reward. Who knows, perhaps, it is for the best...
+#TEXT   3
+Hugo Avendell persuaded me to avoid local authorities and deliver the Portuguese straight to the Company. He thinks that the local governor will take away our prey and find a way to cheat on us. I should change the Portuguese's clothes, his men might still be in the town. I need to find him some appropriate clothes.
+#TEXT   4
+Damn it! I was too slow, Portuguese managed to run away from us. There is a smell of gunpowder in the room, poor doctor. I can forget about any reward now.
+#TEXT   5
+Doctor said that the Portuguese is too bad and he likely won't survive a trip to Curacao. My last chance is to take him to Gino Gvineili. If the genius won't be able to help him, no one will. But we are lacking of time, we have only three days.
+#TEXT   6
+I am late, fever did its job. Too bad that the pirate didn't live enough for the gallows...
+#TEXT   7
+We have arrived at Antigua and the Portuguese is still alive. I won't let my prisoner die before I receive my promised doubloons. But it is all about Gino and his skills now.
+#TEXT   8
+I knew that we have spent too much time here! They have finally tracked us down, but these are not the Portuguese men, they are mercs. I had to calm them down. Now we have only five days to reach Martinique. My prisoner will be able to rest in Saint-Pierre's tavern and live long enough to reach Curacao. Hugo suspects that there are more cutthroats around us, perhaps, I will be forced to fight them.
+#TEXT   9
+I was asked to visit his grace governor due to some important business. Interesting. Anyway, the Portuguese will be resting in the tavern for a few days, so I've got enough time to talk with monsieur Jacques Dille do Parquet. 
+#TEXT   10
+His grace is asking me to patrol the waters of his colony for two days, they have seen some pirate frigate recently. Well, fear has big eyes and I always can use more 10 000 pesos. I agreed, I have to stay here for a few days anyway while the Portuguese is resting...
+#TEXT   11
+Two days have passed and there is still no sign of pirate frigate. Time to see His Grace.
+#TEXT   12
+Hugo is an idiot! No, I am wrong... he is a coward! That is the best word to describe him. And why haven't I thrown him away before? He did nothing to help our deed. Fine, it will cost him in our sharing. Now I should check the tavern and talk with barman. He must have seen something!
+#TEXT   13
+I was able to find out that our client was taken from our loving arms by some Franz Garcke and Hernando Vazquez. Hugo knows them. He was frightened and ran away as soon as our cutthroats showed up. His participation in our business is getting more and more questionable. But it will wait, I am sure that they have taken our man to Le Francois, where else could men like them be hiding? Only under protection of the Kind Jacques. I must try to intercept them there. I should sail to the port of Le Francois and prevent them from taking my prisoner on their ship!
+#TEXT   14
+I've met Garcke's men, as I expected. Too bad for them... Time to talk with their boss - he must be upstairs with my prisoner!
+#TEXT   15
+The Portuguese was put in the room, our doctor is watching over him. I am so damn tired of this… I'd better walk around the town, I have got two days of rest.
+#TEXT   16
+I failed to find the Portuguese and I likely won't. Too bad.
+#TEXT   17
+I was able to catch Bartolomeo the Portuguese, yet I had to deal with his former companions who weren't really eager to let him live. I should talk with my prisoner when we are out of here, something is very wrong with him.
+#TEXT   18
+As I expected, I was attacked by Vazquez's frigate - 'Albatross'. Hugo feared him. I am victorious but there was no sign of Vazquez aboard... I'd better talk with my prisoner.
+#TEXT   19
+As I expected, I was attacked by Vazquez's frigate - 'Albatross'. I preferred to avoid fighting and escaped from the frigate. I should deliver the prisoner to Curacao but, first, I'd better talk with him.
+#TEXT   20
+Eh, I am too kind! I have been saving the Portuguese so often that I just can't let him be hanged. Hell with him, he may leave me in the first port...
+#TEXT   21
+Enough of sentimentalizing with this scum. I had enough of him… Heading to Curacao, to Matthias Beck.
+#TEXT   22
+It's done. The Portuguese was delivered to his judges and coins are mine. I have to admit, I am not satisfied by this story, Gino was damn right, saving man's life in order to hang him later... it's not right.
+#TEXT   23
+I decided to let Bartolomeo go, besides, he offered a good price for his freedom. He has got a hidden cache on Terks filled with gems which he has taken from the Company and they are also the reason why they are all hunting for him. I hope that he wasn't lying in order to save his life... He also warned me about Vazquez, he might be a problem in the future. Now I should look for a treasure before savages find it. What did he say? On the hill under the tree?
+#TEXT   24
+I witnessed a fight between Indians and Dutch marines. What are they doing here? Both sides didn't really appreciated me so I had to fight all of them. It was tough yet they are all dead and I am standing. Now I can search for the treasure.
+#TEXT   25
+The Portuguese didn't lie! I have found gems he was talking about. A proper ending for such an insane story.
+#TEXT   26
+I was engaged by a Dutch frigate near the shores of Terks. I fought them and destroyed them. I don't think that they came here just to walk around this cozy island, it is got to be something about Bartolomeo's treasure. Perhaps I will find something out in the nearest Dutch colony? I should talk with tavern folks.
+#TEXT   27
+I was engaged by a Dutch frigate near the shores of Terks. I preferred to retreat. I don't think that they came here just to walk around this cozy island, it is got to be something about Bartolomeo's treasure. Perhaps I will find something out in the nearest Dutch colony? I should talk with tavern folks.
+#TEXT   28
+Why should I care about Company's intrigues? After all, I have got the gems, it is all that matters...
+#TEXT   29
+It seems that I found out what is going on. Hernando Vazquez. He didn't risk to fight me on Martinique - I am sure he had a nice sight of his frigate's last fight. He wanted to save his life, that is why he told the Company about gems. And he didn't want to meet me at Curacao, that is why he came here, in Philipsburg. He sent Dutch expedition on Terks.
+Well, Blood Don has been living enough, time to end him before he know about my presence here. I should go directly to the governor, I'd better ask his servants.
+#TEXT   30
+I have changed my mind. Vazquez is not a threat for me - Dutch won't let him live, they didn't find any gems on Terks. I can breath freely, I am confident…
+#TEXT   31
+Isn't that something! They have captured the Portuguese! They say that he and Vazquez will be executed in a month. It is obvious that the Company is going to interrogate them at first. I should decide what to do. The Portuguese might tell them about my role in this mess...
+#TEXT   32
+Bartolomeo is being held with his fellow Vazquez in Willemstad's dungeons. Ha! Should I take a risk? Or hell with it?
+#TEXT   33
+I decided to stay away from this risky and, what is more important, worthless gamble. Even if the Portuguese will open his mouth, well, he won't be able to tell much. There are hundreds of captains like me. Hell, he doesn't even know my name.
+#TEXT   34
+I have freed Bartolomeo from the prison, I barely made it, yet Vazquez attacked me from behind, thank God, Bartolomeo warned me and the shot wasn't lethal. Now there is nothing to worry about. I must admit, I did it for another reason. Like it or not, Gino was right, we are responsible for those who we tamed.
+#TEXT   35
+The Portuguese didn't survive the fight with bounty hunters...
+#TEXT   36
+The Portuguese didn't survive the fight with Franz Garcke's men...
+
+#QUEST Consumption
+A Price of Consumption
+#TEXT   1
+Waitress of San Jose tavern is desperate - she is confident that her brother who was put in the local dungeons for smuggling didn't die of illness as she was told. Perhaps, he might be in trouble and I could not stay indifferent to the tears of such a beautiful girl so I promised to help. It is odd that her brother died in two weeks after getting inside the dungeons. There is a probability that senor commandant is holding something back. I also should ask common folks about this strange epidemic, sometimes gossips are the best source of information.
+#TEXT   2
+Didn't get much from the innkeeper. Yet he confirmed my suspicions. It seems that consumption has been killing men for a year and no one would care. Or they just pretend? I also got one more clue, there was a smuggler who had been inside dungeons and survived. He died after all, yet it happened outside the prison. Perhaps I should talk with his fellows - they might tell me some details.
+#TEXT   3
+Senor commandant didn't appreciate my interest. Even more, he tried to show me the door. Well, I admit, the man was extremely polite and patient. I will try to find out more about senor commandant.
+#TEXT   4
+Innkeeper has confirmed my suspicions.  It seems that consumption has been killing men for a year and no one would care. Or they just pretend? About senor commandant... He was sent here due to some of his machinations back in Europe. He fortified his house and never leave it without guards. The man is definitely hiding something. Something about consumption in his dungeons. I should check his house. I also got another clue. There was a smuggler who had been inside dungeons and lived. He died after all, yet it happened outside the prison. Perhaps I should talk with his fellows - they might tell me some details.
+#TEXT   5
+My suspicions regarding senor commandant are getting stronger. They say that he was sent here due to some of his machinations back in Europe. He fortified his house and never leaves it without guards. The man is definitely hiding something. Something about consumption in his dungeons. I should check his house. I also got another clue. There was a smuggler who had been inside dungeons and lived. He died after all, yet it happened outside the prison. Perhaps I should talk with his fellows - they might tell me some details.
+#TEXT   6
+It seems that our consumption has got a name. Juan. Whatever it means, it is not just another illness which kills people in prisons. I should ask the locals about this Juan.
+#TEXT   7
+I have found an interesting letter inside commandant's house. It looks like our colonel deals with a man whose name starts with 'J'. I also found coins, his share from the last deal.
+Well, I am starting to understand what kind of cargo do they trade.
+#TEXT   8
+A Spanish officer approached me in the streets. He was looking disturbed and he begged me to stop asking people about Juan and consumption. He has appointed a meeting outside the town gates tonight. I feel that I am on the right way.
+#TEXT   9
+I was late and the Spanish doctor is gone. It seems that he was also taken by 'consumption'. Too bad.
+#TEXT   10
+Officer, who promised me to tell the truth about consumption, is dead. The only way to reach Juan is ended. Too bad. 
+#TEXT   11
+So, officer Sergio Saldo told me everything. Senor commandant is really selling his prisoners, formalizing their disappearances as deaths from consumption. Funny, his trading partner is called Consumption. Juan 'Consumption'. His men tried to kill us both during our meeting, it seems that I have alerted their gang. Time to find the rest of them and kill them all. Sergio told me that Juan's ship will be sailing not far from Galera Point till midday. It looks like Angelo still has got a chance to return home...
+#TEXT   12
+Fighting is done, the ship was sunk. Now I should return back to the waitress.
+#TEXT   13
+I have sunken Juan's ship with all prisoners it was carrying. What a shame! I have to be more careful next time...
+#TEXT   14
+Juan was too tough for me so I preferred to retreat, I care about my life's safety...
+#TEXT   15
+I was late to Galera Point and Juan's ship has gone... Damn it.
+#TEXT   16
+Juan, the slave trader, paid me well for his life. Young and noble officer Sergio will likely arrest senor commandant but Juan will find the way to continue his business. And the girl… well, she'd better stay ignorant about her brother's fate.
+#TEXT   17
+Juan has escaped from his deserved fate, I had to leave him in order to save slaves. Angelo will return to his sister and Consumption... perhaps, we shall meet again one day and I will be able to end what I've started...
+#TEXT   18
+End of the story. Consumption is dead and he will never continue his dirty hunt for people. Angelo will return to his sister just like a lot of other people will return back to their families today. I am not sure that senor commandant will be punished yet it is not my problem...
+
+#QUEST Citizpassenger
+Transporting @<sType> called @<sName> to @<sCity>.
+#TEXT   1
+I have to transport a passenger named @<sName> to @<sCity> in @<sDays>. My reward is @<sMoney>.
+#TEXT   2
+Passenger had enough of sailing with me and wait until I finally desire to  do my job. He had left me in the last port.
+#TEXT   3
+Job is done.
+
+#QUEST Monkletter
+Church mail
+#TEXT   1
+A monk from @<sStartCity> asked me to deliver an urgent message to a senior priest of @<sCity>. I agreed, helping holy people is good and it is on my way. I have two weeks.
+#TEXT   2
+Padre was upset because I was too late yet he accepted the papers.
+#TEXT   3
+The message was delivered in time. I have received a blessing and a few golden doubloons.
+#TEXT   4
+Two weeks have passed and I have still a job to do. I should hurry...
+
+#QUEST Churchbooks
+Delivery of prayer books
+#TEXT   1
+A monk from @<sStartCity> has asked me to get some prayer books for their local parish. I can get them in any @<sNation> colony. I have a month for the task.
+#TEXT   2
+Prayer books collected. Time to return with them.
+#TEXT   3
+Despite of my timing, holy father thanked me for my work.
+#TEXT   4
+Holy father presented me a sanctified amulet for my work.
+#TEXT   5
+Month has passed and I still got a job to do. I should hurry up...
+
+#QUEST Nobleslaves
+Slaves for a nobleman from @<sCity>
+#TEXT   1
+Some nobleman from @<sCity> has ordered @<sQty> slaves from me. I agreed. I will be paid @<sMoney> golden doubloons.
+#TEXT   2
+Slaves were delivered, payment received.
+#TEXT   3
+I was too slow with the slave business and my client had already solved his problem without my help. I should find another buyer.
+
+#QUEST Noblelombard
+A family relic
+#TEXT   1
+Some nobleman from @<sCity> named @<sName> has asked me to negotiate with the local usurer concerning about some family relic. @<sName> promised to pay two times more than all my costs in three month later. I suppose I could do some investments. Let's see how much the usurer will demand.
+#TEXT   2
+I have changed my mind. People must solve their problems on their own.
+#TEXT   3
+I managed to have a deal with the usurer. The sum was ridiculous and I won't even go to the nobleman to discuss my reward. Let him keep those coins, he needs them more.
+#TEXT   4
+I failed to deal with the usurer. @<sName> is upset but there is nothing I can do.
+#TEXT   5
+@<sName> was really glad that I had deal with the usurer. He will put down a deposit on my name in three month.
+#TEXT   6
+@<sName> has cheated on me. He wasn't going to pay his debts and went to Europe. A word given by the nobleman…
+#TEXT   7
+ @<sName> has put down a deposit just as he promised. Nice.
+
+#QUEST Marginpassenger
+Kidnapper
+#TEXT   1
+@<sCity>. I have bought some interesting information from a man called @<sName>. It is about a 'profitable' passenger who can be ransomed for a good coin. My future prey is called @<sName1>, she will sail on @<sShipType> '@<sShipName>' in @<sDay> to @<sTargetCity>. @<sName> told me that I may try to frighten a captain and he will likely give the passenger without a fight. I should go to @<sTargetCity> and talk with @<sName2>, he has got his own interest, I will get my coins and I won't make enemies. Perhaps, I should talk with a local commandant? @<sName> will be arrested and I will get some reward...
+#TEXT   2
+I failed to capture '@<sShipName>'. My doubloons were wasted.
+#TEXT   3
+I have sunken '@<sShipName>' with all people aboard. My doubloons were wasted.
+#TEXT   4
+I have tracked down @<sShipType> '@<sShipName>' and talked with it's captain. He has given me his passenger and now should ransom @<sName1> .
+#TEXT   5
+I have tracked down @<sShipType> '@<sShipName>' and talked with it's captain. He refused to give me his passenger peacefully. Well, worse for him them. I have no choice but to board his @<sShipType>.
+#TEXT   6
+I have boarded '@<sShipName>' and captured a passenger I seek. Now I should ransom @<sName1>.
+#TEXT   7
+Are you serious? It turned out that @<sName2> is dead. And what should I do with my 'prey'? It is too dangerous to return it to @<sCity>, I won't risk it. I'd better go to Le Francois, they say that Kind Jaques blackmails relatives of his prisoners. I may try to sell my passenger to him.
+#TEXT   8
+Innkeeper told me that I should look for my man on the streets yet I shouldn't try to find him before twelve a.m and after nine p.m.
+#TEXT   9
+Ransom is received. @<sSum> doubloons. Now I'd better leave this place, who knows what my former 'prey' will tell about me...
+#TEXT   10
+Ransom is received. @<sSum>. Now I'd better leave this place, who knows what my former 'prey' will tell about me...
+#TEXT   11
+ @<sName2> refused to pay. And what should I do with my 'prey'? It is too dangerous to return it to @<sCity>, I won't risk it. I'd better go to Le Francois, they say that Kind Jaques blackmails relatives of his prisoners. I may try to sell my passenger to him.
+#TEXT   12
+Ransom is mine. @<sSum>. That is ridiculous yet it is better than nothing.
+#TEXT   13
+Jaques has given me an interesting information. I should sail to @<sShore> immediately. I have got only a week.
+#TEXT   14
+I was too late. Another prey has escaped from me. Failure again...
+#TEXT   15
+I have arrived to @<sShore> in time and slaughtered Spanish troops. Booty was good.
+#TEXT   16
+Jaques has given me an interesting information. Barquentine '@<sShipName>' loaded with a valuable wood will be sailing from @<sCity> to @<sCity1>. I should try to intercept it.
+#TEXT   17
+I failed to capture the barquentine. Failure again...
+#TEXT   18
+I've sunk the barquentine with all it's cargo. Failure again...
+#TEXT   19
+Barquentine '@<sShipName>' was boarded. Her cargo will easily compensate all my costs.
+#TEXT   20
+I've told commandant about @<sName>.  He promised to deal with it, praised me and... that's all. Oh, no, the governor will be told about my good deed. And, of course, no one gives a fuck about my lost doubloons...
+
+#QUEST MarchCap
+Hot Raid
+#TEXT   1
+Captain @<sName> has offered me to plunder a trading caravan loaded with @<sGoods>. It will be passing not far from @<sShore> at @<sIsland> in @<sDays>. I agreed, I believe that there will be enough loot for both of us, besides, fighting together is always easier.
+#TEXT   2
+We have lost our prey. @<sName> was damn angry yet it was his fault too. Ah, hell with him...
+#TEXT   3
+Unfortunately, @<sName> died before we have reached our prey. I have to turn back. Too bad...
+#TEXT   3-1
+Unfortunately, @<sName> died before we have reached our prey. I will have to find the caravan myself and fight alone or to give up.
+#TEXT   4
+@<sName> died in a fight with the caravan. I have to finish the fight alone and take all the booty.
+#TEXT   5
+We didn't capture a thing from that unfortunate fight. @<sName> tried to blame me and I have shown him a door. Screw this idiot...
+#TEXT   6
+Our booty was too poor. @<sName> was really displeased and so was I. We shared the loot and parted. I hope that we will never meet again.
+#TEXT   7
+We have shared the loot. @<sName> was quite satisfied and so was I. I wish there were more raids like this...
+#TEXT   8
+Our booty was rich. We have shared the loot. @<sName> was extremely satisfied and so was I. I wish there were more raids like this...
+#TEXT   9
+I decided to don't share the booty with my companion. It is all mine!
+#TEXT   10
+Captain @<sName> has offered me to plunder a trading caravan loaded with @<sGoods>. It will be sailing from @<sCity1> to @<sCity2> in @<sDays>. I agreed, I believe that there will be enough loot for both of us, besides, fighting together is always easier.
+#TEXT   11
+Captain @<sName> has offered me to find and capture some pirate ship loaded with @<sGoods>. Pirate named @<sName1> is repairing his tub not far from @<sShore> at @<sIsland>. I agreed, I believe that there will be enough loot for both of us, besides, fighting together is always easier. We have got @<sDays> for our operation.
+
+#QUEST Bakaut
+Goods of strategic value
+#TEXT   1
+I will be able to find Michael Rozenkraft's galleon near @<sIsland> for @<sDays>. I must offer him enough of ironwood, not less than @<sQty>.
+#TEXT   2
+Deal is finished - I have sold @<sQty> of ironwood for @<sDublon> doubloons. My total profit is @<sDublon1> coins. Not bad...
+#TEXT   3
+That was bad… I have brought not enough of ironwood and Michael refused to buy it. I must be more attentive next time if I don't want to loose such a great buyer.
+#TEXT   4
+I have failed Rosenkraft for the third time and he won't work with me again. What a shame...
+
+#QUEST Mangarosa
+Manga Rosa
+#TEXT   1
+I have found a very unusual plant. It is tall, has divided leafs, smells well and intoxicating. I have never seen anything like this before. I have got a feeling that this plant is useful so I took it. I need to find someone who knows the plant.
+#TEXT   2
+This plant is called Manga Rosa, trade girl told me that Indians and Gypsies will pay me well for it.
+#TEXT   3
+Gypsies pay fifty doubloons for each Manga Rosa. I can't even imagine that a plant can cost so much. If I find more Manga Rosa I may sell it to Gypsies yet only one plant once.
+#TEXT   4
+Gypsies use Manga Rosa to make some addiction to the tobacco, my interlocutor has rejected to tell me the secret of this addiction but she told me about one sorceress called Amelia who knows secrets of the plant. She lives in a house somewhere southwest of Main.
+
+#QUEST Amulet_Mayak4_Lighthouseroom
+Guadeloupe lighthouse: amulets
+#TEXT   1
+A keeper of Guadeloupe lighthouse promised me to get @<sAml> in two months for 15 000 pesos.
+#TEXT   2
+The amulet was delivered. Now I can make another order.
+
+#QUEST Amulet_Mayak9_Lighthouseroom
+Santiago lighthouse: amulets
+#TEXT   1
+A keeper of Santiago lighthouse promised me to get @<sAml> in two months for 15 000 pesos.
+#TEXT   2
+The amulet was delivered. Now I can make another order.
+
+#QUEST Amulet_Mayak11_Lighthouseroom
+Cartagena lighthouse: amulets
+#TEXT   1
+A keeper of Cartagena lighthouse promised me to get @<sAml> in two months for 15 000 pesos.
+#TEXT   2
+The amulet was delivered. Now I can make another order.
+
+#QUEST Unique_Goods
+Goods of strategic value
+#TEXT   1
+Jan Swanson has 25 pieces of iron wood to sell every 14th and 28th day of month. 750 doubloons for a single batch.
+#TEXT   2
+Fadey the Muscovite will sell me 50 coils of ropes every 20th day of month. 500 doubloons for a single batch.
+#TEXT   3
+From now on I am authorized to buy 30 pieces of ship silk every first and fifteenth day of month from a new vice-director of Dutch West Indian Company. A price for a single batch is 600 doubloons.
+#TEXT   4
+Sergio Saldo offered me to buy 60 barrels of resin every fifth day of month. A price for a single batch is 600 doubloons.
+
+#QUEST FMQ_Guadeloupe
+Price of Discretion
+#TEXT   1
+I was approached by a man named Bertrand Pinette in the streets of Basse-Terre. He offered me to deliver him and two of his friends to Mosquitoes bay of Spanish Maine in ten days. I took the job. I should see my passengers at Capster beach at ten o'clock tonight.
+#TEXT   2
+It's midnight already and I am too late to pick up my passengers.
+#TEXT   3
+All passengers are aboard, time to set sail. Odd group they are. A Spanish officer and a French officer. Both are very secretive and don't talk at all. What was a Spanish military doing on a French island? I have a bad feeling about this.
+#TEXT   4
+Ten days term has expired and I still haven't reached my destination. I should hurry.
+#TEXT   5
+My voyage to Maine took way too long and the scum passengers had started a mutiny. They are all dead now. Good riddance.
+#TEXT   6
+Passengers delivered. I should get as far as possible from the Spanish shores.
+#TEXT   7
+My guts were right, this deliver of Bertrand Pinette and his girls turned to be more profitable in terms of troubles than money. A runaway war captive, a deserter and a fraud - what a company. I am sure Pinette made a fortune on this voyage. As for me, I am obliged to find Pinette and bring him back to Guadeloupe. Nothing I can do about it, I am being blackmailed by this bastard banker. I should sail to Panama since it was my passengers' final destination. I also should remember to keep my mouth shut in the future!
+#TEXT   8
+I didn't find neither Pinette nor his ladies in Panama. Figures, he must had lied to me out of caution. I should head to Portobello now.
+#TEXT   9
+A bartender gave me a beautiful advise to directly address don Carlos de Milyar regarding Pinette. Nice. This would be the best way possible to end up in a local prison. The bartender's smug face tells me that he knows much more than he told me. I should persuade him to share with me.
+#TEXT   10
+So, no sign of Pinette here, although I managed to find a trail of the third passenger - the French deserter. He is a Spanish don now, a commander of the Sario. His reward for a treason, I imagine. I have no other option rather than to board his tub and to capture 'don Juan'. Even if he won't be able to point me to Bertrand's location, I could use him to ease the anger of the governor of Guadeloupe.
+#TEXT   11
+Looks like I was lucky: a war schooner 'Sario' is stationed in Portobello. Boarding it in front of a fort wouldn't be my brightest idea. I should wait him to leave the harbor into the open sea.
+#TEXT   12
+The Sario is in the open sea. I should chase her!
+#TEXT   13
+I made a mistake and attacked the Sario in port of Portobello. Jean-Juan is dead. All leads are gone and I have no clue where to find Pinette. I should expect troubles with French authorities.
+#TEXT   14
+Don Juan is captured and put in my cargo hold. I should talk to him about Pinette.
+#TEXT   15
+I failed to board the Sario and to capture Jean-Juan. All leads are gone and I have no clue where to find Pinette. I should expect troubles with French authorities.
+#TEXT   16
+So, my prisoner is ready to share information about Bertrand Pinette. Heading to Mosquitoes bay.
+#TEXT   17
+Bertrand Pinette has decided to continue his dirty business on Barbados. I should search for him on the biggest plantation there.
+#TEXT   18
+This bastard Pinette refused to follow to my ship. Had to teach him a lesson. I may have problems with the French powers, but this particular filth is harmless now.
+#TEXT   19
+This bastard Pinette refused to follow to my ship. It was stupid to expect the opposite from him. Lesson learnt. Now I should walk around the plantation and make up a plan of capturing тmonsieur Bertrand by force.
+#TEXT   20
+I have a plan: there is a road from plantation to lighthouse of Barbados. I should station my ship near the lighthouse and set an ambush for Pinette near a crossroad between the town and plantation. I need to find a place where I could stay out of sight long enough. Surely, Bertrand constantly visits Bridgetown for business matters, therefore I don't think it will take more than a few days waiting for him.
+#TEXT   21
+I didn't dare to attack Pinette, he had a very impressive guard. Now I should run away, he saw my ambush and he will undoubtedly inform the commandant. Pity, now I should expect problems with French powers...
+#TEXT   22
+Bertrand Pinette is my prisoner now. Now I should go to Basse-Terre to see the banker.
+#TEXT   23
+It's done, I got my cash and my reputation. These 150 doubloons won't compensate all my troubles but it's still something. That was a price for my indiscretion.
+#TEXT   24
+Pinette has offered me an interesting solution - a letter compromising the banker from Basse-Terre. Don Juan was right about aces in the man's hand. It would be a pleasure to look at the face of my blackmailer. Not to mention Bertrand's stash waiting for me in a cave of Guadeloupe.
+#TEXT   25
+Pinette's letter has made a lasting impression on the banker. He will keep his quite, that's for sure. I should check Bertrand's stash now, it's too risky to let it stay there for too long.
+#TEXT   26
+I was attacked by several mercenaries hired by my good banker from Basse-Terre. Seems like he considers me a dangerous witness and want me dead. Very well, I should pay him a visit again.
+#TEXT   27
+The bastard was scared shitless. I am sure that he won't ever try to harm me in any way.
+#TEXT   28
+The term of two months, given me to find Bertrand Pinette has expired. Now I should take care of my reputation issues within French colonies... @<sAdd>@<sAdd1>
+#TEXT   29
+Pinette's letter has made a lasting impression on the banker. He will keep his quite, that's for sure. I should check Bertrand's stash now, it's too risky to let it stay there for too long.
+
+#QUEST FMQ_Martinique
+Resin Dog
+#TEXT   1
+I met a carpenter of Saint-Pierre shipyard today, he told me that the shipbuilder is asking me to pay him a visit. I believe it will be worth the while, he obviously wants my services.
+#TEXT   2
+I've changed my mind and decided not to pay the shipbuilder a visit.
+#TEXT   3
+The shipbuilder's request to attack a Spanish trade convoy didn't pick my interest, so I refused.
+#TEXT   4
+The shipbuilder has offered me to track down a Spanish convoy sailing from Port-of-Spain, Trinidad, to San Juan, Puerto Rico. I have to board the Bensecho loaded with rare and valuable resin. If I succeed, my profit will be around 1500 doubloons!
+#TEXT   5
+The Bensecho was sunk in the heat of fight. What a pity.
+#TEXT   6
+I let the trade convoy and the Bensecho to slip away. What a pity...
+#TEXT   7
+I had boarded the Bensecho yet failed to find enough amount of resin barrels to satisfy my client. What a shame.
+#TEXT   8
+The Bensecho was plundered, I've got the resin in my cargo hold. Time to see my client.
+#TEXT   9
+It's been more than a month since I got this job. Saint-Pierre shipbuilder must have completely forgotten about me by now.
+#TEXT   10
+I was fooled in the most insolent way: the shipbuilder along with his fellow lieutenant named Felicien Gronier has screwed me by performing an excellent play called 'Arrest of the good-hearted smuggler'. No way I am letting them get away with this. Gregoire Valinnie was right - patience is the key here. I should stay for a while in Saint-Pierre and see when the shipyard will start working again.
+#TEXT   11
+It didn't take too long. Two days, and the shipyard is working again as usual. I should pay a visit to the shipbuilder and look into his deceiving eyes.
+#TEXT   12
+This conman told me the most sad story about his 'awful time in prison' without turning a hair. He's a accomplished bastard, no point to exert pressure on him. He also has a colonial lieutenant as a dearest friend and a partner in crime. I need a plan...
+#TEXT   13
+It appears that there are not only hordes of bastards and scums around me. I have friends too! My good old noble acquaintance Gregoire Valinnie, on his own initiative only, has tracked down Felicien Gronier's most recent operations. The lieutenant has sailed to Guadeloupe on a fresh built tartane called 'Topaz'. I should follow him and find out what he's up to.
+#TEXT   14
+I took my time and let Felicien Gronier to slip away. No way I can compensate my losses now.
+#TEXT   15
+I've found the tartane around Guadeloupe, or to be more specific, near deserted shores of Morn l'O bay. Looks like they are unloading goods to the shore. I should wait for them to finish, disembark and 'confiscate' the resin they owe me. They can not escape from me there.
+#TEXT   16
+I've approached too close to the Topaz and alerted her crew: the tartane is sailing away to the open sea and there is an activity on the shores. I spoiled my own plan, no point to land there now, I am sure that bastards will manage to hide the merchandise in the jungles.
+#TEXT   17
+The Topaz has finished unloading and sailing away at the moment. I should wait for a few hours and then land on the shore. Time to get my resin back.
+#TEXT   18
+We've slaughtered the scum on the shore but it's not a victory yet. Lieutenant Felicien Gronier is here, in flesh. Looks like he had a feeling and decided to return. Great timing, you resin dog! He also has five serious fighters by his side. They are standing there like statues, waiting...
+#TEXT   19
+I didn't take my chances against Felicien Gronier's squad - they had that look. I'd rather stay with less plunder loot but alive. Half of resin is a very satisfying result anyway.
+#TEXT   20
+Felicien Gronier tried to threaten me, yet it didn't turn so well for him and his friends - they are staying forever on this shore. I made some calculations: even though there really was only a half of my resin, I also got ship silk, hemp ropes and iron wood in addition. My losses are compensated with profit!
+#TEXT   21
+The Topaz attacked me when I was leaving the bay. What made this small tartane to engage into her last fight - is a mystery to me.
+#TEXT   22
+I was delaying a landing on the shore for too long and Felicien Gronier's men are gone now. Pity, what a pity...
+
+#QUEST FMQ_Nevis
+Prison Break
+#TEXT   1
+Lieutenant of Royal Marines named Caspar Gratton is asking me to deliver him along with his small squad to Grand Case beach of Sint-Maarten. They are definitely no tourists and this is a Dutch island. But it's not my business, ten thousand pesos for a two days job is very nice.
+#TEXT   2
+I took my time on the voyage and the Brits had started a mutiny. Had to kill them.
+#TEXT   3
+Lieutenant Caspar Gratton decided that I would assist him in his military operation against Holland. No way. Escaping from Sint-Maarten is his problem now.
+#TEXT   4
+I have delivered lieutenant Caspar Gratton and his soldiers to Sint-Maarten yet didn't get paid. Instead, the lieutenant requested to wait for him for a few days, then to take his squad to Antigua where colonel Fox will generously pay me in full. No shit, sir. I hope the Dutch won't learn about this, since aiding and abetting British military operations is not considered to be a good deed in their book... I should sail to Philipsburg and investigate the situation. I also wonder what the marines are up to?
+#TEXT   5
+Three days have passed and I learnt nothing. I should return to Grand Case beach - maybe the lieutenant is already there?
+#TEXT   6
+Lieutenant Caspar Gratton didn't show up after all. I have feeling that he ever won't. I should get the hell out of here before it's too late.
+#TEXT   7
+This is just getting better and better... I have brought an English raiding party to Sint-Maarten with a mission to infiltrate a prison of Philipsburg and to release captive English officers! If the Dutch learn about this - they will screw me. Should I try to find my passengers in the jungles and warn them about the ambush? Or perhaps it's better to run away from here as quickly as possible?
+#TEXT   8
+This governor's boy scared me shitless! I thought that the Dutch had found out about my role in the English military operation... But it's fine, the governor offered me to take part in a hunt for English spies and promised a hefty reward for any solid information. If he'd only knew who he was talking to... I got to find the Brits and warn them or, if it's too late, run away from this island.
+#TEXT   9
+This governor's boy scared me shitless! I thought that the Dutch had found out about my role in the English military operation... But it's fine, the governor offered me to take part in a hunt for English spies and promised a reward for any solid information. If he'd only knew who he was talking to... I agreed to help. Now I have to find the Brits and warn them about the eminent danger or I could help the Dutch instead. Seriously, I owe nothing to the lieutenant, he lied to me, he didn't pay me - why should I even bother? Anyways, right now I should go see a commandant.
+#TEXT   10
+The commandant's nerves are stretched to breaking for some reason. He did tell me something of interest though - the Dutch patrol gone missing. Must be my friends' work. Going to the jungles.
+#TEXT   11
+This 'passenger' job is costing me a lot! Now the lieutenant wants me to assist them in releasing the captive officers. Nice one, lieutenant... I am heading to the city. The Brits have an agent in the local church, his name is Filippe Jacobsen. I can find him there from 8 till 10 o'clock in the morning. I also could sell out the raiding party to the commandant of Philipsburg.
+#TEXT   12
+This 'passenger' job is costing me a lot! Now the lieutenant wants me to help them in releasing the captive officers. Nice one, lieutenant... I am heading to the city. The Brits have an agent in the local church, his name is Filippe Jacobsen. I can find him there from 8 till 10 o'clock in the morning.
+#TEXT   13
+I have decided not to participate in Caspar Gratton's games and sold out him and his squad to the commandant of Philipsburg without telling him about my role in all of this. It's all up to the Dutch now.
+#TEXT   14
+It's done, I was right - the Brits resisted and had been put to waste. No one will ever learn about my part in this mess. I have also received my reward of ten thousand pesos.
+#TEXT   15
+I have decided not to participate in Caspar Gratton's games and sold out him and his squad to the commandant of Philipsburg without telling him about my role in all of this. I also volunteered to join the Dutch punitive squad.
+#TEXT   16
+It's done. The British raiding party had been eliminated, not without my help. No second thoughts - I wasn't the one who started this. I should pay a visit to the governor tomorrow and claim my reward.
+#TEXT   17
+Ten thousand pesos and a six month license of the Dutch West India Company! A splendid reward, though I worry about Brits learning about my part in all of this.
+#TEXT   18
+Jacobsen came up with a smart plan: he want to mix soldier wine with some gypsy dreaming potion. I had to pay for this with my own coin though... Caspar Gratton's bill is just scaling and scaling. I should come to the church same time tomorrow.
+#TEXT   19
+I have ruined Jacobsen's cunning play by being late to our meeting. Wonderful. Did he manage to sneak poisoned wine in prison? No clue what to do next. No, there is one - I should run away from here!
+#TEXT   20
+Jacobsen have arranged everything: tonight the prison guards will taste our dreaming wine. We should get down to releasing the prisoners by midnight. Caution is the key, I must avoid patrols in the streets.
+#TEXT   21
+So, Caspar Gratton and his men are coming to save their countrymen tonight and I will be escorting them right to a prison door... I doubt that Dutch uniform will do much in the streets, we absolutely must avoid patrols. Hope we'll be fortunate enough...
+#TEXT   22
+My great timing has ruined everything. This is shameful. I should get out of here.
+#TEXT   23
+I was late to the meeting at the city gates. I fear that the Brits went in town on their own and got catched by patrols. It's the end. I should get out of here.
+#TEXT   24
+We got exposed by patrols. I've managed to escape, same can't be said about my English friends. What a shame...
+#TEXT   25
+It's done! Now we should hurry to Grand Case beach and leave Sint-Maarten as soon as possible.
+#TEXT   26
+It seems that we got exposed by the Dutch - there was an ambush on the beach. It was a tough fight but we prevailed.
+#TEXT   27
+Had a fight against a Dutch patrol vessel. Victory is mine, but it's not an end - corvette 'Zeepard' is on us. I shouldn't engage into this battle, it's time to sail to Antigua.
+#TEXT   28
+Finally I have delivered the Brits to Antigua. I should pay a visit to colonel Fox of Royal Marines tomorrow. I hope he'll be generous to me.
+#TEXT   29
+30 000 pesos, an arquebus and a decent blade. It's an adequate reward for my troubles, but this job is not something I'd do again.
+#TEXT   30
+I took my time delivering the Brits to Antigua and they left my ship on their own without saying farewells. Very English of them...
+
+#QUEST FMQ_Tortuga
+Just Like Home
+#TEXT   1
+Tortuga has met me with an invitation from the governor's wife to visit her entertainment this evening past six o'clock. It would be curious to observe the local nobility. Hope I won't see there any pissed off husbands awarded with horns because of me. It used to happen all the time back home.
+#TEXT   2
+Tortuga's interesting. Women here know what they want. Filled the ears of some pretty silly lass with my bullshit stories and there we are - I am invited to see her and her friends in a governor palace's bower tonight past six o'clock. In Europe women fancy noble artists of notorious families. In here, it's enough to have a ship. Brother was right, money was well spent.
+#TEXT   3
+I've changed my mind. No time for women business.
+#TEXT   4
+I didn't expect this. Or did I? The local governor's wife wanted me to rob that crazy fanatic. Sure, I need the coin, but not that desperately. The dame wasn't happy about this, but I am out of this story, clean and alive. Should I warn Levasseur about this? I should decide right now.
+#TEXT   5
+I have decided not to. Family business is a dirty mess.
+#TEXT   6
+The evening lost its lovely scent of romance very quickly. The local governor's wife wants to rob her husband. By my hands of course. Jewels are inside a chest. A duplicate key is already made and at this moment it is in the hands of some pirate who is sinking himself in a tavern bottle. How did it all go like that, I wonder? Is the dame playing me? Or is she stupid? At any rate, I need money, Michel will not leave his cell on his own.
+#TEXT   7
+I told Levasseur about his wife's plans, he didn't really like the news, got insane, gave me a beggar sum of coins and showed me the door. I think I am starting to feel sorry for his wife...
+#TEXT   8
+Too late to look for the pirate with a key in a tavern. Whatever, less intrigues - less troubles.
+#TEXT   9
+Screw this. It is all crystal now thanks to my new acquaintance. He was promised the very same boon and yet he was smart enough to drop this. I am not an idiot either. Should I warn the husband? I must decide now.
+#TEXT   10
+My meeting with the pirate was productive. Fifty doubloons for the duplicate key and a good advice. I should watch out for the Levasseur's bitch. She is clearly trying to play me.
+#TEXT   11
+The governor's wife wanted me to give her the duplicate key and see her next day for my share. Somehow I didn't feel very comfortable about this and refused. Time to find the chest and grab the booty.
+#TEXT   12
+I've changed my mind and decided not to help the wife in her endeavor. Too risky. I will get rid of the duplicate key and forget about this mess.
+#TEXT   13
+I have lock picked the Levasseur's chest, yet didn't return to his wife. Farewell, you sneaky bitch, ha-ha.
+#TEXT   14
+I've changed my mind and decided not to help the wife in her endeavor. Too risky. The very first stage of her plan ended with a bloodshed. I didn't even take the duplicate key from the pirate's body - I'd better forget about this mess.
+#TEXT   15
+My meeting with the pirate was productive. A bartender and his ladies are about to do a lot of cleaning. I have the duplicate key, time to see the wife.
+#TEXT   16
+It's done. I should see the governor's wife tomorrow evening and grab my cut. Still, I am writing this and feeling... odd? Naive? Stupid?
+#TEXT   17
+This is not funny at all. An assassis tried to kill me a minute ago and I even have an idea who hired the thug. Although, it turned rather well for me - I have the booty and there is a one more decent fighter serving in my crew. Time to see the... client.
+#TEXT   18
+This is not funny at all. An assassis tried to kill me a minute ago and I even have an idea who hired the thug. Although, it turned rather well for me - I have even let this unfortunate fellow to walk away from this alive. Time to see the... client.
+#TEXT   19
+This is not funny at all. An assassis tried to kill me a minute ago and I even have an idea who hired the thug. Although, it turned rather well for me - the scum is eliminated. Time to see the... client.
+#TEXT   20
+Imagine that, the bitch was under the illusion that I would give her a share after she hired an assassin to kill me? Ha! Bite me.
+#TEXT   21
+It's done. I've got my cut, but I still have a feeling that I was used like a whore. I will be smarter next time. Looks like it is always like that here. Feels almost like home.
+#TEXT   22
+What a fuck up! Damn girl had robed me while we were having fun in a bed. No way I am telling anyone about this, so let's presume it was the most expensive whore in my life. Lesson learnt. I hope.
+#TEXT   23
+Damn it! This fucking bitch had me screwed! It's just my fault. Nothing to do here. That was a really instructive experience.
+#TEXT   24
+It's done. I am alive, I got my share of coin and share of sex. What a lass! I am starting to like my new lifestyle. Something to tell about when I am back home.
+
+#QUEST FMQ_Portpax
+Grandee Albalate
+#TEXT   1
+I helped a man called don Domingo Albalate tonight by getting him out of dirty mess. He is a young Spanish grandee and he asked me to pay him a visit in Santo-Domingo. His house is right to the city gates. 
+#TEXT   2
+I've decided not to go to Santo-Domingo. This is a Spanish city after all.
+#TEXT   3
+I wasn't met by don Domingo, instead there were some odd and aggressive characters. They must had been waiting for Albalate. I should search the place and investigate.
+#TEXT   4
+I've found a corpse of the real Ugo - don Domingo's retainer. There also was a curious unfinished note in a table: 'young senor, I don't understand what is really going on yet, but you are in a great danger. I know that such words mean nothing to you but, please, for the name of your father - please, leave the city as soon as you can! I've found documents of your uncle's...' Obviously, someone is after the young don. His old retainer tried to warn his master but they didn't let him to.
+#TEXT   5
+I've listened don Albalate's story and agreed to take him to his plantation in Portobello. He paid really well in advance, plus it's a good deed to help a young senor in trouble. Heading South with haste before young grandee's uncle returns from Cartagena.
+#TEXT   6
+It took too long for me to reach Portobello and don Albalate had lost his patience and left me.
+#TEXT   7
+Here we are on Portobello plantation. We should find a house of Luis Ortiz and search for any clues inside.
+#TEXT   8
+I've found Ortiz's accounting book. Domingo had fallen into great excitement after he read the notes - turns out that his uncle had been fooling him for years by lowering the real income in several times. Grandee Albalate is going to Portobello to address the court of law.
+#TEXT   9
+That was unexpected. Opposed by suddenly appeared don Luis Ortiz and his thugs, I have decided to leave them deal with their family matters on their own. Besides, I was paid well...
+#TEXT   10
+Don Diego and I had finally met Luis Ortiz face to face as soon as we left his house. The bastard tried to bribe me but failed and now he is dead. Alas, the same can be said about poor grandee Albalate. What a shame... I should run away from here before the authorities consider me an accomplice.
+#TEXT   11
+Don Diego and I had finally met Luis Ortiz face to face as soon as we left his house. The bastard tried to bribe me but failed and now he and his minions are feeding maggots. Don Domingo intends to immediately start dealing with his property, I should see him tomorrow and claim my reward.
+#TEXT   12
+This is the end of the curious case of don Albalate. Young grandee made a decision to get a grip on himself and take control over family business and as for me... I received an excellent reward for my doings.
+#TEXT   13
+We were late to Portobello and Luis Ortiz had taken care of any evidences. Don Domingo is going to deal with his situation in court. I wish him luck. I am not empty-handed though - grandee Albalate gifted me with his rapier.
+#TEXT   14
+I didn't find the young don in marquee Albalate's house, but instead I was met by his retainer named Ugo. He got extremely nervous when he heard news about the attack on his master and ran straight to a commandant. I was literally turned out the place. Fine, I can live without their famous Spanish 'hospitality'.
+
+#QUEST FMQ_Lesson
+The Final Lesson
+#TEXT   1
+Today I met Gregoire Valinnie - the very nobleman who was so kind to me on my first day in this region. It feels like it was ages ago. He offered to join him in a very promising business and I agreed. We should get to Boca de la Serpienta coast in a week, land there with a squad of fighters, find the expedition, suppress the Indian resistance and seize the Company's goods. Sounds both risky and profitable.
+#TEXT   2
+Damn it! Gregoire Valinnie was killed in action. No point to continue absent my partner. Rest in peace, friend.
+#TEXT   3
+We didn't risk giving the decisive skirmish to the Caribs - we have too few men for this. Better stay without plunder, yet alive. We are leaving.
+#TEXT   4
+Flames! Such a stupidity... They must have taken away all the goods already. Gregoire Valinnie was pissed off and left my squadron...
+#TEXT   5
+We have managed to salvage a part of the cargo from the Carib lair before we were interrupted by English and Dutch vanguards. We should get the away from here. Our total plunder: @<sSanl> of ironwood, @<sSilk> of ship silk, @<sRope> of ropes and @<sOil> of resin. Heading back to Saint-Pierre, Martinique.
+#TEXT   6
+Victory. Bloody and pointless such as it is. No way we seize the prize with such casualties. Dammit!
+#TEXT   7
+We are about to conclude a bargain tonight at Lamentin Bay. Soon we'll have the money and others will have an illegal cargo. My partner is a man of foresight, no doubt in that.
+#TEXT   8
+I am out of words here. No one can be trusted in this fucking region. I got some cash but... Lesson learnt in full. I suppose I should be grateful for this, but that scum would better never meet me again.
+#TEXT   9
+I can't say for sure that it was the toughest fight in my life. But I am alive, I have both the cash and the cargo. Another beach swimming in blood. I don't know how I survived this, though I have a feeling that this is only beginning and I have just passed the point of no return. At any rate, thanks for the lesson, monseniour Gregoire. It was learnt in full.
+#TEXT   10
+I can't say for sure that it was the toughest fight in my life. But I am alive, I have both the cash and the cargo. Another beach swimming in blood. I doubt that I would have made it without Prosper. All I know is that no one would come to help me just like that in France. Lesson learnt. Rest in peace, my friend. I have spared some coin to your daughter, I am sorry that I can't do more for her.
+#TEXT   11
+What a shame - Gregoire's vessel was sunk in a battle. This is the failure.
+#TEXT   12
+What a shame - Gregoire's vessel was sunk in a battle during our voyage back to Martinique. All the cargo is gone too.
+#TEXT   13
+It took too much time for me to sail to Martinique and Gregoire had left me with all plundered cargo.
+#TEXT   14
+I didn't arrive to Lamentin Bay in time and the deal was concluded without me. Gregoire's vessel is gone and so is my share.
+#TEXT   15
+I can't say for sure that it was the toughest fight in my life. But I am alive, I have both the cash and the cargo. Another beach swimming in blood. I doubt that I would have made it without Prosper. All I know is that no one would come to help me just like that in France. Lesson learnt.
+
+#QUEST Roger_1
+Flying the Jolly Roger: The Amber Rush.
+#TEXT   1
+A head of pirate settlement La Vega, a famous baron of the Brethren, the Code Keeper Marcus Tyrex has assigned me to investigate a story of mysterious blue amber deposits told by some Spanish captain. I should either find and acquire the amber or prove the story to be nothing but a drunk boasting. My money on the latter. I should go to Santo Domingo and find there a whore by the name of Gabriela Chapada. I have only three days before the information losses any value.
+#TEXT   2
+It took too long for me to get to Santo Domingo. No way I can find that Spanish captain now. What a shame to loose a chance to work for a famous pirate just like that....
+#TEXT   3
+Gabriela told me about the name of my brave military - Esberdo Cabanas. He has sailed to Havana in order to acquire means to prospect the amber. Perhaps he was actually telling the truth... I should set sail to Cuba now.
+#TEXT   4
+It took too long for me to investigate in Havana. What a shame to loose a chance to work for a famous pirate just like that....
+#TEXT   5
+I was told in a harbor office that the Cantavro is on patrol but her location is classified. I am not stupid enough to address a commandant regarding such matters. I should seek for another way to get information I need.
+#TEXT   6
+I have arrive at Cuba. No sign of the Cantavro. I should go to the city and investigate.
+#TEXT   7
+Looks like I know a way to find captain Esberdo Cabanas! An enemy of my enemy is a potential friend of mine. I doubt that the imprisoned officer has any warm feelings to his former captain. I should pay a visit to this lover of wine and women.
+#TEXT   8
+Ha! That's a start! All I need is to help my good friend Lope... I should see a governor.
+#TEXT   9
+It's too late to help the prisoner now. Now way I can not to chase down the Cantavro now. What a shame.
+#TEXT   10
+In order to release don Lope I should gather 250 doubloons. Or thirty thousand pesos. Time is running out...
+#TEXT   11
+This is done. Costed me quite a penny but I believe the final prize will cover my expenses. I should see my friend Lope tomorrow in his cell. I also should prepare to set sail immediately.
+#TEXT   12
+Esberdo Cabanas' operation is at Mosquitoes Coast. I should hurry, I have only five days or so!
+#TEXT   13
+I didn't make to Mosquitoes Coast in time. This is a disaster. What a shame, no point to see Tyrex now.
+#TEXT   14
+I have managed to chase down the Cantavro and his long boats yet I failed to plunder even a single piece of blue amber. What a shame!
+#TEXT   15
+I have managed to plunder several long boats but the total gain is too miserable @<sQty> pieces. No point to come see Tyrex with loot like this.
+#TEXT   16
+A plunder turned to be fortunate, I've managed to gather @<sQty> pieces of blue amber, not to mention an ordinary amber. I should go see Tyrex to boast about this.
+#TEXT   17
+I need to find some Rosario Gusman, according to a governor, this caballero had already tried to help don Lope Montoro out. Let's not waste time then. Don Rosario does a visiting round of city guard's posts everyday from 16 to 20 pm.
+
+#QUEST Roger_2
+Flying the Jolly Roger: The Silk Road.
+#TEXT   1
+Tyrex must be testing the limits of my patience. Instead of hunting down trading caravans, I am to find a regular buyer for a rare commodity - ship silk. I have no clue where to begin with. Anyway, first I should meet with Bald Geffrey, captain of a galleon called Snake, in Capsterville of St. Christopher.
+#TEXT   2
+I have wasted too much time and Bald Geffrey must had already decided to act on his own without waiting instructions from Tyrex. What a shame...
+#TEXT   3
+Why thank you, Tyrex! Smugglers offer a price Marcus won't accept. Stores are not an option. Someone must be in need of it since smugglers are clearly re-sell it to someone out there. I should use my brains here - who are the main consumers of ship silk? This will help me to find a buyer.
+#TEXT   4
+I had a talk with a shipbuilder of Capsterville but it didn't bear any fruits, but I think I am on the right path. This shipbuilder needed ropes from Russia, but who would need a silk from Lyons?
+#TEXT   5
+I have found my potential silk buyer. Alas, we didn't get along. Either he believes me to be a snitch or he simply doesn't want to do business with unfamiliar people. There was a spark in his eyes when I mentioned the silk... I bet the sly dog already has a regular source of silk and it's not a governor. Pressing the master won't do any good here, I should better look for his suppliers. There is a pirate lair on Jamaica - Maroon Town. I should go there and investigate.
+#TEXT   6
+A bartender of Maroon Town can point me to a man who knows everything about what's going on in these waters. I must find 50 doubloons for the greedy bastard.
+#TEXT   7
+Looks like I need someone called Husky Billy, an ex pirate who is know fishing around Jamaica on his old long boat. I should wait for him not far Negril Cape. His tub is called the Fly Fish.
+#TEXT   8
+Billy can point me to the silk supplier, yet he asks a new long boat plus a roll of ship silk in return. I have three days to deliver him all of this before he sail away to the open sea.
+#TEXT   9
+According to Husky Billy, every month between 10th and 15th some brigantine called Utrecht smuggles ship silk to a head master of Port Royal's ship builder. I need to get rid of my competitor. Should I sink them all away from the shores to avoid suspicions? Or perhaps I could inform the governor? Either way, this will make client to be much more agreeable.
+#TEXT   10
+I didn't deliver a long boat and silk to Husky Billy in time. The pirate must be far away by now. No point to tell Tyrex about my failure.
+#TEXT   10-1
+It's been a week and there is no sign of the Flying Fish. I must had missed it's appearance. Shame, no need to bother Tyrex now.
+#TEXT   11
+So, the Utrecht is at the bottom of the sea and so are my competitors. I should land at Portland bay to talk with the buyers.
+#TEXT   12
+Damn it! The bay is empty, someone was here just recently but they are all gone by now. I must had engaged into a fight too close to the shores. I doubt the shipbuilder can be persuaded in the light of recent events. No point to go seeing Tyrex now. It's a total failure.
+#TEXT   13
+I have missed the Utrecht. I was so close yet failed to find the brigantine on the horizon.
+#TEXT   14
+A failure! I have wasted my chance to make a deal with the worker, he took me for a patrol officer, got scared and foolishly attacked me. Idiot. I had to kill them all, shame, but this is over.
+#TEXT   15
+It's done. I managed to struck a deal with the worker. 25 doubloons for a roll. Now I should sail to St. Cristopher and see Bald Geffrey.
+#TEXT   16
+It's been two months already. Bald Geffrey must had already sold his silk to someone else. Pity... but I think I can still deliver the information about the buyer to Tyrex. I should get to La Vega in ten days in order to give Tyrex some time to gather enough silk. Hope it will ease his possible anger.
+#TEXT   17
+All terms are long due. No point making Tyrex nervous by my very presence.
+#TEXT   18
+It's been two months already and I still have no leads to possible buyers. It's a total failure, no need to go to Tyrex at this point.
+#TEXT   19
+I have passed the information I got from Husky Billy to the local authorities. No I wait them to deal with my competitors. I should see the governor by 16th day of @<sTemp> month.
+#TEXT   20
+It's done, My competitor was eliminated by a military patrol. I was even rewarded with 10 000 pesos which is nice. I should see the ship builder, he must be more persuasive by now.
+#TEXT   21
+It's done. I managed to struck a deal with the shipbuilder. 25 doubloons for a roll. Now I should sail to St. Cristopher and see Bald Geffrey.
+#TEXT   22
+Bald Geffrey was instructed - he is about to set sail to Jamaica with a first batch of ship silk from Marcus Tyrex. I should sail to La Vega.
+#TEXT   23
+I reported to Marcus. I should see him in thirty days to receive my poor reward. And a new assignment.
+#TEXT   24
+I reported to Marcus. I should see him in twenty days to receive my reward. And a new assignment.
+
+#QUEST Roger_3
+Flying the Jolly Roger: Hot Sun of Maracaibo.
+#TEXT   1
+This time I am assigned to release a former privateer by the name of Jean Picard from slavery. He is kept on a plantation of Maracaibo. This time I command another idiot called Pelly the Cutlass along with his barquentine the Moray. He will be waiting for me at Cape Ragged Point of Barbados. I say fools are much happier people than ones with brains. All you have to do is to follow orders and swing swords. And I should come up with a rescue plan which is a no small task. Anyways, I can think about it later, time to sail to Barbados.
+#TEXT   2
+I was stupid enough to waste a lot of time on my way to Barbados, it's a failure. Pity to ruin the job and set Marcus up...
+#TEXT   3
+Pelly the Cutlass got orders to sail to Maracaibo, drop an anchor at Guajira Bay and wait for my arrival. It will take a week for the Moray to get there. As for myself, I should go straight to the heart of the beast - a Maracaibo plantation. Jean Picard must be somewhere on it. I suppose I should pretend being a slave trader in order to avoid causing any suspicions. Fifty slave heads will make it look trustworthy enough.
+#TEXT   4
+I was stupid enough to waste a lot of time, it's a failure. Pity to ruin the job and set Marcus up...
+#TEXT   4-1
+I heard rumors of pirate captain Jean Picard was killed by a guard on a plantation. My fault totally.
+#TEXT   5
+Here I am on plantation, pretending to be a merchant. I should focus on finding Jean Picard now.
+#TEXT   6
+I've found Jean but it is unwise to discuss his escape in the presence of guards. I should wait for a night and find Picard in one of shacks.
+#TEXT   7
+Plan's simple and blunt. Picard's men rise a riot and I along with Pelly the Cutlass will attack them from outside. However I should arm Jean's pirates first. 30 common sabers and axes can be taken from the ship's arsenal. The rest must be gathered on my own. 30 pistols and charges for them. Up to 90 potions. Also it would not hurt to have 2 muskets with 20 charges to each. I should see Pelly now.
+#TEXT   8
+Weapons were gathered. I should think on how to deliver it secretly to plantation. I suppose, it's time I have a talk with Picard about it.
+#TEXT   9
+Picard is not an idiot which makes him different from other Tyrex's pawns. The weapons will get to plantation in boxes with goods for trade. I should offer them 500 boxes of either coffee or copra or vanilla.
+#TEXT   10
+The goods exchange agreement was made, the deal will be struck tomorrow evening. I should find Picard and let him know.
+#TEXT   11
+I have wrecked the deal by not bringing enough goods for exchange. Shame that it all was ruined by me stupidity...
+#TEXT   12
+So, I am supposed to take my ship to Guajira Bay and get ready to storm the plantation with Pelly on my side before midnight.
+#TEXT   13
+I had screwed it all by not showing up at the rendezvous point in time.
+#TEXT   14
+My squad had approached too close to plantation's entance and raised an alarm. Our rescue plan is completely ruined.
+#TEXT   15
+I didn't show up at the plantation in time. Our rescue plan is completely ruined...
+#TEXT   16
+I must had been too slow with gathering weapons for the rescue. Jean Picard and his men are gone from plantation - either they were sold to another place or tortued to death. It's over.
+#TEXT   17
+We've managed to organize a riot yet Jean Picard died in a fight. It's over.
+#TEXT   18
+It's done! Too soon for a celebration - we have a Spanish squadron on us. I ordered Picard and Cutlass to flee on the Moray, as for me, I am about to engage the Spanish.
+#TEXT	19
+The enemy has a serious force. I should eliminate his flagship, cause confusion and then flee.
+#TEXT	20
+A fight well fought. Heading to La Vega to see Tyrex at once.
+#TEXT	21
+It's done, we've fled to the jungles. Now we should head to Guajira Bay before more Spanish will arrive.
+
+#QUEST Roger_4
+Flying the Jolly Roger: Pirate Trading for Dummies
+#TEXT	1
+Marcus Tyrex has sent me to Isla Tesoro to see the local merchant. Finally some real pirate job. 
+#TEXT	2
+It took me too long to get to Isla Tesoro and now it's too late. Pity, no job for me then, I should go see Tyrex as we agreed to.
+#TEXT	3
+Pasquale Lavoisier assigned me to attack a Dutch trading convoy loaded with iron wood. The wood is carried by the Rosbohom, @<sShip>. I should engage them at @<sdegN> @<sminN> North, @<sdegW> @<sminW> West in five days. The wood must be delivered to Isla Tesoro, to Pasquale. Tyrex was right about this mission.
+#TEXT	4
+I failed to find the convoy even though I tried. Pity... I should go see Tyrex as we agreed to.
+#TEXT	5
+In the heat of a fight I had accidently sunken the taget vessel. Idiot... No point telling that to the merchant. I should go see Tyrex as we agreed to.
+#TEXT	6
+The enemy turned to be way to tough for me. No need to shame myself before the merchant. I should go see Tyrex as we agreed to.
+#TEXT	7
+The Dutch convoy was found and taken as a prize. I should go to Isla Tesoro.
+#TEXT	8
+The merchant was not happy about my performance. Screw this profiteer. I should go see Tyrex as we agreed to.
+#TEXT	9
+The merchant got his iron wood and I got my money. Truth to be told, damn scrooge paid coppers for such a job. Never to deal with him again.
+#TEXT	10
+I had met Bold Geffrey at Isla Tesoro. He told me that Pasquale is in business with Tyrex. Now I see. It's a shame there is no way to punish that damn trader. With a patron like that...
+#TEXT	11
+I've met my old acquaintance Jean Picard who was about to point Marcus to the greed of Pasquale Lavoisier. Not the best idea, so I warned him. Picard offered me to get back what Pasquale owes me. Sounds promising, I should see him in two weeks at Gonaives Bay. Seems like Jean has an idea of how to screw the four-eyed scrooge.
+#TEXT	12
+Jean Picard has a plan of how to break in Pasquale Lavoisier's and Tyrex's house on La Vega. We should do everything before dawn.
+#TEXT	13
+I was late to a meeting with Jean. Pity.
+#TEXT	14
+I arrived to Gonaives Bay on foot which made Picard mad. Jean just left without telling me about his plan. What a shame...
+#TEXT	15
+Robbery well done. My cut must be exceeding 100 000 pesos which covers Lavoisier's debt to me.
+#TEXT	16
+Robbery well done. My cut must be exceeding 100 000 pesos which covers Lavoisier's debt to me. Plus, I didn't allow Jean to kill a witness - a whore belonging to Tyrex. I am probably getting soft but a women on Isla Mona can be a benefit, he-he. She won't run away from there anyway.
+#TEXT	17
+We parted our ways with Jean Picard at Gonaives Bay. He told me he is quitting and suggested that I should do the same. His words regarding Tyrex are somewhat true butЙ not now. Now I should see Marcus and report him about Ignacio Marco.
+#TEXT	18
+We wasted too much time in the jungles on a road to La Vega and didn't risk to do a robbery. Jean was very upset. I should see Marcus and report him about Ignacio Marco.
+#TEXT	19
+I have completely forgotten about Jean Picard's offer! Pity.
+
+#QUEST Roger_5
+Flying the Jolly Roger: Stones of Blood and Forest
+#TEXT	1
+My next mission to locate and plunder a Spanish mining village called Merida. Jean Picard will accompany me in this. Tyrex also provided me with one of his buccaneers - Luka Bayard also known as Leprechaun. I should meet him and his men in La Vega's port.
+#TEXT	2
+I was taken away by other matters and now Picard with Leprechaun had left my ship. What a shame...
+#TEXT	3
+Our goal is Cape of Delusive Hopes, South of Maracibo Lake. No time to waste!
+#TEXT	4
+Here we are in the Spanish Maine. We should find an Indian village and have a talk with their chieftain about a guide to Merida.
+#TEXT	5
+The chieftain is not a talkative type. Leprechaun was right - no way I am doing this without gifts.
+#TEXT	6
+An Indian chieftain by the name of Kumwana has promised me to gather his warriors and have a talk with them. I should see him tomorrow morning to get an answer.
+#TEXT	7
+Redskin chickens! Not a single soul wanted to guide me to Merida - they fear some Capongas in the jungles... This is a problem, I should talk to Leprechaun.
+#TEXT	8
+Not sure it will work but I have no other option here. I should try to gain any luck by gifting and persuading their women. One of them might presuade her husband to help us. I also should bring antidotes to the Leprechaun before we leave the village.
+#TEXT	9
+An Indian girld named Hayami promised me to have a word with her husband Tagofa. I should see them both after a sunset.
+#TEXT	10
+Tagofa agreed to guide us to Merida. But his sly woman demanded to pay forward: two handguns - a Duelling Pistol and a Trombone along with thirty charges to each. Also, a spyglass, an emerald necklace and a golden ring with a ruby.
+#TEXT	11
+Tagofa has joined my unit. In order to reach Merida we need six long boats. Since Lokonos don't posses decent long boats, we are going to build them. For this it is required twenty packs of planks, ten bales of leather and an officer to lead the building - an assigned carpenter.
+#TEXT	12
+It didn't take long to persuade a governor of Merida to part with all mined stones. Picard was right - it's a heavy booty. Nothing to do here now. Time to go back to our longboats.
+#TEXT	13
+Reckless Capongas had us ambushed inside the cave. Had to put another group of theirs down.
+#TEXT	14
+Longboats are ready. I should break a word with Tagofa.
+#TEXT	15
+We were attacked by the very Capongas I have heard so much about recently. They are all dead now and Merida is close to us.
+#TEXT	16
+The Spanish turned to be way too suspecious and aggressive - they didn't think twice before charging on my unit. The very last mistake in their lifes... Merida's garrison is eliminated, all of her protectors are dead. Time to break the gates.
+#TEXT	17
+The last Spanish eager for a glorious death are dead now. Time to pay the governor a visit.
+#TEXT	18
+The booty was split fairly. My efforts to release Jean from slavery were also compensated in full. Fortunate me. Time to go to La Vega and report to Tyrex.
+#TEXT	19
+It took too much time for me to gather gifts for the red skinned couple. Leprechaun along with Jean decided they can do better without me. Probably for the best!
+#TEXT	20
+I was too slow so Leprechaun along with Jean decided they can do better without me. Probably for the best!
+#TEXT	21
+I was too slow so Leprechaun along with Jean decided they can do better without me. Probably for the best!
+
+#QUEST Roger_6
+Flying the Jolly Roger: Master of Trickery
+#TEXT	1
+Alas, Marcus doesn't have another profitable job for me. Howeverthe Master of Codex has a personal task - I should escort the Kitty to Bridgetown of Barbados. I am obliged to please my patron... The ship is in the waters of La Vega at the moment.
+#TEXT	2
+Looks like I drank too much rum since the Kitty is gone to Bridgetown on her own. What a shame...
+#TEXT	3
+The Kitty was sunken in a naval combat. What a shame... No way I am showing up to Marcus now.
+#TEXT	4
+Well-well! I was approached by Ignacio Marco in Bridgetown! He offered me to partner him in an attack of a Dutch silver caravan. The Marco who set Jean Picard up. I agreed to his offer, the prize is too promising but I should be careful with this man. Funny, the caravan has made a stop on an already familiar island to me...
+#TEXT	5
+Well-well! I was approached by Ignacio Marco in Bridgetown! He offered me to partner him in an attack of a Dutch silver caravan. The Marco who set Jean Picard up. I agreed to his offer, the prize is too promising but I should be careful with this man. The caravan has made a stop near the island with the following coordinates: 12 48' North, 64 41' West.
+#TEXT	6
+The caravan is indeed here. Ignasio Marco didn't lie. Very well, time to free the Dutch of their cargo.
+#TEXT	7
+The fighting with the Dutch is over. Ignasio Marco is signalling me from his polacre, looks like he wants me to go ashore to split the plunder, obviously. I am about to go there but also I will put a watchman over the nearest hill armed with a spyglass... I need to be sure the horizon stays clear. 
+#TEXT	8
+My precaution has served me well - this bastard Ignasio Marco works in cooperation with Castillians. It is the very same scenario happened to Picard. A job with a partner near South Maine, then splitting the spoils and then the Spanish squadron. If it wasn't for my watchman, they would have had me just like they had Picard. I still have time to flee... I guess. 
+#TEXT	9
+I am not sure I should engage this Spanish squadron. I believe fleeing is the best possible option in situation like this. It will take no less than 3000 yards between us for me to have a chance of fleeing.
+#TEXT	10
+I had engaged into a tough battle against the Spanish heavy squadron and eliminated it. Now they know what is like to fight a real corsair... I should hurry and see Tyrex as soon as possible.
+#TEXT	11
+I've managed to flee from the Spanish squadron. I should hurry and see Tyrex as soon as possible.
+#TEXT	12
+The El Casador, the flagship is eliminated. Now we can try to flee - all we need is 1000 yards distance from them.
+
+#QUEST Roger_7
+Flying the Jolly Roger: Jarl's Treasures
+#TEXT	1
+And yet another puzzle quest from Tyrex: I should go to god-knows-where and find treasures of a recently dead pirate by the name of WulfricJogansen. All I have is his log. I should go to my cabin and take my time, to try getting the most of this log.
+#TEXT	2
+I got a lead from Wulfric's ship log - the Mosquito Bay. Is seems that he had been visiting with an extreme frequency. This bay leads to a couple of caves deep in the mainland. I should investigate them.
+#TEXT	3
+I was attacked by enraged Caribs in a grotto of Mosquitoes Bay. Looks like I've interrupted some rite they were performing around a fireplace. It never gets easy. Now I can search for the treasure in peace.
+#TEXT	4
+Alas, no sign of any treasures inside the grotto at Mosquitoes Bay.
+#TEXT	5
+I have found a chest with quite an interesting content, although I am sure it's not Red Wulf's treasure.
+#TEXT	6
+I've met some beggars on the exit of the cave. Looks like it was their cache I found earlier.
+#TEXT	7
+This lead was false. I should had expected more from Red Wolf. He was not like the rest unfortunate bastards who hide their belongings inside road caves. I should go to my cabin and try again.
+#TEXT	8
+Okay, I have another lead. Wulfric had been regularly visiting some Gaspard Parmentier at Tortuga... He could the Viking's personal banker. I should investigate.
+#TEXT	9
+I was told of how to find Gaspard's place. I should go there and careful inquire about Red Wolf. It's better to pay a visit during a day. Bankers do not fancy night guest, he-he.
+#TEXT	10
+Gaspard Parmentier's house close. I knocked the door several times and nothing happened. However I heard someone walking inside the house. This banker is clearly hiding from the men like me. Men he doesn't know. I should stand near the hatch to the dungeons and observe the entrance.
+#TEXT	11
+Blimey! My old friend Pelly the Cutlass has arrived to Gaspard and the door magically opened for him. This is insulting. I should wait for Cutlass to leave and then ask him around Gaspard. Pelly is an idiot, he will tell me everything I need to know.
+#TEXT	12
+Bad lead again! Gaspard Parmentier, also known as Goldenteeth, is an ordinary buyer of stolen gems and jewelsЙ I should go to my cabin and try again.
+#TEXT	13
+There is a word 'gord' often written there and there. What the hell is 'gord'? I should find it out since I have no more solid leads to investigate. My friend Gino can help me in this scientific matter. Heading to Antigua.
+#TEXT	14
+There is a word 'gord' often written there and there. What the hell is 'gord'? I should find it out since I have no more solid leads to investigate. Heading to La Vega, I need to ask Tyrex for help in this.
+#TEXT	15
+So, our Wulfric the Viking had a personal secret base within the Archipelago! I bet that's where his treasure lies. I should go to my cabin and try to calculate it's location using the man's ship log.
+#TEXT	16
+I think I have the location of gord I am looking for. It's on an island not marked on any map. I should explore it.
+#TEXT	17
+I was suddenly attacked in the jungles by a horde of pirate. Must be Wulfric's men unaware of his fate. I should gather a boarding party and proceed.
+#TEXT	18
+This is it, I have found Wulfric's gord. Only three of his men survived and they are in my crew now. A carpenter named Rodgar and two of his helpers. Time to search for the treasure. It must be hidden here. And hidden well.
+#TEXT	19
+I have found Red Wolf's treasures. Helluva money: 750 000 pesos and 900 doubloons. A third goes to Tyrex, the rest is mine by right. I will keep the secret of this island to myself. This is now my base, my gord. I can repair ships and store goods here. One day I might build and expand here.
+#TEXT	20
+I have my very own base from now on! It's coordinates are: 18 42' North, 72 9' West. Island is called Isla Mona. Rodgar Janssen will stay here overseeing the village and repairing my ships. Time to see Tyrex and report to him.
+
+#QUEST Roger_8
+Flying the Jolly Roger: Corrida
+#TEXT	1
+Marcus have ordered me to investigate the situation at Martinique. They say Ignacio Marco was seen there. I should go there and watch the bastard. I am forbidden to attack him though - Marcus has his own plans towards him.
+#TEXT	2
+The Torero is on a raid of Le Francois accompanied by a frigate and a corvette. My friend must be here thenЙ I should go to Le Francois and avoid asking anyone about Marco and his crew. My task to watch and observe.
+#TEXT	3
+Ignacio Marco had spent almost two hours in the residence of Jacques Barbason - a head of Le Francois. Then he headed towards a port along with two serious gentlemen who probably captains of other two ships. I should hurry to St. Pierre and try to pursue them further.
+#TEXT	4
+Ignacio Marco has already sailed away when I reached my ship. Whatever. I got some valuable information, I should tell Marcus about it.
+#TEXT	5
+I failed to arrive to Marcus in three weeks and his plan was ruined. What a shame. Nevertheless I am still in business - I should come back in a month on a single powerful ship. And never be late again.
+#TEXT	6
+So, I am to execute a complex plan of Marcus. First stage: I must intercept the Torero which is heading to Philipsburg from Cuba. I'd better attack her near Sint-Maarten but not too close to the island, Barbason's pirate may notice the fight otherwise.
+#TEXT	7
+I have sunken the Torero in the heat of fight. What a shame. I should go to Marcus.
+#TEXT	8
+I have successfully boarded the Torero yet failed to find her log. No way I am getting the information we need. What a shame. I should go to see Marcus.
+#TEXT	9
+I have launched a fight with the Torero too close to Sint-Maarten and had been spotted by other pirates. What a shame. I should go to see Marcus.
+#TEXT	10
+I have successfully boarded the Torero. Ignacio Marco didn`t surrender yet I still have his log. I should go to my cabin and investigate it.
+#TEXT	11
+Now I have all information I needed. Pigeon Spyke is on his way to Tyrex, now it`s time to signal Barbason's squadron near Sint-Maarten to sail to Puerto-Rico. I should keep my distance though. 1500 yards from Philipsburg`s fort will suffice.
+#TEXT	12
+What a shame. I have given the wrong signal to Barbason`s pirates. I should get back to Marcus.
+#TEXT	13
+What a shame. I got to close to Barbason`s pirates and compromised the Torero`s true legend. I should get back to Marcus.
+#TEXT	14
+The signal was sent! The pirates are sailing right to Puerto-Rico where the Spanish ambush have been set. I should hurry to intercept the gold caravan. Hope Marcus`s reinforcements will be there in time.
+#TEXT	15
+What a shame! I`ve wasted too much time and failed to locate the Spanish gold caravan. I should get back to Marcus.
+#TEXT	16
+What a shame! I`ve totally forgotten Marcus`s instructions not to add any ships beside the Torero to my squadron. Now the pirate will be chasing me for a while. I should get back to Marcus.
+#TEXT	17
+The promised reinforcements didn`t disappoint me — Marcus himself has arrived to aid me on the Red Dragon, his warship! The Spanish are gone. I should take a longboat!
+#TEXT	18
+Sadly, we didn`t get any gold from this. I should see Marcus in three weeks on a single warship. Something big is coming.
+#TEXT	19
+Sadly, we didn`t get as much gold from this as we hoped for. I should see Marcus in three weeks on a single warship. Something big is coming.
+#TEXT	20
+The plunder was good though Tyrex had hopes for more. I should see Marcus in three weeks on a single warship. Something big is coming, I hope it will be bigger that this raid.
+#TEXT	21
+Tyrex and I were pleased by the size of our prize. I should see Marcus in three weeks on a single warship. Something big is coming, I hope it will be bigger that this raid.
+#TEXT	22
+Despite my fail, Tyrex wasn`t really mad at me. I should see Marcus in three weeks on a single warship. Something big is coming, I hope it will be bigger that this raid.
+#TEXT	23
+I was too late — Tyrex has already gone to the raid. What a shame!
+#TEXT	24
+I failed to find the Torero in the high seas. Everything`s lost… I shout get back to Marcus.
+
+#QUEST Roger_9
+Flying the Jolly Roger: City of Blood Harvest
+#TEXT	1
+Yo-ho-ho! Me with Marcus, Bold Geffrey, Cutlass Pelly, Luke Leprechaun and Tyrex`s friend Bernard Vensan are about to raid Cartagena! There is a pile of gold waiting for us inside the city`s fort, not to mention ransom we will get from the townsfolk. A great life it is  except a hangover, ha-ha! Helluva party we had yesterday, the booze, the girls — La Vega has much to offer to Charley Prince, I am being respected in this place! I love this life!
+#TEXT	2
+I am an idiot beyond measure! My exceptional navigation skills made the other to abandon me!
+#TEXT	3
+Here is the city of Cartagena. My first task is to eliminate guard ships.
+#TEXT	4
+The Spanish squadron has been eliminated. I should get aboard the Red Dragon.
+#TEXT	5
+Tyrex and me are going to bombard Cartagena`s fort. It bothers me a bit but the Red Dragon is a fort of herself.
+#TEXT	6
+The resistance has been terminated. Cartagena is ours! Marcus is heading to fort for the gold and I am ordered to get a ransom from a governor.
+#TEXT	7
+I made the Spanish to pay even more than Marcus wanted — the ransom of 350 000 pesos is acquired. Heading to the fort.
+#TEXT	8
+The gold of Cartagena has been loaded on our ships. My cut is @<sGold> pieces of gold and @<sMoney> pesos. It`s a rich prize and it`s an fair split... mostly. I didn`t really like that Marcus split the gold without me, plus he took a fucking half of it! I agree, the lead was his and he had the biggest ship… Never mind, I have a new order, I should head to Tortuga and put my coin to good waste there. Whores and rum, I will not disappoint you!
+
+#QUEST Roger_10
+Flying the Jolly Roger: Nemesis
+#TEXT	1
+Life`s good! Janette`s brothel will remember me for a fucking long time, ha-ha! Costed me quite a penny but I have a new lead already: my new girlfriend, Camilla, is offering me a treasure map to a lost city of gold miners. I am sure this is not a com since the girl was going to sell it to Marcus in the first place. She will be waiting for me in  the church from 10 am till 1 pm. I should prepare 200 doubloons for her.
+#TEXT	2
+I have Camilla`s map. I should study it and get ready for anything. I need to prepare munitions, healing potions, antidotes in case things will turn ugly.
+#TEXT	3
+Here it is — Caratasca Lagoon. A wild and deserted shore. Here my journey to the ruins begins.
+#TEXT	4
+An obstacle! I clear my way with explosive for certain. Someone have already been here not so long ago. Heading back to my ship to get gun powder.
+#TEXT	5
+Barrels filled with gun powder are ready. I should light a fuse and get to cover.
+#TEXT	5-1
+My plan worked perfectly! The path is clear!
+#TEXT	6
+I`ve found the ruins. Somewhere here must a way to dungeons where the treasure is buried.
+#TEXT	7
+Camilla, this bitch! He sold the map not only to me but also to Cutlass! I would never thought that greed can blind a man like this. We used to be good partners… Seems like the poor bastard was always envying me.
+I`ve found the treasures but they are protected by metal bars. I should get instruments from the ship.
+#TEXT	8
+Fuck!.. It hurts! Jeffrey had set me up! Greedy bastard! A second `friend` from the Brethren who tried to kill me today because of gold. I should get the hell out of here right now. This is so wrong. Who else is going to meet me here? Picard? We had an agreement, but nothing is certain anymore. Geffrey`s men are still around, I heard the scum mentioned a musketeer unit he brought here.
+#TEXT	9
+Sadly instead of Jean, I`ve met Luke Leprechaun here. He and his buccaneers had set an ambush upstairs. Turned out the old forester always had a grudge towards me. So much for signing bandits and pirates as friends!
+I do not see all of this as a game of chance. Something is in the air, I should get the hell out of here!
+#TEXT	10
+All of this had been orchestrated... A fucking avenger of the people set a trap for me. The man`s name is don Henrico and the worst part is that his accusations are all just and true.
+I am all alone here, in this dark, creepy and silent dungeons. I am surrounded by the dead even rats are not present here. I still have time to find a way out before starvation kills me.
+#TEXT	11
+I`ve found a rusty key on a skeleton and it opens a door leading downstairs. Perhaps it is a way out?
+#TEXT	12
+I woke up in cold sweat. How long had I been asleep? I had terrible nightmares of Merida in flames and her dead citizens.  My brother Michelle was there too. He said something about a key... near me? On the stairs?
+#TEXT	13
+It's a miracle! I've found an old silver key on the stairs!
+#TEXT	14
+I've found another dungeon. It's flooded and has a very close resemblance to the entrance of Hell. It's hot in here and there is a deep smell of sulfur around. I have no idea where to go next plus I should worry about hot gazers bursting from the rifts.
+#TEXT	15
+I've reached some cave and it has fresh and cool water to ease a pain from sulfur air and burns. The air is different here, must be the exit nearby!
+#TEXT	16
+I recognize this place! I've been here on my way to the ruins! Soon I will see the sea! 
+#TEXT	17
+I did it! It's a second birth no less... I believe I've earnt such punishment. I am a monster.
+Time to part my ways with Marcus Tyrex and the piracy. I will meddle in their affairs again, I am sure of it but I will never be one of them again. Pirate Charley Prince died in the dungeons of dead city.
+@<sText>

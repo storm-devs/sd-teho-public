@@ -1,0 +1,38 @@
+Ship_got_good 		{%1 centners of %2 are taken on board}
+Ship_cant_got_good 	{No place for %1}
+
+seg_Balls 		{cannonballs}
+seg_Grapes 		{grapeshot}
+seg_Knippels 		{knippels}
+seg_Bombs 		{bombs}
+seg_Sailcloth 		{sailcloth}
+seg_Planks 		{planks}
+seg_Slaves 		{slaves}
+seg_Wheat 		{wheat}
+seg_Ebony 		{ebony}
+seg_Chocolate 		{cocoa}
+seg_Suga 		{sugar}
+seg_Wine 		{wine}
+seg_ShipSilk 		{shipsilk}
+seg_Rum 		{rum}
+seg_Tobacco 		{tobacco}
+seg_Coffee 		{coffee}
+seg_Mahogany 		{mahogany}
+seg_Cinnamon 		{vanilla}
+seg_Copra 		{copra}
+seg_Paprika 		{paprika}
+seg_Fruits 		{fruits}
+seg_Ale 		{ale}
+seg_Ropes 		{ropes}
+seg_Clothes 		{clothes}
+seg_Cotton 		{cotton}
+seg_Sandal 		{ironwood}
+seg_Leather 		{leather}
+seg_Oil 		{tar}
+seg_Food 		{food}
+seg_Weapon 		{weapons}
+seg_Gold 		{gold}
+seg_Silver 		{silver}
+seg_Powder 		{gunpowder}
+seg_Brick 		{bricks}
+seg_Medicament 		{medicine}

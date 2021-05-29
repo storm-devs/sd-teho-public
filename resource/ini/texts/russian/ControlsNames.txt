@@ -1,0 +1,651 @@
+newLine {
+
+
+}
+
+HelpChooser {Select help topic}
+MainInterface {Interface controls}
+DialogControls {Dialog}
+WorldMapControls {World map}
+BattleInterfaceControls {Interface controls}
+Sailing1Pers {1st person sea}
+Sailing3Pers {3rd person sea}
+FightModeControls {Combat mode}
+PrimaryLand {Controls on land}
+
+
+
+ChrCamTurnV
+{
+Vertical movement of the camera following character
+
+}
+ChrCamTurnH
+{
+Horizontal movement of the camera following character
+
+}
+ChrCamCameraSwitch
+{
+Camera mode toggle 'from behind' \ '1st person'
+
+}
+ChrCamNormalize
+{
+Center camera
+
+}
+
+
+
+
+ShipCamera_Turn_V
+{
+Vertical movement of the camera following ship
+
+}
+ShipCamera_Turn_H
+{
+Horizontal movement of the camera following ship
+
+}
+ShipCamera_Forward
+{
+Zoom in to a ship
+
+}
+ShipCamera_Backward
+{
+Zoom out from a ship
+
+}
+
+
+
+
+
+
+
+DeckCamera_Turn_V
+{
+Vertical camera rotation (deck view)
+
+}
+DeckCamera_Turn_H
+{
+Horizontal camera rotation (deck view)
+
+}
+DeckCamera_Forward
+{
+Forward (deck view)
+
+}
+DeckCamera_Backward
+{
+Back (deck view)
+
+}
+DeckCamera_Left
+{
+Strafe left (deck view)
+
+}
+DeckCamera_Right
+{
+Strafe right (deck view)
+
+}
+
+
+
+
+
+
+
+
+ChrTurnH
+{
+Character rotation
+
+}
+ChrTurnV
+{
+Character movement
+
+}
+ChrTurnHL
+{
+Rotate character left
+
+}
+ChrTurnHR
+{
+Rotate character right
+
+}
+ChrAction
+{
+Perform action
+
+}
+ChrForward
+{
+Move forward
+
+}
+ChrForward1
+{
+Move forward
+
+}
+ChrForward2
+{
+Move forward (alternative)
+
+}
+ChrBackward
+{
+Move backwards
+
+}
+ChrBackward1
+{
+Move backwards
+
+}
+ChrRun
+{
+Switch to running
+
+}
+ChrRunStick
+{
+Switch to running
+
+}
+
+ChrBlock
+{
+Block
+
+}
+ChrRecoil
+{
+Snap back
+
+}
+ChrParry
+{
+Parry
+
+}
+
+ChrAttackForce
+{
+Lunge
+
+}
+ChrAttackFast
+{
+Strike
+
+}
+ChrAttackRound
+{
+Group attack
+
+}
+ChrAttackBreak
+{
+Heavy attack
+
+}
+ChrAttackFient
+{
+Feint
+
+}
+
+ChrAttackBreakBase
+{
+Heavy attack / Feint
+
+}
+
+ChrAttackRoundBase
+{
+Group attack
+
+}
+
+ChrAttackChoseBase
+{
+Fencing mode
+
+}
+
+ChrBlockBase
+{
+Block
+
+}
+ChrAttackBase
+{
+Lunge / Parry
+
+}
+ChrAltAttackBase
+{
+Strike / Group attack
+
+}
+
+ChrFire
+{
+Fire
+
+}
+
+ChrFightMode
+{
+Toggle combat mode
+
+}
+BOAL_UsePotion
+{
+Drink health elixir
+
+}
+BOAL_ActivateRush
+{
+Use Ometochtli tincture 
+
+}
+BOAL_DeadSearch
+{
+Loot corpse
+
+}
+
+UseAntidote
+{
+Drink antidote
+}
+
+MapView
+{
+View maps
+}
+
+Alchemy
+{
+Crafting interface
+}
+
+Dolly
+{
+Teleportation
+}
+
+Ultimate_potion
+{
+Drink Indian potion
+}
+
+Ship_TurnLeft
+{
+Turn ship left
+
+}
+Ship_TurnRight
+{
+Turn ship right
+
+}
+Ship_SailUp
+{
+Raise sails
+
+}
+Ship_SailDown
+{
+Lower sails
+
+}
+Ship_Fire
+{
+Cannon volley
+
+}
+
+Sea_CameraSwitch
+{
+Toggle camera "behind ship" / "on deck"
+
+}
+Telescope
+{
+Toggle spyglass
+
+}
+TelescopeIn
+{
+Spyglass on/zoom in
+
+}
+TelescopeOut
+{
+Spyglass off/zoom out
+
+}
+
+BI_MapEnter
+{
+Exit to map
+
+}
+
+
+
+WMapTurnH
+{
+Rotate camera around ship (in map mode)
+
+}
+WMapTurnV
+{
+Camera height (in map mode)
+
+}
+WMapCameraRotate
+{
+Camera gliding/rotation mode on
+
+}
+WMapForward
+{
+Zoom camera in
+
+}
+WMapBackward
+{
+Zoom camera out
+
+}
+WMapCameraSwitch
+{
+Toggle view mode
+
+}
+WMapShipSailUp
+{
+Sail forward
+
+}
+WMapShipSailDown
+{
+Sail back
+
+}
+WMapShipTurnLeft
+{
+Turn left
+
+}
+WMapShipTurnRight
+{
+Turn right
+
+}
+WMapCancel
+{
+Exit map to the sea
+
+}
+
+
+
+
+
+
+Interface
+{
+Bring up game interface
+
+}
+MainMenu
+{
+Bring up main menu
+
+}
+MainMenuDouble
+{
+Bring up main menu
+
+}
+Help
+{
+Bring up game help
+
+}
+
+
+
+
+
+BICommandsActivate
+{
+Bring up action menu
+
+}
+LICommandsActivate
+{
+Bring up action menu 
+
+}
+BICommandsConfirm
+{
+Select command 
+
+}
+BICommandsCancel
+{
+Cancel command 
+
+}
+BICommandsLeft
+{
+Action menu - navigate left
+
+}
+BICommandsRight
+{
+Action menu - navigate right
+
+}
+MiniMapZoomIn
+{
+Zoom in on mini-map
+
+}
+MiniMapZoomOut
+{
+Zoom out on mini-map
+
+}
+BIFastCommand
+{
+Perform a quick command
+
+}
+
+
+
+
+
+HelpChooser_Cancel
+{
+Exit help
+
+}
+HelpChooser_Action
+{
+Show help for the current element
+
+}
+HelpChooser_Next
+{
+Next help element
+
+}
+HelpChooser_Prev
+{
+Previous help element
+
+}
+HelpChooser_Left
+{
+Left (in help mode)
+
+}
+HelpChooser_Right
+{
+Right (in help mode)
+
+}
+HelpChooser_Up
+{
+Up (in help mode)
+
+}
+HelpChooser_Down
+{
+Down (in help mode)
+
+}
+
+
+
+
+
+
+
+DlgAction
+{
+Reply selection in a dialog
+
+}
+DlgAction1
+{
+Reply selection in a dialog
+
+}
+DlgUp
+{
+Previous reply in a dialog
+
+}
+DlgDown
+{
+Next reply in a dialog
+
+}
+DlgScrollUp
+{
+Scroll dialog down
+
+}
+DlgScrollDown
+{
+Scroll dialog up
+
+}
+
+hk_charge1
+{
+Load cannons with cannonballs
+
+}
+hk_charge2
+{
+Load cannons with grapeshot
+
+}
+hk_charge3
+{
+Load cannons with chainshots
+
+}
+hk_charge4
+{
+Load cannons with bombs
+
+}
+
+hk_Cure
+{
+Use healing mixture
+
+}
+
+hk_Rush
+{
+Use 'Fury' ability
+
+}
+
+hk_ImmediateReload
+{
+Immediate Reloading
+
+}
+
+hk_LightRepair
+{
+Turn on simplified repair
+
+}
+
+hk_InstantRepair
+{
+Turn on repair
+
+}
+
+hk_Turn180
+{
+Turn about
+
+}
+
+hk_SandbankManeuver
+{
+Activate sandbank maneuvers
+
+}
+
+ChrStrafeLeft
+{
+Step left
+}
+
+ChrStrafeRight
+{
+Step right
+}
+
+OfficersCharge
+{
+Order for officers : Fight at will
+}
+
+OfficersHold
+{
+Order for officers : Hold position
+}
+
+OfficersFollow
+{
+Order for officers : Follow
+}

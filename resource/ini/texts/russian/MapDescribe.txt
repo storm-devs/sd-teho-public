@@ -1,0 +1,180 @@
+info
+{
+    Генератор кладов
+    Скрипт создан ALexusB 05.11.04
+}
+type_full_0
+{
+This is #sMapIslName#. The location of the hidden treasure is shown here - it's #sMaplocName#. A famous pirate has hidden his treasure there.
+Judging by the brown blood stains, the map is genuine - this also indicates that it had been changing owners quite often.
+}
+type_full_0_isl {island}
+type_full_0_mein {mainland}
+
+type_full_1
+{
+On the map of #sMapIslName#. The treasures are located in #sMaplocName#. But only by checking it out you can see if it's still there.
+The map is rather ancient and there are no doubts about its genuineness.
+}
+type_full_1_isl {island}
+type_full_1_mein {mainland}
+
+type_full_2
+{
+This map is a fresh one - the paper hasn't turned yellow yet. If the legend is correct, the treasure is hidden in #sMaplocName# on #sMapIslName#. Is it really there? It's worth checking!
+}
+type_full_2_isl {island}
+type_full_2_mein {mainland}
+
+type_quest_0
+{
+This is #sMapIslName#. The location of the hidden treasure is shown here - it's #sMaplocName#. #sMapOwner# has hidden his treasure there.
+Judging by the brown blood stains, the map is genuine - this also indicates that it had been changing owners quite often.
+}
+type_quest_0_isl {island}
+type_quest_0_mein {mainland}
+
+type_part
+{
+This is one of the parts of the map, which, apparently, leads to the treasure. There's not enough information, and you cannot tell the location of the treasure just by that piece. You can only hope that you eventually get hold of the second part of this map, which should be around somewhere.
+And then everything will be clear!
+}
+
+type_fake
+{
+This map indicates the location of the treasure. Of course, you can check whether it's there or not, but sure as hell it's just a forgery.
+You should just dispose of this piece of paper.
+}
+
+
+Antigua_Grot 			{in the cave to the right of Falmouth cove}
+Antigua_Grot_box1 		{a chest over a large stone}
+
+SentJons_TownCave 		{in the dungeon of St. Jones}
+SentJons_TownCave_box1 	{under the planks in a dead end}
+SentJons_TownCave_box2 	{in a dead end of the mine}
+SentJons_TownCave_box3 	{at the blockage}
+ 
+Barbados_Cave			{in a cave not far from Bridgetown}		
+Barbados_Cave_box1		{under the planks in a dead end}
+
+Beliz_Cave 				{in a cave to the right of the exit from Belize}
+Beliz_Cave_box1			{a chest near the stone bridge}
+Beliz_Cave_box2			{a chest on a large stone}
+Beliz_Cave_box3			{a chest near the rope hanging from the ceiling}
+
+Beliz_Cave_2 			{in a cave opposite to the exit from Belize}		
+Beliz_Cave_2_box1		{under the planks in a dead end}
+
+Bermudes_Dungeon 		{in a dungeon under the shipyard of Sharptown}	
+Bermudes_Dungeon_box1	{a chest behind a closed door}
+Bermudes_Dungeon_box2	{a chest behind an open door}
+Bermudes_Dungeon_box3	{a chest in a dead end}
+Bermudes_Dungeon_box4	{a chest behind the barrels}
+
+Caracas_Grot 			{in a cave to the right of the exit from Caracas}	
+Caracas_Grot_box1		{a chest over a large stone}
+
+Cartahena_Cave			{in a cave opposite to the exit from Cartagena}	
+Cartahena_Cave_box1		{a chest under the torch}
+Cartahena_Cave_box2		{a chest in a dead end}
+Cartahena_Cave_box3		{a chest near the torch}
+
+Caiman_Grot				{in a cave to the right of the Desert Coast}
+Caiman_Grot_box1		{a chest over a large stone}
+
+Charles_Grot			{in a cave to the right of the Half Moon Bay}	
+Charles_Grot_box1		{a chest on the shore}
+
+Cuba_Grot				{in a cave to the right of Cape Camaguey}
+Cuba_Grot_box1			{a chest on the shore}
+
+Cumana_Cave				{in a cave to the right of the Carupano Cove}
+Cumana_Cave_box1		{a chest near the stone bridge}
+Cumana_Cave_box2		{a chest on a large stone}
+Cumana_Cave_box3		{a chest near the rope hanging from the ceiling}
+
+Curacao_Cave			{in a cave to the right of Blanca Lagoon}	
+Curacao_Cave_box1		{a chest under the torch}
+Curacao_Cave_box2		{a chest in a dead end}
+Curacao_Cave_box3		{a chest near the torch}
+
+Dominica_Grot			{in a cave to the left of Scott's Head Bay}	
+Dominica_Grot_box1		{a chest on the shore}
+
+Guadeloupe_Cave			{in a cave to the left of the lighthouse of Guadeloupe}
+Guadeloupe_Cave_box1	{a chest in a niche behind the torch}
+Guadeloupe_Cave_box2	{a chest in a niche behind the pillar}
+Guadeloupe_Cave_box3	{a chest behind the stones near the wall}
+
+Hispaniola_Cave			{in a cave not far from the town of Port-au-Prince}		
+Hispaniola_Cave_box1	{{a chest near the stone bridge}
+Hispaniola_Cave_box2	{a chest on a large stone}
+Hispaniola_Cave_box3	{a chest near the rope hanging from the ceiling}
+
+Jamaica_Grot			{in a cave to the right of the Port-Royal lighthouse}
+Jamaica_Grot_box1		{a chest over a large stone}
+
+Maracaibo_Cave			{in a cave opposite to the exit from Maracaibo}
+Maracaibo_Cave_box1		{a chest under the torch}
+Maracaibo_Cave_box2		{a chest in a dead end}
+Maracaibo_Cave_box3		{a chest near the torch}
+
+Marigo_Cave				{in a cave opposite to the exit from Philipsburg}
+Marigo_Cave_box1		{a chest under the torch}
+Marigo_Cave_box2		{a chest in a dead end}
+Marigo_Cave_box3		{a chest near the torch}
+			
+Panama_Cave				{in a cave to the left the exit from Portobello}
+Panama_Cave_box1		{under the planks in a dead end}
+
+Pearl_Grot				{in a cave near the western coast between Belize and Blueweld}	
+Pearl_Grot_box1			{a chest over a large stone}
+
+PortoBello_Cave			{in a cave to the right of Mosquitos Bay}		
+PortoBello_Cave_box1	{under the planks in a dead end}
+
+SanJuan_Cave			{in a cave not far from San Juan}		
+SanJuan_Cave_box1		{a chest near the stone bridge}
+SanJuan_Cave_box2		{a chest on a large stone}
+SanJuan_Cave_box3		{a chest near the rope hanging from the ceiling}
+
+SantaCatalina_Cave		{in a cave to the right of Cape Perlas}
+SantaCatalina_Cave_box1	{a chest under the torch}
+SantaCatalina_Cave_box2	{a chest in a dead end}
+SantaCatalina_Cave_box3	{a chest near the torch}
+
+SantaCatalina_Grot		{in a cave to the right of Bay of San Juan del Norte}
+SantaCatalina_Grot_box1	{a chest on the shore}
+
+SantaCatalina_PearlCave	{in a cave to the left of Bay of San Juan del Norte}
+SantaCatalina_PearlCave_box1	{a chest near the stone bridge}
+SantaCatalina_PearlCave_box2	{a chest on a large stone}
+SantaCatalina_PearlCave_box3	{a chest near the rope hanging from the ceiling}
+
+Tenotchitlan_Cave		{in a cave to the north of the Aztec temple}
+Tenotchitlan_Cave_box1	{{a chest near the stone bridge}
+Tenotchitlan_Cave_box2	{a chest on a large stone}
+Tenotchitlan_Cave_box3	{a chest near the rope hanging from the ceiling}
+
+Terks_Grot				{in a cave to the right of the Northern Bay}
+Terks_Grot_box1			{a chest over a large stone}
+
+Tortuga_Grot			{in a cave opposite to Fisheye Beach}
+Tortuga_Grot_box1		{a chest on the shore}
+
+Tortuga_Cave			{in a dungeon of Tortuga}
+Tortuga_Cave_box1		{a chest behind a closed door}
+
+Trinidad_Grot			{in a cave opposite to the lighthouse of Trinidad and Tobago}
+Trinidad_Grot_box1		{a chest on the shore}
+
+Martinique_Grot 		{in a cave not far from Lamentin Beach}
+Martinique_Grot_box1 	{a chest on the shore}
+
+FortFrance_Dungeon		{in a dungeon of St. Pierre}
+FortFrance_Dungeon_box1	{a chest on the elevation}
+FortFrance_Dungeon_box2	{a chest behind an open door on the upper stage}
+FortFrance_Dungeon_box3	{a chest not far from the lift}
+FortFrance_Dungeon_box4	{a chest behind an open door on the lower stage}
+FortFrance_Dungeon_box5	{under wooden crates}
