@@ -170,6 +170,7 @@ void ProcessDialogEvent()
 			pchar.questTemp.HWIC.CanTake.Eng = "true";//признак, что английка уже бралась
 			HWICSilverConvoyInWorld();
 			AddQuestRecord("Holl_Gambit", "2-1");
+			ReOpenQuestHeader("Holl_Gambit"); // данила ,чтобы вышел из архива. 																				   
 			pchar.questTemp.HWIC.Eng = "begin";
 			SetFunctionTimerCondition("HollConvoy_Over", 0, 0, 15, false);
 		break;
@@ -488,6 +489,27 @@ void ProcessDialogEvent()
 				Link.l4 = "Charlie, I am going to an ancient Indian city Tayasal. I will be clear, this is going to be a really dangerous trip and it is also a mystic one - we will get there through the teleport idol. Will you... join me?";
 				Link.l4.go = "tieyasal";
 			}
+			
+			////////////////////////казначей///////////////////////////////////////////////////////////
+           	// boal отчёт о корабле
+			if(CheckAttribute(NPChar, "treasurer") && NPChar.treasurer == 1)
+			{
+			    Link.l11 = "Charlie, give me a full ship report.";
+			    Link.l11.go = "QMASTER_1";
+				
+			    // Warship. Автозакупка товара
+				Link.l12 = "I want you to purchase certain goods every time we are docked.";
+				Link.l12.go = "QMASTER_2";
+			}
+			
+			if (CheckAttribute(NPChar, "IsCompanionClone"))//////////////////компаньон//////////////////////////////////////////////
+			{
+				//dialog.text = "Я прибыл по вашему распоряжению, капитан.";
+				Link.l2 = "I need to issue several orders to you.";
+				Link.l2.go = "Companion_Tasks";
+				NextDiag.TempNode = "Knippel_officer";// не забыть менять в зависисомости от оффа
+				break;
+			}
 			Link.l1 = "Listen to my orders!";
             Link.l1.go = "stay_follow";
 			link.l2 = "It's nothing. Dismissed!";
@@ -495,6 +517,80 @@ void ProcessDialogEvent()
 			NextDiag.TempNode = "Knippel_officer";
 		break;
 		
+		/////////////////////////// ответы для казначея ///////////////////////////////////
+		case "QMASTER_1":
+			dialog.Text = "Welp... The guns are alrighty, we replace those that explode and keep our powder safe. What kind of a report did you expect, Captain? I am an old cannoneer, not a purser. Knippel to my yard, I am the best cannoneer mind you!";
+			Link.l1 = "No arguing here, Charlie, you do know your trade. I will find a purser myself, don't you worry.";
+			Link.l1.go = "exit";
+		break;	
+
+		case "QMASTER_2":
+			dialog.text = "You want old Charlie to change his gun deck for bargaining with shopkeepers? Captain, I sink ships, not put up a fight for each peso. And I am positive they will rip me off in the very first colony we try this.";
+			link.l1 = "But of course, Charlie. I should start looking for a proper purser.";
+			link.l1.go = "exit";
+		break;
+		
+		//Указания для компаньона 19.02.08 -->/////////////////////////////////////////////////////////////////////////////////////////
+		case "Companion_Tasks":
+			dialog.Text = "I am listening to you.";
+			Link.l1 = "This is about boarding.";
+			Link.l1.go = "Companion_TaskBoarding";
+			Link.l2 = "This is about your ship.";
+			Link.l2.go = "Companion_TaskChange";
+			if (bBettaTestMode) // Только при бета-тесте
+			{
+				Link.l3 = "I want you to leave my squadron for a while and seek fortune on your own.";
+				Link.l3.go = "CompanionTravel";
+			}
+			Link.l8 = "Nothing so far.";
+			Link.l8.go = "exit";
+			break;
+
+		case "Companion_TaskBoarding":
+			dialog.Text = "So what is your wish.";
+			Link.l1 = "Don't board enemy ships. Take care of yourself and the crew.";
+			Link.l1.go = "Companion_TaskBoardingNo";
+			Link.l2 = "I want you to board enemy ships.";
+			Link.l2.go = "Companion_TaskBoardingYes";
+			break;
+
+		case "Companion_TaskChange":
+			dialog.Text = "So what is your wish.";
+			Link.l1 = "I would like you not to swap your ship for another one after boarding. It's too valuable.";
+			Link.l1.go = "Companion_TaskChangeNo";
+			Link.l2 = "When you are boarding enemy ships, you can take them for yourself, if they happen to be decent.";
+			Link.l2.go = "Companion_TaskChangeYes";
+			break;
+
+		case "Companion_TaskBoardingNo":
+			dialog.Text = "Aye-aye.";
+			Link.l1 = "At ease.";
+			Link.l1.go = "exit";
+			NPChar.Tasks.CanBoarding = false;
+			break;
+
+		case "Companion_TaskBoardingYes":
+			dialog.Text = "It will be done.";
+			Link.l1 = "At ease.";
+			Link.l1.go = "exit";
+			NPChar.Tasks.CanBoarding = true;
+			break;
+
+		case "Companion_TaskChangeNo":
+			dialog.Text = "Aye-aye.";
+			Link.l1 = "It will be done.";
+			Link.l1.go = "exit";
+			NPChar.Tasks.CanChangeShipAfterBoarding = false;
+			break;
+
+		case "Companion_TaskChangeYes":
+			dialog.Text = "It will be done.";
+			Link.l1 = "At ease.";
+			Link.l1.go = "exit";
+			NPChar.Tasks.CanChangeShipAfterBoarding = true;
+			break;
+			//	<========////////////////////////////////////////
+
 		case "stay_follow":
             dialog.Text = "Orders?";
             Link.l1 = "Stand here!";

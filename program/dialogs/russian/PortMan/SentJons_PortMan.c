@@ -40,6 +40,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "Eh... what a pity! But I can't do anything here, you were too vigilant. Farewell!";
 			link.l1.go = "exit";
 			DeleteAttribute(pchar, "questTemp.Regata");
+			pchar.quest.Regata_PU.over = "yes"; // mitrokosta снимаем прерывание
 			}
 			else
 			{
@@ -137,7 +138,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			pchar.quest.Regata_PU.win_condition.l1 = "locator";
 			pchar.quest.Regata_PU.win_condition.l1.location = "Bridgetown_town";
 			pchar.quest.Regata_PU.win_condition.l1.locator_group = "reload";
-			pchar.quest.Regata_PU.win_condition.l1.locator = "reload11_back";
+			pchar.quest.Regata_PU.win_condition.l1.locator = "reload10_back"; // mitrokosta фикс неправильного локатора
 			pchar.quest.Regata_PU.win_condition.l2 = "Night";
 			pchar.quest.Regata_PU.function = "RegataPU_Open";//вход в ПУ ночью
 			//ситуации

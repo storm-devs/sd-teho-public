@@ -46,6 +46,11 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "First time";
 		break;
+		case "without_moneysss": // лесник  если Гг нажрался..сволочь:D:D:D
+		    dialog.text = "Senor, you promised to find my brother... Why are you wasting time drinking here?";
+			link.l1 = "Ohh..Yeah, right..hic.. Chill, lass, I'm already gone...hic..";
+			link.l1.go = "exit";
+		break;
 		
 		case "Servant":
 			dialog.text = "Good afternoon, senor. What's your business here?";

@@ -649,3 +649,31 @@ OfficersFollow
 {
 Order for officers : Follow
 }
+
+FLT_LoadBalls {
+Fleet command : load cannons with cannonballs
+}
+
+FLT_LoadGrapes {
+Fleet command : load cannons with grapeshot
+}
+
+FLT_LoadChain {
+Fleet command : load cannons with chainshots
+}
+
+FLT_LoadBombs {
+Fleet command : load cannons with bombs
+}
+
+FLT_SailAway {
+Fleet command : sail away
+}
+
+FLT_LowerSails {
+Fleet command : lower sails
+}
+
+FLT_ProtFlagship {
+Fleet command : protect flagship
+}

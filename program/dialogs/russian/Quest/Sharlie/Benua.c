@@ -139,6 +139,8 @@ void ProcessDialogEvent()
 			sld = ItemsFromID("specialletter");
 			sld.text = "Letter_Mishelle";
 			NextDiag.CurrentNode = "escape_4";
+			LocatorReloadEnterDisable("FortFrance_town", "reload91", false); // лесник открыл входы
+			LocatorReloadEnterDisable("FortFrance_town", "reload_jail", false);
 		break;
 		
 		case "escape_4":
@@ -576,8 +578,8 @@ void ProcessDialogEvent()
 			SetFunctionTimerCondition("LongHappy_SenPierreGuests", 0, 0, 31, false); // таймер
 			if (!CheckAttribute(pchar, "questTemp.LongHappy.MarryRum"))
 			{
-				pchar.questTemp.LongHappy = "toIslaTesoro";
-				LocatorReloadEnterDisable("Pirates_town", "reload4_back", true);//закрыть таверну Исла-Тесоро
+			pchar.questTemp.LongHappy = "toIslaTesoro";
+			LocatorReloadEnterDisable("Pirates_town", "reload4_back", true);//закрыть таверну Исла-Тесоро
 			}
 			npchar.dialog.currentnode = "First time";
 		break;

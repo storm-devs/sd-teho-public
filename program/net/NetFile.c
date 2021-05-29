@@ -1,3 +1,4 @@
+/*
 void NetFileSend_SendData()
 {
 	int wNetClientID = GetEventData();
@@ -62,3 +63,4 @@ void NetFileRecv_Done()
 		NetClient_OnFileDone(iEventID, iEventSubID);
 	}
 }
+*/

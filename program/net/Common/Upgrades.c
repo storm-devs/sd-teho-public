@@ -1,6 +1,6 @@
 // ship upgrades
 object NetShipHullUpgrades[3], NetShipSailUpgrade[3];
-
+/*
 void Net_InitUpgrades()
 {
 	NetShipHullUpgrades[0].str = "hull1";
@@ -34,3 +34,4 @@ void Net_InitUpgrades()
 	NetShipSailUpgrade[2].speedrate = 5.0;
 	NetShipSailUpgrade[2].turnrate = 5.0;
 }
+*/

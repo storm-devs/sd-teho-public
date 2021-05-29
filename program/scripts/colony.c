@@ -51,7 +51,7 @@ void CreateColonyCommanders()
 		}
 		// boal <--
 		colonies[i].commander = colonies[i].id + " Fort Commander";
-
+		
 		iChar = GenerateCharacter(sti(colonies[i].nation), WITH_SHIP, "officer", MAN, 1, FORT_COMMANDER);
 		Nations[sti(colonies[i].nation)].fort = sti(Nations[sti(colonies[i].nation)].fort) + 1; // число фортов нации
 		characters[iChar].id = colonies[i].id + " Fort Commander";
@@ -516,6 +516,7 @@ void TWN_Capture_Forts()
 
 void TWN_FightInTown()
 {
+	int iNation = sti(rCharacter.nation);
     ref sld, Builder;
     int j, i, natEsc;
     string sTemp, snCity, sModel;
@@ -720,18 +721,16 @@ void TWN_FightInTown()
 	            }
 				if (pchar.questTemp.Ascold != "Ascold_ImMummy")
 				{
-					//наши мушкетеры
-					for (i = 0; i < MAX_TOWN_MUSHKETER; i++)
+					//наши мушкетёры
+					for (i = 0; i < MAX_TOWN_MUSHKETER; i++) // Captain Beltrop, фикс моделей мушкетёров, раньше они определялись по флагу ГГ, теперь всё как и раньше... 31.10.2020
 					{				
 						if (sti(Pchar.GenQuestFort.PlayerCrew) < 1) break;
-						if(sti(pchar.nation) == PIRATE)
+						if (isMainCharacterPatented() && sti(Items[sti(rCharacter.EquipedPatentId)].TitulCur) > 1) //если есть патент, оставлю, хотя рудимент, форма только со звания капитан
 						{
-							sModel = "mushketer_" + (rand(4)+1);
-						}
-						else
-						{
-							sModel = "mush_" + NationShortName(sti(pchar.nation)) + "_" + i;
-						}				
+                         iNation = sti(Items[sti(rCharacter.EquipedPatentId)].Nation);
+			             sModel = "mush_"+NationShortName(iNation)+"_"+(rand(2)+1); // 3 модели
+                        }
+                        else sModel = "mush_ctz_"+(rand(2)+4); // шесть моделей				
 						sld = GetCharacter(NPC_GenerateCharacter("GenChar_", sModel, "man", "mushketer", 5, sti(pchar.nation), 0, false, "soldier"));
 						sld.id = "GenChar_" + sld.index;
 						LAi_NoRebirthEnable(sld); //не показывать убитых при входе в локацию
@@ -740,7 +739,6 @@ void TWN_FightInTown()
 						LAi_SetWarriorType(sld);
 						LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);
 						ChangeCharacterAddressGroup(sld, loadedLocation.id, "rld", sTemp);
-						//Pchar.GenQuestFort.PlayerCrew = sti(Pchar.GenQuestFort.PlayerCrew) - 1;
 					}
 				}
 				// помощь эскадре

@@ -515,6 +515,7 @@ void ProcessDialogEvent()
 		break;
 		
 		case "pirate_dublon":
+			NextDiag.TempNode = "pirate_dublon"; // mitrokosta правка явного бага
 			dialog.text = "Did you bring fifty doubloons?";
 			link.l1 = "You know, I think that you can live without them. The key. On the table.";
 			link.l1.go = "pirate_7";

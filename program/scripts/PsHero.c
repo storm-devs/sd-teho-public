@@ -1652,7 +1652,7 @@ void PGG_Q1AfterBattle(string qName)
 
 	if (bOk || !bSeaActive)
 	{
-		if (IsEntity(worldMap))
+		if (IsEntity(&worldMap))
 		{
 //			PChar.Quest.PGGQuest1_Time2Fight.win_condition.l1 = "EnterToSea";
 			bLater = true;
@@ -1802,7 +1802,7 @@ void PGG_Q1Time2Late(string qName)
 	chr = CharacterFromID(PChar.GenQuest.PGG_Quest.PGGid);
 	if (!bQuestCheckProcessFreeze)
 	{
-		if (IsEntity(worldMap))
+		if (IsEntity(&worldMap))
 		{
 			PChar.Quest.PGGQuest1_Time2Late_01.over = "yes"; // сброс, если уже откладывали
 			PChar.Quest.PGGQuest1_Time2Late_02.over = "yes";

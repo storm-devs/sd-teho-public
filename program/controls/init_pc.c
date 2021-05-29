@@ -332,6 +332,34 @@ void ExternControlsInit(bool bFirst)
 	MapControlToGroup("hk_charge4","Sailing1Pers");
 	MapControlToGroup("hk_charge4","BattleInterfaceControls");
 
+	// Эскадре - зарядить ядрами
+	CI_CreateAndSetControls( "Sailing3Pers", "FLT_LoadBalls", CI_GetKeyCode("KEY_5"), 0, true );
+	MapControlToGroup("FLT_LoadBalls","Sailing1Pers");
+	MapControlToGroup("FLT_LoadBalls","BattleInterfaceControls");
+	// Эскажре - зарядить картечью
+	CI_CreateAndSetControls( "Sailing3Pers", "FLT_LoadGrapes", CI_GetKeyCode("KEY_6"), 0, true );
+	MapControlToGroup("FLT_LoadGrapes","Sailing1Pers");
+	MapControlToGroup("FLT_LoadGrapes","BattleInterfaceControls");
+	// Эскадре - зарядить книпелями
+	CI_CreateAndSetControls( "Sailing3Pers", "FLT_LoadChain", CI_GetKeyCode("KEY_7"), 0, true );
+	MapControlToGroup("FLT_LoadChain","Sailing1Pers");
+	MapControlToGroup("FLT_LoadChain","BattleInterfaceControls");
+	// Эскадре - зарядить бомбами
+	CI_CreateAndSetControls( "Sailing3Pers", "FLT_LoadBombs", CI_GetKeyCode("KEY_8"), 0, true );
+	MapControlToGroup("FLT_LoadBombs","Sailing1Pers");
+	MapControlToGroup("FLT_LoadBombs","BattleInterfaceControls");
+	// Эскадре - свалить
+	CI_CreateAndSetControls( "Sailing3Pers", "FLT_SailAway", CI_GetKeyCode("KEY_O"), 0, true );
+	MapControlToGroup("FLT_SailAway","Sailing1Pers");
+	MapControlToGroup("FLT_SailAway","BattleInterfaceControls");
+	// Эскадре - паруса в боевое
+	CI_CreateAndSetControls( "Sailing3Pers", "FLT_LowerSails", CI_GetKeyCode("KEY_L"), 0, true );
+	MapControlToGroup("FLT_LowerSails","Sailing1Pers");
+	MapControlToGroup("FLT_LowerSails","BattleInterfaceControls");
+	// Всем - защита флагмана
+	CI_CreateAndSetControls( "Sailing3Pers", "FLT_ProtFlagship", CI_GetKeyCode("KEY_P"), 0, true );
+	MapControlToGroup("FLT_ProtFlagship","Sailing1Pers");
+	MapControlToGroup("FLT_ProtFlagship","BattleInterfaceControls");
 // Dialog =====================================================================
 	CI_CreateAndSetControls( "DialogControls", "DlgAction", CI_GetKeyCode("VK_SPACE"), 0, false );
 	CI_CreateAndSetControls( "DialogControls", "DlgAction1", CI_GetKeyCode("VK_LBUTTON"), 0, false );   // boal new engine

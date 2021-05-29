@@ -1,5 +1,5 @@
 int rgbGameMessage = 14610157;
-
+/*
 void NetClient_DeleteChatEnvironment()
 {
 	DeleteClass(&NCSay);
@@ -84,22 +84,7 @@ void NetClient_ChatControlActivation()
 	int iSMsg;
 	switch (sControl)
 	{
-		/*case "Net_RestartGame":
-			iSMsg = NMCreate();
-			NMAddClientID(iSMsg, wClientID);
-			NMAddByte(iSMsg, NC_COMMAND);
-			NMAddByte(iSMsg, NSC_COMMAND_RESTARTGAME);
-			NetClient_SendMessage(iSMsg, true);
-			NMDelete(iSMsg);
-		break;
-		case "Net_StartGame":
-			iSMsg = NMCreate();
-			NMAddClientID(iSMsg, wClientID);
-			NMAddByte(iSMsg, NC_COMMAND);
-			NMAddByte(iSMsg, NSC_COMMAND_STARTGAME);
-			NetClient_SendMessage(iSMsg, true);
-			NMDelete(iSMsg);
-		break;*/
+		
 		case "Say":
 			NCSay.Mode = "Say";
 			LaunchNetChatString();
@@ -111,16 +96,7 @@ void NetClient_ChatControlActivation()
 				LaunchNetChatString();
 			}
 		break;
-		/*case "Person_Say":
-			NCSay.Mode = sControl;
-			iSMsg = NMCreate();
-			NMAddClientID(iSMsg, wClientID);
-			NMAddByte(iSMsg, NC_SAY);
-			NMAddByte(iSMsg, NSC_SAY_PERSON);
-			NMAddString(iSMsg, "Person Say", 128);
-			NMAddByte(iSMsg, wClientID);
-			NetClient_SendMessage(iSMsg, false);
-			NMDelete(iSMsg);
-		break;*/
+
 	}
 }
+*/

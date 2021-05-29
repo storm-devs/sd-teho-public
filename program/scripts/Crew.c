@@ -16,7 +16,7 @@ void UpdateCrewExp()
 		if(cn != -1)
 		{
 			chr = &characters[cn];
-			if (bSeaActive || IsEntity(worldMap))  // море или карта
+			if (bSeaActive || IsEntity(&worldMap))  // море или карта
 			{
 				ChangeCrewExp(chr, "Sailors", 1);
 			}

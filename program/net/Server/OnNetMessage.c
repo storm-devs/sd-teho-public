@@ -1,4 +1,4 @@
-
+/*
 bool NetServer_CheckForBan(int dwIP, int wPort, int iMsg)
 {
 	string sBan = "b" + inet_ntoax(dwIP);
@@ -164,3 +164,4 @@ void NetServer_GetTotalPlayerStatistic(int wNetClientID, int iMsg)
 	NMDelete(iSMsg);
 }
 
+*/

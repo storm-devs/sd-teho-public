@@ -261,6 +261,14 @@ void ProcessDialogEvent()
 				link.l1.go = "exit";
 			break;
 			}
+			if (iTemp >= 15000) // лесник
+			{
+			 iTemp = (15000 - sti(npchar.quest.foodqty))	
+             dialog.text = "Wow, pal, that's too much for us! We won't be able to eat it before it rots. Right now I can't take more than "+iTemp+".";
+			 link.l1 = "Whatever you say.";
+			 link.l1.go = "trade_3";
+			 break;
+            }							  
 			iMoney = (50+drand(5))*iTemp;
 			dialog.text = ""+FindRussianQtyString(iTemp)+"? Fine. I will pay you "+FindRussianMoneyString(iMoney)+". Deal?";
 			link.l1 = "Sure! Nice trading!";
@@ -269,7 +277,38 @@ void ProcessDialogEvent()
 			link.l2.go = "exit";
 			NextDiag.TempNode = "head";
 		break;
-		
+		case "trade_3": // лесник 
+		    iTemp = (15000 - sti(npchar.quest.foodqty))	
+		    iMoney = (50+drand(5))*iTemp;
+			dialog.text = "Deal. I'll pay you "+FindRussianMoneyString(iMoney)+" for the goods. Is it enough?";
+			link.l1 = "Sure! Nice trading!";
+			link.l1.go = "trade_4";
+			link.l2 = "Hm. No, I have changed my mind.";
+			link.l2.go = "exit";
+			NextDiag.TempNode = "head";
+		break;
+		case "trade_4": // лесник 
+		    iTemp = (15000 - sti(npchar.quest.foodqty))	
+			iMoney = (50+drand(5))*iTemp;
+			AddMoneyToCharacter(pchar, iMoney);
+			RemoveCharacterGoods(pchar, GOOD_FOOD, iTemp);
+			npchar.quest.foodqty = sti(npchar.quest.foodqty)+iTemp;
+			if (sti(npchar.quest.foodqty) >= 15000) // склады затарены на полгода
+			{
+				SetFunctionTimerCondition("LSC_ClearFoodStorage", 0, 0, 180, false);
+				dialog.text = "Nice! My storehouse is full now. I won't need to buy provision for the next half a year.";
+				link.l1 = "Good. Then I will bring the next load of provision to you in six months.";
+				link.l1.go = "exit";
+				AddQuestRecord("LSC", "25");
+			}
+			else
+			{
+				dialog.text = "Great! Bring me more next time.";
+				link.l1 = "Sure!";
+				link.l1.go = "exit";
+			}
+			NextDiag.TempNode = "head";
+		break;
 		case "trade_2":
 			iTemp = dialogEditStrings[4];
 			iMoney = (50+drand(5))*iTemp;

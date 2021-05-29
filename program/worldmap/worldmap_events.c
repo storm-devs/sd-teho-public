@@ -8,22 +8,21 @@ void wdmEvent_EncounterCreate()
 	float dltTime = GetEventData();
 	float playerShipX = GetEventData();
 	float playerShipZ = GetEventData();
-	float playerShipAY = GetEventData();
-	//Skip encounters
-	if(CheckAttribute(worldMap, "noenc") != 0)
-	{
-		if(worldMap.noenc == "true") return;
-	}
+	float playerShipAY = GetEventData();	
+	//Skip encounters ------ дает тормоза
+//	if(CheckAttribute(worldMap, "noenc") != 0)
+//	{
+//		if(worldMap.noenc == "true") return;
+//	}
 	//Save player ship position
 	worldMap.playerShipX = playerShipX;
 	worldMap.playerShipZ = playerShipZ;
 	worldMap.playerShipAY = playerShipAY;
 	//DeleteAttribute(pchar, "SkipEshipIndex");// boal
-	//Generate encounters
+	//Generate encounters		
 	wdmStormGen(dltTime, playerShipX, playerShipZ, playerShipAY);
-	wdmShipEncounter(dltTime, playerShipX, playerShipZ, playerShipAY);
+	wdmShipEncounter(dltTime, playerShipX, playerShipZ, playerShipAY);	// дает тормоза
 }
-
 
 void wdmEvent_PlayerInStorm()
 {
@@ -193,8 +192,6 @@ bool wdmIsSkipEnable()
 	return wdmSkipReturnBool;
 }
 
-
-
 void wdmDeleteLoginEncounter(string encID)
 {
 	Event("WorldMap_EncounterDelete", "s", encID);
@@ -211,16 +208,18 @@ ref wdmEncounterDelete()
 	{
 		return &BI_intRetValue;
 	}
+		
 	aref enc;
 	makearef(enc, worldMap.(encPath));
 	//Сохраняем событие
 	bool needEvent = false;
 	string eventName = "";
 	string chrID = "";
+	
 	if(CheckAttribute(enc, "quest.chrID"))
 	{
-    //homo 14/04/07 не ясно если энкоутер еще не доплыл до пункта назанчения значит его нельзя тереть?
-    //Даже если его трет программист?
+		//homo 14/04/07 не ясно если энкоутер еще не доплыл до пункта назанчения значит его нельзя тереть?
+		//Даже если его трет программист?
     	if(CheckAttribute(&enc, "Gotox") && CheckAttribute(&enc, "Gotoz"))
 		{
 
@@ -230,7 +229,6 @@ ref wdmEncounterDelete()
 			if( fRadSqr > 100.0 && stf(enc.livetime) > 1.0) 
 			{
 				BI_intRetValue = false;
-				//return &BI_intRetValue;   убрал
 			}
 		}
 
@@ -239,26 +237,25 @@ ref wdmEncounterDelete()
 			eventName = enc.quest.event;
 			chrID = enc.quest.chrID;
 			needEvent = true;
-		}
-		/*else
-		{
-			return &BI_intRetValue;
-		}*/
+		}		
 	}
+	
 	//Отмечаем, что удалён
 	enc.needDelete = "wdmEncounterDelete";
 	//Удаляем квестовую пометку
 	DeleteAttribute(&enc, "quest");
-	if (!IsEntity(worldMap))
+	
+	if (!IsEntity(&worldMap))
 	{
 	   //Трем сам энкаутер сразу homo 10/04/07
         DeleteAttribute(&worldMap, encPath);
     }
+	
 	//Отправляем квестовый эвент, если надо
 	if(needEvent)
 	{
 		PostEvent(eventName, 100, "s", chrID);
-	}
+	}	
 	return &BI_intRetValue;
 }
 

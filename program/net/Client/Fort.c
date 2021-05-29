@@ -1,5 +1,5 @@
 object NCFortModel, NCFortBlots;
-
+/*
 void NetClient_DeleteFortEnvironment()
 {
 	DeleteClass(NetClient_GetCLient(NET_FORTCLIENT));
@@ -45,10 +45,6 @@ void NetClient_CreateFortEnvironment(int iMsg)
 	SetTexturePath(0, "");
 
 	// create fort blot
-	/*CreateEntity(&NCFortBlots, "blots");
-	SendMessage(&NCFortBlots, "lia", MSG_BLOTS_SETMODEL, &NCFortModel, NCFort);
-	LayerAddObject("net_execute", &NCFortBlots, 10001);
-	LayerAddObject("net_realize", &NCFortBlots, 10001);*/
 
 	SendMessage(rFort, "laaii", MSG_NET_ADD_FORT, rIsland, arLocator, &NCFortModel, &NCFortBlots);
 }
@@ -83,3 +79,4 @@ void NetClient_OnFort(int iMsg)
 		break;
 	}
 }
+*/

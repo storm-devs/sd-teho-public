@@ -1,6 +1,6 @@
 bool bServerGameStarted = false;
 int iServerEnvSMsg;
-
+/*
 void NetServer_EndGame(bool bReconnect)
 {
 	//if (!bServerGameStarted) { return; }
@@ -382,4 +382,4 @@ void NetServer_DownloadClientFile(int wClientID, string sFileName)
 	NMAddString(iSMsg, sFileName, 128);
 	NetServer_SendMessage(wClientID, iSMsg, true);
 	NMDelete(iSMsg);
-}
+}*/

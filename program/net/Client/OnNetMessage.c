@@ -1,4 +1,4 @@
-
+/*
 void NetClient_OnNetMessage()
 {
 	int dwIP = GetEventData();
@@ -151,3 +151,4 @@ void NetClient_OnStatistics(int iMsg)
 
 	Event("NCEvent_PlayerStatistic", "lssllllllllfl", iPIndex, sNickName, sFaceImage, iRank, iRewardAccuracy, iRewardVitality, iRewardVictorious, iWon, iLost, iWrecks, iSunk, fAccuracy, iTotalDamage);
 }
+*/

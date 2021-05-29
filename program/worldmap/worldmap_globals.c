@@ -487,7 +487,7 @@ void  wdmEmptyAllDeadQuestEncounter()
 {
     aref encs;
     string sdel,aname;
-	bool isWMap = IsEntity(worldMap);
+	bool isWMap = IsEntity(&worldMap);
 	
     makearef(encs, worldMap.encounters);
 
@@ -495,6 +495,7 @@ void  wdmEmptyAllDeadQuestEncounter()
     for(int i = 0; i < num; i++)
     {
         aref enc = GetAttributeN(encs, i);
+        DeleteAttribute(enc, "dirSailEnc");
         if(CheckAttribute(enc, "quest.chrID"))
         {
             int iChar = GetCharacterIndex(enc.quest.chrID)
@@ -540,7 +541,7 @@ void  wdmEmptyAllOldEncounter()
 {
     aref encs;
     string sdel,aname;
-	bool isWMap = IsEntity(worldMap);
+	bool isWMap = IsEntity(&worldMap);
 
     makearef(encs, worldMap.encounters);
 
@@ -617,7 +618,7 @@ aref  wdmFindOrCreateQuestEncounter(string _chrId)
 {
     aref encs;
     string sdel,aname;
-	bool isWMap = IsEntity(worldMap);
+	bool isWMap = IsEntity(&worldMap);
 
     makearef(encs, worldMap.encounters);
 

@@ -972,7 +972,7 @@ string GetDeviceLocation(ref npchar)
 				{
     				arCommon = GetAttributeN(arRld2, n);
 					LocId = arCommon.go;
-					if (findsubstr(LocId, "Common" , 0) != -1 && LocId != pchar.questTemp.jailCanMove.Deliver.locationId && LocId != pchar.GenQuest.SeekSpy.Location && LocId != "CommonPackhouse_1" && LocId != "CommonPackhouse_2")
+					if (findsubstr(LocId, "Common" , 0) != -1 && LocId != pchar.questTemp.jailCanMove.Deliver.locationId && LocId != pchar.GenQuest.SeekSpy.Location && LocId != "CommonPackhouse_1" && LocId != "CommonPackhouse_2" && arCommon.name != "reload1") // mitrokosta fix
     				{
 						storeArray[howStore] = LocId;
 						howStore++; 					
@@ -1000,7 +1000,7 @@ string GetDeviceLocation(ref npchar)
 				{
     				arCommon = GetAttributeN(arRld2, n);
 					LocId = arCommon.go;
-					if (findsubstr(LocId, "Common" , 0) != -1 && LocId != "CommonPackhouse_1" && LocId != "CommonPackhouse_2")
+					if (findsubstr(LocId, "Common" , 0) != -1 && LocId != "CommonPackhouse_1" && LocId != "CommonPackhouse_2" && arCommon.name != "reload1") // mitrokosta fix
     				{
 						storeArray[howStore] = LocId;
 						howStore++; 					

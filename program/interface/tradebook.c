@@ -15,6 +15,10 @@ void InitInterface(string iniName)
     SetEventHandler("MouseRClickUp","HideInfoWindow",0);
     
     XI_RegistryExitKey("IExit_F2");
+// LDH 06Jul17 
+    if (SORT_PRICELIST)
+        FillPriceListTownSorted("TABLE_CITY");
+    else
     FillPriceListTown("TABLE_CITY");
 }
 
@@ -132,6 +136,137 @@ void FillPriceListTown(string _tabName)
         row = "tr" + n;
 		curItem = GetAttributeN(rootItems, i);
 		cityId = GetAttributeName(curItem);
+        row = "tr" + n;	
+		cn = FindColony(cityId);
+		if (cn != -1)
+		{
+			rCity = GetColonyByIndex(cn);
+			if (n == 1) firstId = cityId;
+			GameInterface.(_tabName).(row).UserData.CityID  = cityId;
+			GameInterface.(_tabName).(row).UserData.CityIDX = cn;
+			GameInterface.(_tabName).(row).td1.icon.group  = "NATIONS";
+			GameInterface.(_tabName).(row).td1.icon.image  = Nations[sti(rCity.nation)].Name;
+			GameInterface.(_tabName).(row).td1.icon.width  = 26;
+		    GameInterface.(_tabName).(row).td1.icon.height = 26;
+		    GameInterface.(_tabName).(row).td1.icon.offset = "0, 3";
+			GameInterface.(_tabName).(row).td2.str = GetConvertStr(cityId + " Town", "LocLables.txt");
+			GameInterface.(_tabName).(row).td2.scale = 0.85;
+			GameInterface.(_tabName).(row).td3.str = GetConvertStr(rCity.islandLable, "LocLables.txt");
+			GameInterface.(_tabName).(row).td3.scale = 0.8;
+			GameInterface.(_tabName).(row).td4.scale = 0.75;
+			if (CheckAttribute(nulChr, "PriceList." + cityId + ".AltDate"))
+		    {
+		        GameInterface.(_tabName).(row).td4.str = nulChr.PriceList.(cityId).AltDate;
+		    }
+		    else
+		    {
+		        GameInterface.(_tabName).(row).td4.str = "??.??.????";
+		    }
+			n++;
+		}
+	}
+	//if (n > 1) GameInterface.(_tabName).select = 1;
+	Table_UpdateWindow(_tabName);
+	FillPriceList("TABLE_GOODS", firstId);
+}
+
+// LDH 06Jul17 
+#define MAX_OURCOLONIES 42
+void FillPriceListTownSorted(string _tabName)
+{
+	string  cityId, attr2, firstId;
+    int     i, cn, n;
+    ref     nulChr;
+    string  row;
+    aref    rootItems;
+    aref    curItem;
+    ref     rCity;
+
+// LDH 06Jul17 -->
+    string OurColonies[MAX_OURCOLONIES];
+    i = 0;
+    OurColonies[i] = "Havana";          i = i + 1;
+    OurColonies[i] = "Santiago";        i = i + 1;
+    OurColonies[i] = "PuertoPrincipe";  i = i + 1;
+    OurColonies[i] = "PortRoyal";       i = i + 1;
+    OurColonies[i] = "FortOrange";      i = i + 1;
+    OurColonies[i] = "Tortuga";         i = i + 1;
+    OurColonies[i] = "PortPax";         i = i + 1;
+    OurColonies[i] = "SantoDomingo";    i = i + 1;
+    OurColonies[i] = "LaVega";          i = i + 1;
+    OurColonies[i] = "Terks";           i = i + 1;
+    OurColonies[i] = "SanJuan";         i = i + 1;
+    OurColonies[i] = "Pirates";         i = i + 1;
+    OurColonies[i] = "Marigo";          i = i + 1;
+    OurColonies[i] = "Charles";         i = i + 1;
+    OurColonies[i] = "SentJons";        i = i + 1;
+    OurColonies[i] = "BasTer";          i = i + 1;
+    OurColonies[i] = "Dominica";        i = i + 1;
+    OurColonies[i] = "FortFrance";      i = i + 1;
+    OurColonies[i] = "LeFransua";       i = i + 1;
+    OurColonies[i] = "Bridgetown";      i = i + 1;
+    OurColonies[i] = "Villemstad";      i = i + 1;
+    OurColonies[i] = "PortSpein";       i = i + 1;
+    OurColonies[i] = "Cumana";          i = i + 1;
+    OurColonies[i] = "Caracas";         i = i + 1;
+    OurColonies[i] = "Maracaibo";       i = i + 1;
+    OurColonies[i] = "Cartahena";       i = i + 1;
+    OurColonies[i] = "PortoBello";      i = i + 1;
+    OurColonies[i] = "Panama";          i = i + 1;
+    OurColonies[i] = "Pearl";           i = i + 1;
+    OurColonies[i] = "SantaCatalina";   i = i + 1;  // Blueweld
+    OurColonies[i] = "Beliz";           i = i + 1;
+    OurColonies[i] = "Caiman";          i = i + 1;
+    
+    OurColonies[i] = "Tenotchitlan";    i = i + 1;
+    OurColonies[i] = "Minentown";       i = i + 1;
+    OurColonies[i] = "LostShipsCity";   i = i + 1;
+    OurColonies[i] = "KhaelRoa";        i = i + 1;
+    OurColonies[i] = "Ksochitam";       i = i + 1;
+    OurColonies[i] = "RockIsland";      i = i + 1;
+    OurColonies[i] = "SantaQuiteria";   i = i + 1;
+    OurColonies[i] = "IslaDeVieques";   i = i + 1;
+    OurColonies[i] = "Is";              i = i + 1;
+    OurColonies[i] = "SanAndres";
+
+// LDH 06Jul17 <--
+    
+    // шапка -->
+    GameInterface.(_tabName).select = 0;
+    GameInterface.(_tabName).hr.td1.str = "Нация";
+    GameInterface.(_tabName).hr.td1.scale = 0.77
+	GameInterface.(_tabName).hr.td2.str = "Город";
+	GameInterface.(_tabName).hr.td2.scale = 0.8;
+	GameInterface.(_tabName).hr.td3.str = "Местоположение";
+	GameInterface.(_tabName).hr.td3.scale = 0.7;
+	GameInterface.(_tabName).hr.td4.str = "Актуальность";
+	GameInterface.(_tabName).hr.td4.scale = 0.7;
+    // <--
+    nulChr = &NullCharacter;
+    makearef(rootItems, nulChr.PriceList);  // тут живут ИД города и служ. инфа.
+    n = 1;
+    firstId = "";
+// LDH 06Jul17 -->
+    for (i=0; i<MAX_OURCOLONIES; i++)   
+    {
+		bool bFound = false;
+		for (int j=0; j<GetAttributesNum(rootItems); j++)
+		{
+			curItem = GetAttributeN(rootItems, j);
+			cityId = GetAttributeName(curItem);
+			
+			if(cityId == OurColonies[i])
+			{
+				bFound = true;
+				break;
+			}
+		}
+		
+		if(!bFound)
+			continue;
+// LDH 06Jul17 <--
+
+        row = "tr" + n;	
 		cn = FindColony(cityId);
 		if (cn != -1)
 		{

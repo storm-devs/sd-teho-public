@@ -378,6 +378,7 @@ void selectStatistic()
 	HideShipPlace();
 	HideStoreBook();
 	ShowButtons();
+	XI_RegistryExitKey("IExit_Escape"); // belamour выход на ESC
 	CreateString(true, "LevelComplexity", XI_ConvertString("m_Complexity") + " : " + GetLevelComplexity(MOD_SKILL_ENEMY_RATE), "INTERFACE_SMALL", COLOR_NORMAL, 440, 334, SCRIPT_ALIGN_CENTER, 1);
 }
 
@@ -392,6 +393,7 @@ void selectCashBook()
 	HideShipPlace();
 	HideStoreBook();
 	ShowButtons();
+	XI_RegistryExitKey("IExit_Escape"); // belamour выход на ESC
 }
 
 void selectShipPlace()
@@ -403,6 +405,7 @@ void selectShipPlace()
 	HideCashBook();
 	HideStoreBook();
 	ShowButtons();
+	XI_RegistryExitKey("IExit_Escape"); // belamour выход на ESC
 }
 
 void selectStoreBook()
@@ -416,6 +419,7 @@ void selectStoreBook()
 	HideCashBook();
 	HideShipPlace();
 	ShowButtons();
+	XI_RegistryExitKey("IExit_Escape"); // belamour выход на ESC
 }
 
 void HideInfoWindow() 

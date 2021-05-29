@@ -3,9 +3,39 @@ int g_ControlsLngFile = -1;
 
 bool g_bToolTipStarted = false;
 
+float 	fHUDRatio 	= 1.0;
+int 	iHUDBase 	= iGlobalVar1;
+int 	newBase 	= iGlobalVar1;
+
+#define BI_LOW_RATIO 	0.25
+#define BI_HI_RATIO 	4.0
+#define BI_DIF_RATIO 	3.75
+
+int CalcHUDBase(float fSlider, float MyScreen)
+{
+    float fRes = BI_DIF_RATIO * fSlider;
+    float curBase = MyScreen / (BI_LOW_RATIO + fRes);
+
+    return makeint(curBase + 0.5);
+}
+
+float CalcHUDSlider(float fRatio)
+{
+    float fRes = fRatio - BI_LOW_RATIO;
+    fRes /= BI_DIF_RATIO;
+
+    return fRes;
+}
+
 void InitInterface(string iniName)
 {
 	float glowEffect;
+
+    fHUDRatio = stf(Render.screen_y) / iGlobalVar1;
+    iHUDBase = makeint(iGlobalVar1);
+    newBase = iHUDBase;
+	
+	trace("2 : " + iGlobalVar1);
 
 	g_nCurControlsMode = -1;
 	GameInterface.title = "titleOptions";
@@ -60,7 +90,7 @@ void InitInterface(string iniName)
 		SetSelectable("DIALOG_SLIDE",false);
 	}
 	
-	// Warship 07.07.09 Эффект свечения
+	// Warship 07.07.09 ќффект свечения
 	if(!CheckAttribute(&InterfaceStates, "GlowEffect"))
 	{
 		InterfaceStates.GlowEffect = 50;
@@ -70,6 +100,13 @@ void InitInterface(string iniName)
 	
 	GameInterface.nodes.GLOW_SLIDE.value = glowEffect;
 	SendMessage(&GameInterface, "lslf", MSG_INTERFACE_MSG_TO_NODE, "GLOW_SLIDE", 0, glowEffect);
+	
+	fHUDRatio = stf(Render.screen_y) / iGlobalVar1;
+	float sl = CalcHUDSlider(fHUDRatio);
+	SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "HUD_SLIDE", 2, makeint(sl * 100.0));
+	GameInterface.nodes.hud_slide.value = sl;
+	iHUDBase = CalcHUDBase(sl, stf(Render.screen_y));
+	SetFormatedText("HUD_DESCRIP_TEXT", Render.screen_y + "  / " + newBase + " : " + fHUDRatio);
 }
 
 void ProcessCancelExit()
@@ -80,8 +117,10 @@ void ProcessCancelExit()
 
 void ProcessOkExit()
 {
-	// Warship 07.07.09 Эффект свечения
+	// Warship 07.07.09 ќффект свечения
 	SetGlowParams(1.0, sti(InterfaceStates.GlowEffect), 2));
+	iGlobalVar1 = newBase;
+	trace("3 : " + iGlobalVar1);
 
 	SaveGameOptions();
 	ProcessExit();
@@ -334,7 +373,7 @@ void procSlideChange()
 		return;
 	}
 	
-	// Warship 07.07.09 Эффект свечения
+	// Warship 07.07.09 ќффект свечения
 	if(sNodeName == "GLOW_SLIDE")
 	{
 		InterfaceStates.GlowEffect = fVal*250;
@@ -347,6 +386,10 @@ void procSlideChange()
 	}
 	if( sNodeName=="MUSIC_SLIDE" || sNodeName=="SOUND_SLIDE" || sNodeName=="DIALOG_SLIDE" ) {
 		ChangeSoundSetting();
+		return;
+	}
+	if( sNodeName == "HUD_SLIDE" ) {
+		ChangeHUDDetail();
 		return;
 	}
 	if( sNodeName=="VMOUSE_SENSITIVITY_SLIDE" || sNodeName=="HMOUSE_SENSITIVITY_SLIDE" ) {
@@ -453,11 +496,12 @@ bool AddToControlsList(int row, string sControl, string sKey, bool bRemapable)
 
 string GetGroupNameByMode(int nMode)
 {
-	switch( nMode ) {
-	case 1: return "Sailing1Pers"; break;
-	case 2: return "PrimaryLand"; break;
-	case 3: return "Sailing3Pers"; break;
-	case 4: return "FightModeControls"; break;
+	switch( nMode ) 
+	{
+		case 1: return "Sailing1Pers"; break;
+		case 2: return "PrimaryLand"; break;
+		case 3: return "Sailing3Pers"; break;
+		case 4: return "FightModeControls"; break;
 	}
 	return "unknown";
 }
@@ -577,11 +621,12 @@ float ConvertSeaDetails(float fDetails, bool Real2Slider)
 void GetHerbOptionsData()
 {
 	int nSelBtn = 0;
-	switch( iGrassQuality ) {
-	case 0: nSelBtn=4; break;
-	case 1: nSelBtn=3; break;
-	case 2: nSelBtn=2; break;
-	case 3: nSelBtn=1; break;
+	switch( iGrassQuality ) 
+	{
+		case 0: nSelBtn=4; break;
+		case 1: nSelBtn=3; break;
+		case 2: nSelBtn=2; break;
+		case 3: nSelBtn=1; break;
 	}
 	SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"HERB_CHECKBOX", 2, nSelBtn, true );
 }
@@ -936,3 +981,15 @@ void FaderFrame()
 		PostEvent("evFaderFrame",nDeltaTime,"lll",nTotalTime,nCurTime,nDeltaTime);
 	}
 }
+
+void ChangeHUDDetail()
+{
+    float sl = stf(GameInterface.nodes.hud_slide.value);
+	newBase = CalcHUDBase(sl, stf(Render.screen_y));
+	if( newBase != iHUDBase) 
+	{
+        fHUDRatio = stf(Render.screen_y) / newBase;
+		SetFormatedText("HUD_DESCRIP_TEXT", Render.screen_y + "  / " + newBase + " : " + fHUDRatio);
+	}
+}
+

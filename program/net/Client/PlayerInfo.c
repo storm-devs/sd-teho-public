@@ -1,3 +1,4 @@
+/*
 void NetClient_OnPlayerInfo(int iMsg)
 {
 	int iSubCode = NMGetByte(iMsg);
@@ -40,3 +41,4 @@ void NetClient_OnPlayerInfo(int iMsg)
 		break;
 	}
 }
+*/

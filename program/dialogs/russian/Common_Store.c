@@ -370,7 +370,7 @@ void ProcessDialogEvent()
 									 "Show me the cannonballs, bombs and stuff like that."));
 			link.l1.go = "trade_1";
 
-			if(IsPCharHaveTreasurer() && CheckAttribute(PChar, "TransferGoods.Enable")) // Автозакупка товаров
+			if(CheckFunctionalTreasurer() && CheckAttribute(PChar, "TransferGoods.Enable")) // Автозакупка товаров
 			{
 				link.l5 = "My purser will make all necessary purchases...";
 				link.l5.go = "TransferGoods";
@@ -534,6 +534,7 @@ void ProcessDialogEvent()
 						"Cap, the loading of goods on the selected ship has begun.");
 					link.l1 = "Thank you. Pleasure doing business with you.";
 					link.l1.go = "exit";
+          SetPriceListByStoreMan(rColony); // mitrokosta обновляем список цен
 					WaitDate("", 0, 0, 0, 1, 0); // Крутим время
 				}
 				else

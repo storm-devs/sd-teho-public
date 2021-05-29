@@ -284,86 +284,120 @@ void WM_InitializeCommands()
 
 void WM_SetParameterData()
 {
-	BattleInterface.CommandTextures.list.t0.name = "battle_interface\cancel.tga";
+	float fHtRatio = stf(Render.screen_y) / iGlobalVar1;
+	int fTmp, fTmp2;
+	BattleInterface.CommandTextures.list.t0.name = "battle_interface\cancel.tga.tx";
 	BattleInterface.CommandTextures.list.t0.xsize = 2;
 	BattleInterface.CommandTextures.list.t0.ysize = 1;
 
-	BattleInterface.CommandTextures.list.t1.name = "battle_interface\worldmapcommands.tga";
+	BattleInterface.CommandTextures.list.t1.name = "battle_interface\worldmapcommands.tga.tx";
 	BattleInterface.CommandTextures.list.t1.xsize = 8;
 	BattleInterface.CommandTextures.list.t1.ysize = 2;
 
-	BattleInterface.wm_sign.fontid			= "interface_normal";
-	BattleInterface.wm_sign.fontcolor		= argb(255,255,255,168) //argb(255,255,255,255);
-	BattleInterface.wm_sign.fontscale		= 1.1;
+	BattleInterface.wm_sign.fontid					= "interface_normal";
+	BattleInterface.wm_sign.fontcolor				= argb(255,255,255,168) //argb(255,255,255,255);
+	BattleInterface.wm_sign.fontscale				= 1.1 * fHtRatio;
+    fTmp = makeint(-14.0 * fHtRatio);
+    fTmp2 = makeint(18.0 * fHtRatio);
+    BattleInterface.wm_sign.fontoffset       = fTmp + "," + fTmp2;
 
 	BattleInterface.wm_sign.shipnamefontid			= "interface_normal";
 	BattleInterface.wm_sign.shipnamefontcolor		= argb(255,255,255,255);
-	BattleInterface.wm_sign.shipnamefontscale		= 1.1;
+	BattleInterface.wm_sign.shipnamefontscale		= 1.1 * fHtRatio;
+    fTmp = makeint(-14.0 * fHtRatio);
+    fTmp2 = makeint(40.0 * fHtRatio);
+    BattleInterface.wm_sign.shipnamefontoffset       = fTmp + "," + fTmp2;
 
-	BattleInterface.wm_sign.backtexturename		= "battle_interface\ShipBackIcon.tga";
+	BattleInterface.wm_sign.backtexturename			= "battle_interface\ShipBackIcon.tga.tx";
 	BattleInterface.wm_sign.backcolor				= argb(255,128,128,128);
 	BattleInterface.wm_sign.backuv					= "0.0,0.0,1.0,1.0";
 	BattleInterface.wm_sign.backoffset				= "-2,-2"; //"0.0,0.0";
-	BattleInterface.wm_sign.backiconsize			= "128,128";
+	fTmp = makeint(128.0 * fHtRatio);
+	BattleInterface.wm_sign.backiconsize			= fTmp + "," + fTmp;
 
-	BattleInterface.wm_sign.shipstatetexturename	= "battle_interface\ShipState.tga";
+	BattleInterface.wm_sign.shipstatetexturename	= "battle_interface\ShipState.tga.tx";
 	BattleInterface.wm_sign.shipstatecolor			= argb(255,128,128,128);
 	BattleInterface.wm_sign.shiphpuv				= "0.0,0.109,0.5,0.6875";
-	BattleInterface.wm_sign.shiphpoffset			= "-32,-13";
-	BattleInterface.wm_sign.shiphpiconsize			= "64,74";
+	fTmp = makeint(-32.0 * fHtRatio);
+    fTmp2 = makeint(-13.0 * fHtRatio);
+    BattleInterface.wm_sign.shiphpoffset			= fTmp + "," + fTmp2;
+	fTmp = makeint(32.0 * fHtRatio);
+	BattleInterface.wm_sign.shipspoffset			= fTmp + "," + fTmp2;
+	
+	fTmp = makeint(64.0 * fHtRatio);
+    fTmp2 = makeint(74.0 * fHtRatio);
+    BattleInterface.wm_sign.shiphpiconsize			= fTmp + "," + fTmp2;
+	BattleInterface.wm_sign.shipspiconsize			= fTmp + "," + fTmp2;
 	BattleInterface.wm_sign.shipspuv				= "0.5,0.109,1.0,0.6875";
-	BattleInterface.wm_sign.shipspoffset			= "32,-13";
-	BattleInterface.wm_sign.shipspiconsize			= "64,74";
 
-	BattleInterface.wm_sign.shipclasstexturename	= "battle_interface\ShipClass.tga";
+	BattleInterface.wm_sign.shipclasstexturename	= "battle_interface\ShipClass.tga.tx";
 	BattleInterface.wm_sign.shipclasscolor			= argb(255,102,102,102); //argb(255,128,128,128);
-	BattleInterface.wm_sign.shipclassuv			= "0.0,0.0,1.0,1.0";
-	BattleInterface.wm_sign.shipclassoffset		= "-14,-52";//"-14,-50";
-	BattleInterface.wm_sign.shipclassiconsize		= "64,16";
+	BattleInterface.wm_sign.shipclassuv				= "0.0,0.0,1.0,1.0";
+	fTmp = makeint(-14.0 * fHtRatio);
+    fTmp2 = makeint(-52.0 * fHtRatio);
+    BattleInterface.wm_sign.shipclassoffset			= fTmp + "," + fTmp2;
+	
+	fTmp = makeint(64.0 * fHtRatio);
+    fTmp2 = makeint(16.0 * fHtRatio);
+    BattleInterface.wm_sign.shipclassiconsize		= fTmp + "," + fTmp2;
+
 	BattleInterface.wm_sign.gunchargeprogress		= "0.0625, 0.219, 0.359, 0.5, 0.641, 0.781, 0.983";
 
-	BattleInterface.wm_sign.shiptexturename		= "battle_interface\ship_icons2.tga";
+	BattleInterface.wm_sign.shiptexturename			= "battle_interface\ship_icons2.tga.tx";
 	BattleInterface.wm_sign.shipcolor				= argb(255,128,128,128);
-	BattleInterface.wm_sign.shipoffset				= "-14,-12";
-	BattleInterface.wm_sign.shipiconsize			= "64,64";
+	
+	fTmp = makeint(-14.0 * fHtRatio);
+    fTmp2 = makeint(-12.0 * fHtRatio);
+    BattleInterface.wm_sign.shipoffset				= fTmp + "," + fTmp2;
 
-	BattleInterface.wm_sign.commandlistverticaloffset = -40;
+	fTmp = makeint(64.0 * fHtRatio);
+    BattleInterface.wm_sign.shipiconsize			= fTmp + "," + fTmp;
 
-	BattleInterface.wm_sign.iconoffset1 = "70,70";
-	BattleInterface.wm_sign.iconoffset2 = "70,198";
-	BattleInterface.wm_sign.iconoffset3 = "70,326";
-	BattleInterface.wm_sign.iconoffset4 = "70,454";
-	BattleInterface.wm_sign.iconoffset5 = "70,582";
+	fTmp = makeint(-40.0 * fHtRatio);
+    BattleInterface.wm_sign.commandlistverticaloffset = fTmp;
+
+	float fTmp3;
+    fTmp = makeint(70.0 * fHtRatio);
+    fTmp3 = fTmp;
+    fTmp2 = makeint(128.0 * fHtRatio);
+    BattleInterface.wm_sign.iconoffset1 = fTmp + "," + fTmp;
+    fTmp3 += fTmp2;
+    BattleInterface.wm_sign.iconoffset2 = fTmp + "," + fTmp3;
+	fTmp3 += fTmp2;
+    BattleInterface.wm_sign.iconoffset3 = fTmp + "," + fTmp3;
+    fTmp3 += fTmp2;
+    BattleInterface.wm_sign.iconoffset4 = fTmp + "," + fTmp3;
+    fTmp3 += fTmp2;
+    BattleInterface.wm_sign.iconoffset5 = fTmp + "," + fTmp3;
+    fTmp3 += fTmp2;
+    BattleInterface.wm_sign.iconoffset6 = fTmp + "," + fTmp3;
+    fTmp3 += fTmp2;
+    BattleInterface.wm_sign.iconoffset7 = fTmp + "," + fTmp3;
+    fTmp3 += fTmp2;
+    BattleInterface.wm_sign.iconoffset8 = fTmp + "," + fTmp3;
 
 	BattleInterface.CommandList.CommandMaxIconQuantity = 8;
 	BattleInterface.CommandList.CommandIconSpace = 1;
-	BattleInterface.CommandList.CommandIconLeft = 108;//157; boal
-	BattleInterface.CommandList.CommandIconWidth = RecalculateHIcon(48);
-	BattleInterface.CommandList.CommandIconHeight = RecalculateVIcon(48);
+	BattleInterface.CommandList.CommandIconLeft = makeint(108 * fHtRatio);//157;
+	BattleInterface.CommandList.CommandIconWidth = RecalculateHIcon(makeint(48 * fHtRatio));
+	BattleInterface.CommandList.CommandIconHeight = RecalculateVIcon(makeint(48 * fHtRatio));
 
 	BattleInterface.CommandList.CommandNoteFont = "interface_normal";
 	BattleInterface.CommandList.CommandNoteColor = argb(255,255,255,255);
-	BattleInterface.CommandList.CommandNoteScale = 1.0;
-	BattleInterface.CommandList.CommandNoteOffset = RecalculateHIcon(0) + "," + RecalculateVIcon(-42);
+	BattleInterface.CommandList.CommandNoteScale = 1.0 * fHtRatio;
+	BattleInterface.CommandList.CommandNoteOffset = RecalculateHIcon(0) + "," + RecalculateVIcon(makeint(-42 * fHtRatio));
 
 	BattleInterface.CommandList.CommandNoteFont = "interface_normal";
 	BattleInterface.CommandList.CommandNoteColor = argb(255,255,255,255);
-	BattleInterface.CommandList.CommandNoteScale = 1.0;
-	BattleInterface.CommandList.CommandNoteOffset = RecalculateHIcon(0) + "," + RecalculateVIcon(-42);
+	BattleInterface.CommandList.CommandNoteScale = 1.0 * fHtRatio;
+	BattleInterface.CommandList.CommandNoteOffset = RecalculateHIcon(0) + "," + RecalculateVIcon(makeint(-42 * fHtRatio));
 
-	BattleInterface.CommandList.UDArrow_Texture = "battle_interface\arrowly.tga";
+	BattleInterface.CommandList.UDArrow_Texture = "battle_interface\arrowly.tga.tx";
 	BattleInterface.CommandList.UDArrow_UV_Up = "0.0,1.0,1.0,0.0";
 	BattleInterface.CommandList.UDArrow_UV_Down = "0.0,0.0,1.0,1.0";
-	BattleInterface.CommandList.UDArrow_Size = RecalculateHIcon(32) + "," + RecalculateVIcon(32);
-	BattleInterface.CommandList.UDArrow_Offset_Up = RecalculateHIcon(-41) + "," + RecalculateVIcon(-30);
-	BattleInterface.CommandList.UDArrow_Offset_Down = RecalculateHIcon(-41) + "," + RecalculateVIcon(46);
-
-	/*BattleInterface.CommandList.ActiveIcon_Texture = "battle_interface\enter_list.tga";
-	BattleInterface.CommandList.ActiveIcon_Offset = RecalculateHIcon(-49) + ",0";
-	BattleInterface.CommandList.ActiveIcon_Size = RecalculateHIcon(48) + "," + RecalculateVIcon(48);
-	BattleInterface.CommandList.ActiveIcon_UV1 = "0.5,0.0,1.0,1.0";
-	BattleInterface.CommandList.ActiveIcon_UV2 = "0.0,0.0,0.5,1.0";
-	BattleInterface.CommandList.ActiveIcon_Note = XI_ConvertString("MenuNote"); */
+	BattleInterface.CommandList.UDArrow_Size = RecalculateHIcon(makeint(32 * fHtRatio)) + "," + RecalculateVIcon(makeint(32 * fHtRatio));
+	BattleInterface.CommandList.UDArrow_Offset_Up = RecalculateHIcon(makeint(-41 * fHtRatio)) + "," + RecalculateVIcon(makeint(-30 * fHtRatio));
+	BattleInterface.CommandList.UDArrow_Offset_Down = RecalculateHIcon(makeint(-41 * fHtRatio)) + "," + RecalculateVIcon(makeint(46 * fHtRatio));
 
 	BattleInterface.maincharindex = pchar.index;
 

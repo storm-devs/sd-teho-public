@@ -87,6 +87,7 @@ void ProcessDialogEvent()
 			npchar.Payment = true;
 			npchar.DontClearDead = true;
 			NextDiag.CurrentNode = "Danielle_officer";
+			npchar.HoldEquip = true; // лесник -  не отдавать саблю и пистоль																					 
 			SaveCurrentNpcQuestDateParam(npchar, "HiredDate");
 			LAi_group_MoveCharacter(npchar, LAI_GROUP_PLAYER);
 			AddQuestRecord("BaronReturn", "2");
@@ -778,6 +779,8 @@ void ProcessDialogEvent()
 			link.l2 = "It's nothing. Dismissed!";
 			link.l2.go = "exit";
 			NextDiag.TempNode = "Danielle_officer";
+			sld = characterFromId("Danielle");
+		    sld.HoldEquip = true; // лесник -  не отдавать саблю и пистоль для текущей игры. поэтому так . другого способа не нашел						 
 		break;
 		
 		case "stay_follow":

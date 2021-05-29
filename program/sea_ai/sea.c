@@ -1,3 +1,5 @@
+#include "_settings_.h" 
+
 #include "sea_ai\Script_defines.h"
 #include "sea_ai\SeaPeople.h"
 
@@ -57,6 +59,10 @@ object  ShipTracks;
 
 object	SeaLocatorShow;
 object	LoginGroupsNow;
+
+ref		rSeaLoadResult;
+object	oSeaSave;
+
 bool	bSeaShowLocators = true;
 bool	bQuestDisableMapEnter = false;
 bool	bFromCoast = false;
@@ -285,6 +291,9 @@ string Sea_FindNearColony()
 // boal <--
 void Sea_LandLoad()
 {	
+	pchar.shipx = pchar.ship.pos.x;
+	pchar.shipz = pchar.ship.pos.z;
+	ClearAllLogStrings();
 	string sColony = Sea_FindNearColony(); // boal
 	int iColony = FindColony(sColony);
 	if(iColony != -1)
@@ -1194,6 +1203,8 @@ void SeaLogin(ref Login)
 	pchar.space_press = "0";
 	DeleteAttribute(pchar, "SkipEshipIndex");// boal
 	
+	pchar.DirSailFail = ""; // mitrokosta удалить флаг фейла директсаила
+	
 	/*if (checkattribute(pchar, "sneak"))
 	{
 		string sgroup = pchar.sneak.group;
@@ -1379,7 +1390,6 @@ void Sea_LoginGroup(string sGroupID)
 
 void Sea_FirstInit()
 { 
-	trace("Sea_FirstInit");
 	bSeaLoaded = true;
 	RefreshBattleInterface();
 	if( SeaCameras.Camera == "SeaDeckCamera" ) {
@@ -1418,8 +1428,6 @@ void Sea_ReloadStart()
 	PostEvent("Sea_Reload", 1);
 }
 
-ref		rSeaLoadResult;
-object	oSeaSave;
 
 void Sea_Save()
 {
@@ -1512,6 +1520,7 @@ void Sea_LoadIsland(string sIslandID)
 		// boal <--
 		CreateEntity(&Island, "Island");
 		Island.LightingPath = GetLightingPath();
+		Island.dynamicLightsOn = DYNAMIC_LIGHTS;
 		Island.ImmersionDistance = Islands[iIslandIndex].ImmersionDistance;			// distance = fRadius * ImmersionDistance, from island begin immersion
 		Island.ImmersionDepth = Islands[iIslandIndex].ImmersionDepth;			// immersion depth = (Distance2Camera / (fRadius * ImmersionDistance) - 1.0) * ImmersionDepth
 		string sTexturePath = "islands\" + Islands[iIslandIndex].TexturePath + "\";
@@ -1687,7 +1696,7 @@ ref SeaLoad_GetPointer()
 {
 	string sType = GetEventData();
 	int iIndex = GetEventData();
-
+	
 	switch (sType)
 	{
 		case "character":

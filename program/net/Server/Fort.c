@@ -1,5 +1,5 @@
 object NSFortModel, NSFortBlots;
-
+/*
 void NetServer_DeleteFortEnvironment()
 {
 	DeleteClass(NetServer_GetCLient(NET_FORTCLIENT));
@@ -188,4 +188,4 @@ void NetServer_OnFortHit()
 	NMAddFloat(iSMsg, z);
 	NetServer_SendMessage(DST_ALL, iSMsg, false);
 	NMDelete(iSMsg);
-}
+}*/

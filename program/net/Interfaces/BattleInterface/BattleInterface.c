@@ -10,7 +10,7 @@ object NetBInterface;
 //chref.skills.repair.totalcooldowntime = int max (>=0)
 //chref.skills.repair.currentcooldowntime = int cur (>=0)
 //NetClient_ShipStartRepair()
-
+/*
 void NetBI_CreateShipPointer()
 {
 	objShipPointer.Server = false;
@@ -741,10 +741,6 @@ ref Net_ProcessSailDamage()
 		sailDmg = sailDmgMax;
 	}
 
-/*	if (sailDmg < 0.5)
-	{
-		Log_SetStringtoLog("MUST DIE!!! " + sailDmg);
-	}*/
 
 	arSail.hc = holeCount;
 	arSail.hd = holeData;
@@ -790,3 +786,4 @@ float Net_CalculateShipSP(ref chref)
 	if(fSP<0.0) fSP = 0.0;
 	return fSP;
 }
+*/

@@ -494,17 +494,17 @@ void StoreDayUpdateStart()
 
 	if(storeDayUpdateCnt >= 0) return;
 	storeDayUpdateCnt = 0;
-	PostEvent("EvStoreDayUpdate", 30);
+	PostEvent("EvStoreDayUpdate", 200);
 }
 
 void StoreDayUpdate()
-{
+{	
 	if(storeDayUpdateCnt >= 0)
 	{
 		UpdateStore(&Stores[storeDayUpdateCnt]);
 		storeDayUpdateCnt++;
 		if(storeDayUpdateCnt >= STORE_QUANTITY) storeDayUpdateCnt = -1;
-		PostEvent("EvStoreDayUpdate", 30);
+		PostEvent("EvStoreDayUpdate", 200);
 	}
 }
 
@@ -692,12 +692,14 @@ void SetNull2StoreManPart(ref rchar, float part)
 }
 
 // нулим ростовщиков
-void SetNull2Deposit(string _city)
-{
-    if (CheckAttribute(Pchar, "quest.Deposits." + _city))
-    {
-        Log_Info("All investments of yours in " + GetCityName(_city) + " are gone.");
-        DeleteAttribute(Pchar, "quest.Deposits." + _city);
+void SetNull2Deposit(string _city) {
+	string sQuest1, sQuest2;
+	sQuest1 = "quest.Deposits." + _city + "_Type1"; // mitrokosta поправка на двухвалютную систему
+	sQuest2 = "quest.Deposits." + _city + "_Type2";
+	if (CheckAttribute(pchar, sQuest1) || CheckAttribute(pchar, sQuest2)) {
+		Log_Info("All investments of yours in " + GetCityName(_city) + " are gone.");
+		DeleteAttribute(pchar, sQuest1);
+		DeleteAttribute(pchar, sQuest2);
     }
 }
 

@@ -1,5 +1,5 @@
 #define NET_REPAIR_COOLDOWN			60
-
+/*
 void NetServer_DeleteShipEnvironment()
 {
 	DelEventHandler("NetServer_ShipUpdateParameters", "NetServer_ShipUpdateParameters");
@@ -602,10 +602,7 @@ void NetServer_ShipUpdateParameters()
 		rClient.Ship.MaxSpeedZ = fGameSpeed * fMaxSpeedZ * fWindPower * fTRFromWeight * fTRFromSailDamage * fTRFromSkill * fSpeedFromHp;// * fSpeedPerk;
 
 		/*if (fWindDotShip < -0.70)
-		{
-			rClient.Ship.MaxSpeedZ = stf(rClient.Ship.MaxSpeedZ) * (fWindDotShip + 1.0);
-		}*/
-
+		
 	// Turn rate depend from sail State
 		float	fTRFromSailState = 1.0;
 		float	fTRResult;
@@ -764,3 +761,4 @@ void NetServer_CannonRecalculateParameters(ref rClient)
 
 	rClient.Ship.Cannons.SpeedV0 = stf(rCannon.SpeedV0) * stf(rBall.SpeedV0);// * NetServer_IsPerkUse(rClient.Perks.LongRangeShoot, 1.0, 1.15);
 }
+*/

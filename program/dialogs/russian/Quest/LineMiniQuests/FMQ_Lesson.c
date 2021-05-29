@@ -173,6 +173,7 @@ void ProcessDialogEvent()
 		
 		case "greguar_17":
 			PlaySound("VOICE\Russian\Master_01.wav");
+			pchar.quest.FMQL_goods_over.over = "yes";// лесник снято прерывание на встречу.
 			dialog.text = "It is done. Cargo is unloaded, the client is here. Let's do the talking.";
 			link.l1 = "...";
 			link.l1.go = "greguar_18";

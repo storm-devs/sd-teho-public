@@ -1,6 +1,5 @@
-
-#define RELOAD_TIME_FADE_OUT	0.5
-#define RELOAD_TIME_FADE_IN		0.5
+#define RELOAD_TIME_FADE_OUT	0.8
+#define RELOAD_TIME_FADE_IN		0.8
 
 object reload_fader;
 aref reload_locator_ref;
@@ -381,6 +380,7 @@ void ReloadEndFade()
 	}
 	SendMessage(&reload_fader, "lfl", FADER_IN, RELOAD_TIME_FADE_IN, true);
 	PostEvent("LoadSceneSound", 500);
+	ReloadProgressUpdate();
 	ReloadProgressEnd();
 }
 

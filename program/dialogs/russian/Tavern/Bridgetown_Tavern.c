@@ -143,6 +143,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			pchar.questTemp.HWIC.Self = "start";
 			SetFunctionTimerCondition("TargetFernandoOver", 0, 0, 60, false); //таймер
 			AddQuestRecord("Holl_Gambit", "3-1");
+			ReOpenQuestHeader("Holl_Gambit"); // данила . чтобы вышел из архива																				  
 			Log_TestInfo(""+XI_ConvertString("Colony"+pchar.questTemp.HWIC.Self.SpainCity)+"");
 		break;
 		

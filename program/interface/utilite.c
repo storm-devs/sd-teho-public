@@ -517,7 +517,10 @@ void FillShipList(string strAccess, ref chref)
 
 	for(n= 0; n< SHIP_TYPES_QUANTITY; n++)
 	{
+		if(CheckAttribute(ShipsTypes[n], "name"))
 		sShip = ShipsTypes[n].name;
+		else
+			sShip = "";
 		AddFaceGroup(strAccess,"SHIPS_"+sShip);
 	}
 }
@@ -664,18 +667,18 @@ void CloseTooltip()
 
 string GetMoralePicture(float fMoraleValue)
 {
-	if( fMoraleValue >= 75.0 ) {return "interfaces\flags\flag_1_64.tga";}
-	if( fMoraleValue >= 50.0 ) {return "interfaces\flags\flag_2_64.tga";}
-	if( fMoraleValue >= 25.0 ) {return "interfaces\flags\flag_3_64.tga";}
-	return "interfaces\flags\flag_4_64.tga";
+	if( fMoraleValue >= 75.0 ) {return "interfaces\flags\flag_1_64.tga.tx";}
+	if( fMoraleValue >= 50.0 ) {return "interfaces\flags\flag_2_64.tga.tx";}
+	if( fMoraleValue >= 25.0 ) {return "interfaces\flags\flag_3_64.tga.tx";}
+	return "interfaces\flags\flag_4_64.tga.tx";
 }
 
 string GetExperiencePicture(float fExpValue)
 {
-	if( fExpValue >= 75.0 ) {return "interfaces\stars\Yellow_star1.tga";}
-	if( fExpValue >= 50.0 ) {return "interfaces\stars\Yellow_star2.tga";}
-	if( fExpValue >= 25.0 ) {return "interfaces\stars\Yellow_star3.tga";}
-	return "interfaces\stars\Yellow_star4.tga";
+	if( fExpValue >= 75.0 ) {return "interfaces\stars\Yellow_star1.tga.tx";}
+	if( fExpValue >= 50.0 ) {return "interfaces\stars\Yellow_star2.tga.tx";}
+	if( fExpValue >= 25.0 ) {return "interfaces\stars\Yellow_star3.tga.tx";}
+	return "interfaces\stars\Yellow_star4.tga.tx";
 }
 
 string GetMoraleGroupPicture(float fMoraleValue)

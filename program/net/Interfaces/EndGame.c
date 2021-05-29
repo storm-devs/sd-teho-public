@@ -1,3 +1,4 @@
+/*
 void InitInterface(string iniName)
 {
 	GameInterface.title = "";
@@ -25,3 +26,4 @@ void ICancelProcedure()
 
 	IDoExit( RC_INTERFACE_NET_FINDGAME );
 }
+*/

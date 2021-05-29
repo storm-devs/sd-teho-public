@@ -623,7 +623,7 @@ void SetMusic(string name)
 	//Trace("SetMusic : "+name);
 	if (oldMusicID >= 0)
 	{
-		SendMessage(Sound, "ll", MSG_SOUND_RELEASE, oldMusicID);
+                SendMessage(Sound, "lll", MSG_SOUND_STOP, oldMusicID, 0);
 		oldMusicID = -1;
 	}
 
@@ -676,6 +676,8 @@ void SetMusicOnce(string name)
 
 void FadeOutMusic(int _time)
 {
+    if(_time < 100)
+        _time *= 1000;
 	if (musicID >= 0)
 	{
 		StopSound(musicID, _time);
@@ -694,7 +696,8 @@ void PauseAllSounds()
 void ResumeAllSounds()
 {
 	//Trace("ResumeAllSounds");
-	SendMessage(Sound,"lll",MSG_SOUND_RESUME, musicID, SOUNDS_FADE_TIME);
+	//SendMessage(Sound,"lll",MSG_SOUND_RESUME, musicID, SOUNDS_FADE_TIME);
+	SendMessage(Sound,"lll",MSG_SOUND_RESUME, 0, SOUNDS_FADE_TIME);
 }
 
 // OLD VERSIONS
@@ -854,7 +857,7 @@ void ResetSound()
 	ResetSoundScheme();
 	// fix <--
 	StopSound(0,0);
-	ReleaseSound(0);
+	//ReleaseSound(0);
 	musicName = "";
 	oldMusicName = "";
 	musicID = -1;    //fix boal не было нуления ИД

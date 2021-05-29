@@ -179,6 +179,10 @@ void InitInterfaceTables()
 
 	Interfaces[INTERFACE_MAP].SectionName = "interface\map.c";
 	Interfaces[INTERFACE_MAP].IniFile = "RESOURCE\INI\INTERFACES\map.ini";
+
+	Interfaces[INTERFACE_DIRSAILENC].SectionName = "interface\DirSailEnc.c";
+	Interfaces[INTERFACE_DIRSAILENC].IniFile = "RESOURCE\INI\INTERFACES\DirSailEnc.ini";
+	
 	Interfaces[INTERFACE_COLONY_INFO].SectionName = "interface\ColonyInfo.c";
 	Interfaces[INTERFACE_COLONY_INFO].IniFile = "RESOURCE\INI\INTERFACES\ColonyInfo.ini";
 

@@ -80,7 +80,9 @@ void ProcessDialogEvent()
 						sld.money = iRank*200+1000+rand(500);
 						LAi_SetWarriorType(sld);
 						LAi_warrior_SetStay(sld, true);
-						LAi_group_MoveCharacter(sld, LAI_GROUP_MONSTERS);
+						//LAi_group_MoveCharacter(sld, LAI_GROUP_MONSTERS);
+						LAi_group_MoveCharacter(sld, LAI_GROUP_ENEMY);// лесник изменил группу чтобы ядом таино травить можно было
+						LAi_group_Attack(sld, Pchar);// лесник добавил атаку на пчара а то у некоторых баг что они не нападают.
 						ChangeCharacterAddressGroup(sld, pchar.GenQuest.EncGirlF.locationId, "quest", "quest" + i);
 						i++;
 						model[iMassive] = "";	
@@ -92,11 +94,13 @@ void ProcessDialogEvent()
 				sld = GetCharacter(NPC_GenerateCharacter("UndergroundGirl", "women_"+(rand(5)+11), "woman", "towngirl", 5, PIRATE, 1, false, "citizen"));
 				sld.dialog.filename = "Enc_FriendGirl_dialog.c";
 				int iTemp = rand(1);
-				sld.dialog.currentnode = "Underground1";//+ iTemp; //здесь рендом поведения девки: 0-помогите, 1-сама крутая
+				sld.dialog.currentnode = "Underground"+ iTemp; //здесь рендом поведения девки: 0-помогите, 1-сама крутая// лесник - раскоментил itemp
 				sld.greeting = "Enc_RapersGirl_" + (iTemp+1); //соотв. озвучка
-				LAi_SetStayType(sld);
+			   // LAi_SetStayType(sld);
+				LAi_SetCitizenType(sld);// чтоб ходила по пещере. лесник
 				LAi_group_MoveCharacter(sld, LAI_GROUP_PLAYER);
-				ChangeCharacterAddressGroup(sld, pchar.GenQuest.EncGirlF.locationId, "monsters", "monster"+(rand(9)+1));
+				GetCharacterPos(pchar, &locx, &locy, &locz); // и ниже - ищем ближейший локатор лесник.
+	            ChangeCharacterAddressGroup(sld, pchar.GenQuest.EncGirlF.locationId, "goto", LAi_FindNearestFreeLocator("goto", locx, locy, locz));
 			}
 			LAi_SetActorTypeNoGroup(npchar);
             LAi_ActorRunToLocation(npchar, "reload", "reload1", "none", "", "", "", -1);

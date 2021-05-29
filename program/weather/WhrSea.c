@@ -11,9 +11,10 @@ void WhrCreateSeaEnvironment()
 	aref	aSea2; makearef(aSea2, aCurWeather.Sea2);
 	aref	aCommon; makearef(aCommon, WhrCommonParams.Sea);
 	int   i;
-	float fMaxSeaHeight;
+	float fMaxSeaHeight = 0.0;
 
 	if (CheckAttribute(&Sea,"MaxSeaHeight")) { fMaxSeaHeight = stf(Sea.MaxSeaHeight); }
+	if(fMaxSeaHeight < 0.0) return;
 	DeleteAttribute(&Sea,"");
 
 	Sea.Clear = "";
@@ -29,12 +30,10 @@ void WhrCreateSeaEnvironment()
 	string sLocation = mchr.location;
 
 	float FogDensity = 1.0;
-	float FogSeaDensity = 1.0
+	float FogSeaDensity = 1.0;
 
 	if (FindLocation(sLocation) != -1)
-	{
-		/*if(CheckAttribute(&locations[FindLocation(sLocation)], "fastreload"))
-		{*/
+		{
 			Sea.LodScale = 32.0;
 			Sea.MaxVertices = 1000;
 			Sea.MaxIndices = 1300;
@@ -56,29 +55,13 @@ void WhrCreateSeaEnvironment()
 			Sea.Sea2.LodScale = 2.0;
 			Sea.Sea2.GridStep = 0.15;
 			Sea.Sea2.BumpScale = 0.3;
-		/*}
+		}
 		else
 		{
-			Sea.LodScale = 8.0;
-			Sea.MaxVertices = 2000;
-			Sea.MaxIndices = 2600;
-			Sea.MaxWaveDistance = 1000.0;
-			Sea.MaxDim = 65536;
-			Sea.MinDim = 64;
-			Sea.GridStep = GridStepPC;
-			fMaxSeaHeight = 0.5;// boal бухты затапливает 5.0;
-			Sea.Sea2.LodScale = 2.0;
-			Sea.Sea2.GridStep = 0.15;
-			//SetSeaSettings();
-		}*/
-	}
-	else
-	{
         if (CheckAttribute(aCurWeather, "Storm") && sti(aCurWeather.Storm) == true)
 		{
 		    SetSeaSettings();
 			fMaxSeaHeight = 200.0;
-			Log_TestInfo("Шторм включен, волны по Мах разрешены");
 		}
 		else
 		{
@@ -92,7 +75,7 @@ void WhrCreateSeaEnvironment()
 				Sea.MaxDim = 65536;
 				Sea.MinDim = 64;
 				Sea.GridStep = GridStepPC;
-				fMaxSeaHeight = SetMaxSeaHeight(i); //boal
+				fMaxSeaHeight = SetMaxSeaHeight(i);
 				Sea.Sea2.LodScale = 1.0;
 				Sea.Sea2.GridStep = 0.15;
 			}
@@ -156,23 +139,12 @@ void WhrCreateSeaEnvironment()
 		Sea.Sun.HeightAngle = Whr_GetFloat(aSea, "SunRoad.Special.HeightAngle");
 		Sea.Sun.AzimuthAngle = Whr_GetFloat(aSea, "SunRoad.Special.AzimuthAngle");
 	}
-
 	Sea.CubeMap.Size = 512;	
 	Sea.CubeMap.VectorsSize = 256;
 	
 	Sea.CubeMap.Format = "r5g6b5";
 
 	Sea.Sky.Color = Whr_GetColor(aSea, "Sky.Color");
-
-	// harmonics
-	aref aHarmonics; makearef(aHarmonics, aSea.Harmonics);
-	int iNumHarmonics = GetAttributesNum(aHarmonics);
-	for (i=0;i<iNumHarmonics;i++)
-	{
-		aref aHarmonic = GetAttributeN(aHarmonics,i);
-		string sTemp = "h" + i;
-		Sea.Harmonics.(sTemp) = GetAttributeValue(aHarmonic);
-	}
 
 	// Advanced Sea initialize
 	Sea.Sea2.WaterColor = Whr_GetColor(aSea2, "WaterColor");
@@ -197,11 +169,24 @@ void WhrCreateSeaEnvironment()
 
 	Sea.Sea2.SimpleSea = sti(InterfaceStates.SimpleSea);
 
+	Sea.Sea2.FoamEnable = false;
+	if(FindLocation(sLocation) == -1)
+	{
+		Sea.Sea2.FoamEnable = true;
+	Sea.Sea2.FoamK = Whr_GetFloat(aSea2, "FoamK");
+	Sea.Sea2.FoamV = Whr_GetFloat(aSea2, "FoamV");
+	Sea.Sea2.FoamUV = Whr_GetFloat(aSea2, "FoamUV");
+	Sea.Sea2.FoamTexDisturb = Whr_GetFloat(aSea2, "FoamTexDisturb");
+	}
+
+	if(CheckAttribute(aSea2, "LodScale"))
+        Sea.Sea2.LodScale = Whr_GetFloat(aSea2, "LodScale");
+    if(CheckAttribute(aSea2, "GridStep"))
+        Sea.Sea2.GridStep = Whr_GetFloat(aSea2, "GridStep");
+
 	Sea.MaxSeaHeight = fMaxSeaHeight;
 	Sea.isDone = "";
-	//Log_TestInfo("Whether Sea.MaxSeaHeight " + Sea.MaxSeaHeight);
-	
-	// boal 14/09/06 запоминаем стреднюю волну для моря (не локации)
+
 	if (bSeaActive && !bAbordageStarted)
 	{
 		pchar.SystemInfo.ScaleSeaHeight = GetScaleSeaHeight();
@@ -216,7 +201,6 @@ void SetSeaSettings()
 	Sea.MaxWaveDistance = MaxWaveDistance;
 	Sea.MaxDim = 65536;
 	Sea.MinDim = 128;
-	//Sea.GridStep = GridStepPC;
 	Sea.GridStep = 0.1 + 0.1 * (1.0 - stf(InterfaceStates.SeaDetails));
 
 	Sea.Sea2.LodScale = 0.5;

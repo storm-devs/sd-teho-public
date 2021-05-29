@@ -214,6 +214,11 @@ float GetDistance2D(float x1, float y1, float x2, float y2)
 	return sqrt(sqr(x1 - x2) + sqr(y1 - y2));
 }
 
+float GetDistance2DRel(float x1, float y1, float x2, float y2)
+{
+	return sqr(x1 - x2) + sqr(y1 - y2);
+}
+
 // Warship 21.07.09 Расстояние в 3D
 float GetDistance3D(float _x1, float _y1, float _z1, float _x2, float _y2, float _z2)
 {
@@ -372,7 +377,7 @@ void CalcLocalTime(float _inc)
 }
 void RefreshWeather()
 {
-    Whr_UpdateWeather();
+//>>>>>    Whr_UpdateWeather();
 	// звуки
 	/*
 	if (bSeaActive && !bAbordageStarted)
@@ -500,3 +505,19 @@ int GetCurrentModelrNumber()
 	return n;
 }
 
+string strleft(string str, int num)
+{
+	if (num < 1) return "";
+	int len = strlen(str);
+	if (num > len) num = len;
+	return strcut(str,0,num-1);
+}
+
+string strright(string str, int num)
+{
+	if (num < 1) return "";
+	int len = strlen(str);
+	int start = len - num;
+	if (start < 0) start = 0;
+	return strcut(str,start,len-1);
+}

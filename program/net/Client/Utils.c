@@ -1,4 +1,4 @@
-
+/*
 bool NetClient_IsTeam(int wOurCharacterID, int wOtherCharacterID)
 {
 	return false;
@@ -19,3 +19,4 @@ bool NetClient_IsClientDead(ref rClient)
 ref NetClient_GetClient(int wOurCharacterID) { return &NCClients[wOurCharacterID]; }
 int NetClient_GetThisClientID() { return wClientID; }
 ref NetClient_GetThisClient() { return &NCClients[wClientID]; }
+*/

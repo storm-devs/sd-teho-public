@@ -29,7 +29,7 @@ void ProcessDialogEvent()
 			if (LAi_grp_playeralarm > 0)
 			{
        			dialog.text = PCharRepPhrase(LinkRandPhrase("The town is alerted. Seems like it's time for me to take up arms too...", "Aren't you being chased by all town's guard?. To me, soldiers!!!", "You won't find a shelter here. But will find a few inches of cold steel under a rib!"), 
-					LinkRandPhrase("What do you want, scoundrel?! A municipal guard has taken your track already, you won't escape too far, "+ GetSexPhrase("dirty pirate!","scoundrel") +"!", "Stop! "+ GetSexPhrase("Dirty killer! Guard!!!","I am not afraid of you! Soon you will be hang up in our fort, there's no place to hide..."));
+					LinkRandPhrase("What do you want, scoundrel?! A municipal guard has taken your track already, you won't escape too far, "+ GetSexPhrase("dirty pirate!","scoundrel") +"!", "Stop! "+ GetSexPhrase("Dirty killer! Guard!!!","I am not afraid of you! Soon you will be hang up in our fort, there's no place to hide...")));
 				link.l1 = PCharRepPhrase(RandPhraseSimple("Seems like you're tired of being alive...", "And why don't you want to live calmly, citizens..." + XI_ConvertString("Colony" + npchar.city + "Gen") + "!"), 
 					RandPhraseSimple("Go to hell!", "There are a few seconds left for you in this world..."));
 				link.l1.go = PCharRepPhrase("exit_setOwner", "fight");

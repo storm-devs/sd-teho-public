@@ -1,5 +1,5 @@
 object NCSky;
-
+/*
 void NetClient_WhrDeleteSkyEnvironment()
 {
 	if (isEntity(&NCSky))
@@ -33,4 +33,4 @@ void NetClient_MoveSkyToLayers(string sExecuteLayer, string sRealizeLayer)
 {
 	LayerAddObject(sExecuteLayer, &NCSky, 2);
 	LayerAddObject(sRealizeLayer, &NCSky, 2);
-}
+}*/

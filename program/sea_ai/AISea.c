@@ -67,10 +67,13 @@ void SeaAI_SailToEndFade()
 	for (int i=0; i<iNumShips; i++)
 	{
 		int iCharIndex = Ships[i];
+		
+		if (iCharIndex >= 0 && iCharIndex < TOTAL_CHARACTERS) { 
 		if (CheckAttribute(&Characters[iCharIndex], "SeaAI.Group.Name") && Characters[iCharIndex].SeaAI.Group.Name ==	PLAYER_GROUP) // fix
 		{
 			SendMessage(&Characters[iCharIndex], "l", MSG_SHIP_RESET_TRACK);
 		}
+	}
 	}
     // fix -->
 	ClearAllFire();

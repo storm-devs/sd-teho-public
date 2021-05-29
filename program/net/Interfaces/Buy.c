@@ -21,7 +21,7 @@ bool bSelectNewTeamWindow = false;
 float fServerInfoPiecesLoaded = 0.0;
 
 bool bServerInfoReady = false;
-
+/*
 void InitInterface(string iniName)
 {
 	int i;
@@ -606,10 +606,10 @@ void Buy_SetCannon(int iDirection)
 			
 			// set new cannon upgrade = Copper
 			Buy_SetCannonUpgrade(0, true);
-			Picture_SetGroupPicture("PICTURE_CANNON_UPGRADE_COPPER", "CANNONS_UPGRADE_1", rCannon.picture);
-			Picture_SetGroupPicture("PICTURE_CANNON_UPGRADE_BRONZE", "CANNONS_UPGRADE_2", rCannon.picture);
-			Picture_SetGroupPicture("PICTURE_CANNON_UPGRADE_IRON", "CANNONS_UPGRADE_3", rCannon.picture);
-
+			Picture_SetGroupPicture("PICTURE_CANNON_UPGRADE_COPPER", "GOODS", rCannon.picture);
+			Picture_SetGroupPicture("PICTURE_CANNON_UPGRADE_BRONZE", "GOODS", rCannon.picture);
+			Picture_SetGroupPicture("PICTURE_CANNON_UPGRADE_IRON", "GOODS", rCannon.picture);
+			
 			Buy_UpdateCredit();
 			break;
 		}
@@ -984,13 +984,7 @@ void Buy_UpdateCredit()
 	}
 
 	// enable/disable perks
-	/*for (i=0; i<Net_GetPerksNum(); i++)
-	{
-		bDisable = false;
-		bState = CheckButton_GetState("CHECKBUTTONS_PERKS", i + 1);
-		if (!bState && (iCurrentCredit + Net_GetPerkCost(i) > iMaxCredit)) { bDisable = true; }
-		CheckButton_SetDisable("CHECKBUTTONS_PERKS", i + 1, bDisable);
-	}*/
+
 }
 
 // ========================================
@@ -1112,3 +1106,4 @@ void Buy_Server_UpdateReady()
 	NetClient_SendMessage(iSMsg, true);
 	NMDelete(iSMsg);
 }
+*/

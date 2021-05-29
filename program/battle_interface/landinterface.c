@@ -31,14 +31,9 @@ void procBattleCommandSound()
 
 void InitBattleLandInterface()
 {
-	//if( IsEntity(&objLandInterface) ) {
-	//	DeleteClass(&objLandInterface);
-	//}
-	//if(bLandInterfaceStart) {
-	if( IsEntity(&objLandInterface) ) {
+	if( IsEntity(&objLandInterface) ) 
+	{
 		EndBattleLandInterface();
-		//DeleteEntity(&objLandInterface);
-		//return;
 	}
 	bLandInterfaceStart = false;
 	SetEventHandler(EVENT_LOCATION_LOAD,"StartBattleLandInterface",0);
@@ -65,7 +60,6 @@ void StartBattleLandInterface()
 {
 	if(bLandInterfaceStart)
 	{
-		//BLI_SetObjectData();
 		return;
 	}
 	bLandInterfaceStart = true;
@@ -180,7 +174,6 @@ ref BLI_CheckCommand()
 	break;
 	}
 
-	//if(!bUsed)	objLandInterface.UserIcons.cancel.enable = true;
 	return &g_intRetVal;
 }
 
@@ -352,6 +345,8 @@ void EndBattleLandInterface()
 
 void BLI_SetObjectData()
 {
+    float fHtRatio = stf(Render.screen_y) / iGlobalVar1;
+    int fTmp, fTmp2;
 	DeleteAttribute(&objLandInterface,"");
 
 	objLandInterface.parameters.DoShowCommandos = InterfaceStates.BattleShow.Command;
@@ -377,15 +372,15 @@ void BLI_SetObjectData()
 	BLI_SetMessageParameters();
 	// текстуры
 	int idLngFile = LanguageOpenFile("commands_name.txt");
-	objLandInterface.CommandTextures.list.t0.name = "battle_interface\LandCommands.tga";
+	objLandInterface.CommandTextures.list.t0.name = "battle_interface\LandCommands.tga.tx";
 	objLandInterface.CommandTextures.list.t0.xsize = 16;
 	objLandInterface.CommandTextures.list.t0.ysize = 4;
 	
- 	objLandInterface.CommandTextures.list.t1.name = "battle_interface\LandTarget_SLB.tga";
+ 	objLandInterface.CommandTextures.list.t1.name = "battle_interface\LandTarget_SLB.tga.tx";
 	objLandInterface.CommandTextures.list.t1.xsize = 16;
 	objLandInterface.CommandTextures.list.t1.ysize = 2;
 	
-	objLandInterface.CommandTextures.list.t2.name = "battle_interface\Cancel.tga";
+	objLandInterface.CommandTextures.list.t2.name = "battle_interface\Cancel.tga.tx";
 	objLandInterface.CommandTextures.list.t2.xsize = 2;
 	objLandInterface.CommandTextures.list.t2.ysize = 1;
 	// boal <--
@@ -403,13 +398,13 @@ void BLI_SetObjectData()
 	objIconsNote.1x8 = LanguageConvertString(idLngFile, "go_portman");
 	objIconsNote.1x5 = LanguageConvertString(idLngFile, "go_prison");
 	// список команд
-	objLandInterface.Commands.Cancel.enable		= false;
-	objLandInterface.Commands.Cancel.picNum		= 1;
-	objLandInterface.Commands.Cancel.selPicNum	= 0;
-	objLandInterface.Commands.Cancel.texNum		= 2;
-	objLandInterface.Commands.Cancel.event		= "Cancel";
-	objLandInterface.Commands.Cancel.name		= "Cancel";
-	objLandInterface.Commands.Cancel.note		= LanguageConvertString(idLngFile, "sea_cancel");
+	objLandInterface.Commands.Cancel.enable		    = false;
+	objLandInterface.Commands.Cancel.picNum		    = 1;
+	objLandInterface.Commands.Cancel.selPicNum	    = 0;
+	objLandInterface.Commands.Cancel.texNum		    = 2;
+	objLandInterface.Commands.Cancel.event		    = "Cancel";
+	objLandInterface.Commands.Cancel.name		    = "Cancel";
+	objLandInterface.Commands.Cancel.note		    = LanguageConvertString(idLngFile, "sea_cancel");
 
 	objLandInterface.Commands.FastReload.enable		= true;
 	objLandInterface.Commands.FastReload.picNum		= 27;
@@ -427,35 +422,35 @@ void BLI_SetObjectData()
 	// boal -->
     objLandInterface.Commands.ItemsUse.enable		= true;
  	objLandInterface.Commands.ItemsUse.picNum		= 20;
-	objLandInterface.Commands.ItemsUse.selPicNum		= 4;
+	objLandInterface.Commands.ItemsUse.selPicNum	= 4;
 	objLandInterface.Commands.ItemsUse.texNum		= 0;
 	objLandInterface.Commands.ItemsUse.event		= "BI_ItemsUse";
 	objLandInterface.Commands.ItemsUse.note			= LanguageConvertString(idLngFile, "land_ItemsUse");
 	
 	objLandInterface.Commands.DialogStart.enable	= true;
- 	objLandInterface.Commands.DialogStart.picNum		= 17;
-	objLandInterface.Commands.DialogStart.selPicNum		= 1;
-	objLandInterface.Commands.DialogStart.texNum		= 0;
+ 	objLandInterface.Commands.DialogStart.picNum	= 17;
+	objLandInterface.Commands.DialogStart.selPicNum	= 1;
+	objLandInterface.Commands.DialogStart.texNum	= 0;
 	objLandInterface.Commands.DialogStart.event		= "BI_DialogStart";
 	objLandInterface.Commands.DialogStart.note		= LanguageConvertString(idLngFile, "land_DialogStart");
 	
 	objLandInterface.Commands.ItemsChange.enable	= true;
- 	objLandInterface.Commands.ItemsChange.picNum		= 19;
-	objLandInterface.Commands.ItemsChange.selPicNum		= 3;
-	objLandInterface.Commands.ItemsChange.texNum		= 0;
+ 	objLandInterface.Commands.ItemsChange.picNum	= 19;
+	objLandInterface.Commands.ItemsChange.selPicNum	= 3;
+	objLandInterface.Commands.ItemsChange.texNum	= 0;
 	objLandInterface.Commands.ItemsChange.event		= "BI_ItemsChange";
 	objLandInterface.Commands.ItemsChange.note		= LanguageConvertString(idLngFile, "land_ItemsChange");
 	
 	objLandInterface.Commands.TakeItem.enable		= true;
  	objLandInterface.Commands.TakeItem.picNum		= 16;
-	objLandInterface.Commands.TakeItem.selPicNum		= 0;
+	objLandInterface.Commands.TakeItem.selPicNum	= 0;
 	objLandInterface.Commands.TakeItem.texNum		= 0;
 	objLandInterface.Commands.TakeItem.event		= "BI_TakeItem";
 	objLandInterface.Commands.TakeItem.note			= LanguageConvertString(idLngFile, "land_TakeItem");
 	
 	objLandInterface.Commands.PlaceItem.enable		= true;
  	objLandInterface.Commands.PlaceItem.picNum		= 16;
-	objLandInterface.Commands.PlaceItem.selPicNum		= 0;
+	objLandInterface.Commands.PlaceItem.selPicNum	= 0;
 	objLandInterface.Commands.PlaceItem.texNum		= 0;
 	objLandInterface.Commands.PlaceItem.event		= "BI_PlaceItem";
 	objLandInterface.Commands.PlaceItem.note		= LanguageConvertString(idLngFile, "land_PlaceItem");
@@ -463,12 +458,12 @@ void BLI_SetObjectData()
 	objLandInterface.Commands.UseBox.enable			= true;
  	objLandInterface.Commands.UseBox.picNum		    = 16;
 	objLandInterface.Commands.UseBox.selPicNum		= 0;
-	objLandInterface.Commands.UseBox.texNum		= 0;
+	objLandInterface.Commands.UseBox.texNum			= 0;
 	objLandInterface.Commands.UseBox.event			= "BI_UseBox";
 	objLandInterface.Commands.UseBox.note			= LanguageConvertString(idLngFile, "land_UseBox");
 	
-	objLandInterface.Commands.DeadBox.enable			= true;
- 	objLandInterface.Commands.DeadBox.picNum		    = 20;
+	objLandInterface.Commands.DeadBox.enable		= true;
+ 	objLandInterface.Commands.DeadBox.picNum		= 20;
 	objLandInterface.Commands.DeadBox.selPicNum		= 4;
 	objLandInterface.Commands.DeadBox.texNum		= 0;
 	objLandInterface.Commands.DeadBox.event			= "BI_DeadBox";
@@ -531,57 +526,99 @@ void BLI_SetObjectData()
 		CreateReloadPaths(outGroupName);
 	}
 
-	objLandInterface.ManSign.backtexturename		= "battle_interface\ShipBackIcon.tga";
+	objLandInterface.ManSign.backtexturename		= "battle_interface\ShipBackIcon.tga.tx";
 	objLandInterface.ManSign.backcolor				= argb(255,128,128,128);
 	objLandInterface.ManSign.backuv					= "0.0,0.0,1.0,1.0";
 	objLandInterface.ManSign.backoffset				= "-2,-2"; //"0.0,0.0";
-	objLandInterface.ManSign.backiconsize			= "128,128";
+	fTmp = makeint(128.0 * fHtRatio);
+    objLandInterface.ManSign.backiconsize			= fTmp + "," + fTmp;
 
-	objLandInterface.ManSign.alarmtexturename		= "battle_interface\alarmback.tga";
+	//objLandInterface.ManSign.backiconsize			= "128,128";
+
+	objLandInterface.ManSign.alarmtexturename		= "battle_interface\alarmback.tga.tx";
 	objLandInterface.ManSign.alarmhighcolor			= argb(255,168,28,28);
 	objLandInterface.ManSign.alarmlowcolor			= argb(64,168,28,28);
 	objLandInterface.ManSign.alarmuptime			= 0.5;
 	objLandInterface.ManSign.alarmdowntime			= 1.5;
 	objLandInterface.ManSign.alarmuv				= "0.0,0.0,1.0,1.0";
 	objLandInterface.ManSign.alarmoffset			= "-2,-2"; //"0.0,0.0";
-	objLandInterface.ManSign.alarmiconsize			= "128,128";
+	fTmp = makeint(128.0 * fHtRatio);
+     objLandInterface.ManSign.alarmiconsize			= fTmp + "," + fTmp;
+	//objLandInterface.ManSign.alarmiconsize			= "128,128";
 
-	objLandInterface.ManSign.manstatetexturename	= "battle_interface\ShipState.tga";
+	objLandInterface.ManSign.manstatetexturename	= "battle_interface\ShipState.tga.tx";
 	objLandInterface.ManSign.manstatecolor			= argb(255,128,128,128);
 	objLandInterface.ManSign.manhpuv				= "0.0,0.109,0.5,0.6875";
-	objLandInterface.ManSign.manhpoffset			= "-32,-13";
-	objLandInterface.ManSign.manhpiconsize			= "64,74";
+	//objLandInterface.ManSign.manhpoffset			= "-32,-13";
+	fTmp = makeint(-32.0 * fHtRatio);
+    fTmp2 = makeint(-13.0 * fHtRatio);
+    objLandInterface.ManSign.manhpoffset			= fTmp + "," + fTmp2;
+	//objLandInterface.ManSign.manhpiconsize			= "64,74";
 	objLandInterface.ManSign.manenegryuv			= "0.5,0.109,1.0,0.6875";
-	objLandInterface.ManSign.manenegryoffset		= "32,-13";
-	objLandInterface.ManSign.manenergyiconsize		= "64,74";
+	fTmp = makeint(32.0 * fHtRatio);
+    objLandInterface.ManSign.manenegryoffset		= fTmp + "," + fTmp2;
+	fTmp = makeint(64.0 * fHtRatio);
+    fTmp2 = makeint(74.0 * fHtRatio);
+    objLandInterface.ManSign.manhpiconsize			= fTmp + "," + fTmp2;
+    objLandInterface.ManSign.manenergyiconsize		= fTmp + "," + fTmp2;
+
+	//objLandInterface.ManSign.manenegryoffset		= "32,-13";
+	//objLandInterface.ManSign.manenergyiconsize		= "64,74";
 
 	objLandInterface.ManSign.gunchargetexturename	= "battle_interface\GunShots.tga";
 	objLandInterface.ManSign.gunchargecolor			= argb(0,168,168,48); //argb(255,168,168,48);
 	objLandInterface.ManSign.gunchargebackcolor		= argb(0,188,48,48); //argb(255,188,48,48);
 	objLandInterface.ManSign.gunchargeuv			= "0.0,0.0,1.0,1.0";
-	objLandInterface.ManSign.gunchargeoffset		= "-14,-53"; //"-14,-50";
-	objLandInterface.ManSign.gunchargeiconsize		= "64,16";
+	//objLandInterface.ManSign.gunchargeoffset		= "-14,-53"; //"-14,-50";
+	fTmp = makeint(-14.0 * fHtRatio);
+    fTmp2 = makeint(-53.0 * fHtRatio);
+    objLandInterface.ManSign.gunchargeoffset	    = fTmp + "," + fTmp2;
+
+	
+	//objLandInterface.ManSign.gunchargeiconsize		= "64,16";
+	fTmp = makeint(64.0 * fHtRatio);
+    fTmp2 = makeint(16.0 * fHtRatio);
+    objLandInterface.ManSign.gunchargeiconsize		= fTmp + "," + fTmp2;
+
 	objLandInterface.ManSign.gunchargeprogress		= "0.0, 0.234375, 0.40625, 0.59375, 0.765625, 0.985, 0.99"; //"0.0625, 0.211, 0.359, 0.5, 0.633, 0.765, 0.983";"0.0, 0.234375, 0.40625, 0.59375, 0.78125, 0.96, 0.99";
 
 	objLandInterface.ManSign.manfacecolor			= argb(255,128,128,128);
-	objLandInterface.ManSign.manfaceoffset			= "-14,-12";
-	objLandInterface.ManSign.manfaceiconsize		= "64,64";
+	//objLandInterface.ManSign.manfaceoffset			= "-14,-12";
+	fTmp = makeint(-14.0 * fHtRatio);
+    fTmp2 = makeint(-12.0 * fHtRatio);
+    objLandInterface.ManSign.manfaceoffset			= fTmp + "," + fTmp2;
 
-	objLandInterface.ManSign.commandlistverticaloffset = -40;
+	//objLandInterface.ManSign.manfaceiconsize		= "64,64";
+	fTmp = makeint(64.0 * fHtRatio);
+    objLandInterface.ManSign.manfaceiconsize		= fTmp + "," + fTmp;
+    objLandInterface.ManSign.commandlistverticaloffset = -40 * fHtRatio;
+ 
+	//objLandInterface.ManSign.commandlistverticaloffset = -40;
 
+	fTmp = makeint(70.0 * fHtRatio);
+    fTmp2 = makeint(110.0 * fHtRatio);
+
+	for(i = 1; i<=5; i++) 
+	{
+		string sOffsetIcon = "iconoffset" + i;
+		objLandInterface.ManSign.(sOffsetIcon) = fTmp + "," + (fTmp + (i-1)*fTmp2);
+	}
+
+/*
 	objLandInterface.ManSign.iconoffset1 = "70,70";
 	objLandInterface.ManSign.iconoffset2 = "70,180";
 	objLandInterface.ManSign.iconoffset3 = "70,290";
 	objLandInterface.ManSign.iconoffset4 = "70,400";
-
+*/
 	int nLoc = FindLoadedLocation();
 	if(nLoc >= 0) {
 		int nFile = LanguageOpenFile("LocLables.txt");
 		if(nFile >= 0) {
 			objLandInterface.textinfo.islandname.font = "interface_normal";
-			objLandInterface.textinfo.islandname.scale = 0.9;
-			objLandInterface.textinfo.islandname.pos.x = sti(showWindow.right) - RecalculateHIcon(104);
-			objLandInterface.textinfo.islandname.pos.y = RecalculateVIcon(20);
+			objLandInterface.textinfo.islandname.scale = 0.9 * fHtRatio;
+			// LDH 04Feb17
+			objLandInterface.textinfo.islandname.pos.x = sti(showWindow.right) - RecalculateHIcon(104 * fHtRatio );
+			objLandInterface.textinfo.islandname.pos.y = RecalculateVIcon(20 * fHtRatio);
 			if (CheckAttribute(&locations[nLoc],"islandId"))
 			{
 				if (locations[nLoc].islandId != "Mein")
@@ -599,14 +636,18 @@ void BLI_SetObjectData()
 			}
 			//
 			objLandInterface.textinfo.villagename.font = "interface_normal";
-			objLandInterface.textinfo.villagename.scale = 0.9;
-			objLandInterface.textinfo.villagename.pos.x = sti(showWindow.right) - RecalculateHIcon(104);
-			objLandInterface.textinfo.villagename.pos.y = RecalculateVIcon(40);
+//			objLandInterface.textinfo.villagename.scale = 0.9;
+			objLandInterface.textinfo.villagename.scale = 0.9 * fHtRatio;      // LDH 22Jan17
+			// LDH 04Feb17
+			objLandInterface.textinfo.villagename.pos.x = sti(showWindow.right) - RecalculateHIcon(104 * fHtRatio);
+			objLandInterface.textinfo.villagename.pos.y = RecalculateVIcon(40 * fHtRatio);
 
 			objLandInterface.textinfo.locationname.font = "interface_normal";
-			objLandInterface.textinfo.locationname.scale = 0.9;
-			objLandInterface.textinfo.locationname.pos.x = sti(showWindow.right) - RecalculateHIcon(104);
-			objLandInterface.textinfo.locationname.pos.y = RecalculateVIcon(60);
+//			objLandInterface.textinfo.locationname.scale = 0.9;
+			objLandInterface.textinfo.locationname.scale = 0.9 * fHtRatio;     // LDH 22Jan17
+			// LDH 04Feb17
+			objLandInterface.textinfo.locationname.pos.x = sti(showWindow.right) - RecalculateHIcon(104 * fHtRatio);
+			objLandInterface.textinfo.locationname.pos.y = RecalculateVIcon(60 * fHtRatio);
 			
             if (!CheckAttribute(&locations[nLoc],"fastreload"))
 			{
@@ -621,9 +662,11 @@ void BLI_SetObjectData()
 		}
 	}
 	objLandInterface.textinfo.datatext.font = "interface_normal";
-	objLandInterface.textinfo.datatext.scale = 0.9;
-	objLandInterface.textinfo.datatext.pos.x = sti(showWindow.right) - RecalculateHIcon(104);
-	objLandInterface.textinfo.datatext.pos.y = RecalculateVIcon(85);
+//	objLandInterface.textinfo.datatext.scale = 0.9;
+	objLandInterface.textinfo.datatext.scale = 0.9 * fHtRatio;     // LDH 22Jan17
+	// LDH 04Feb17
+	objLandInterface.textinfo.datatext.pos.x = sti(showWindow.right) - RecalculateHIcon(104 * fHtRatio);
+	objLandInterface.textinfo.datatext.pos.y = RecalculateVIcon(85 * fHtRatio);
 	RefreshLandTime();
 	//objLandInterface.textinfo.datatext.text = XI_convertString("Date:") + GetQuestBookData(); //GetDataDay()+" "+XI_ConvertString("target_month_" + GetDataMonth())+" "+GetDataYear();
 	objLandInterface.textinfo.datatext.refreshable = true;
@@ -662,21 +705,21 @@ void BLI_SetObjectData()
     // Это у вас нет, у меня все есть ;) - boal
 	objLandInterface.CommandList.CommandMaxIconQuantity = 10;
 	objLandInterface.CommandList.CommandIconSpace = 1;
-	objLandInterface.CommandList.CommandIconLeft = 108;//157;
-	objLandInterface.CommandList.CommandIconWidth = RecalculateHIcon(48);
-	objLandInterface.CommandList.CommandIconHeight = RecalculateVIcon(48);
+	objLandInterface.CommandList.CommandIconLeft = 108 * fHtRatio;//157;
+	objLandInterface.CommandList.CommandIconWidth = RecalculateHIcon(48 * fHtRatio);
+	objLandInterface.CommandList.CommandIconHeight = RecalculateVIcon(48 * fHtRatio);
 
 	objLandInterface.CommandList.CommandNoteFont = "interface_normal";
 	objLandInterface.CommandList.CommandNoteColor = argb(255,255,255,255);
-	objLandInterface.CommandList.CommandNoteScale = 1.0;
-	objLandInterface.CommandList.CommandNoteOffset = RecalculateHIcon(0) + "," + RecalculateVIcon(-42);
+	objLandInterface.CommandList.CommandNoteScale = 1.0 * fHtRatio;
+	objLandInterface.CommandList.CommandNoteOffset = RecalculateHIcon(0) + "," + RecalculateVIcon(-42 * fHtRatio);
 
 	objLandInterface.CommandList.UDArrow_Texture = "battle_interface\arrowly.tga";
 	objLandInterface.CommandList.UDArrow_UV_Up = "0.0,1.0,1.0,0.0";
 	objLandInterface.CommandList.UDArrow_UV_Down = "0.0,0.0,1.0,1.0";
-	objLandInterface.CommandList.UDArrow_Size = RecalculateHIcon(32) + "," + RecalculateVIcon(32);
-	objLandInterface.CommandList.UDArrow_Offset_Up = RecalculateHIcon(-41) + "," + RecalculateVIcon(-30);
-	objLandInterface.CommandList.UDArrow_Offset_Down = RecalculateHIcon(-41) + "," + RecalculateVIcon(46);
+	objLandInterface.CommandList.UDArrow_Size = RecalculateHIcon(32 * fHtRatio) + "," + RecalculateVIcon(32 * fHtRatio);
+	objLandInterface.CommandList.UDArrow_Offset_Up = RecalculateHIcon(-41 * fHtRatio) + "," + RecalculateVIcon(-30 * fHtRatio);
+	objLandInterface.CommandList.UDArrow_Offset_Down = RecalculateHIcon(-41 * fHtRatio) + "," + RecalculateVIcon(46 * fHtRatio);
 	
 	// дебилы все равно играть не будут, а нормальным лишнее не нужно boal
 	/*objLandInterface.CommandList.ActiveIcon_Texture = "battle_interface\enter_list.tga";

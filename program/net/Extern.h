@@ -1,3 +1,4 @@
+/*
 // ===================================
 // Net native function
 // ===================================
@@ -85,3 +86,4 @@ native void NFDelTexture(string sGroupID, string sFilename);
 native void NFDelGroupTextures(string sGroupID);
 
 #libriary "NET_SCRIPT_LIBRIARY"
+*/

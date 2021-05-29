@@ -42,8 +42,8 @@ bool DialogMain(ref Character)
 	//Ссылка на главного персонажа
 	ref mainChr = GetMainCharacter();
 	//Если когото не заведено, выходим
-	if(!IsEntity(mainChr)) return false;
-	if(!IsEntity(Character)) return false;
+	if(!IsEntity(&mainChr)) return false;
+	if(!IsEntity(&Character)) return false;
 	if(LAi_IsDead(mainChr)) return false;
 	if(LAi_IsDead(Character)) return false;
 	//Проверим на существование текущего нода
@@ -161,7 +161,7 @@ void SelfDialog(ref Character)
 	//Если диалог запущен, выходим
 	if(dialogRun != false) return false;
 	//Если когото не заведено, выходим
-	if(!IsEntity(Character)) return false;
+	if(!IsEntity(&Character)) return false;
 	//Проверим на существование текущего нода
 	if(!CheckAttribute(Character, "Dialog.CurrentNode"))
 	{
@@ -258,6 +258,7 @@ void StartDialogWithMainCharacter()
 	//С кем хотим говорить
 	int person = GetEventData();
 	//Сими с собой не беседуем
+	if(person<0) return;
 	if(person == GetMainCharacterIndex()) return;
 	//С непрогруженными персонажами не беседуем
 	if(!IsEntity(&Characters[person])) return;

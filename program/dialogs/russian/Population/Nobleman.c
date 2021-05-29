@@ -170,6 +170,27 @@ void ProcessDialogEvent()
 			AddPassenger(pchar, npchar, false);
 			SetCharacterRemovable(npchar, false);
 			sTitle = npchar.index+"Citizpassenger";
+
+// LDH 13Sep17 - do not add to an existing Citizpassenger record -->
+// "Rename" the quest record by copying it to a new name and deleting the old record
+			if (CheckAttribute(pchar, "questinfo."+sTitle))
+			{
+				string sTempLDH = frand(1);
+				sTempLDH = strcut(sTempLDH, 2, 5);    // 4 random digits
+				string sTitle1 = sTitle+sTempLDH;
+
+				aref arTo, arFrom;
+				makearef(arFrom, pchar.questinfo.(sTitle));
+				makearef(arTo,   pchar.questinfo.(sTitle1));
+				CopyAttributes(arTo, arFrom);
+				pchar.questinfo.(sTitle1) = "";
+
+				DeleteAttribute(pchar, "questinfo."+sTitle);
+
+				Trace("Duplicate Citizpassenger record "+sTitle+" copied to "+sTitle1+" **");
+			}
+// <--
+
 			AddQuestRecordEx(sTitle, "Citizpassenger", "1");
 			AddQuestUserDataForTitle(sTitle, "sType", "nobleman");
 			AddQuestUserDataForTitle(sTitle, "sName", GetFullName(npchar));

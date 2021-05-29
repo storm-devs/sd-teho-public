@@ -178,12 +178,23 @@ void ProcessDialogEvent()
 			}
 			if (CheckAttribute(pchar, "questTemp.LSC.nrv_friend")) 
 			{
-				dialog.text = TimeGreeting()+", "+pchar.name+"! The door is open, in case you want to see the boss.";
-				link.l1 = "Fine...";
-				link.l1.go = "exit";
-				NextDiag.TempNode = "Narval_residence";
-				DeleteAttribute(npchar, "protector.CheckAlways");
-				break;
+				if (stf(environment.time) >= 6.00 && stf(environment.time) < 21.00) // диалог от времени суток. лесник
+			    {
+					dialog.text = TimeGreeting()+", "+pchar.name+"! The door is open, in case you want to see the boss.";
+					link.l1 = "Fine...";
+					link.l1.go = "exit";
+					NextDiag.TempNode = "Narval_residence";
+					DeleteAttribute(npchar, "protector.CheckAlways");
+				}
+				else
+				{
+                    dialog.text = TimeGreeting()+", "+pchar.name+"! In case you want to see the boss, he is asleep by now. Come back in the morning.";
+					link.l1 = "Fine...";
+					link.l1.go = "exit";
+					NextDiag.TempNode = "Narval_residence";
+					DeleteAttribute(npchar, "protector.CheckAlways");	
+                }					
+				break;	
 			}
 			if (!CheckAttribute(pchar, "questTemp.LSC.nrv_friend") && CheckAttribute(pchar, "questTemp.LSC.rvd_friend")) 
 			{
@@ -202,11 +213,22 @@ void ProcessDialogEvent()
 				DeleteAttribute(npchar, "protector.CheckAlways");
 				break;
 			}
+			if (stf(environment.time) >= 6.00 && stf(environment.time) < 21.00) // лесник . диалог от времени суток .
+			{
 			dialog.text = "Want to see the boss? Hm, well, move along then.";
 			link.l1 = "Thanks for allowing to...";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Narval_residence";
 			DeleteAttribute(npchar, "protector.CheckAlways");
+			}
+			else
+			{
+            dialog.text = "Want to see the boss? No more visits today. Come back in the morning.";
+			link.l1 = "Alright...";
+			link.l1.go = "exit";
+			NextDiag.TempNode = "Narval_residence";
+			DeleteAttribute(npchar, "protector.CheckAlways");
+            }			
 		break;
 		
 		case "Narval_soldier":
@@ -411,11 +433,22 @@ void ProcessDialogEvent()
 			}
 			if (CheckAttribute(pchar, "questTemp.LSC.rvd_friend")) 
 			{
+				if (stf(environment.time) >= 6.00 && stf(environment.time) < 21.00) // лесник . диалог от времени суток .
+				{
 				dialog.text = TimeGreeting()+", "+pchar.name+"! The door is open, in case you want to see Eddie and Chimiset. They will be glad to see you.";
 				link.l1 = "Fine...";
 				link.l1.go = "exit";
 				NextDiag.TempNode = "Rivados_residence";
 				DeleteAttribute(npchar, "protector.CheckAlways");
+				}
+				else // лесник - режим пропуска 
+				{	
+				dialog.text = TimeGreeting()+", "+pchar.name+"! In case you want to see Eddie and Chimiset, they resting already. Come back in the morning, they will be glad to see you.";
+				link.l1 = "Fine...";
+				link.l1.go = "exit";
+				NextDiag.TempNode = "Rivados_residence";
+				DeleteAttribute(npchar, "protector.CheckAlways");
+				}
 				break;
 			}
 			if (CheckAttribute(pchar, "questTemp.LSC.nrv_friend") && !CheckAttribute(pchar, "questTemp.LSC.rvd_friend")) 
@@ -436,11 +469,22 @@ void ProcessDialogEvent()
 				DeleteAttribute(npchar, "protector.CheckAlways");
 				break;
 			}
+			if (stf(environment.time) >= 6.00 && stf(environment.time) < 21.00) // лесник . диалог от времени суток .
+			{
 			dialog.text = "Do you want to see Eddie? Fine, move along, I suppose he will spare a minute for you.";
 			link.l1 = "Thanks for allowing to...";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Rivados_residence";
 			DeleteAttribute(npchar, "protector.CheckAlways");
+			}
+			else // лесник режим пропуска.
+			{
+            dialog.text = "Do you want to see Eddie? No more visits today, come back in the morning and he will spare a minute for you.";
+			link.l1 = "Alright...";
+			link.l1.go = "exit";
+			NextDiag.TempNode = "Rivados_residence";
+			DeleteAttribute(npchar, "protector.CheckAlways");
+            }			
 		break;
 		
 		case "Rivados_soldier":

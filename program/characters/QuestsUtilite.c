@@ -359,7 +359,12 @@ void FillAboardCabinBox(ref _location, ref _npchar)
     {
         DeleteAttribute(_location, "box2");
         _location.box2.money = 2212;
+		if (!CheckAttribute(pchar, "questTemp.MapBest")) { // mitrokosta отличная карта без НИ
+			_location.box2.items.map_best = 1;
+			pchar.questTemp.MapBest = true;
+		} else {
         _location.box2.items.map_normal = 1;
+		}
 		
 		if(drand(100) > 75)
 		{		
@@ -678,11 +683,11 @@ void FillAboardCabinBox(ref _location, ref _npchar)
 	{
 		DeleteAttribute(_location, "box1");
 		_location.box1.money = 30000;
-		_location.box1.gold_dublon = 200;
-		_location.box1.map_normal = 1;
-		_location.box1.pistol8 = 1;
-		_location.box1.harpoon = 5;
-		_location.box1.GunEchin = 10;
+		_location.box1.items.gold_dublon = 200; // Captain Beltrop, 18.02.2021, было пропущено слово items, из-за чего в сундуке были только деньги
+		_location.box1.items.map_normal = 1;
+		_location.box1.items.pistol8 = 1;
+		_location.box1.items.harpoon = 5;
+		_location.box1.items.GunEchin = 10;
 		DeleteAttribute(_location, "box2");
 		_location.box2.items.bussol = 1;
 		_location.box2.items.clock2 = 1;
@@ -1288,6 +1293,10 @@ void FantomMakeCoolFighter(ref _Character, int _Rank, int _Fencing, int _Pistol,
 	SetCharacterPerk(_Character, "Sliding");
 	SetCharacterPerk(_Character, "HardHitter");
 	DeleteAttribute(_Character, "Items");
+	// belamour ДА! Я - ленивая рожа, но всего то 4 пестика :) --->
+	If(_Gun == "pistol2" || _Gun == "pistol4" || _Gun == "pistol6" || _Gun == "howdah")
+	{SetCharacterPerk(_Character, "GunProfessional");}
+	// <--- belamour пистоли выдаются раньше перка, как итог - не могут одеть
 	_Character.SuperShooter  = true;
 	_Blade = GetGeneratedItem(_Blade);
     GiveItem2Character(_Character, _Blade);
@@ -1308,12 +1317,12 @@ void FantomMakeCoolFighter(ref _Character, int _Rank, int _Fencing, int _Pistol,
 			GiveItem2Character(_Character, _Gun);
 			EquipCharacterbyItem(_Character, _Gun);
 			LAi_SetCharacterBulletType(_Character, _Bullet);
+			LAi_SetCharacterUseBullet(_Character, _Bullet);
 			string sGunpowder = LAi_GetCharacterGunpowderType(_Character);
 			if(sGunPowder != "")
 			{
 				AddItems(_Character, sGunpowder, 30 + rand(20)); // Warship. Порох
 			}	
-			LAi_SetCharacterUseBullet(_Character, _Bullet);
 		}
 	}
 
@@ -1844,7 +1853,7 @@ void SetNewModelToChar(ref chref)
 	int colors = argb(64, 64, 64, 64);
 	int colore = argb(0, 32, 32, 32);
 
-    if (IsEntity(chref))
+    if (IsEntity(&chref))
     {
     	if(CheckAttribute(chref, "model"))
         {
@@ -4451,33 +4460,7 @@ void QuestCheckTakeBoxes(ref itemsRef)
 		DeleteAttribute(itemsRef, "Treasure");
 		//eddy. для безконфликтности квестов
 		locations[FindLocation(pchar.location)].DisableEncounters = false; //энкаутеры открыть
-		if(!CheckAttribute(itemsRef, "PiratesOnUninhabitedTreasure"))
-		{
-			// ситуация
-			switch (sti(pchar.GenQuest.Treasure.Vario))
-			{
-				case 0: 
-					Treasure_SetCaribWarrior(); 
-				break;
-				
-				case 1:
-					Treasure_SetBandosWarrior();
-				break;
-				
-				case 2:  
-					pchar.quest.Treasure_evilcaptain.win_condition.l1 = "ExitFromLocation";
-					pchar.quest.Treasure_evilcaptain.win_condition.l1.location = pchar.location;
-					pchar.quest.Treasure_evilcaptain.function = "Treasure_SetCaptainWarrior";
-				break;
-				
-				case 3:
-					pchar.quest.Treasure_evilsoldier.win_condition.l1 = "ExitFromLocation";
-					pchar.quest.Treasure_evilsoldier.win_condition.l1.location = pchar.location;
-					pchar.quest.Treasure_evilsoldier.function = "Treasure_SetOfficerWarrior";
-				break;
-			}
-		}
-		else
+		if(CheckAttribute(itemsRef, "PiratesOnUninhabitedTreasure"))
 		{
 			title = "PiratesOnUninhabited" + PChar.GenQuest.PiratesOnUninhabited.StartShore;
 			
@@ -4499,6 +4482,39 @@ void QuestCheckTakeBoxes(ref itemsRef)
 			
 			DeleteAttribute(itemsRef, "PiratesOnUninhabitedTreasure");
 			DeleteAttribute(PChar, "GenQuest.PiratesOnUninhabited");
+		}
+		else
+		{
+			if (CheckAttribute(itemsRef, "ReasonToFastTreasure")) // mitrokosta фикс двойных ОЗК
+			{
+				DeleteAttribute(itemsRef, "ReasonToFastTreasure");
+			}
+			else
+			{
+				// ситуация
+				switch (sti(pchar.GenQuest.Treasure.Vario))
+				{
+					case 0: 
+						Treasure_SetCaribWarrior(); 
+					break;
+					
+					case 1:
+						Treasure_SetBandosWarrior();
+					break;
+					
+					case 2:  
+						pchar.quest.Treasure_evilcaptain.win_condition.l1 = "ExitFromLocation";
+						pchar.quest.Treasure_evilcaptain.win_condition.l1.location = pchar.location;
+						pchar.quest.Treasure_evilcaptain.function = "Treasure_SetCaptainWarrior";
+					break;
+					
+					case 3:
+						pchar.quest.Treasure_evilsoldier.win_condition.l1 = "ExitFromLocation";
+						pchar.quest.Treasure_evilsoldier.win_condition.l1.location = pchar.location;
+						pchar.quest.Treasure_evilsoldier.function = "Treasure_SetOfficerWarrior";
+					break;
+				}
+			}
 		}
 		
 		if(CheckAttribute(itemsRef, "Hold_GenQuest_Treasure"))
@@ -4546,10 +4562,11 @@ void SetOpenDoorCommonLoc(string City, string locationId)
 			{
     			arDis2 = GetAttributeN(arRld2, n);
 				LocId = arDis2.go;
-				if (LocId == locationId)
+				if (arDis2.name != "reload1" && LocId == locationId) // mitrokosta вот где собака зарыта! reload1 не смотреть!
     			{
 					arDis.disable = false;
 					arDis.canEnter = true;
+					arDis2.disable = false; // на всякий случай
 					return;					
 				}
 			}
@@ -4716,29 +4733,22 @@ string DesIsland()//Jason выбор рандомной необитайки - �
 
 string FindFriendCityToMC(bool bRand)//Jason выбрать радномный дружественный к ГГ город - вынес сюда
 {
-	int n, m, nation;
+	int n;
     int storeArray[MAX_COLONIES];
     int howStore = 0;
+	int nation = GetBaseHeroNation(); // mitrokosta фикс зависимости от флага
+	if (nation == PIRATE) {
+		nation = ENGLAND;
+	}
+	int curIsland = GetCharacterCurrentIsland(pchar);
 
 	for(n=0; n<MAX_COLONIES; n++)
 	{
-		nation = GetNationRelation(sti(pchar.nation), sti(colonies[n].nation));
-		m = GetCharacterCurrentIsland(pchar);
-		if (m < 0)
+		bool notSameIsland = (curIsland < 0) || (Islands[curIsland].id != colonies[n].island);
+		if (notSameIsland && colonies[n].id != "Panama" && colonies[n].id != "Minentown" && colonies[n].id != "SanAndres" && colonies[n].nation != "none" && colonies[n].nation != PIRATE && GetNationRelation(nation, sti(colonies[n].nation)) != RELATION_ENEMY) // mitrokosta фикс зависимости от флага
 		{
-			if (nation != RELATION_ENEMY && nation != PIRATE && colonies[n].id != "Panama" && colonies[n].id != "Minentown" && colonies[n].id != "SanAndres" && colonies[n].nation != "none")
-			{ // may-16
-				storeArray[howStore] = n;
-				howStore++;
-			}
-		}
-		else
-		{
-			if (nation != RELATION_ENEMY && nation != PIRATE && colonies[n].id != "Panama" && colonies[n].id != "Minentown" && colonies[n].id != "SanAndres" && colonies[n].nation != "none" && Islands[m].id != colonies[n].island)
-			{
-				storeArray[howStore] = n;
-				howStore++;
-			}
+			storeArray[howStore] = n;
+			howStore++;
 		}
 	}
 	if (howStore == 0) return "none";
@@ -4749,29 +4759,22 @@ string FindFriendCityToMC(bool bRand)//Jason выбрать радномный �
 
 string FindEnemyCityToMC(bool bRand)//Jason выбрать радномный враждебный к ГГ город - вынес сюда
 {
-	int n, m, nation;
+	int n;
     int storeArray[MAX_COLONIES];
     int howStore = 0;
+	int nation = GetBaseHeroNation(); // mitrokosta фикс зависимости от флага
+	if (nation == PIRATE) {
+		nation = ENGLAND;
+	}
+	int curIsland = GetCharacterCurrentIsland(pchar);
 
 	for(n=0; n<MAX_COLONIES; n++)
 	{
-		nation = GetNationRelation(sti(pchar.nation), sti(colonies[n].nation));
-		m = GetCharacterCurrentIsland(pchar);
-		if (m < 0)
+		bool notSameIsland = (curIsland < 0) || (Islands[curIsland].id != colonies[n].island);
+		if (notSameIsland && colonies[n].id != "Panama" && colonies[n].id != "Minentown" && colonies[n].id != "SanAndres" && colonies[n].nation != "none" && colonies[n].nation != PIRATE && GetNationRelation(nation, sti(colonies[n].nation)) == RELATION_ENEMY) // mitrokosta фикс зависимости от флага
 		{
-			if (nation == RELATION_ENEMY && colonies[n].id != "Panama" && colonies[n].id != "Minentown" && colonies[n].id != "SanAndres" && colonies[n].nation != "none" && colonies[n].nation != PIRATE)
-			{
-				storeArray[howStore] = n;
-				howStore++;
-			}
-		}
-		else
-		{
-			if (nation == RELATION_ENEMY && colonies[n].id != "Panama" && colonies[n].id != "Minentown" && colonies[n].id != "SanAndres" && colonies[n].nation != "none" && Islands[m].id != colonies[n].island && colonies[n].nation != PIRATE)
-			{
-				storeArray[howStore] = n;
-				howStore++;
-			}
+			storeArray[howStore] = n;
+			howStore++;
 		}
 	}
 	if (howStore == 0) return "none";
@@ -5819,23 +5822,23 @@ string SelectAdmiralMaps() // выбор случайной не повторя�
 	map[22] = "A_map_cumana";
 	map[23] = "A_map_perl";
 	
-	int i = 0;
-	while(i < 23)
-	{
-		int n = rand(23);
-		string sTemp = map[n];
-		if (sTemp != "")
-		{
-			if (!CheckAttribute(sld, "quest.map."+sTemp))
-			{
-				sld.quest.map.(sTemp) = true;
-				sMap = sTemp;
-				i = 24; // остановка цикла
-			}
-			sTemp = "";
-			i++; // завершение цикла
+	string storeArray[24]; // mitrokosta переписал случайный выбор - старый иногда ничего не выдавал даже если карты были
+	int howStore = 0;
+	string sTemp;
+	
+	for (int i = 0; i < 24; i++) {
+		sTemp = map[i];
+		if (!CheckAttribute(sld, "quest.map." + sTemp)) {
+			storeArray[howStore] = sTemp;
+			howStore++;
 		}
 	}
+	
+	if (howStore > 0) {
+		sMap = storeArray[rand(howStore - 1)];
+		//sld.quest.map.(sMap) = true;
+		}
+	
 	return sMap;
 }
 
@@ -5856,7 +5859,7 @@ void TargetAdmiralMapToCharacter(ref chr, string amap) // дать конкре�
 	if (!CheckAttribute(sld, "quest.map."+amap))
 	{
 		GiveItem2Character(chr, amap);
-		sld.quest.map.(amap) = true;
+		//sld.quest.map.(amap) = true;
 	}
 }
 
@@ -5888,6 +5891,151 @@ string IdentifyAdmiralMapLast() // идентифицировать послед
 		if (findsubstr(sName, "A_map_", 0) != -1) sMap = sName;
 	}
 	return sMap;
+}
+
+// mitrokosta не хочу копипастить код прохода по всем локам и фантомам
+// handler это функция вида void Handler(ref chref, string itemID) где chref - ссылка на найденного персонажа/бокса с предметом, а itemID - ид предмета
+// вызывается на всех найденных объектах, возвращает число найденных
+int FindRealItem(string itemID, string handler) {
+	ref sld;
+	aref chref;
+	int i, j;
+	string simpleBox, privateBox;
+	int numChr = 0;
+
+	for(i = 0; i < nLocationsNum; i++) {
+		sld = &Locations[i]; // проверим локации
+		for(j = 1; j < MAX_HANDLED_BOXES; j++) {
+			simpleBox = "box" + j;
+			privateBox = "private" + j;
+			
+			if(!CheckAttribute(sld, simpleBox) && !CheckAttribute(sld, privateBox)) {
+				break;
+			}
+
+			if(CheckAttribute(sld, simpleBox + ".Items." + itemID)) {
+				trace(itemID + " найден в локации " + sld.id + " в боксе " + simpleBox);
+				makearef(chref, sld.(simpleBox));
+				if (handler != "") {
+					call handler(chref, itemID);
+				}
+				numChr++;
+			}
+			
+			if(CheckAttribute(sld, privateBox + ".Items." + itemID)) {
+				trace(itemID + " найден в локации " + sld.id + " в привате " + privateBox);
+				makearef(chref, sld.(privateBox));
+				if (handler != "") {
+					call handler(chref, itemID);
+				}
+				numChr++;
+			}
+		}
+	}
+
+	for(i = 0; i < TOTAL_CHARACTERS; i++) {
+		sld = &Characters[i]; // и фантомов
+		if(CheckAttribute(sld, "Items." + itemID)) {
+			trace(itemID + " найден у персонажа " + sld.id);
+			if (handler != "") {
+				call handler(sld, itemID);
+			}
+			numChr++;
+		}
+	}
+	return numChr;
+}
+
+// mitrokosta проверить существование помеченных отличных карт и "освободить" их
+void PrepareAdmiralMaps() {
+	string sMap;
+	string map[24];
+	ref sld = CharacterFromID("Dios");
+
+	map[0] = "A_map_bermudas";
+	map[1] = "A_map_jam";
+	map[2] = "A_map_cayman";
+	map[3] = "A_map_barbados";
+	map[4] = "A_map_tortuga";
+	map[5] = "A_map_curacao";
+	map[6] = "A_map_martiniqua";
+	map[7] = "A_map_dominica";
+	map[8] = "A_map_trinidad";
+	map[9] = "A_map_puerto";
+	map[10] = "A_map_cuba";
+	map[11] = "A_map_hisp";
+	map[12] = "A_map_nevis";
+	map[13] = "A_map_beliz";
+	map[14] = "A_map_guad";
+	map[15] = "A_map_santa";
+	map[16] = "A_map_antigua";
+	map[17] = "A_map_terks";
+	map[18] = "A_map_sm";
+	map[19] = "A_map_maine_1";
+	map[20] = "A_map_maine_2";
+	map[21] = "A_map_panama";
+	map[22] = "A_map_cumana";
+	map[23] = "A_map_perl";
+
+	if (CheckAttribute(pchar, "questTemp.AdmiralMap")) {
+		for (int i = 0; i < 24; i++) {
+			sMap = map[i];
+			if (FindRealItem(sMap, "") == 0) {
+				DeleteAttribute(sld, "quest.map." + sMap); // второй шанс... можно и без этого конечно
+			}
+		}
+	}
+}
+
+// mitrokosta если у перса/бокса есть отличная карта, пометить ее как найденную и удалить отовсюду кроме него самого
+void CheckAdmiralMaps(ref chref) {
+	string sMap;
+	string map[24];
+	ref sld = CharacterFromID("Dios");
+	ref rMap = ItemsFromID("map_full");
+	ref qMap = ItemsFromID("mapQuest");
+
+	map[0] = "A_map_bermudas";
+	map[1] = "A_map_jam";
+	map[2] = "A_map_cayman";
+	map[3] = "A_map_barbados";
+	map[4] = "A_map_tortuga";
+	map[5] = "A_map_curacao";
+	map[6] = "A_map_martiniqua";
+	map[7] = "A_map_dominica";
+	map[8] = "A_map_trinidad";
+	map[9] = "A_map_puerto";
+	map[10] = "A_map_cuba";
+	map[11] = "A_map_hisp";
+	map[12] = "A_map_nevis";
+	map[13] = "A_map_beliz";
+	map[14] = "A_map_guad";
+	map[15] = "A_map_santa";
+	map[16] = "A_map_antigua";
+	map[17] = "A_map_terks";
+	map[18] = "A_map_sm";
+	map[19] = "A_map_maine_1";
+	map[20] = "A_map_maine_2";
+	map[21] = "A_map_panama";
+	map[22] = "A_map_cumana";
+	map[23] = "A_map_perl";
+
+	if (CheckAttribute(pchar, "questTemp.AdmiralMap")) {
+		for (int i = 0; i < 24; i++) {
+			sMap = map[i];
+			if (CheckCharacterItem(chref, sMap)) {
+				if (!CheckAttribute(sld, "quest.map." + sMap)) {
+					FindRealItem(sMap, "TakeItemFromCharacter"); // стереть карту отовсюду
+					DeleteAttribute(rMap, "BoxTreasure." + sMap);
+					DeleteAttribute(qMap, "BoxTreasure." + sMap);
+
+					GiveItem2Character(chref, sMap);
+					sld.quest.map.(sMap) = true;
+					trace("Карта " + sMap + " помечена как найденная, больше она генериться не будет");
+}
+			}
+		}
+	}
 }
 // <-- адмиральские карты
 
@@ -6313,3 +6461,41 @@ bool LongHappy_CheckTavernGoods() //
 	return false;
 }
 
+// mitrokosta проверка, может ли/хочет ли казначей считать крыс и деньги
+bool CheckFunctionalTreasurer() {
+	if (!IsPCharHaveTreasurer()) {
+		return false;
+	}
+	
+	ref sld = GetPCharTreasurerRef();
+	
+	if (sld.id == "Helena") {
+		return false;
+	}
+	
+	if (sld.id == "Mary") {
+		return false;
+	}
+	
+	if (sld.id == "Tichingitu") {
+		return false;
+	}
+	
+	if (sld.id == "Tonzag") {
+		return false;
+	}
+	
+	if (sld.id == "Knippel") {
+		return false;
+	}
+	
+	if (sld.id == "Longway") {
+		return false;
+	}
+	
+	if (sld.id == "Baker") {
+		return false;
+	}
+	
+	return true;
+}

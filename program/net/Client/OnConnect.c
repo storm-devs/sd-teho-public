@@ -1,4 +1,4 @@
-
+/*
 void NetClient_OnConnect(int iMsg)
 {
 	int iSubCode = NMGetByte(iMsg);
@@ -83,3 +83,4 @@ void NetClient_OnConnectNeedPassword(int iMsg)
 	Event("NCEvent_Client_RejectedServerPassword");
 }
 
+*/

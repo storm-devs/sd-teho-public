@@ -19,7 +19,7 @@ bool SetCharacterTask_GotoPoint(ref character, string locatorGroup, string locat
 {
 	float x, y, z;
 	//Get current location
-	if(IsEntity(loadedLocation) == 0)
+	if(IsEntity(&loadedLocation) == 0)
 	{
 		Trace("SetCharacterTask_GotoPoint -> location not created");
 		return false;

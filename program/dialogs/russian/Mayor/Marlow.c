@@ -75,13 +75,13 @@ void ProcessDialogEvent()
 					link.l1.go = "CapComission1";
 					DeleteAttribute(pchar,"GenQuest.CaptainComission.toMayor");
 				}	
-				if(CheckAttribute(pchar,"GenQuest.CaptainComission.PirateShips"))
+				if (pchar.GenQuest.CaptainComission.PirateShips == "died" || pchar.GenQuest.CaptainComission.PirateShips == "goaway") // лесник. новая проверка. искл. возможность сразу сдать задание,минуя 15 дней.
 				{
 					link.l1 = "Hello, Pastor. I want to talk about your mission.";
 					link.l1.go = "CapComission3";
 				}
-				if(CheckAttribute(pchar,"GenQuest.CaptainComission.RepeatSpeak"))
-				{
+				if(CheckAttribute(pchar,"GenQuest.CaptainComission.RepeatSpeak") && !CheckAttribute(pchar,"GenQuest.CaptainComission.vikupzaplatil")) 
+				{ // лесник . второй диалог с проверкой ,если ГГ ещё не принес деньги за выкуп.
 					link.l1 = "I want to talk about your prisoner.";
 					link.l1.go = "CapComission6";
 				}
@@ -213,15 +213,21 @@ void ProcessDialogEvent()
 				link.l1.go = "CapComission1";
 				DeleteAttribute(pchar,"GenQuest.CaptainComission.toMayor");
 			}		
-			if(CheckAttribute(pchar,"GenQuest.CaptainComission.PirateShips"))
-			{
-				link.l1 = "Hello, Pastor, it is about your prisoner.";
-				link.l1.go = "CapComission3";
-			}
-			if(CheckAttribute(pchar,"GenQuest.CaptainComission.RepeatSpeak"))
+			if (CheckAttribute(pchar, "GenQuest.CaptainComission") && CheckAttribute(pchar,"GenQuest.CaptainComission.toMayor"))
 			{
 				link.l1 = "It's about your prisoner.";
-				link.l1.go = "CapComission6";
+				link.l1.go = "CapComission1";
+				DeleteAttribute(pchar,"GenQuest.CaptainComission.toMayor");
+			}	
+			if (pchar.GenQuest.CaptainComission.PirateShips == "died" || pchar.GenQuest.CaptainComission.PirateShips == "goaway")//  правка лесник,новая проверка ,исключающая тут же сдачу задания
+			{
+				link.l1 = "Hello, Pastor, I am here because of your mission.";
+				link.l1.go = "CapComission3";
+			}
+			if (CheckAttribute(pchar, "GenQuest.Marginpassenger") && pchar.GenQuest.Marginpassenger == "cabin" && CheckAttribute(pchar, "questTemp.LongHappy"))
+			{ // лесник . похититель  ( после ДЛС ДиС ,когда барбазона уже нет)
+				link.l1 = "I've heard that you are engaged in a business related to prisoners...";
+				link.l1.go = "Marginpassenger";
 			}
 		break;
 		
@@ -270,22 +276,23 @@ void ProcessDialogEvent()
 			link.l1 = "See you.";
 			link.l1.go = "exit";
 			AddQuestRecord("CaptainComission1", "10");
-			AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM));
+			AddQuestUserData("CaptainComission1", "sName", "Zachary Marlow");//правка лесник.  в СЖ запись ниже не работает																																				  
+			//AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM));																															 
 			CaptainComission_GenerateManager();
 		break;
 		
 		case "CapComission2_2":
-			if(rand(1) == 0)
-			{
-				dialog.text = "Well, well.. I've got one business... Don't even know how to start. I need to sink one pirate who went too far.";
-				link.l1 = "Can't he simply be killed in the jungle?";
-				link.l1.go = "CapComission2_2_1";
-			}
-			else
+			if(rand(3) == 1)
 			{
 				dialog.text = "Well, " + pchar.name + ", you know, it doesn't work like that. Come back with money and you'll get your weakling, ha-ha.";
 				link.l1 = "Fine. See you.";
 				link.l1.go = "CapComission2_4";
+			}
+			else
+			{
+				dialog.text = "Well, well.. I've got one business... Don't even know how to start. I need to sink one pirate who went too far.";
+				link.l1 = "Can't he simply be killed in the jungle?";
+				link.l1.go = "CapComission2_2_1";
 			}
 		break;
 
@@ -314,7 +321,8 @@ void ProcessDialogEvent()
 		
 		case "CapComission2_2_4":
 			AddQuestRecord("CaptainComission1", "24");
-			AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM));
+			AddQuestUserData("CaptainComission1", "sName", "Zachary Marlow");//правка																			   
+			//AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM));
 			AddQuestUserData("CaptainComission1", "sShipName1", pchar.GenQuest.CaptainComission.ShipName1);
 			AddQuestUserData("CaptainComission1", "sShipName2", pchar.GenQuest.CaptainComission.ShipName2);
 			AddQuestUserData("CaptainComission1", "sShoreName", XI_ConvertString(pchar.GenQuest.CaptainComission.Island.Shore + "Abl"));
@@ -323,7 +331,7 @@ void ProcessDialogEvent()
             pchar.quest.CapComission_PirateAttack.win_condition.l1.location = pchar.GenQuest.CaptainComission.Island;
             pchar.quest.CapComission_PirateAttack.function = "CaptainComission_GeneratePirateShips"; 
 			SetFunctionTimerCondition("CaptainComission_PirateShipsOver", 0, 0, 15, false);
-			pchar.GenQuest.CaptainComission.PirateShips = "goaway";	
+			//pchar.GenQuest.CaptainComission.PirateShips = "sdatkwest";	// лесник - заменил проверку для сдачи сразу.
 			DialogExit();
 		break;
 		
@@ -345,6 +353,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("CaptainComission1", "sCharName", pchar.GenQuest.CaptainComission.Name);
 			AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City));			
 			addMoneyToCharacter(pchar, -150000);
+			pchar.GenQuest.CaptainComission.vikupzaplatil = true; // новая проверка ,если шарль заплатил выкуп за пленника. лесник																																																			
 			DialogExit();
 			AddDialogExitQuestFunction("CaptainComission_GeneratePassengerSlave");	
 		break;
@@ -353,7 +362,8 @@ void ProcessDialogEvent()
 			if(!CheckAttribute(pchar,"GenQuest.CaptainComission.RepeatSpeak"))
 			{
 				AddQuestRecord("CaptainComission1", "31");
-				AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM));
+				AddQuestUserData("CaptainComission1", "sName", "Zachary Marlow");		// лесник																											 
+				//AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM));// в СЖ не работает
 			}	
 			pchar.GenQuest.CaptainComission.RepeatSpeak = true;		
 			DialogExit();
@@ -403,8 +413,9 @@ void ProcessDialogEvent()
 			ChangeCharacterComplexReputation(pchar,"nobility", -2);
 			AddQuestRecord("CaptainComission1", "27");
 			AddQuestUserData("CaptainComission1", "sSex", GetSexPhrase("","ла"));
-			AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_DAT));
-			AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City + "Gen"));
+			AddQuestUserData("CaptainComission1", "sName", "Marlow");		// лесник																								   
+			//AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_DAT));
+			AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City + "Acc"));
 			AddQuestUserData("CaptainComission1", "sCharName", pchar.GenQuest.CaptainComission.Name);
 			DeleteAttribute(pchar,"GenQuest.CaptainComission.PirateShips");
 			DialogExit();
@@ -414,8 +425,9 @@ void ProcessDialogEvent()
 			ChangeCharacterComplexReputation(pchar,"nobility", -2);
 			AddQuestRecord("CaptainComission1", "28");
 			AddQuestUserData("CaptainComission1", "sSex", GetSexPhrase("","а"));
-			AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM));
-			AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City + "Gen"));
+			AddQuestUserData("CaptainComission1", "sName", "Marlow"); // правка	// лесник																											 
+			//AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM));
+			AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City + "Acc"));
 			AddQuestUserData("CaptainComission1", "sCharName", pchar.GenQuest.CaptainComission.Name);
 			DeleteAttribute(pchar,"GenQuest.CaptainComission.PirateShips");
 			DialogExit();		
@@ -430,8 +442,9 @@ void ProcessDialogEvent()
 		case "CapComission4_6":
 			addMoneyToCharacter(pchar, -200000);
 			AddQuestRecord("CaptainComission1", "29");
-			AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM));
-			AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City + "Gen"));
+			AddQuestUserData("CaptainComission1", "sName", "Marlow"); // правки имени в сж лесник																										  
+			AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM));// в сж не работает
+			AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City + "Acc"));
 			AddQuestUserData("CaptainComission1", "sCharName", pchar.GenQuest.CaptainComission.Name);
 			DeleteAttribute(pchar,"GenQuest.CaptainComission.PirateShips");
 			pchar.GenQuest.CaptainComission.SlaveAddMoney = true;
@@ -448,17 +461,28 @@ void ProcessDialogEvent()
 		case "CapComission5_1":
 			AddQuestRecord("CaptainComission1", "34");
 			AddQuestUserData("CaptainComission1", "sName", pchar.GenQuest.CaptainComission.SlaveName);
-			AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City + "Gen"));
+			AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City + "Acc"));
 			AddQuestUserData("CaptainComission1", "sCharName", pchar.GenQuest.CaptainComission.Name);
 			DeleteAttribute(pchar,"GenQuest.CaptainComission.PirateShips");
 			DialogExit();		
 			AddDialogExitQuestFunction("CaptainComission_GeneratePassengerSlave");	
 		break;
 		
-		case "CapComission6":
-			dialog.text = "Have you brought money, Charles? I wasn't kidding about selling that man to planters.";			
-			link.l1 = "Listen, "+ NPChar.name +", there is a problem... I don't have that much money. But I am ready to work.";
+			/*case "CapComission6":    // ЕСЛИ В ПЕРВЫЙ РАЗ ОТКАЗАЛ В ЗАДАНИИ ,ТО ПУСТЬ БАБКИ ИЩЕТ
+		     ИНАЧЕ ПОВТОРНАЯ ДАЧА ЗАДАНИЯ ПРЕВРАЩАЕТ КВЕСТ В КАШУ.. лесник
+			dialog.text = "Ты выкуп привёз"+ GetSexPhrase("","ла") +"? Ведь я не шутил, когда сказал, что продам его плантаторам.";			
+			link.l1 = "Слушай, "+ NPChar.name +", тут такое дело... В общем, у меня нет таких денег. Но я готов"+ GetSexPhrase("","а") +" отработать.";
 			link.l1.go = "CapComission2_2";
+			if(makeint(pchar.money) > 150000)
+			{
+				link.l2 = "It's good that you haven't sold him. Here are your coins - 150000 pesos. Where can I get him?"
+				link.l2.go = "CapComission2_3";
+			}			
+		break;*/
+		  case "CapComission6":                        // лесник . пусть шарль бабло ищет,или забить на пленника.
+			dialog.text = "Have you brought money? I wasn't kidding about selling that man to planters.";			
+			link.l1 = "I don't have the money, " + NPChar.name + ", but I'm working on it.";
+			link.l1.go = "exit";
 			if(makeint(pchar.money) > 150000)
 			{
 				link.l2 = "It's good that you haven't sold him. Here are your coins - 150000 pesos. Where can I get him?"
@@ -466,6 +490,108 @@ void ProcessDialogEvent()
 			}			
 		break;
 
+																																				 																																													  																																															
+//--------------------------------------------Похититель------------------------------------------------------
+		case "Marginpassenger":
+			dialog.text = "And why do you care about what I do? You know, you'd better go aw...";
+			link.l1 = "Tshh, calm down. I have a business for you. It's about your prisoner.";
+			link.l1.go = "Marginpassenger_1";
+		break;
+		
+		case "Marginpassenger_1":
+			dialog.text = "Ah, fine. Who do you want to ransom?";
+			link.l1 = "Wait. I am not here to buy out, I am here to offer you to buy a prisoner. Well, and you will have an opportunity to get a ransom for him.";
+			link.l1.go = "Marginpassenger_2";
+		break;
+		
+		case "Marginpassenger_2":
+			dialog.text = "Hm. And why do you need my agency? Why don't you want to get money directly for yourself?";
+			link.l1 = "It's quite risky to me. I may have problems with authorities.";
+			link.l1.go = "Marginpassenger_3";
+		break;
+		
+		case "Marginpassenger_3":
+			dialog.text = "Ha-h... fine then. Let's take a look. Who is your prisoner?";
+			link.l1 = "This is "+pchar.GenQuest.Marginpassenger.Text+" "+XI_ConvertString("Colony"+pchar.GenQuest.Marginpassenger.City+"Gen")+".";
+			link.l1.go = "Marginpassenger_4";
+		break;
+		
+		case "Marginpassenger_4":
+			int iTemp = makeint(sti(pchar.GenQuest.Marginpassenger.Dublon)*2*stf(pchar.GenQuest.Marginpassenger.Chance))*100;
+			dialog.text = "I see and it would be a fine trade if you are not lying. I suppose that I can pay you for this man "+iTemp+" pesos or give some interesting information instead. It's your choice.";
+			link.l1 = "I'd better take pesos. I had enough of this business...";
+			link.l1.go = "Marginpassenger_money";
+			link.l2 = "Ha! Tell me more. I am sure that you'll give me an interesting information.";
+			link.l2.go = "Marginpassenger_offer";
+		break;
+		
+		case "Marginpassenger_money":
+			dialog.text = "Money then. Take them. Now, it's not your problem. Deliver the subject of sale here.";
+			link.l1 = "He has to be near the town's gates already. Thanks! You have really helped me.";
+			link.l1.go = "Marginpassenger_money_1";
+		break;
+		
+		case "Marginpassenger_money_1":
+			iTemp = makeint(sti(pchar.GenQuest.Marginpassenger.Dublon)*2*stf(pchar.GenQuest.Marginpassenger.Chance))*100;
+			dialog.text = "You're welcome, bring me more... See you!";
+			link.l1 = "Good luck...";
+			link.l1.go = "exit";
+			AddMoneyToCharacter(pchar, iTemp);
+			sld = characterFromId("MarginPass");
+			RemovePassenger(Pchar, sld);
+			sld.lifeday = 0;
+			AddQuestRecord("Marginpassenger", "12");
+			AddQuestUserData("Marginpassenger", "sSum", iTemp);
+			CloseQuestHeader("Marginpassenger");
+			DeleteAttribute(Pchar, "GenQuest.Marginpassenger");
+		break;
+		
+		case "Marginpassenger_offer":
+			pchar.GenQuest.Marginpassenger.Goods = GOOD_EBONY + rand(makeint(GOOD_MAHOGANY - GOOD_EBONY));
+			pchar.GenQuest.Marginpassenger.GoodsQty = 200+rand(10)*10;
+			switch (drand(1))
+			{
+				case 0: //бухта на южном мейне
+					SelectSouthshore();
+					while (!isLocationFreeForQuests(pchar.GenQuest.Marginpassenger.Shore)) SelectSouthshore();
+					dialog.text = "It's good to do business with a smart man. Now listen: in few days to " + XI_ConvertString(pchar.GenQuest.Marginpassenger.Shore+"Dat") + " a Spanish expedition will arrive from Main, loaded with valuable woods. They will be waiting for a ship supposed to take the cargo. If you get there for a week, you will have a chance to take the cargo for yourself\nIf I were you, I would be already moving to my ship. And bring the prisoner here.";
+					link.l1 = "Thanks! The wood will be a nice compensation for my troubles. And my passenger has to be near the town's gates already. He will be brought to you.";
+					link.l1.go = "Marginpassenger_offer_1";
+				break;
+				
+				case 1: //просто кораблик
+					SelectSouthcity();
+					pchar.GenQuest.Marginpassenger.ShipName1 = GenerateRandomNameToShip(SPAIN);
+					dialog.text = "It's good to do business with a smart man. Now listen: about in a week a Spanish brigantine '"+pchar.GenQuest.Marginpassenger.ShipName1+"' loaded with valuable woods will sail from "+XI_ConvertString("Colony"+pchar.GenQuest.Marginpassenger.Southcity+"Gen")+" to "+XI_ConvertString("Colony"+pchar.GenQuest.Marginpassenger.Southcity1+"Gen")+". If you hurry, you will catch it easily\nYou are still here? If I were you, I would be already moving to my ship. And bring the prisoner here.";
+					link.l1 = "Thanks! The wood will be a nice compensation for my troubles. And my passenger has to be near the town's gates already. He will be brought to you.";
+					link.l1.go = "Marginpassenger_offer_2";
+				break;
+			}
+			sld = characterFromId("MarginPass");
+			RemovePassenger(Pchar, sld);
+			sld.lifeday = 0;
+			pchar.GenQuest.Marginpassenger = "final";
+		break;
+		
+		case "Marginpassenger_offer_1":
+			DialogExit();
+			AddQuestRecord("Marginpassenger", "13");
+			AddQuestUserData("Marginpassenger", "sShore", XI_ConvertString(pchar.GenQuest.Marginpassenger.Shore+"Abl"));//лесник - окончание в СЖ
+			SetFunctionTimerCondition("Marginpassenger_SouthshoreOver", 0, 0, 7, false);
+			pchar.quest.Marginpassenger.win_condition.l1 = "location";
+			pchar.quest.Marginpassenger.win_condition.l1.location = pchar.GenQuest.Marginpassenger.Shore;
+			pchar.quest.Marginpassenger.function = "Marginpassenger_Southshore";
+		break;
+		
+		case "Marginpassenger_offer_2":
+			DialogExit();
+			AddQuestRecord("Marginpassenger", "16");
+			AddQuestUserData("Marginpassenger", "sCity", XI_ConvertString("Colony"+pchar.GenQuest.Marginpassenger.Southcity+"Gen"));
+			AddQuestUserData("Marginpassenger", "sCity1", XI_ConvertString("Colony"+pchar.GenQuest.Marginpassenger.Southcity1+"Acc")); // лесник - окончание в СЖ
+			AddQuestUserData("Marginpassenger", "sShipName", pchar.GenQuest.Marginpassenger.ShipName1);
+			SetFunctionTimerCondition("Marginpassenger_SouthshipInWorld", 0, 0, 5+rand(2), false);
+		break;
+		
 		// ============== Грабеж среди бела дня, попытка залезть в сундуки =========================
 		case "Man_FackYou":
 			dialog.text = LinkRandPhrase("Robbery!!! That is unacceptable! Prepare yourself, "+ GetSexPhrase("pal","girl") +"...", "Hey, what the hell are you doing there?! Thought that you could rob me? You are done...", "Wait, what the hell? Take your hands off! Turns out that you are a thief! End of the line, bastard...");
@@ -542,6 +668,41 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			AddMoneyToCharacter(pchar, -1000000);
 			pchar.GenQuest.Piratekill = 0;
+		break;
+	}
+}
+
+void SelectSouthshore()
+{
+	switch (rand(6))
+	{
+		case 0: pchar.GenQuest.Marginpassenger.Shore = "shore37"; break;
+		case 1: pchar.GenQuest.Marginpassenger.Shore = "shore47"; break;
+		case 2: pchar.GenQuest.Marginpassenger.Shore = "shore48"; break;
+		case 3: pchar.GenQuest.Marginpassenger.Shore = "shore25"; break;
+		case 4: pchar.GenQuest.Marginpassenger.Shore = "shore21"; break;
+		case 5: pchar.GenQuest.Marginpassenger.Shore = "shore20"; break;
+		case 6: pchar.GenQuest.Marginpassenger.Shore = "shore19"; break;
+	}
+}
+
+void SelectSouthcity()
+{
+	switch (drand(2))
+	{
+		case 0: 
+			pchar.GenQuest.Marginpassenger.Southcity = "Maracaibo";
+			pchar.GenQuest.Marginpassenger.Southcity1 = "Havana"; 
+		break;
+		
+		case 1:
+			pchar.GenQuest.Marginpassenger.Southcity = "Cartahena";
+			pchar.GenQuest.Marginpassenger.Southcity1 = "Santiago"; 
+		break;
+		
+		case 2:
+			pchar.GenQuest.Marginpassenger.Southcity = "Portobello";
+			pchar.GenQuest.Marginpassenger.Southcity1 = "Santodomingo"; 
 		break;
 	}
 }

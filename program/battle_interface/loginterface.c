@@ -98,6 +98,11 @@ void CreateILogAndActions(int loadType)
 void Log_SetActiveAction(string actionName)
 {
 	if( ILogAndActions.type=="sea" && g_ActiveActionName!=actionName ) {
+
+		// LDH 13Feb17 clear MoorName when leave moor location
+		if (actionName != "Moor")
+			pchar.MoorName = " ";
+
 		RefreshBattleInterface();
 	}
 	g_ActiveActionName = actionName;
@@ -122,38 +127,43 @@ void Log_SetEternalString(string strLog)
 
 void CreateLogEnvironment()
 {
+	float fHtRatio = stf(Render.screen_y) / iGlobalVar1;
 	ILogAndActions.Log.width = sti(showWindow.sw)/2;
-	ILogAndActions.Log.height = sti(showWindow.sh)-80;
-	ILogAndActions.Log.right = sti(showWindow.right) - RecalculateHIcon(340);
-	ILogAndActions.Log.up = sti(showWindow.top) + 16;
+	ILogAndActions.Log.height = sti(showWindow.sh)-makeint(80 * fHtRatio);
+	ILogAndActions.Log.right = sti(showWindow.right) - RecalculateHIcon(makeint(340 * fHtRatio));
+	ILogAndActions.Log.up = sti(showWindow.top) + makeint(16 * fHtRatio);
 	ILogAndActions.Log.font = "interface_normal";
-	ILogAndActions.Log.fontscale = 1.2;
+//	ILogAndActions.Log.fontscale = 1.1 * fHtRatio;
+	ILogAndActions.Log.fontscale = 1.2 * (1.0 + (fHtRatio-1.0)*0.4);   // LDH 04Feb17
+//	ILogAndActions.Log.fontscale = 1.2; // Original code
 	ILogAndActions.Log.color = argb(0,255,255,255);
-	ILogAndActions.Log.offsetString = 24;
+	ILogAndActions.Log.offsetString = makeint(24 * fHtRatio);
 	ILogAndActions.Log.speed = 0.05;
 	ILogAndActions.Log.color_speed = 0.02;
 }
 
 void CreateSeaActionsEnvironment()
 {
+	float fHtRatio = stf(Render.screen_y) / iGlobalVar1;
+
 	ILogAndActions.type = "sea";
 	ILogAndActions.ActiveActions.TextureName = "battle_interface\list_icons.tga";
 	ILogAndActions.ActiveActions.horzQ = 16;
 	ILogAndActions.ActiveActions.vertQ = 8;
-	ILogAndActions.ActiveActions.width = RecalculateHIcon(48);
-	ILogAndActions.ActiveActions.height = RecalculateVIcon(48);
-	ILogAndActions.ActiveActions.left = sti(showWindow.right) - RecalculateHIcon(296);
-	ILogAndActions.ActiveActions.top = sti(showWindow.top) + RecalculateVIcon(32);
+	ILogAndActions.ActiveActions.width = RecalculateHIcon(makeint(48 * fHtRatio));
+	ILogAndActions.ActiveActions.height = RecalculateHIcon(makeint(48 * fHtRatio));
+	ILogAndActions.ActiveActions.left = sti(showWindow.right) - RecalculateHIcon(makeint(296 * fHtRatio));
+	ILogAndActions.ActiveActions.top = sti(showWindow.top) + RecalculateVIcon(makeint(32 * fHtRatio));
 
 	ILogAndActions.ActiveActions.text1.font = "interface_normal";
-	ILogAndActions.ActiveActions.text1.scale = 1.0;
-	ILogAndActions.ActiveActions.text1.pos.x = sti(showWindow.right) - RecalculateHIcon(272);
-	ILogAndActions.ActiveActions.text1.pos.y = sti(showWindow.top) + RecalculateVIcon(86);
+	ILogAndActions.ActiveActions.text1.scale = 1.0 * fHtRatio;
+	ILogAndActions.ActiveActions.text1.pos.x = sti(showWindow.right) - RecalculateHIcon(makeint(272 * fHtRatio));
+	ILogAndActions.ActiveActions.text1.pos.y = sti(showWindow.top) + RecalculateVIcon(makeint(86 * fHtRatio));
 	ILogAndActions.ActiveActions.text1.text = XI_ConvertString("Press_F3");
 	ILogAndActions.ActiveActions.text2.font = "interface_normal";
-	ILogAndActions.ActiveActions.text2.scale = 1.0;
-	ILogAndActions.ActiveActions.text2.pos.x = sti(showWindow.right) - RecalculateHIcon(272);
-	ILogAndActions.ActiveActions.text2.pos.y = sti(showWindow.top) + RecalculateVIcon(86);//RecalculateVIcon(102);
+	ILogAndActions.ActiveActions.text2.scale = 1.0 * fHtRatio;
+	ILogAndActions.ActiveActions.text2.pos.x = sti(showWindow.right) - RecalculateHIcon(makeint(272 * fHtRatio));
+	ILogAndActions.ActiveActions.text2.pos.y = sti(showWindow.top) + RecalculateVIcon(makeint(86 * fHtRatio));//RecalculateVIcon(102);
 	ILogAndActions.ActiveActions.text2.text = XI_ConvertString("for_quick_action");
 
 	ILogAndActions.ActiveActions.Moor.IconNum		= 29;
@@ -172,25 +182,27 @@ void CreateSeaActionsEnvironment()
 
 void CreateLandActionsEnvironment()
 {
+        float fHtRatio = stf(Render.screen_y) / iGlobalVar1;
 	ILogAndActions.type = "land";
 
 	ILogAndActions.ActiveActions.TextureName = "battle_interface\LandCommands.tga";
 	ILogAndActions.ActiveActions.horzQ = 16;
 	ILogAndActions.ActiveActions.vertQ = 4;
-	ILogAndActions.ActiveActions.width = RecalculateHIcon(48);
-	ILogAndActions.ActiveActions.height = RecalculateVIcon(48);
-	ILogAndActions.ActiveActions.left = sti(showWindow.right) - RecalculateHIcon(284);
-	ILogAndActions.ActiveActions.top = sti(showWindow.top) + RecalculateVIcon(32);
+	ILogAndActions.ActiveActions.width = RecalculateHIcon(makeint(48 * fHtRatio));
+	ILogAndActions.ActiveActions.height = RecalculateVIcon(makeint(48 * fHtRatio));
+//	ILogAndActions.ActiveActions.left = sti(showWindow.right) - RecalculateHIcon(makeint(284 * fHtRatio));
+	ILogAndActions.ActiveActions.left = sti(showWindow.right) - RecalculateHIcon(210 + 74*fHtRatio); // LDH 04Feb17
+	ILogAndActions.ActiveActions.top = sti(showWindow.top) + RecalculateVIcon(makeint(32 * fHtRatio));
 
 	ILogAndActions.ActiveActions.text1.font = "interface_normal";
-	ILogAndActions.ActiveActions.text1.scale = 1.0;
-	ILogAndActions.ActiveActions.text1.pos.x = sti(showWindow.right) - RecalculateHIcon(260);
-	ILogAndActions.ActiveActions.text1.pos.y = sti(showWindow.top) + RecalculateVIcon(86);
+	ILogAndActions.ActiveActions.text1.scale = 1.0 * fHtRatio;     
+	ILogAndActions.ActiveActions.text1.pos.x = sti(showWindow.right) - RecalculateHIcon(makeint(260 * fHtRatio));
+	ILogAndActions.ActiveActions.text1.pos.y = sti(showWindow.top) + RecalculateVIcon(makeint(86 * fHtRatio));
 	ILogAndActions.ActiveActions.text1.text = XI_ConvertString("Press_F3");
 	ILogAndActions.ActiveActions.text2.font = "interface_normal";
-	ILogAndActions.ActiveActions.text2.scale = 1.0;
-	ILogAndActions.ActiveActions.text2.pos.x = sti(showWindow.right) - RecalculateHIcon(260);
-	ILogAndActions.ActiveActions.text2.pos.y = sti(showWindow.top) + RecalculateVIcon(86);//RecalculateVIcon(102);
+	ILogAndActions.ActiveActions.text2.scale = 1.0 * fHtRatio; 
+	ILogAndActions.ActiveActions.text2.pos.x = sti(showWindow.right) - RecalculateHIcon(makeint(260 * fHtRatio));
+	ILogAndActions.ActiveActions.text2.pos.y = sti(showWindow.top) + RecalculateVIcon(makeint(86 * fHtRatio));//RecalculateVIcon(102);
 	ILogAndActions.ActiveActions.text2.text = XI_ConvertString("for_quick_action");
 
 	ILogAndActions.ActiveActions.ToSea.IconNum		= 13;
@@ -215,25 +227,26 @@ void CreateLandActionsEnvironment()
 
 void CreateWorldMapActionsEnvironment()
 {
+    float fHtRatio = stf(Render.screen_y) / iGlobalVar1;
 	ILogAndActions.type = "map";
 
 	ILogAndActions.ActiveActions.TextureName = "battle_interface\WorldMapCommands.tga";
 	ILogAndActions.ActiveActions.horzQ = 8;
 	ILogAndActions.ActiveActions.vertQ = 2;
-	ILogAndActions.ActiveActions.width = RecalculateHIcon(48);
-	ILogAndActions.ActiveActions.height = RecalculateVIcon(48);
-	ILogAndActions.ActiveActions.left = sti(showWindow.right) - RecalculateHIcon(284);
-	ILogAndActions.ActiveActions.top = sti(showWindow.top) + RecalculateVIcon(32);
+	ILogAndActions.ActiveActions.width = RecalculateHIcon(makeint(48 * fHtRatio));
+	ILogAndActions.ActiveActions.height = RecalculateVIcon(makeint(48 * fHtRatio));
+	ILogAndActions.ActiveActions.left = sti(showWindow.right) - RecalculateHIcon(makeint(284 * fHtRatio));
+	ILogAndActions.ActiveActions.top = sti(showWindow.top) + RecalculateVIcon(makeint(32 * fHtRatio));
 
 	ILogAndActions.ActiveActions.text1.font = "interface_normal";
-	ILogAndActions.ActiveActions.text1.scale = 1.0;
-	ILogAndActions.ActiveActions.text1.pos.x = sti(showWindow.right) - RecalculateHIcon(260);
-	ILogAndActions.ActiveActions.text1.pos.y = sti(showWindow.top) + RecalculateVIcon(86);
+	ILogAndActions.ActiveActions.text1.scale = 1.0 * fHtRatio;
+	ILogAndActions.ActiveActions.text1.pos.x = sti(showWindow.right) - RecalculateHIcon(makeint(260 * fHtRatio));
+	ILogAndActions.ActiveActions.text1.pos.y = sti(showWindow.top) + RecalculateVIcon(makeint(86 * fHtRatio));
 	ILogAndActions.ActiveActions.text1.text = XI_ConvertString("Press_F3");
 	ILogAndActions.ActiveActions.text2.font = "interface_normal";
-	ILogAndActions.ActiveActions.text2.scale = 1.0;
-	ILogAndActions.ActiveActions.text2.pos.x = sti(showWindow.right) - RecalculateHIcon(260);
-	ILogAndActions.ActiveActions.text2.pos.y = sti(showWindow.top) + RecalculateVIcon(86);//RecalculateVIcon(102);
+	ILogAndActions.ActiveActions.text2.scale = 1.0 * fHtRatio;
+	ILogAndActions.ActiveActions.text2.pos.x = sti(showWindow.right) - RecalculateHIcon(makeint(260 * fHtRatio));
+	ILogAndActions.ActiveActions.text2.pos.y = sti(showWindow.top) + RecalculateVIcon(makeint(86 * fHtRatio));//RecalculateVIcon(102);
 	ILogAndActions.ActiveActions.text2.text = XI_ConvertString("for_quick_action");
 
 	ILogAndActions.ActiveActions.EnterToSea.IconNum	= 1;

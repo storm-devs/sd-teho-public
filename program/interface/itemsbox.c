@@ -29,6 +29,7 @@ int iLinesCount = 0;
 
 void InitInterface_RS(string iniName, ref itemsRef, string faceID)
 {
+	CheckAdmiralMaps(itemsRef); // mitrokosta проверить отличные карты
 	sFaceID = faceID;
 	String sInterfaceType = sGetInterfaceType();
 	if(sInterfaceType == INTERFACETYPE_BARREL)
@@ -1207,7 +1208,7 @@ void onGetAllBtnClick()
 			if(iItemsQty < 1) continue;
 			
 			// Учет перегруза -->
-			maxItemsToAdd = GetMaxItemsToTake(refCharacter, itemID)
+			maxItemsToAdd = GetMaxItemsToTake(true, itemID)
 			
 			if(maxItemsToAdd < iItemsQty) iItemsQty = maxItemsToAdd;
 			// <-- Учет перегруза
@@ -1252,7 +1253,7 @@ void onTableAddAllBtnClick()
 	int iItemsQty = GetCharacterFreeItem(refToChar, item);
 	
 	// Учет перегруза
-	int maxItemsToAdd = GetMaxItemsToTake(refCharacter, item);
+	int maxItemsToAdd = GetMaxItemsToTake(true, item);
 	
 	if(maxItemsToAdd < iItemsQty) iItemsQty = maxItemsToAdd;
 	
@@ -1284,7 +1285,7 @@ void onTableRemoveAllBtnClick()
 	if(IsQuestUsedItem(item) && item != "Gold") return; // Квестовые не отдать, только золото
 	
 	// Учет перегруза (в сундуки и трупы можно ложить сколько угодно)
-	int maxItemsToAdd = GetMaxItemsToTake(refToChar, item);
+	int maxItemsToAdd = GetMaxItemsToTake(false, item);
 	
 	if(maxItemsToAdd < iItemsQty) iItemsQty = maxItemsToAdd;
 	
@@ -1549,30 +1550,34 @@ void ADD_BUTTON()  // купить
 }
 
 // Сколько еще могет утащить указанного предмета, в штуках
-int GetMaxItemsToTake(ref _char, String _item)
-{
+// mitrokosta переписал  без сравнения ссылок
+// take == true, значит берём в refCharacter
+int GetMaxItemsToTake(bool take, String _item) {
 	float curWeight;
+	int maxItems, maxWeight;
 	
-	// Warship MEGA FIX 10.07.09
-	if(_char == refToChar)
-	{
-		curWeight = fStoreWeight;
-	}
-	else
-	{
+	if (take) {
 		curWeight = fCharWeight;
+		maxWeight = GetMaxItemsWeight(refCharacter);
 	}
-	
-	int maxWeight = GetMaxItemsWeight(_char);
+	else {
+		curWeight = fStoreWeight;
+		maxWeight = GetMaxItemsWeight(refToChar);
+	}
 	
 	float itemWeight = stf(Items[GetItemIndex(_item)].weight);
 	
-	if(itemWeight == 0) // Это золото и прочая байда - лезла ошибка деления на нуль
-	{
+	// Это золото и прочая байда - лезла ошибка деления на нуль
+	if(itemWeight == 0) {
 		return 1000000000;
 	}
 	
-	return MakeInt((maxWeight - curWeight) / itemWeight);
+	maxItems = MakeInt((maxWeight - curWeight) / itemWeight);
+	if(maxItems < 0) {
+		return 0;
+	}	
+	
+	return maxItems;
 }
 
 void OfficerReincarnation(ref rPassanger);

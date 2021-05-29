@@ -26,6 +26,10 @@ native int StoreStats();
 native int ClearAchievement(string id);
 native int ResetStats(int bAchievementsToo);
 
+native int NFGetTexture(string sGroupID, string sFilename);
+native void NFDelGroupTextures(string sGroupID);
+native int NFFindFiles(ref rObject, string sDirectory, string sMask, bool bRecursive);
+
 #libriary "ScriptLocationLibrary"
 
 

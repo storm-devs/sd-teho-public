@@ -1,5 +1,5 @@
 object TopList;
-
+/*
 void NetServer_OnServerInfo(int wNetClientID, int iMsg)
 {
 	int iSubCode = NMGetByte(iMsg);
@@ -203,3 +203,4 @@ void NetServer_OnServerInfo_SendTopListInfo(int wNetClientID, int iMsg)
 	NetServer_SendMessage(wNetClientID, iSMsg, true);
 	NMDelete(iSMsg);
 }
+*/

@@ -746,8 +746,8 @@ void ProcessDialogEvent()
 		case "saga_16":
 			dialog.text = "You have excellently grasped all of life's lessons, Charles. I am truly happy for you. And I'm glad that you did go ahead and accepted de Poincy's request instead of sailing home to France. I hope everything turns out well for you and that you will be able to carry out what I was not able to do myself.";
 			link.l1 = "I'm afraid I have no choice. I am alone since my first day in the Caribbean. See you later, Michel. I think our next meeting will include an order of your release.";
-			// место под установку проверки купленности 3 ДЛС
-			link.l1.go = "saga_17a";
+			if (GetDLCenabled(DLC_APPID_3)) link.l1.go = "saga_17a";
+			else 							link.l1.go = "saga_17";
 		break;
 		
 		// Addon 2016-1 Jason Пиратская линейка

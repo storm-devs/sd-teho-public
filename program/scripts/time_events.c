@@ -61,30 +61,23 @@ void SalaryNextDayUpdate()
 #event_handler("EvSituationsUpdate","WorldSituationsUpdate");
 void WorldSituationsUpdate()
 {
-	int iStep = GetEventData();
-	float dayRandom;
-
-	// boal -->
-	/*if (bQuestCheckProcessFreeze)   // если в квесте, то откладываем
-	{
-	    if(iStep < 10)
-		{
-			PostEvent("EvSituationsUpdate", 1000, "l", iStep);
-		}
-	}*/
-	// boal <--
+	int 	iStep = GetEventData();
+	float 	dayRandom;
 
 	switch(iStep)
 	{
-		case 0:
+		case 0:		
+			DailyEatCrewUpdate();
+		
             DeleteAttribute(pchar, "SkipEshipIndex");// boal
-			DailyEatCrewUpdate(); // boal
 			Log_QuestInfo("WorldSituationsUpdate DailyEatCrewUpdate");
 			
 			dayRandom = Random();
 			PChar.DayRandom = dayRandom;
 			Log_TestInfo("dayRandom == " + dayRandom);
+
 			CheckCharactersUpdateItems();
+						
 			if (CheckAttribute(pchar, "questTemp.LSC")) 
 			{ //Jason: еженедельное обновление паролей кланов LSC и ежедневное вытирание
 				if (GetDataDay() == 7 || GetDataDay() == 14 || GetDataDay() == 21 || GetDataDay() == 28)
@@ -104,12 +97,13 @@ void WorldSituationsUpdate()
 				AddCharacterHealth(pchar, -2);
 			}
 			// трем эскадру у Тортуги
-			Tortuga_DeleteShipGuard();
+			Tortuga_DeleteShipGuard();						
 		break;
 		
-		case 1:
-            SalaryNextDayUpdate();  // зряплата
+		case 1:			
+			SalaryNextDayUpdate();  // зряплата
 			Log_QuestInfo("WorldSituationsUpdate SalaryNextDayUpdate");
+
 			if (rand(2) == 0) Norman_ChangeFesivalFace(); // выходки Нормана
 			if (GetDataDay() == 5 && CheckAttribute(pchar, "questTemp.OilTrade")) DoQuestFunctionDelay("Oil_SetSergioToMayak", 1.0); // генератор смол
 			if (GetDataDay() == 1 && !CheckAttribute(pchar, "questTemp.Sharlie.Lock") && !CheckAttribute(pchar, "questTemp.Mtraxx.Corrida.IslandLock")) // Addon 2016-1 Jason пиратская линейка
@@ -124,17 +118,15 @@ void WorldSituationsUpdate()
 			// ФМК - без НИ
 			if (!CheckAttribute(pchar, "questTemp.FMQ.Success") && sti(pchar.rank) > 3) DoQuestFunctionDelay("FMQ_SetConditions", 1.0);
 			
-			AchievmentsDayUpdateStart();
-			
-			//if(GetDLCenabled(DLC_APPID_5)) trace("DLC 5 активировано!");
-			//else trace("DLC 5 НЕ активировано!");
+			AchievmentsDayUpdateStart();			
 		break;
 		
-		case 2:
+		case 2:				
 			// Jason: ежедневная переустановка сторожевиков Тортуги
 			Tortuga_SetShipGuard();
 			ProcessHullDecrease();	// учет безвозвратной убыли корпуса
 			ProcessDayRepair();
+			
 			// Addon 2016-1 Jason пиратская линейка
 			if (CheckAttribute(pchar, "questTemp.Mtraxx.CharleePrince"))
 			{
@@ -147,19 +139,20 @@ void WorldSituationsUpdate()
 					OfficersReaction("bad");
 				}
 			}
-			if (!CheckAttribute(pchar, "questTemp.Mtraxx.BugsFixer")) Mtraxx_BugsFixer(); // правки релиза
+			if (!CheckAttribute(pchar, "questTemp.Mtraxx.BugsFixer")) Mtraxx_BugsFixer(); // правки релиза							
 		break;
 		
-		case 3:
-			//UpdateDisease();
+		case 3:				
 			Group_FreeAllDead();
+
 			// Jason НСО
 			if (CheckAttribute(pchar, "questTemp.Patria.Governor") && GetDataDay() == 15)
 			{
 				AddMoneyToCharacter(pchar, 100000);
 				log_info("You have received your share of profit from Poincy");
 			}
-			//if (!CheckAttribute(pchar, "questTemp.Patria_BugsFixer")) Patria_BugsFixer(); // 17-add
+			if (!CheckAttribute(pchar, "questTemp.Patria_BugsFixer")) Patria_BugsFixer(); // 17-add			
+			
 			// Jason Дороже золота
 			if(GetDLCenabled(DLC_APPID_5))
 			{	
@@ -185,39 +178,42 @@ void WorldSituationsUpdate()
 			}
 		break;
 		
-		case 4:
-			QuestActions(); //eddy
+		case 4:		
+			QuestActions(); //eddy				
+			// belamour правки Большого патча
+			if (!CheckAttribute(pchar, "questTemp.BigPatch_BugsFixer")) BigPatch_BugsFixer();	
+			// belamour правки Большого патча 2 второй прогон
+			if (!CheckAttribute(pchar, "questTemp.BigPatch_BugsFixer2")) BigPatch_BugsFixer2();	
 		break;
 		
 		case 5:
-			//UpdateColonyProfit();  
-			wdmEmptyAllOldEncounter();// homo чистка энкоутеров
+			wdmEmptyAllOldEncounter();// homo чистка энкоутеров				
 		break;
 		
 		case 6:
-			UpdateCrewExp();  // изменение опыта команды
+			UpdateCrewExp();  // изменение опыта команды	
 		break;
 		
 		case 7:
-			UpdateCrewInColonies(); // пересчет наемников в городах
+			UpdateCrewInColonies(); // пересчет наемников в городах	
 		break;
 		
 		case 8:
-			if(IsEntity(worldMap))
+			if(IsEntity(&worldMap))
 			{
 				EmptyAllFantomCharacter(); // трем НПС
 				wdmEmptyAllDeadQuestEncounter();
-			}
+			}				
 		break;
 		
-		case 9:
-				UpdateReputation();
-				GenerateRumour() //homo 05/07/06
+		case 9:		
+			UpdateReputation();
 		break;
 		
 		case 10:
-			//
-		break;
+			GenerateRumour() //homo 05/07/06			
+		break;		
+		
 	}
 
 	iStep++;

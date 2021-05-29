@@ -147,9 +147,14 @@ float Cannon_GetRechargeTime()
 
 	float fMultiply = 1.0;
 	// boal -->
-    fMultiply = AIShip_isPerksUse(aCharacter.TmpPerks.FastReload, 1.0, 0.9);
-	fMultiply = AIShip_isPerksUse(aCharacter.TmpPerks.ImmediateReload, fMultiply, 0.5); 
-	fMultiply = isEquippedArtefactUse(aCharacter, "amulet_5", fMultiply, 0.85);
+
+       // EvgAnat - фикс fMultiply --> 
+
+        fMultiply = fMultiply * AIShip_isPerksUse(aCharacter.TmpPerks.FastReload, 1.0, 0.9);
+        fMultiply = fMultiply * AIShip_isPerksUse(aCharacter.TmpPerks.ImmediateReload, 1.0, 0.5); 
+        fMultiply = fMultiply * isEquippedArtefactUse(aCharacter, "amulet_5", 1.0, 0.85);
+  
+       //<-- EvgAnat 
 
 	ref refBaseShip = GetRealShip(sti(aCharacter.ship.Type));
 	if (sti(refBaseShip.BaseType) != SHIP_FORT)
@@ -210,10 +215,10 @@ float Cannon_GetFireTime()
 
     float  fExp;
 	fExp = 0.05 + stf(GetCrewExp(aCharacter, "Cannoners") * crewQ) / stf(crewOpt * GetCrewExpRate());
-	if (fExp > 1) fExp = 1;
+	if (fExp > 1.0) fExp = 1.0;
 	
 	fFireTime = fFireTime * (2.0 - fExp);
-	fFireTime = fFireTime * (1 + (1 - fCrewMorale/MORALE_NORMAL)/5.0);
+	fFireTime = fFireTime * (1.0 + (1.0 - fCrewMorale/MORALE_NORMAL)/5.0);
 	
 	return fFireTime;  
 }
@@ -299,6 +304,7 @@ int GetBortIntactCannonsNum(ref rCharacter, string sBort, int iNumCannonsOnBort)
 {
 	float fDamage  = 0.0;
 	
+        if(sti(rCharacter.ship.type) == SHIP_NOTUSED) return 0;
 	if(iNumCannonsOnBort <= 0) return 0;
 	if (!CheckAttribute(rCharacter, "Ship.Cannons.Borts." + sBort + ".damages")) return iNumCannonsOnBort;				
 	aref arDamages;	

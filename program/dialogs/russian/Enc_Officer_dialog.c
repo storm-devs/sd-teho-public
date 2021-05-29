@@ -118,7 +118,7 @@ void ProcessDialogEvent()
 			
 			
 			// по тек локации определим можно ли тут приказать  -->
-			if(IsEntity(loadedLocation))
+			if(IsEntity(&loadedLocation))
 			{
 				if(CheckAttribute(loadedLocation, "fastreload"))
 				{
@@ -411,10 +411,10 @@ void ProcessDialogEvent()
 		///////////////////////////////////////////////////////////////////////////////////
 		case "WantToGo_Munity":	//zagolski. отыгрыш бегство офицера
 			Diag.TempNode = "Hired";
-			if (sti(Pchar.questTemp.MunityOfficerIDX) != GetCharacterIndex(Npchar.id))
+			if (!CheckAttribute(pchar, "questTemp.MutinyOfficerIDX"))
 			{
-				Pchar.questTemp.MunityOfficerIDX = GetCharacterIndex(Npchar.id);
-				Pchar.questTemp.MunityOfficerIDX.begin = "1";
+				pchar.questTemp.MutinyOfficerIDX = npchar.index;
+				npchar.quest.Mutiny = true; // mitrokosta доп защита от багов
 				SetFunctionTimerCondition("mOfficer_fc", 0, 0, 1, false);
 			}
 			Diag.CurrentNode = Diag.TempNode;

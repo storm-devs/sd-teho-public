@@ -387,6 +387,16 @@ void LaunchMapScreen()
 	}
 }
 
+void LaunchDirSailEnc()
+{
+    Interfaces[INTERFACE_DIRSAILENC].SectionName = "interface\DirSailEnc.c";
+	if(procInterfacePrepare(INTERFACE_DIRSAILENC))
+	{
+		nPrevInterface = -1;
+		CurrentInterface = INTERFACE_DIRSAILENC;
+		InitInterface(Interfaces[CurrentInterface].IniFile);
+	}
+}
 void LaunchPaperMapScreen()
 {
 	if(procInterfacePrepare(INTERFACE_PAPER_MAP))
@@ -1276,7 +1286,7 @@ void StartVideo(string vidName)
 	DeleteAttribute(&InterfaceStates,"VideoBreakControls");
 	SetEventHandler("Control Activation","IVideoBreakPrepare",0);
 	SetEventHandler("Control Deactivation","IVideoBreak",0);
-	if(!IsEntity(aviVideoObj))
+	if(!IsEntity(&aviVideoObj))
 	{
 		Trace("Can`t create video player");
 		PostEvent("ievntEndVideo",0);
@@ -2190,6 +2200,7 @@ void MakeQuickSave()
 {
 	if( IsNetActive() ) {return;}
 	if( bPlayVideoNow ) {return;}
+	if( dialogRun ) {return;}  // лесник - если диялог ,то быстре сохарнение отменяется. лесник
 
 	aref arTmp;
 	if( FindClass(arTmp,"fader") ) {return;}
@@ -2348,14 +2359,23 @@ string GetCurLocationName()
 		if (worldMap.island != "")
 		{
             locLabel =  worldMap.island;
-			if (locLabel == "Cuba2") locLabel = "Cuba";
-            if (locLabel == "Hispaniola2") locLabel = "Hispaniola";
-			locLabel = GetConvertStr(locLabel, "LocLables.txt");
-			if (locLabel == "")
-      		{
-      		    locLabel = GetConvertStr("Mein", "LocLables.txt");
-      		}
-			locLabel  += " - " + XI_ConvertString("Sea");
+			
+			int iIslandIndex = FindIsland(locLabel);
+			if (iIslandIndex != -1 && Islands[iIslandIndex].visible == true)
+			{
+				if (locLabel == "Cuba2") locLabel = "Cuba";
+				if (locLabel == "Hispaniola2") locLabel = "Hispaniola";
+				locLabel = GetConvertStr(locLabel, "LocLables.txt");
+				if (locLabel == "")
+				{
+					locLabel = GetConvertStr("Mein", "LocLables.txt");
+				}
+				locLabel  += " - " + XI_ConvertString("Sea");
+			}
+			else
+			{
+				locLabel = XI_ConvertString("Open Sea");
+			}				
 		}
 		else
 		{

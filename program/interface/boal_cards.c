@@ -2,6 +2,7 @@
 int scx, scy, spx, spy, sgxy, ssxy, smxy;
 int move_i, dir_i, dir_i_start;
 bool openExit;
+bool cardMove;
 int  money_i, moneyOp_i;
 string money_s;
 
@@ -53,6 +54,7 @@ void InitInterface(string iniName)
     spy = 188;
     
     openExit = false;  // можно ли прервать игру
+	cardMove = false; // игрок перемещает карту
     
     pchar = GetMainCharacter();
     
@@ -62,36 +64,35 @@ void InitInterface(string iniName)
     
     npchar = GetCharacter(sti(pchar.GenQuest.Cards.npcharIdx));
     
-    switch (iRate)
-    {
-        case 100 :
+	iMoneyP = sti(pchar.Money); // mitrokosta теперь смотрим на реальные деньги только в начале и в конце
+	iMoneyN = sti(npchar.Money);
+    
+	// mitrokosta фикс опыта за некратные ставки -->
+	if (iRate >= 100) {
             money_s = "silver";
             iExpRate = 1;
-        break;
-        
-        case 500 :
+	}
+	if (iRate >= 500) {
             money_s = "gold";
             iExpRate = 2;
-        break;
-        
-        case 1000 :
+	}
+	if (iRate >= 1000) {
             money_s = "silver";
             SetNewPicture("SCROLLPICT", "interfaces\card_sukno.tga");
             iExpRate = 3;
-        break;
-
-        case 5000 :
+	}
+	if (iRate >= 5000) {
             money_s = "gold";
             SetNewPicture("SCROLLPICT", "interfaces\card_sukno.tga");
             iExpRate = 6;
-        break;
-		
-		case 10000 : // Jason Дороже золота
+	}
+	if (iRate >= 10000) { // Jason Дороже золота
             money_s = "gold";
             SetNewPicture("SCROLLPICT", "interfaces\card_sukno.tga");
             iExpRate = 8;
-        break;
-    }
+	}
+	// <--
+
     if (money_s == "gold")
     {
         smxy = sgxy;
@@ -165,6 +166,8 @@ void Exit()
     	}
         interfaceResultCommand = RC_INTERFACE_SALARY_EXIT;
 
+		AddMoneyToCharacter(pchar, iMoneyP - sti(pchar.Money)); // mitrokosta раздача денег теперь в конце
+		AddMoneyToCharacter(npchar, iMoneyN - sti(npchar.Money));
     	Statistic_AddValue(Pchar, "GameCards_Win", iHeroWin);
 		Achievment_SetStat(pchar, 25, iHeroWin);
     	AddCharacterExpToSkill(Pchar, SKILL_FORTUNE, iExpRate*5*iHeroWin);
@@ -239,6 +242,11 @@ void ProcessCommandExecute()
                     
                     if (dir_i == 1)
                     {
+						if (cardMove) { // mitrokosta фикс множественного взятия
+							break;
+						} else {
+							cardMove = true; // начинаем перемещение
+						}
                         move_i = 0;
                         PlaySound("interface\took_item.wav");
                         PostEvent("My_eventMoveImg", 100);
@@ -325,6 +333,7 @@ void MoveImg()
     }
     else
     {
+		cardMove = false; // закончили перемещение
         CreateImage("BLANK","","", 0, 0, 0, 0);
         PlaySound("interface\button3.wav");
         // перерисуем все карты на руках
@@ -436,8 +445,6 @@ void RedrawDeck()
     moneyOp_i = 0;
     iChest = 0; // на кону
     
-    iMoneyP = sti(pchar.Money);
-    iMoneyN = sti(npchar.Money);
     ShowMoney();
     
     // тасуем карты
@@ -589,12 +596,12 @@ bool CheckGame()
 			{
 				if (iMoneyP > iRate)
 				{
-					sTemp += NewStr() + RandPhraseSimple("Играем дальше!","Продолжаем!");
+					sTemp += NewStr() + RandPhraseSimple("Let's keep playing!","Let's continue!");
 				}
 				else
 				{
 					bStartGame = 100;//признах запрета новой игры
-					sTemp += NewStr() + "Все, капитан, у вас больше не осталось денег на ставку. Вы проиграли!";
+					sTemp += NewStr() + "It's over, captain, you have no money to bet! You lost!";
 					pchar.questTemp.GoldenGirl.Game.Fail = "true"; // ГГ проиграл
 				}
 			}
@@ -604,22 +611,22 @@ bool CheckGame()
 				{
 					if (iMoneyP > iRate)
 					{
-						sTemp += NewStr() + RandPhraseSimple("Играем дальше!","Продолжаем!");
+						sTemp += NewStr() + RandPhraseSimple("Let's keep playing!", "Let's continue!");
 					}
 					else
 					{
 						bStartGame = 100;//признах запрета новой игры
-						sTemp += NewStr() + "Все, тебе больше нечего ставить. Ты проиграл!";
+						sTemp += NewStr() + "It's over, you have nothing to bet! You lost!";
 						pchar.questTemp.GoldenGirl.Game.Fail = "true"; // ГГ проиграл
 					}
 				}
 				else
 				{
 					bStartGame = 100;//признах запрета новой игры
-					sTemp += NewStr() + "Все, мне больше нечего ставить. Ты победил!";
+						sTemp += NewStr() + "It's over, I have nothing to bet. You won!";
 					pchar.questTemp.GoldenGirl.Game.Win = "true"; // ГГ выиграл
-				}
-			}			
+				}	
+			}
 		}
 		else
 		{
@@ -673,6 +680,7 @@ bool CheckGame()
         {
             if (dir_i == -1 && bStartGame >= 2) // комп играет сам
             {
+				cardMove = true; // начинаем перемещение
                 move_i = 0;
                 PlaySound("interface\took_item.wav");
                 PostEvent("My_eventMoveImg", 500);
@@ -706,13 +714,11 @@ void EndGameCount(int who)
     openExit = true;
     if (who == 1) // ГГ
     {
-        AddMoneyToCharacter(pchar, iChest - (sti(pchar.Money) - iMoneyP));
-        AddMoneyToCharacter(npchar,  -(sti(npchar.Money) - iMoneyN));
+		iMoneyP += iChest;
     }
     else
     {
-        AddMoneyToCharacter(pchar, -(sti(pchar.Money) - iMoneyP));
-        AddMoneyToCharacter(npchar, iChest - (sti(npchar.Money) - iMoneyN));
+		iMoneyN += iChest;
     }
 }
 
@@ -741,13 +747,13 @@ void OpenCards();
 		{
 			if (iMoneyP > iRate)
 			{
-				sTemp += NewStr() + RandPhraseSimple("Играем дальше!","Продолжаем!");
+				sTemp += NewStr() + RandPhraseSimple("Let's keep playing!", "Let's continue!");
 				bStartGame = 2;
 			}
 			else
 			{
 				bStartGame = 100;//признах запрета новой игры
-				sTemp += NewStr() + "Все, капитан, у вас больше не осталось денег на ставку. Вы проиграли!";
+				sTemp += NewStr() + "It's over, captain, you have no money to bet! You lost!";
 				pchar.questTemp.GoldenGirl.Game.Fail = "true"; // ГГ проиграл
 			}
 		}
@@ -757,20 +763,20 @@ void OpenCards();
 			{
 				if (iMoneyP > iRate)
 				{
-					sTemp += NewStr() + RandPhraseSimple("Играем дальше!","Продолжаем!");
+					sTemp += NewStr() + RandPhraseSimple("Let's keep playing!", "Let's continue!");
 					bStartGame = 2;
 				}
 				else
 				{
 					bStartGame = 100;//признах запрета новой игры
-					sTemp += NewStr() + "Все, тебе больше нечего ставить. Ты проиграл!";
+					sTemp += NewStr() + "It's over, you have nothing to bet! You lost!";
 					pchar.questTemp.GoldenGirl.Game.Fail = "true"; // ГГ проиграл
 				}
 			}
 			else
 			{
 				bStartGame = 100;//признах запрета новой игры
-				sTemp += NewStr() + "Все, мне больше нечего ставить. Ты победил!";
+				sTemp += NewStr() + "It's over, I have nothing to bet. You won!";
 				pchar.questTemp.GoldenGirl.Game.Win = "true"; // ГГ выиграл
 			}	
 		}
@@ -787,7 +793,7 @@ void OpenCards();
 			bStartGame = 100;//признах запрета новой игры
 			sTemp += NewStr() + "We are done here!";
 		}
-	}
+    }
     SetFormatedText("INFO_TEXT", sTemp);
     RedrawCards();
 }

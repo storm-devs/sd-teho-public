@@ -1,4 +1,4 @@
-bool NetServer_CheckGameOver_Naval()
+/*bool NetServer_CheckGameOver_Naval()
 {
 	int i;
 	int iTeams[4], iTeamsDamage[4];
@@ -46,4 +46,4 @@ bool NetServer_CheckGameOver_Naval()
 	}
 
 	return true;
-}
+}*/

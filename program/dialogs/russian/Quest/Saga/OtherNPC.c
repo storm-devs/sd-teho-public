@@ -1185,7 +1185,7 @@ void ProcessDialogEvent()
 			LAi_group_SetCheck("EnemyFight", "Saga_MineBandos_05Die");
 			AddDialogExitQuest("MainHeroFightModeOn");	
 			DoQuestCheckDelay("Saga_MineSetMusic", 0.3);
-			// запусткаем автобабахалку на 10 выстрелов
+			// запускаем автобабахалку на 10 выстрелов
 			iTotalTemp = 0;
 			DoQuestCheckDelay("Saga_GunAutoFire", 7.0);
 			bDisableCharacterMenu = false;//разлочим интерфейсы

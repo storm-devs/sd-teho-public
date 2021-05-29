@@ -3,7 +3,7 @@ int iMaxNumPlayers, iGameSpeed, iTimeLimit, iStartPosition, iCredit, iMaxShipCla
 int iGameTime = 0; 
 int iWeatherType = 0;
 int iNumTeams = 2;
-
+/*
 void InitInterface(string iniName)
 {
 	GameInterface.title = "titleNetCreateGame";
@@ -490,3 +490,4 @@ void OnCancel()
 {
 	IDoExit(RC_INTERFACE_NET_FINDGAME);
 }
+*/

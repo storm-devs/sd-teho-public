@@ -112,6 +112,7 @@ void wdmTimeUpdate()
 
 void wdmCreateWorldMap()
 {
+    float fHtRatio = stf(Render.screen_y) / iGlobalVar1;
 	wdmLockReload = false;
 	//Уберём все сообщения для игрока
 	ClearAllLogStrings();
@@ -133,6 +134,7 @@ void wdmCreateWorldMap()
 	worldMap.date.font = "normal";
 	worldMap.date.coordinate = XI_ConvertString("Coordinates");
 	//Удалим все устаревшие энкаунтеры
+	worldMap.resizeRatio = fHtRatio;
 	wdmRemoveOldEncounters();
 //	Trace("Save check ---------------================--------------")
 //	DumpAttributes(&worldMap);

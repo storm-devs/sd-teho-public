@@ -145,7 +145,7 @@ void ProcessDuelDialog(ref NPChar, aref Link, aref NextDiag)
 		}
 		break;
 
-	//что ж, пойдем выйдем
+	//что ж, пойдём выйдем
 	case "fight_off_town_prep":
 		SaveCurrentQuestDateParam("questTemp.Duel.StartTime");
 		PChar.questTemp.duel.Start = true;

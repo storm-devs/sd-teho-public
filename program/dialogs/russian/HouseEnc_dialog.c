@@ -7,6 +7,8 @@ void ProcessDialogEvent()
 	ref rColony;
 	
 	int iTest;
+	
+	bool  ok; // лесник . спецпеременная.
 
 	DeleteAttribute(&Dialog,"Links");
 
@@ -360,10 +362,21 @@ void ProcessDialogEvent()
 				}
 			}		
 			else
-			{
+			{// лесник если нет корабля то иди отседа
+				ok = (rColony.from_sea == "") || (Pchar.location.from_sea == rColony.from_sea);
+		        if (sti(Pchar.Ship.Type) != SHIP_NOTUSED && ok)
+				{	
 				dialog.text = "Go ahead.";
 				link.l1 = "Thanks.";
 				link.l1.go = "storage_2";
+				}
+				else
+				{
+                dialog.text = RandPhraseSimple("Captain, where is your ship? How are you planning to move cargo?", "I don’t see your ship docked in the port. How exactly are you going to load her?");
+                link.l1 = RandPhraseSimple("Oh.. I totally forgot about that!", "Damn it, that’s right!");
+			    link.l1.go = "exit";
+				break;
+                }			
 			}
 			link.l2 = "No, I've changed my mind.";
 			link.l2.go = "exit"; 						
@@ -438,10 +451,21 @@ void ProcessDialogEvent()
 				}
 			}
 			else
-			{
+			{ // лесник - если нет корабля то иди отседа:D
+				ok = (rColony.from_sea == "") || (Pchar.location.from_sea == rColony.from_sea);
+		        if (sti(Pchar.Ship.Type) != SHIP_NOTUSED && ok)
+				{	
 				dialog.text = "Collect your goods, and I will close the warehouse.";
 				link.l1 = "Fine.";
 				link.l1.go = "storage_6";
+				}
+				else
+				{
+                dialog.text = RandPhraseSimple("Captain, where is your ship? How are you planning to move cargo?", "I don’t see your ship docked in the port. How exactly are you going to load her?");
+                link.l1 = RandPhraseSimple("Oh.. I totally forgot about that!", "Damn it, that’s right!");
+			    link.l1.go = "exit";
+				break;
+                }				
 			}
 		break;
 		

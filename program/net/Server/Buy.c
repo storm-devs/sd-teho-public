@@ -1,5 +1,5 @@
 int iSecondsToStartGame = -1;
-
+/*
 void NetServer_OnBuy(int wNetClientID, int iMsg)
 {
 	int iSMsg;
@@ -245,3 +245,4 @@ void NetServer_OnBuy_FullInfo(int wNetClientID, int iMsg)
 		return;
 	}
 }
+*/

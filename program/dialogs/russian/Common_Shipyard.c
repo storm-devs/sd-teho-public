@@ -228,7 +228,7 @@ void ProcessDialogEvent()
 					link.l17.go = "Device_complete";
 				}
 				// <-- генератор Неудачливый вор
-				if(RealShips[sti(Pchar.Ship.Type)].BaseType != SHIP_CURSED_FDM)
+				if(sti(Pchar.Ship.Type) != SHIP_NOTUSED && RealShips[sti(Pchar.Ship.Type)].BaseType != SHIP_CURSED_FDM) // mitrokosta фикс ломаных диалогов
 				{
 					link.l12 = "I want to change the look of my sails.";
 					link.l12.go = "SailsGerald";
@@ -291,7 +291,7 @@ void ProcessDialogEvent()
 				link.l15 = "Don't you have a job requiring help of a stranger?";
 			    link.l15.go = "Tasks";
 				
-				if(RealShips[sti(Pchar.Ship.Type)].BaseType != SHIP_CURSED_FDM)
+				if(sti(Pchar.Ship.Type) != SHIP_NOTUSED && RealShips[sti(Pchar.Ship.Type)].BaseType != SHIP_CURSED_FDM) // mitrokosta фикс ломаных диалогов
 				{
 					link.l12 = "I want to change the look of my sails.";
 					link.l12.go = "SailsGerald";
@@ -750,6 +750,11 @@ void ProcessDialogEvent()
 	        shTo.Tuning.SpeedRate = true;
 			
 			shTo.WindAgainstSpeed   	= stf(shTo.WindAgainstSpeed) + 0.15 * stf(shTo.WindAgainstSpeed);
+			
+			if (stf(shTo.WindAgainstSpeed) > 1.985) { // mitrokosta фикс невозможных значений
+				shTo.WindAgainstSpeed = 1.985;
+			}
+			
 			shTo.DontTuning.WindAgainst = true;
 			
 			if(!CheckAttribute(pchar, "achievment.Tuning.stage1")) 

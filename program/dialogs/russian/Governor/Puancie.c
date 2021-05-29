@@ -425,6 +425,8 @@ void ProcessDialogEvent()
 			dialog.text = "The light frigate 'Gryffondor' is under you command now. From this moment this excellent ship is yours. Use it's high qualities for the glory of his Majesty and to strengthen a French influence on the Caribbean archipelago!";
 			link.l1 = "At once!";
 			link.l1.go = "serve_5";		
+                        if(CheckAttribute (pchar, "IsMushketer")) SetMainCharacterToMushketer("", false);
+                        // <--- belamour всегда снимаем мушкет, если какие либо операции с кирасам	
 			RemoveCharacterEquip(pchar, CIRASS_ITEM_TYPE);
 			GiveItem2Character(pchar, "suit1");
 			EquipCharacterbyItem(pchar, "suit1");

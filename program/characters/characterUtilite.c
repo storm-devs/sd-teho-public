@@ -671,7 +671,12 @@ float GetSailRPD(ref _refCharacter) // процент ремонта парус�
 		}
 	}
 	
-	if(IsCharacterEquippedArtefact(_refCharacter, "talisman7")) repairSkill = repairSkill * 1.5;
+        // belamour правка артефактов согласно описанию -->
+	if(IsCharacterEquippedArtefact(_refCharacter, "talisman7")) repairSkill = repairSkill * 2.0; // вдвое увеличивает 
+        if(IsCharacterEquippedArtefact(_refCharacter, "indian_5")) repairSkill = repairSkill * 0.9;  // тсантса
+        if(IsCharacterEquippedArtefact(_refCharacter, "indian_6")) repairSkill = repairSkill * 0.9;  // Коралловая голова
+        //<-- belamour
+
 	float damagePercent = 100.0 - GetSailPercent(_refCharacter);
 	if (damagePercent == 0.0) return 0.0;
 
@@ -698,7 +703,12 @@ float GetHullRPD(ref _refCharacter) // процент ремонта корпу�
 		}
 	}
 	
-	if(IsCharacterEquippedArtefact(_refCharacter, "talisman7")) repairSkill = repairSkill * 1.5;
+        // belamour правка артефактов согласно описанию -->
+	if(IsCharacterEquippedArtefact(_refCharacter, "talisman7")) repairSkill = repairSkill * 2.0; // вдвое увеличивает
+        if(IsCharacterEquippedArtefact(_refCharacter, "indian_5")) repairSkill = repairSkill * 0.9;  // Тсантса
+        if(IsCharacterEquippedArtefact(_refCharacter, "indian_6")) repairSkill = repairSkill * 0.9;  // Коралловая голова
+        //<-- belamour
+
 	float damagePercent = 100.0 - GetHullPercent(_refCharacter);
 	if(damagePercent == 0.0) return 0.0;
 
@@ -715,7 +725,6 @@ float GetSailSPP(ref _refCharacter) // количество парусины н�
 		ret = ret * 0.75; // потребность ниже
 	}
 	ret = ret * isEquippedArtefactUse(_refCharacter, "obereg_2", 1.0, 0.85);
-	ret = ret * isEquippedArtefactUse(_refCharacter, "indian_6", 1.0, 1.10);
 	
 	return ret;
 }
@@ -732,7 +741,6 @@ float GetHullPPP(ref _refCharacter) // количество досок на од
 		ret = ret * 0.75; // потребность ниже
 	}
 	ret = ret * isEquippedArtefactUse(_refCharacter, "obereg_1", 1.0, 0.85);
-	ret = ret * isEquippedArtefactUse(_refCharacter, "indian_5", 1.0, 1.10);
 	
 	return ret;
 }
@@ -1867,7 +1875,7 @@ bool TakeNItems(ref _refCharacter, string itemName, int n)
 	{
 		if(arItm.ID != "Gold") // Warship. Для нового интерфейса обмена - проверка на золото
 		{
-			if(sti(_refCharacter.index) == GetMainCharacterIndex() && IsEntity(_refCharacter))
+			if(sti(_refCharacter.index) == GetMainCharacterIndex() && IsEntity(&_refCharacter))
 			{
 				if(n > 0)
 				{
@@ -2459,7 +2467,7 @@ void SetEquipedItemToCharacter(ref chref, string groupID, string itemID)
 		case MAPS_ITEM_TYPE:	
 			if(CheckAttribute(chref, "MapsAtlasCount"))
 			{
-				if(sti(arItm.Atlas) > 0)
+				if(CheckAttribute(arItm,"Atlas") && sti(arItm.Atlas) > 0) // ugeen fix
 				{
 					chref.MapsAtlasCount = sti(chref.MapsAtlasCount) + 1;
 					if(sti(chref.MapsAtlasCount) == MAPS_IN_ATLAS && !CheckCharacterPerk(chref, "MapMaker"))  // даем скрытый перк если собрали все карты островов
@@ -2518,7 +2526,8 @@ void EquipCharacterByItem(ref chref, string itemID)
 	aref arItm;
 
 	if( !CheckCharacterItem(chref, itemID) ) return;
-	if( Items_FindItem(itemID, &arItm) < 0 ) return;
+	int itemNum = Items_FindItem(itemID, &arItm); // mitrokosta понадобится позже
+	if( itemNum < 0 ) return;
 	if( !CheckAttribute(arItm, "groupID") ) return;
 
 	string groupName = arItm.groupID;
@@ -2567,9 +2576,27 @@ void EquipCharacterByItem(ref chref, string itemID)
 			chref.equip.(groupName).(itemID) = itemID;		
 		}	
 	}	
-	if(IsEntity(chref))
-	{	SetEquipedItemToCharacter(chref, groupName, itemID);
-	}
+	if(IsEntity(&chref)) {
+		SetEquipedItemToCharacter(chref, groupName, itemID);
+	} else { // --> mitrokosta фикс надевания кирас в море
+		if (groupName == CIRASS_ITEM_TYPE) {
+			if (CheckAttribute(chref, "HeroModel")) {
+				if (CheckAttribute(arItm, "model")) {
+					chref.model = GetSubStringByNum(chref.HeroModel, sti(arItm.model));
+					chref.cirassId = itemNum;
+				} else {
+					chref.model = GetSubStringByNum(chref.HeroModel, 0);
+					DeleteAttribute(chref, "cirassId");
+				}
+			} else {
+				if(CheckAttribute(arItm, "model")) {
+					chref.cirassId = itemNum;
+				} else {
+					DeleteAttribute(chref, "cirassId");
+				}
+			}
+		}
+	} // <--
 }
  // to_do
 void EquipOfficerByItem(ref chref, string itemID)

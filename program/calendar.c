@@ -48,22 +48,60 @@ int GetMonthDays(int month)
 	while(month>12) {month -= 12;}
 	switch(month)
 	{
-	case 1:		return 31;	break;
-	case 2:		return 28;	break;
-	case 3:		return 31;	break;
-	case 4:		return 30;	break;
-	case 5:		return 31;	break;
-	case 6:		return 30;	break;
-	case 7:		return 31;	break;
-	case 8:		return 31;	break;
-	case 9:		return 30;	break;
-	case 10:	return 31;	break;
-	case 11:	return 30;	break;
-	case 12:	return 31;	break;
+		case 1:		return 31;	break;
+		case 2:		return 28;	break;
+		case 3:		return 31;	break;
+		case 4:		return 30;	break;
+		case 5:		return 31;	break;
+		case 6:		return 30;	break;
+		case 7:		return 31;	break;
+		case 8:		return 31;	break;
+		case 9:		return 30;	break;
+		case 10:	return 31;	break;
+		case 11:	return 30;	break;
+		case 12:	return 31;	break;
 	}
 	Trace("Error: " + month + " month is not relevant");
 	return 30;
 }
+
+int GetDayOfYear(int year, int month, int day)
+{
+	int yearday = 0;
+
+	int Leap = 0;
+	if (month > 2)
+	{
+		if (year % 400 == 0) {
+			Leap = 1;
+		} else {
+			if (year % 100 != 0) {
+				if (year % 4 == 0) Leap = 1;
+			}
+		}
+	}
+
+	switch (month)
+	{
+		case  1: yearday =   0; break;	//   0
+		case  2: yearday =  31; break;	// +31
+		case  3: yearday =  59; break;	// +28
+		case  4: yearday =  90;	break;	// +31
+		case  5: yearday = 120;	break;	// +30
+		case  6: yearday = 151;	break;	// +31
+		case  7: yearday = 181;	break;	// +30
+		case  8: yearday = 212;	break;	// +31
+		case  9: yearday = 243;	break;	// +31
+		case 10: yearday = 273;	break;	// +30
+		case 11: yearday = 304;	break;	// +31
+		case 12: yearday = 334;	break;	// +30
+	}
+	yearday += Leap;
+	yearday += day;
+	return yearday;
+}
+
+
 int GetAddingDataYear(int addYear,int addMonth,int addDay)
 {
 	int nextDay = GetDataDay()+addDay;
@@ -177,7 +215,7 @@ void AddDataToCurrent(int addYear,int addMonth,int addDay)
 	
 	if(addYear!=0 || addMonth!=0 || addDay!=0)	
 	{
-		if (AchievmentsDayUpdateCnt != 0)
+		if (GetSteamEnabled() && AchievmentsDayUpdateCnt != 0)
 		{
 			AchievmentsDayUpdateCnt = 0;
 		}

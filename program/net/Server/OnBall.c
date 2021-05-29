@@ -2,7 +2,7 @@ object NSBalls;
 
 int iServerBallIndex;
 int iServerCurrentBallIndex;
-
+/*
 void NetServer_DeleteBallsEnvironment()
 {
 	DelEventHandler("NetServer_OnCannonFire", "NetServer_OnCannonFire");
@@ -129,3 +129,4 @@ void NetServer_OnBallWaterHit()
 	NetServer_SendMessage(DST_ALL, iSMsg, false);
 	NMDelete(iSMsg);
 }
+*/

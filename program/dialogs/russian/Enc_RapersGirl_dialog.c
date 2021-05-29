@@ -394,6 +394,8 @@ void ProcessDialogEvent()
 		
 		case "Node_132_6":
 			AddMoneyToCharacter(pchar, -makeint(sti(pchar.GenQuest.EncGirl.mapPrice))); 
+			ref rMap = ItemsFromID("map_full"); // mitrokosta фикс пустой карты
+			FillMapForTreasure(rMap);
 			GiveItem2Character(pchar, "map_full");
 			Diag.TempNode = "Node_12End";
 			pchar.GenQuest.EncGirl = "close";
@@ -481,6 +483,7 @@ void ProcessDialogEvent()
 		
 		case "Node_132_16":
 			pchar.quest.EncGirl_DeathSimple.over = "yes";
+			PChar.quest.EncGirl_DialogAtShore.over = "yes";// лесник . снял прерывание  , если не с той бухты зашел.		
 			LAi_LocationDisableMonstersGen(pchar.location, false);
 			chrDisableReloadToLocation = false;
 			Log_Info("You have received your share of the treasure");
@@ -512,6 +515,9 @@ void ProcessDialogEvent()
 			Diag.CurrentNode = Diag.TempNode;
 			DialogExit();
 			AddDialogExitQuestFunction("EncGirl_GirlFollow");
+			pchar.quest.EncGirl_AddPassenger.win_condition.l1 = "location";// лесник на корабль девицу. 
+			pchar.quest.EncGirl_AddPassenger.win_condition.l1.location = pchar.location.from_sea;
+			pchar.quest.EncGirl_AddPassenger.function = "EncGirl_AddPassenger";
 		break;
 		
 		case "Node_132_17":
@@ -552,6 +558,10 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "GenQuest.EncGirl");
 			DialogExit();
 			AddDialogExitQuest("pchar_back_to_player");			
+            LAi_SetActorType(npchar); // отправил восвояси чтоб не стояла. лесник.
+			LAi_ActorRunToLocation(npchar, "reload", "reload1_back", "none", "", "", "OpenTheDoors", -1.0);
+            pchar.quest.EncGirl_EnterToSea.over = "yes";// лесник . снял прерывание  , если не с той бухты зашел.	
+            PChar.quest.EncGirl_DialogAtShore.over = "yes";// лесник . снял прерывание  , если не с той бухты зашел.						
 		break;
 		
 		case "Node_133":
@@ -575,6 +585,9 @@ void ProcessDialogEvent()
 			pchar.quest.EncGirl_GetCoins.win_condition.l1.date.month = GetAddingDataMonth(0, 0, 10);
 			pchar.quest.EncGirl_GetCoins.win_condition.l1.date.year = GetAddingDataYear(0, 0, 10);
 			pchar.quest.EncGirl_GetCoins.function = "EncGirl_GenQuest_GetCoins";	
+            sTemp = LAi_FindNearestFreeLocator2Pchar("reload");// лесник - девица убегает если ГГ сказал ждать в цервки
+			LAi_SetActorType(npchar);
+			LAi_ActorRunToLocation(npchar, "reload", sTemp, "none", "", "","OpenTheDoors", -1.0);			
 			Diag.TempNode = "Node_134"; 
 			Diag.CurrentNode = Diag.TempNode;
 			ReOpenQuestHeader("JungleGirl");

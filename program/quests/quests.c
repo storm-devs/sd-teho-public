@@ -1009,7 +1009,7 @@ bool DoQuestReloadToLocation(string idLocation, string idGroup, string idLocator
 		SetEventHandler(EVENT_LOCATION_LOAD,"DoDeleteFakeLocation",0);
 		return DoReloadFromSeaToLocation(idLocation,idGroup,idLocator);
 	}
-	if(IsEntity(worldMap))
+	if(IsEntity(&worldMap))
 	{
 		idxOldLocation = -1;
 		SetEventHandler(EVENT_LOCATION_LOAD,"DoDeleteFakeLocation",0);
@@ -1039,7 +1039,7 @@ bool DoFunctionReloadToLocation(string idLocation, string idGroup, string idLoca
 		SetEventHandler(EVENT_LOCATION_LOAD,"DoDeleteFakeLocation",0);
 		return DoReloadFromSeaToLocation(idLocation,idGroup,idLocator);
 	}
-	if(IsEntity(worldMap))
+	if(IsEntity(&worldMap))
 	{
 		idxOldLocation = -1;
 		SetEventHandler(EVENT_LOCATION_LOAD,"DoDeleteFakeLocation",0);

@@ -133,7 +133,7 @@ void ProcessDialogEvent()
 				dialog.text = "Thank you, " + GetAddress_Form(NPChar) + ". I will tell everyone about your kindness!";
 				link.l1 = "This is not really necessary.";
 				link.l1.go = "exit";
-				ChangeCharacterComplexReputation(pchar,"nobility", sti(iTemp/2000+0.5));
+				ChangeCharacterComplexReputation(pchar,"nobility", iTemp/2000.0+0.5);
 				pchar.money = sti(pchar.money) - iTemp;
 				Achievment_SetStat(pchar, 41, 1);
 			}
@@ -142,7 +142,7 @@ void ProcessDialogEvent()
 				dialog.text = "Thank you, respected "+ GetSexPhrase("sir","lady") +" " + GetAddress_Form(NPChar) + ". May the Lord watch over you...";
 				link.l1 = "Yeah, His protection would certainly not hurt!";
 				link.l1.go = "exit";
-				ChangeCharacterNationReputation(pchar, sti(NPChar.nation), sti(iTemp/10000+0.5));
+				ChangeCharacterNationReputation(pchar, sti(NPChar.nation), iTemp/10000.0+0.5);
 				pchar.money = sti(pchar.money) - iTemp;
 				Achievment_SetStat(pchar, 41, 1);
 			}
@@ -151,8 +151,8 @@ void ProcessDialogEvent()
 				dialog.text = "Thank you, "+ GetSexPhrase("most esteemed sir","most esteemed lady") +" " + GetAddress_Form(NPChar) + ". I wish you all the best!";
 				link.l1 = "Thank you, buddy.";
 				link.l1.go = "exit";
-				AddCharacterExpToSkill(pchar, "Leadership", sti(iTemp/5000));
-				AddCharacterExpToSkill(pchar, "Fortune", sti(iTemp/5000));
+				AddCharacterExpToSkill(pchar, "Leadership", iTemp/5000.0);
+				AddCharacterExpToSkill(pchar, "Fortune", iTemp/5000.0);
 				pchar.money = sti(pchar.money) - iTemp;
 				Achievment_SetStat(pchar, 41, 1);
 			}

@@ -3,6 +3,7 @@ int iNetCannonsNum;
 
 int NETCANNON_CANNON, NETCANNON_CULVERINE, NETCANNON_MORTAR;
 
+/*
 ref Net_GetCannonByIndex(int iIndex) { return &NetCannons[iIndex]; }
 int Net_GetCannonsNum() { return iNetCannonsNum; }
 
@@ -207,3 +208,4 @@ void Net_InitCannons()
 
 	iNetCannonsNum = n;
 }
+*/

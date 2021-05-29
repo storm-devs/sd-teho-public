@@ -96,6 +96,8 @@ void DeleteShipEnvironment()
 	DelEventHandler("Ship_BortReloadEvent", "Ship_BortReloadEvent");
 	DelEventHandler("Ship_VolleyHeelEnd", "Ship_VolleyHeelEnd");
 	DelEventHandler(SHIP_SET_BLOT, "Ship_SetBlot");
+	DelEventHandler(SHIP_FAKE_FIRE, "Ship_EventFakeFire");
+
 
 	for (int i=0; i<iNumShips; i++) 
 	{ 
@@ -117,7 +119,7 @@ void ClearAllFire() // boal new
     for (int i=0; i<iNumShips; i++)
 	{
 		// delete particles from ship/etc
-		SendMessage(&Characters[Ships[i]], "l", MSG_SHIP_SAFE_DELETE);
+		if (Ships[i] != -1) SendMessage(&Characters[Ships[i]], "l", MSG_SHIP_SAFE_DELETE);
 	}
 }
 // boal new сбросить всем в море проверку смотрения на флаг.
@@ -129,12 +131,13 @@ void Sea_ClearCheckFlag()
 		
 		for (i=0; i<iNumShips; i++)
 		{
+			if(sti(Ships[i]) >= 0 && sti(Ships[i]) < TOTAL_CHARACTERS) {
 			if (!CheckAttribute(&Characters[Ships[i]], "DontCheckFlag"))
 			{
 			    DeleteAttribute(&Characters[Ships[i]], "CheckFlagYet"); // флаг распознования врага
 			    DeleteAttribute(&Characters[Ships[i]], "CheckFlagDate");
 			}
-			
+			}
 		}
 		// фортам трем
 		for (i=0; i<MAX_COLONIES; i++)
@@ -208,6 +211,7 @@ void CreateShipEnvironment()
 	SetEventHandler("Ship_BortReloadEvent", "Ship_BortReloadEvent", 0);
 	SetEventHandler("Ship_VolleyHeelEnd", "Ship_VolleyHeelEnd", 0);
 	SetEventHandler(SHIP_SET_BLOT, "Ship_SetBlot", 0);
+	SetEventHandler(SHIP_FAKE_FIRE, "Ship_EventFakeFire", 0);
 }	
 
 float Ship_GetBortFireDelta()
@@ -631,6 +635,7 @@ void Ship_SetTaskRunaway(int iTaskPriority, int iCharacterIndex, int iFromIndex)
 	rCharacter.SeaAI.Task = AITASK_RUNAWAY;
 	rCharacter.SeaAI.Task.Target = iFromIndex;	
 	SendMessage(&AISea, "llla", AI_MESSAGE_SHIP_SET_TASK, AITASK_RUNAWAY, iTaskPriority, &Characters[iCharacterIndex]);	
+	Ship_SetSailState(iCharacterIndex, 1);
 }
 
 void Ship_SetTaskAttack(int iTaskPriority, int iCharacterIndex, int iCharacterIndexVictim)
@@ -672,7 +677,11 @@ void Ship_SetTaskDefend(int iTaskPriority, int iCharacterIndex, int iCharacterIn
 
 void Ship_DoFire()
 {
-	int bCameraOutside = SeaCameras_isCameraOutside();
+	int bCameraOutside = SeaCameras_isCameraOutside();// || CrosshairHidden();     // LDH 17Jan17 aimed fire when crosshair visible
+	// LDH 09Feb17 - tell player how to get aiming crogghair
+/*	bool bTemp = bMapEnter || bCanEnterToLand;	// LDH 11Feb17
+	if (CrosshairHidden() && GetCurControlGroup() == "Sailing1Pers" && bTemp)
+		Log_Info("Нажмите клавишу 'C' для активации прицельного огня");*/
 	SendMessage(&AISea, "lal", AI_MESSAGE_CANNON_FIRE, &Characters[nMainCharacterIndex], bCameraOutside);
 }
 
@@ -729,7 +738,7 @@ void Ship_SetLightsOff(ref rCharacter, float fTime, bool bLights, bool bFlares, 
 
 void Ship_SetLightsAndFlares(ref rCharacter)
 {
-	if(sti(sea.lights) == 1)
+	if(CheckAttribute(sea,"lights") && sti(sea.lights) == 1)
 	{
 		rCharacter.Ship.Flares = 1;
 		rCharacter.Ship.Lights = 1;
@@ -916,7 +925,14 @@ void Ship_Add2Sea(int iCharacterIndex, bool bFromCoast, string sFantomType, bool
 
 void Ship_RecreateStaticSounds()
 {
-	for (int i=0; i<iNumShips; i++) { Ship_CreateStaticSounds(&Characters[Ships[i]]); }
+	for (int i=0; i<iNumShips; i++) {
+	     if (makeint(Ships[i]) > -1 && makeint(&Characters[Ships[i]]) > -1)
+			Ship_CreateStaticSounds(&Characters[Ships[i]]);
+	}
+	
+	if (CheckAttribute(&WeatherParams, "Rain.Sound") && sti(WeatherParams.Rain.Sound))
+        Whr_SetRainSound(true, sti(Weathers[iCurWeatherNum].Night));
+
 }
 
 void Ship_CreateStaticSounds(ref rCharacter)
@@ -1884,6 +1900,7 @@ void Ship_CheckFlagEnemy(ref rCharacter)
 	        SetNationToOfficers(iNationToChange);
 	        SetNationRelation2MainCharacter(sti(rCharacter.nation), RELATION_ENEMY);
 	        */
+			pchar.MoorName = " ";	// LDH 12Feb17 - don't display MoorName in battle
 			Log_Info("You failed to be taken for a friend - "+ NationNamePeople(sti(rCharacter.nation)) + " recognized you as an enemy.");
 			SetCharacterRelationBoth(sti(rCharacter.index), GetMainCharacterIndex(), RELATION_ENEMY);
 			DoQuestCheckDelay(NationShortName(iNationToChange) + "_flag_rise", 0.1); // применение нац отношений флага
@@ -2238,8 +2255,7 @@ void Ship_ApplyCrewHitpoints(ref rOurCharacter, float fCrewHP)
 		}
 	}
 	
-	fMultiply = fMultiply * isEquippedAmuletUse(rOurCharacter, "amulet_10", 1.0, 0.95 );
-			
+	fMultiply = fMultiply * isEquippedArtefactUse(rOurCharacter, "amulet_10", 1.0, 0.95 ); //belamour isEquippedAmuletUse не работает на офицерах, только на ГГ
 	float fDamage = fCrewHP * fMultiply; 
 
 	float fNewCrewQuantity = stf(rOurCharacter.Ship.Crew.Quantity) - fDamage;
@@ -2291,14 +2307,14 @@ void Ship_ApplyHullHitpoints(ref rOurCharacter, float fHP, int iKillStatus, int 
 		if (sti(Characters[iKillerCharacterIndex].TmpPerks.HullDamageUp)) 		fPlus = 0.15;
 		if (sti(Characters[iKillerCharacterIndex].TmpPerks.CannonProfessional)) fPlus = 0.3;
 		
-		if(IsCharacterEquippedArtefact(&Characters[iKillerCharacterIndex], "indian_8")) fPlus = fPlus * 1.05;
+		if(IsCharacterEquippedArtefact(&Characters[iKillerCharacterIndex], "indian_8")) fPlus += 0.05; // belamour произведение дает 0 без перков
 	}
 
 	if (sti(rOurCharacter.TmpPerks.BasicBattleState))			fMinus = 0.15;
 	if (sti(rOurCharacter.TmpPerks.AdvancedBattleState))		fMinus = 0.25;
 	if (sti(rOurCharacter.TmpPerks.ShipDefenseProfessional))	fMinus = 0.35;
 	
-	if(IsCharacterEquippedArtefact(rOurCharacter, "amulet_8")) fMinus = fMinus * 1.05; // Jason: фикс! Амулет работал в обратную сторону
+	if(IsCharacterEquippedArtefact(rOurCharacter, "amulet_8")) fMinus += 0.05; // belamour произведение дает 0 без перков
 	
 	if (CheckAttribute(rOurCharacter, "SeaBoss")) fMinus = fPlus + stf(rOurCharacter.SeaBoss); // Addon 2016-1 Jason Пиратская линейка
 
@@ -3390,10 +3406,42 @@ void Ship_CheckMainCharacter()
 					sIslandID = rIsland.id;
 					makearef(arIslandReload, rIsland.reload);
 					sIslandLocator = rIsland.reload.(sLocatorName).name;
+
+					// LDH 24Jan17 - display mooring location name -->
+                    int nFile = LanguageOpenFile("LocLables.txt");
+					string MoorName = LanguageConvertString(nFile, rIsland.reload.(sLocatorName).label);
+                    LanguageCloseFile(nFile);
+					if (!CheckAttribute(pchar, "MoorName")) pchar.MoorName = " ";
+					if (MoorName != pchar.MoorName)
+                    {
+						// LDH 14Feb17 rewrite
+						// LDH 26Jan17 - play anchor sound if moor location changes due to overlapping locations
+						if (pchar.MoorName != " " && MoorName != " ")
+						{
+							boal_soundOn = false;		// make sure it's only played once
+							PlaySound("interface\_Yakordrop.wav");
+						}
+						pchar.MoorName = MoorName;
+                    }
+					// LDH 24Jan17 <--
+
 					break;
 				}
 			}
+
+			// LDH 12Feb17 display moor name in battle interface -->
+			// If we don't do this, location does not update
+			BattleInterface.textinfo.Location.text = GetBILocationName();
+			// LDH 12Feb17 <--
 		}
+	}
+	else
+	{
+		// LDH 13Feb17 display region name in battle interface -->
+		pchar.Moorname = " ";
+		// If we don't do this, location does not update
+		BattleInterface.textinfo.Location.text = GetBILocationName();
+		// LDH 13Feb17 <--
 	}
 
 	// disable any abordage if storm
@@ -4555,5 +4603,58 @@ void EmptyFantom_DropGoodsToSea(ref rChar, int iFantomType)
 	SendMessage(&AISea, "la", AI_MESSAGE_CHARACTER_DEAD, rChar);
 }
 
+void Ship_DoFakeFire(ref rChar, string sBort, float fRandTime)
+{
+	SendMessage(rChar, "lsf", MSG_SHIP_DO_FAKE_FIRE, sBort, fRandTime);
+}
 
+void Ship_EventFakeFire()
+{
+	float fX 	= GetEventData();
+	float fY 	= GetEventData();
+	float fZ 	= GetEventData();
+	float fAY 	= GetEventData();
+	
+	CreateParticleSystem("cancloud_fire", fX, fY, fZ, 0.0, fAY, 0.0, 5);
+	Play3DSound("cannon_fire", fX, fY, fZ);
+}
 
+void Ship_SetTechnique(ref rCharacter, string sTech)
+{
+	SendMessage(rCharacter, "ls", MSG_MODEL_SET_TECHNIQUE, sTech);
+}
+
+void Ship_SetGhostShip(ref rCharacter, string sTech)
+{
+	Ship_SetTechnique(rCharacter, sTech);
+	
+	LayerDelObject(sCurrentSeaRealize, rCharacter);
+	LayerAddObject(sCurrentSeaRealize, rCharacter, 100000);
+
+//	Ship_SetRiggingAlpha(rCharacter,128);
+}
+/*
+void Ship_SetRiggingAlpha(ref rCharacter, int alpha)
+{
+	aref arVant;
+	if( FindClass(&arVant,"Vant") ) {
+		SendMessage(arVant,"lil",40400,rCharacter,alpha);
+		LayerDelObject(sCurrentSeaRealize, arVant);
+		LayerAddObject(sCurrentSeaRealize, arVant, 100001);
+	}
+
+	aref arRope;
+	if( FindClass(&arRope,"Rope") ) {
+		SendMessage(arRope,"lil",40400,rCharacter,alpha);
+		LayerDelObject(sCurrentSeaRealize, arRope);
+		LayerAddObject(sCurrentSeaRealize, arRope, 100001);
+	}
+
+	aref arSail;
+	if( FindClass(&arSail,"Sail") ) {
+		SendMessage(arSail,"lil",40400,rCharacter,alpha);
+		LayerDelObject(sCurrentSeaRealize, arSail);
+		LayerAddObject(sCurrentSeaRealize, arSail, 100001);
+	}
+}
+*/

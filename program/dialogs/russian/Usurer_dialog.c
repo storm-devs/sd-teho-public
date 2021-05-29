@@ -229,8 +229,8 @@ void ProcessDialogEvent()
 				link.l10.go = "ShipLetters_Usurer1";			
 			}
 			
-			//--> семейная реликвия
-			if (CheckAttribute(pchar, "GenQuest.Noblelombard") && npchar.city == pchar.GenQuest.Noblelombard.City && !CheckAttribute(npchar, "quest.noblelombard"))
+			//--> семейная реликвия // лесник переписал с нпчара на чара 
+			if (CheckAttribute(pchar, "GenQuest.Noblelombard") && npchar.city == pchar.GenQuest.Noblelombard.City && !CheckAttribute(pchar, "quest.noblelombard"))// вот тут 
 			{
 				link.l11 = "I want to talk about your client's debt. His name is "+pchar.GenQuest.Noblelombard.Name+". He pawned his family relic. I represent his interests here and I have rights to discuss with you its return.";
 				link.l11.go = "Noblelombard";			
@@ -2610,7 +2610,7 @@ void ProcessDialogEvent()
 			}
 			link.l4 = "This rarity costs a fortune! It looks like my client has to pay for it by himself.";
 			link.l4.go = "Noblelombard_4";
-			npchar.quest.noblelombard = "true";
+			pchar.quest.noblelombard = "true";//лесник с нпчара на пчара
 		break;
 		
 		case "Noblelombard_1":
@@ -2621,6 +2621,7 @@ void ProcessDialogEvent()
 			AddMoneyToCharacter(pchar, -sti(pchar.GenQuest.Noblelombard.Summ));
 			pchar.GenQuest.Noblelombard = "full";
 			AddCharacterExpToSkill(pchar, "Leadership", 150);
+	
 		break;
 		
 		case "Noblelombard_2":
@@ -2634,6 +2635,7 @@ void ProcessDialogEvent()
 				pchar.GenQuest.Noblelombard = "maxpercent";
 				AddCharacterExpToSkill(pchar, "Leadership", 50);
 				AddCharacterExpToSkill(pchar, "Fortune", 70);
+			
 			}
 			else
 			{
@@ -2641,6 +2643,7 @@ void ProcessDialogEvent()
 				link.l1 = "Hm... fine. Too bad that you don't want to compromise.";
 				link.l1.go = "Noblelombard_4";
 				AddCharacterExpToSkill(pchar, "Fortune", 30);
+			
 			}
 		break;
 		
@@ -2662,6 +2665,7 @@ void ProcessDialogEvent()
 				link.l1 = "Hm... fine. Too bad that you don't want to compromise.";
 				link.l1.go = "Noblelombard_4";
 				AddCharacterExpToSkill(pchar, "Fortune", 60);
+	
 			}
 		break;
 		
@@ -2697,7 +2701,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("Noblelombard", "sName", pchar.GenQuest.Noblelombard.Name);
 			CloseQuestHeader("Noblelombard");
 			DeleteAttribute(Pchar, "GenQuest.Noblelombard");
-			DeleteAttribute(NPchar, "quest.noblelombard");
+			DeleteAttribute(Pchar, "quest.noblelombard"); // лесник с нпчара на пчара
 		break;
 		
 		case "Noblelombard_9":
@@ -2709,7 +2713,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("Noblelombard", "sName", pchar.GenQuest.Noblelombard.Name);
 			CloseQuestHeader("Noblelombard");
 			DeleteAttribute(Pchar, "GenQuest.Noblelombard");
-			DeleteAttribute(NPchar, "quest.noblelombard");
+			DeleteAttribute(Pchar, "quest.noblelombard");// с нпчара на пчара  лесник
 		break;
 //<-- семейная реликвия
 

@@ -21,6 +21,15 @@ sea_InstantBoarding {Instant Boarding}
 sea_Speak {Talk}
 sea_Sneak {Sneak into the town}
 sea_Repair {Repair}
+sea_SailDir {Sail to ..}
+sea_SailNW {Northwest}
+sea_SailN {North}
+sea_SailNE {Northeast}
+sea_SailE {East}
+sea_SailSE {Southeast}
+sea_SailS {South}
+sea_SailSW {Southwest}
+sea_SailW {West}
 
 sea_Brander {Brander}
 sea_ImmediateReload {Reloading}

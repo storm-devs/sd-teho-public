@@ -1,6 +1,6 @@
 #define NUM_PERKS		6
 object NetPerks[NUM_PERKS];
-
+/*
 int Net_GetPerksNum() { return NUM_PERKS; }
 ref Net_GetPerkByIndex(int iPerkIndex) { return &NetPerks[iPerkIndex]; }
 
@@ -29,3 +29,4 @@ void Net_InitPerks()
 	NetPerks[5].Name = "MuscetFire";
 	NetPerks[5].Cost = 15000;
 }
+*/

@@ -90,6 +90,8 @@ void chrCharacterEntryToLocator()
 		}
 		break;
 	case "camdetector":
+        // LDH 18Feb17 - no camera panning out when character is at a door
+        if ( ! CAMERA_SWING_AT_DOORS) break;
 		if( !chrCheckCamLocatorSkip(loc,locator) )
 		{
 			locAttr = "locators.camera." + locator;
@@ -327,7 +329,7 @@ ref funcGetWeaponID()
 	g_strRetParam = "blade";
 	string nCharIdx = GetEventData();
 	int iTemp = GetCharacterIndex(nCharIdx);
-	if (iTemp != -1)
+	if (iTemp >= 0 && iTemp < TOTAL_CHARACTERS && CheckAttribute(&characters[iTemp], "equip.blade"))
 	{
 		string bladeId = characters[iTemp].equip.blade; 
 		if (findsubstr(bladeId, "topor" , 0) != -1)	g_strRetParam = "topor";

@@ -617,7 +617,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		case "sandal": // бакаут
 			amount = sti(pchar.questTemp.AlexClock.Sandal);
 			iTemp = amount-iSan;
-			if (iTemp > 0) // еще не все привез
+			if (iTemp > 0) // ещё не все привез
 			{
 				iSum = 4000*iSan;
 				dialog.text = "Okay, okay. I'm also going to need "+FindRussianQtyString(amount)+" of ironwood. You've brought me "+FindRussianQtyString(iSan)+". . So, what's left for you to bring me is "+FindRussianQtyString(iTemp)+". All right, at the rate of 4000 pesos per a piece, your reward totals at "+FindRussianMoneyString(iSum)+". Please, take it.";
@@ -672,7 +672,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			AddMoneyToCharacter(pchar, iSum);
 		break;
 		
-		case "shipsilk": // шелк
+		case "shipsilk": // шёлк
 			amount = sti(pchar.questTemp.AlexClock.Shipsilk);
 			iTemp = amount-iSil;
 			if (iTemp > 0) // еще не все привез

@@ -37,7 +37,7 @@ void QuestComplete(string sQuestName, string qname)
             // тут чиним стророжевики <--
             if (rand(100) > 93 && !bWorldAlivePause)
             {
-                if(IsEntity(worldMap))
+                if(IsEntity(&worldMap))
                 {
                     LaunchNationLegend();
                 }else{
@@ -277,7 +277,6 @@ void QuestComplete(string sQuestName, string qname)
 				{
 					iRepIncr = iDonation / 1000;
 					ChangeCharacterComplexReputation(pchar,"nobility", iRepIncr);
-					pchar.questTemp.donate = 0;
 				}
 			}
 			if (iRep < 20 && iRep >= 10)
@@ -286,7 +285,6 @@ void QuestComplete(string sQuestName, string qname)
 				{
 					iRepIncr = iDonation/2000;
 					ChangeCharacterComplexReputation(pchar,"nobility", iRepIncr);
-					pchar.questTemp.donate = 0;
 				}
 			}
 			if (iRep <30 && iRep >=20)
@@ -295,7 +293,6 @@ void QuestComplete(string sQuestName, string qname)
 				{
 					iRepIncr = iDonation/3000;
 					ChangeCharacterComplexReputation(pchar,"nobility", iRepIncr);
-					pchar.questTemp.donate = 0;
 				}
 			}
 			if (iRep <40 && iRep >=30)
@@ -304,7 +301,6 @@ void QuestComplete(string sQuestName, string qname)
 				{
 					iRepIncr = iDonation/4000;
 					ChangeCharacterComplexReputation(pchar,"nobility", iRepIncr);
-					pchar.questTemp.donate = 0;
 				}
 			}
 			if (iRep <50 && iRep >=40)
@@ -313,7 +309,6 @@ void QuestComplete(string sQuestName, string qname)
 				{
 					iRepIncr = iDonation/5000;
 					ChangeCharacterComplexReputation(pchar,"nobility", iRepIncr);
-					pchar.questTemp.donate = 0;
 				}
 			}
 			if (iRep <60 && iRep >=50)
@@ -322,7 +317,6 @@ void QuestComplete(string sQuestName, string qname)
 				{
 					iRepIncr = iDonation/6000;
 					ChangeCharacterComplexReputation(pchar,"nobility", iRepIncr);
-					pchar.questTemp.donate = 0;
 				}
 			}
 			if (iRep <70 && iRep >=60)
@@ -331,7 +325,6 @@ void QuestComplete(string sQuestName, string qname)
 				{
 					iRepIncr = iDonation/7000;
 					ChangeCharacterComplexReputation(pchar,"nobility", iRepIncr);
-					pchar.questTemp.donate = 0;
 				}
 			}
 			if (iRep <80 && iRep >=70)
@@ -340,7 +333,6 @@ void QuestComplete(string sQuestName, string qname)
 				{
 					iRepIncr = iDonation/8000;
 					ChangeCharacterComplexReputation(pchar,"nobility", iRepIncr);
-					pchar.questTemp.donate = 0;
 				}
 			}
 			if (iRep < REPUTATION_MAX && iRep >=80)
@@ -349,9 +341,9 @@ void QuestComplete(string sQuestName, string qname)
 				{
 					iRepIncr = iDonation/10000;
 					ChangeCharacterComplexReputation(pchar,"nobility", iRepIncr);
-					pchar.questTemp.donate = 0;
 				}
-			}
+				}
+			pchar.questTemp.donate = 0; // mitrokosta фикс накопления пожертвований
 		break;
 	    // индульгенция <--
 		case "SetNPCInShipDeck":  // народ внутри нашего корабля
@@ -383,7 +375,7 @@ void QuestComplete(string sQuestName, string qname)
 		break;
 		
         case "Munity_on_Ship_Map":
-            if (IsEntity(worldMap) && GetCrewQuantity(pchar) > 0 && !IsCharacterEquippedArtefact(pchar, "totem_02"))
+            if (IsEntity(&worldMap) && GetCrewQuantity(pchar) > 0 && !IsCharacterEquippedArtefact(pchar, "totem_02"))
         	{
                 MunityOnShip("ShipMunity");
             }
@@ -452,10 +444,10 @@ void QuestComplete(string sQuestName, string qname)
         break;
 
         case "Dead_Munity":
-		if (Pchar.questTemp.MunityOfficerIDX.begin == "1")
+		if (CheckAttribute(pchar, "questTemp.MutinyOfficerIDX")) // mitrokosta переписал без атрибута begin - нафиг он нужен? только глаза мозолит
 		{
 			Log_SetStringToLog("Corpses of the rebels were thrown overboard to their last voyage");
-			Pchar.questTemp.MunityOfficerIDX.begin = "0";
+			DeleteAttribute(pchar, "questTemp.MutinyOfficerIDX");
 		}
 		else Log_SetStringToLog("The mutiny was put to an end");
 
@@ -734,7 +726,8 @@ void QuestComplete(string sQuestName, string qname)
    			pchar.questTemp.officiantLocator = sld.location.locator;
    			pchar.questTemp.officiantGroup   = sld.location.group;   // запомнить, где была
 			PlaceCharacter(sld, "goto", pchar.location);
-			sld.dialog.currentnode = "without_money";
+			if (CheckAttribute(pchar, "questTemp.Consumption") && pchar.location == "PortSpein_tavern") sld.dialog.currentnode = "without_moneysss";
+			else sld.dialog.currentnode = "without_money"; // лесник ,выбор диалога если нажралдся в "цене чухотки"																																		 
 			LAi_SetActorType(sld);
 			LAi_ActorDialog(sld, pchar, "officiant_back_to_citizen", 5.0, 1.0);
 			DoQuestCheckDelay("pchar_back_to_player", 6.0);
@@ -1670,7 +1663,8 @@ void QuestComplete(string sQuestName, string qname)
 					sld = CharacterFromID("GangMan_" + i);
 					LAi_RemoveCheckMinHP(sld);
 					sld.lifeDay = 0;
-				}	
+				}
+             SetFunctionTimerCondition("EncGerl_deleteisjangly", 0, 0, 30, false);	// лесник 30 дней не давать квест.					
 			}
 			else
 			{
@@ -2132,7 +2126,7 @@ void QuestComplete(string sQuestName, string qname)
 			pchar.quest.CaptainComission_CapIsDead.function = "CaptainComission_CapIsDead";
 			LAi_SetFightMode(pchar, false);
 			LAi_LocationFightDisable(loadedLocation, true);
-			DoQuestCheckDelay("TalkSelf_Quest", 0.4); //диалог сам-на-сам
+			//DoQuestCheckDelay("TalkSelf_Quest", 0.4); //диалог сам-на-сам лесник  лишнее
 		break;
 
 		case "CaptainComission_TalkCanoneer":
@@ -2188,15 +2182,32 @@ void QuestComplete(string sQuestName, string qname)
 			sld = characterFromID("CapComission_1");
 			ChangeCharacterAddressGroup(sld, pchar.GenQuest.CaptainComission.City + "_prison", "goto", "goto9");
 			LAi_group_MoveCharacter(sld, "Prisoner_Group"); 
-			LAi_SetCitizenType(sld);	
+			LAi_SetCitizenType(sld);// с этого места не было кода лесник
+			LAi_SetStayType(sld);						
+			sld.name = pchar.GenQuest.CaptainComission.Name;
+	        sld.lastname = "";
+	        sld.greeting = "Gr_prison";
+	        sld.dialog.FileName = "GenQuests_Dialog.c";
+	        sld.dialog.currentnode = "CaptainComission_370"; 											 
 		break;
+		
+			
+          case "CaptainComission_Capitan_Cdox":
+             // добавлена проверка на смерть капитана по "поручению капитана" от руки игрока уже после тюрьмы. лесник
+		    AddQuestRecord("CaptainComission2", "33");
+			AddQuestUserData("CaptainComission2", "sName", pchar.GenQuest.CaptainComission.Name);
+			pchar.quest.CaptainComission_Capitan_Cdox.over = "yes"; // на сякий случай
+			CloseQuestHeader("CaptainComission2");
+			DeleteAttribute(pchar, "GenQuest.CaptainComission");
+		break;
+		
 		
 		case "CaptainComission_PrisonFree_Death":			
 			pchar.quest.CapComission_DeletePrisonGroup.win_condition.l1 = "ExitFromLocation";
             pchar.quest.CapComission_DeletePrisonGroup.win_condition.l1.location = pchar.location;
             pchar.quest.CapComission_DeletePrisonGroup.win_condition = "CaptainComission_DeletePrisonGroup";
 			pchar.quest.CaptainComission_GetSecretTimeIsOut.over = "yes";
-			AddQuestRecord("CaptainComission2", "22");
+			AddQuestRecord("CaptainComission2", "55");
 			AddQuestUserData("CaptainComission2", "sName", pchar.GenQuest.CaptainComission.Name);
 			CloseQuestHeader("CaptainComission2");
 			DeleteAttribute(pchar, "GenQuest.CaptainComission");
@@ -2235,7 +2246,7 @@ void QuestComplete(string sQuestName, string qname)
 			ChangeShowIntarface();
 			InterfaceStates.Buttons.Save.enable = true;
 			bDisableCharacterMenu = false;			
-			DoQuestFunctionDelay("CaptainComission_BattleInShore", 8.0); 
+			DoQuestFunctionDelay("CaptainComission_BattleInShore", 5.0); 
 		break;
  		////////////////////////////////////////////////////////////////////////
 		//  Конец   Генератор - Поручение капитана "Операция 'Галеон'"
@@ -3708,6 +3719,12 @@ void QuestComplete(string sQuestName, string qname)
 			pchar.quest.Login_Val.win_condition.l1.location = "Terks";
 			pchar.quest.Login_Val.function = "CreateValkiriaBrig";
 			AddComplexSelfExpToScill(100, 100, 100, 100);
+			for (i=1; i<=7; i++)
+	        {
+			//log_info("чистим матросов");	// лесник удалил матросов после боя с флитвудом.
+		     sld = characterFromId("OwrSailor_"+i);
+		     sld.lifeday = 0;//убираем засаду
+	        }
 		break;
 		
 		case "ReturnShoreToNormal":
@@ -6157,6 +6174,7 @@ void QuestComplete(string sQuestName, string qname)
 			AddCharacterHealth(pchar, 12); 
 			LAi_SetCurHPMax(pchar);
 			pchar.quest.Mary_giveme_sex.over = "yes"; //снять прерывание
+			pchar.quest.Mary_giveme_sex1.over = "yes"; //снять прерывание лесник. 																	 
         break;
 		
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -8035,7 +8053,7 @@ void QuestComplete(string sQuestName, string qname)
 			sld.dialog.currentnode = "kukulkan_twice";
 			LAi_SetActorType(sld);
 			LAi_ActorDialogDelay(sld, pchar, "", 1.0);
-			LAi_group_Delete("ITZA");
+//			LAi_group_Delete("ITZA");  // дает вылет в хардкор режиме
         break;
 		
 		case "Tieyasal_KukulkanKick":
@@ -10506,6 +10524,16 @@ void QuestComplete(string sQuestName, string qname)
 		break;
 		
 		case "FMQL_CoastClear": // всех перебили
+      // --> mitrokosta чистим своих
+      for (i=1; i<=10; i++)
+      {
+        if (GetCharacterIndex("FMQL_sailor_"+i) != -1)
+        {
+          sld = CharacterFromID("FMQL_sailor_"+i);
+          sld.lifeday = 0;
+        }
+      }
+      // <--
 			LAi_group_Delete("EnemyFight");
 			LAi_group_Delete("TmpEnemy");
 			chrDisableReloadToLocation = false;
@@ -10617,7 +10645,7 @@ void QuestComplete(string sQuestName, string qname)
 			LAi_LocationFightDisable(&Locations[FindLocation("Shore38")], false);
 			LAi_LocationDisableOfficersGen("Shore38", false);
 			locations[FindLocation("Shore38")].DisableEncounters = false; // may-16
-			RemoveGeometryFromLocation("Shore28", "smg");
+			RemoveGeometryFromLocation("Shore38", "smg"); // mitrokosta фикс опечатки
 			bQuestDisableMapEnter = false;//открыть карту
 			DeleteAttribute(pchar, "GenQuest.MapClosedNoBattle");
 			AddQuestRecord("FMQ_Lesson", "8");
@@ -12118,7 +12146,7 @@ void QuestComplete(string sQuestName, string qname)
 			n = 0;
 			for (i=1; i<=iTotalTemp; i++)
 			{
-				sld = CharacterFromID("Mtr_CartahenaFort2Pirate_"+i);
+				sld = CharacterFromID("Mtr_CartahenaFort3Pirate_"+i); // belamour: убрать пиратов Тесака из Бастиона
 				if (LAi_GetCharacterHP(sld) > 0) n++;
 				sld.lifeday = 0; // патч 17/1
 			}
@@ -13293,6 +13321,9 @@ void QuestComplete(string sQuestName, string qname)
 			sld = characterFromId("Marigo_Hostess");
 			sld.nation = FRANCE;
 			LAi_group_MoveCharacter(sld, "FRANCE_CITIZENS");
+			sld = CharacterFromID("Marigo Fort Commander"); // лесник . оживил форт после боя смены нации филипсбурга (для НИ)
+			sld.nation = FRANCE;
+			LAi_group_MoveCharacter(sld, "FRANCE_CITIZENS");
 			// заставка форта
 			n = Findlocation("Marigo_fort");
 			Locations[n].image = "loading\fort_fra_" + rand(1) + ".tga";
@@ -13670,7 +13701,7 @@ void QuestComplete(string sQuestName, string qname)
 			LocatorReloadEnterDisable("Charles_town", "reload_jail", false);
 		break;
 		
-		/// Jason ----------------------------------------------------------- Дороже золота ------------------------------------------------------------------
+/// Jason ----------------------------------------------------------- Дороже золота ------------------------------------------------------------------
 		case "GoldenGirl_GirlExit": // подруга убегает
 			chrDisableReloadToLocation = false;//открыть локацию
 			bDisableFastReload = false;//открыть переход
@@ -14146,7 +14177,7 @@ void QuestComplete(string sQuestName, string qname)
 			chrDisableReloadToLocation = false;
 			sld = characterFromId("FortFrance_Hostess");
 			ChangeCharacterAddressGroup(sld, "FortFrance_SecBrRoom", "barmen", "stay");
-			if(CheckAttribute(pchar, "GoldenGirl.Julianna_Helper"))
+			if(CheckAttribute(pchar, "questTemp.GoldenGirl.Julianna_Helper")) // belamour целый час бился, какого ... не видит условие
 			{
 				sld = characterFromID("Julianna");
 				AddPassenger(pchar, sld, false);//добавить пассажира
@@ -14205,6 +14236,8 @@ void QuestComplete(string sQuestName, string qname)
 				if (sld.location == "FortFrance_church" && CheckAttribute(sld, "CityType")) ChangeCharacterAddressGroup(sld, "none", "", "");
 			}
 			// оденем ГГ в мундир, если он есть, либо снимем кирасу
+                        if(CheckAttribute (pchar, "IsMushketer")) SetMainCharacterToMushketer("", false);
+                        // <--- belamour всегда снимаем мушкет, если какие либо операции с кирасам
 			RemoveCharacterEquip(pchar, CIRASS_ITEM_TYPE);
 			if (CheckCharacterItem(pchar, "suit1")) EquipCharacterbyItem(pchar, "suit1");
 			LAi_SetActorType(pchar);
@@ -14421,35 +14454,35 @@ void QuestComplete(string sQuestName, string qname)
 			ChangeCharacterAddressGroup(sld, "FortFrance_tavern", "waitress", "stay2");
 			LAi_SetCitizenType(sld);
 			// установим офицеров
-			// офицер гамбита
-			if (CheckAttribute(pchar, "questTemp.HWIC.Detector"))
-			{
-				if (pchar.questTemp.HWIC.Detector == "holl_win" && GetCharacterIndex("Longway") != -1) 
+				// офицер гамбита
+				if (CheckAttribute(pchar, "questTemp.HWIC.Detector"))
 				{
-					sld = characterFromId("Longway");
-					sld.dialog.currentnode = "Longway";
-				}
-				if (pchar.questTemp.HWIC.Detector == "eng_win" && GetCharacterIndex("Knippel") != -1) 
-				{
-					sld = characterFromId("Knippel");
-					sld.dialog.currentnode = "Knippel";
-				}
-				if (pchar.questTemp.HWIC.Detector == "self_win" && GetCharacterIndex("Tonzag") != -1)
-				{
-					sld = characterFromId("Tonzag");
-					sld.dialog.currentnode = "Tonzag";
-				}
-				pchar.questTemp.LongHappy.HambitOfficer = sld.id;
-				sld.Dialog.Filename = "Quest\LongHappy.c";
+					if (pchar.questTemp.HWIC.Detector == "holl_win" && GetCharacterIndex("Longway") != -1) 
+					{
+						sld = characterFromId("Longway");
+						sld.dialog.currentnode = "Longway";
+					}
+					if (pchar.questTemp.HWIC.Detector == "eng_win" && GetCharacterIndex("Knippel") != -1) 
+					{
+						sld = characterFromId("Knippel");
+						sld.dialog.currentnode = "Knippel";
+					}
+					if (pchar.questTemp.HWIC.Detector == "self_win" && GetCharacterIndex("Tonzag") != -1)
+					{
+						sld = characterFromId("Tonzag");
+						sld.dialog.currentnode = "Tonzag";
+					}
+					pchar.questTemp.LongHappy.HambitOfficer = sld.id;
+					sld.Dialog.Filename = "Quest\LongHappy.c";
 				ChangeCharacterAddressGroup(sld, "FortFrance_tavern", "goto", "goto2");
 				LAi_SetActorType(sld);
-			}
-			// Бейкер
-			if (GetCharacterIndex("Baker") != -1)
-			{
-				sld = characterFromId("Baker");
-				sld.Dialog.Filename = "Quest\LongHappy.c";
-				sld.dialog.currentnode = "Baker";
+				}
+				// Бейкер
+				if (GetCharacterIndex("Baker") != -1)
+				{
+					sld = characterFromId("Baker");
+					sld.Dialog.Filename = "Quest\LongHappy.c";
+					sld.dialog.currentnode = "Baker";
 				ChangeCharacterAddressGroup(sld, "FortFrance_tavern", "tables", "stay3");
 				LAi_SetActorType(sld);
 			}
@@ -14622,8 +14655,8 @@ void QuestComplete(string sQuestName, string qname)
 				}
 				else sld = characterFromId("Vensan");
 				sld.dialog.currentnode = "Vensan";
-				FantomMakeCoolFighter(sld, 35, 70, 70, "blade_21", "pistol5", "bullet", 250);
-				LAi_SetCheckMinHP(sld, 10, true, ""); // скрытое бессмертие
+					FantomMakeCoolFighter(sld, 35, 70, 70, "blade_21", "pistol5", "bullet", 250);
+					LAi_SetCheckMinHP(sld, 10, true, ""); // скрытое бессмертие
 			}
 			sld.Dialog.Filename = "Quest\LongHappy.c";
 			ChangeCharacterAddressGroup(sld, "Pirates_Tavern", "sit", "sit1");
@@ -14675,12 +14708,12 @@ void QuestComplete(string sQuestName, string qname)
 					{
 						sld = characterFromId("Tonzag");
 						sld.dialog.currentnode = "Tonzag";
-						pchar.questTemp.LongHappy.HambitOfficer = sld.id;
-						sld.Dialog.Filename = "Quest\LongHappy.c";
-						ChangeCharacterAddressGroup(sld, "Pirates_Tavern", "sit", "sit4");
-						LAi_SetSitType(sld);
-						pchar.questTemp.LongHappy.CountNeed = sti(pchar.questTemp.LongHappy.CountNeed)+1;
-					}
+					pchar.questTemp.LongHappy.HambitOfficer = sld.id;
+					sld.Dialog.Filename = "Quest\LongHappy.c";
+					ChangeCharacterAddressGroup(sld, "Pirates_Tavern", "sit", "sit4");
+					LAi_SetSitType(sld);
+					pchar.questTemp.LongHappy.CountNeed = sti(pchar.questTemp.LongHappy.CountNeed)+1;
+				}
 				}
 				// Бейкер
 				if (GetCharacterIndex("Baker") != -1)

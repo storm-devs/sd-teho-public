@@ -2,6 +2,7 @@ string totalInfo = "";
 bool isSkipable = false;
 bool bEncType   = false;
 bool bShowVideo; // для показа квестовых роликов, если будут
+bool bEscDisable = false; // belamour для выхода из меню на ESC BigPatch
 string  sQuestSeaCharId = "";
 
 void InitInterface(string iniName)
@@ -47,8 +48,16 @@ void ProcessBreakExit()
 
 void ProcessCancelExit()
 {
-	IDoExit( RC_INTERFACE_MAP_EXIT );
-	wdmReloadToSea();
+	//IDoExit( RC_INTERFACE_MAP_EXIT );
+	//wdmReloadToSea();
+	
+	//belamour выход через ESC -->
+	if (!bEscDisable) 
+	{ 
+		pchar.SkipEshipIndex = pchar.eshipIndex; 
+		IDoExit(RC_INTERFACE_MAP_EXIT);
+	}
+	//<-- belamour BigPatch
 }
 
 void IDoExit(int exitCode)
@@ -341,11 +350,11 @@ void CalculateInfoData()
         {
         	if (CheckOfficersPerk(pchar, "SailingProfessional"))
         	{
-			if (rand(100) > 75) SetSelectable("B_CANCEL",false);
+			if (rand(100) > 75) {SetSelectable("B_CANCEL",false); bEscDisable = true;} // belamour BigPatch
         	}
 		else
 		{
-			if (rand(100) > 25) SetSelectable("B_CANCEL",false);
+			if (rand(100) > 25) {SetSelectable("B_CANCEL",false); bEscDisable = true;} // belamour BigPatch
         }
 	}
 	if (pchar.space_press == "1") bEncType = false;
@@ -353,6 +362,7 @@ void CalculateInfoData()
 	if (bEncType && !bBettaTestMode) // спец тип не пропустить
 	{
         SetSelectable("B_CANCEL",false);
+		bEscDisable = true; // belamour BigPatch
 	}
 	pchar.space_press = 0;
 }

@@ -1,4 +1,4 @@
-bool NetServer_CheckGameOver_Fort()
+/*bool NetServer_CheckGameOver_Fort()
 {
 	int i;
 
@@ -45,4 +45,4 @@ bool NetServer_CheckGameOver_Fort()
 	}
 
 	return false;
-}
+}*/

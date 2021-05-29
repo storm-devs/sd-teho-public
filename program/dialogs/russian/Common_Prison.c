@@ -401,6 +401,7 @@ void ProcessDialogEvent()
 			dialog.text = "And nevertheless I would request that you surrender your weapons!";
 			link.l1 = "Screw you! Take it away from me by force, then!";
 			link.l1.go = "fight";
+			CaptainComission_GenerateCaptainInPrison(); // данила . на всякий случай ,чтобы сгенерился нормально.
 			AddDialogExitQuest("CaptainComission_GenerateCapJail");
 		break;
 		
@@ -413,9 +414,21 @@ void ProcessDialogEvent()
 		break;
 		
 		case "CapComission_PrisonFree1":
+		if(CheckAttribute(pchar,"GenQuest.CaptainComission"))// лесник . разделение диалога если кеп убит или нет
+		{
 			dialog.text = "Ehm, captain, I don't have direction to discharge this prisoner from custody. You must request a permission from the governor.";
 			link.l1 = "Officer, I am acting for the good of the inquest. The prisoner agreed to cooperate with the authorities and reveal the cache. Time is on the essence - the smugglers can find the precious cargo, and then it will be lost for the populace.";
 			link.l1.go = "CapComission_PrisonFree2";
+		}
+         else
+		 {
+         	dialog.text = "You shouldn't have killed him, captain.. It doesn't matter to me though. We'll have to execute you instead of him. Guards! Seize him!";
+            link.l2 = "You picked the wrong guy to fuck with!...";
+             link.l2.go = "fight";
+			 NextDiag.TempNode = "First_officer";
+			NextDiag.CurrentNode = NextDiag.TempNode; 
+			AddDialogExitQuest("OpenTheDoors");
+		 }			 
 		break;
 		
 		case "CapComission_PrisonFree2":
@@ -1244,7 +1257,7 @@ void ProcessDialogEvent()
 			Log_Info("Smuggler's captain on a board");
 			PlaySound("interface\notebook.wav");
 			LAi_Fade("", "");
-			WaitDate("",0,0,0,2,5); // 280313
+			WaitDate("",0,0,0,0,60); // 280313 // лесник. прокрутка времени было так WaitDate("",0,0,0,2,5);
 		break;
 	}
 }
@@ -1302,7 +1315,7 @@ string GetBanderLocation(ref npchar)
 				{
     				arCommon = GetAttributeN(arRld2, n);
 					LocId = arCommon.go;
-					if (findsubstr(LocId, "Common" , 0) != -1 && LocId != pchar.GenQuest.SeekSpy.Location)
+					if (findsubstr(LocId, "Common" , 0) != -1 && LocId != pchar.GenQuest.SeekSpy.Location && arCommon.name != "reload1") // mitrokosta fix
     				{
 						storeArray[howStore] = LocId;
 						howStore++; 					
@@ -1330,7 +1343,7 @@ string GetBanderLocation(ref npchar)
 				{
     				arCommon = GetAttributeN(arRld2, n);
 					LocId = arCommon.go;
-					if (findsubstr(LocId, "Common" , 0) != -1)
+					if (findsubstr(LocId, "Common" , 0) != -1 && arCommon.name != "reload1") // mitrokosta fix
     				{
 						storeArray[howStore] = LocId;
 						howStore++; 

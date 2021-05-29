@@ -1,3 +1,4 @@
+/*
 void NetClient_OnServerInfo(int iMsg)
 {
 	int iSubCode = NMGetByte(iMsg);
@@ -124,4 +125,4 @@ void NetClient_OnServerInfo_TopListPlayer(int iMsg)
 	}
 
 	Event("NetClient_OnServerInfo_TopListPlayer_Event");
-}
+}*/

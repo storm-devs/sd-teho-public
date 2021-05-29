@@ -1,4 +1,4 @@
-
+/*
 void InitInterface(string iniName)
 {
 	int i;
@@ -211,3 +211,4 @@ int ScrollGetTexture()
 	
 	return iTexture;
 }
+*/

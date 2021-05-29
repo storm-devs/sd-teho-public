@@ -1535,7 +1535,7 @@ void ProcessDialogEvent()
 		case "cabin_sex_go":
 			DialogExit();
 			chrDisableReloadToLocation = true;//закрыть локацию
-			DoQuestCheckDelay("Mary_LoveSex", 1.0);
+			DoQuestCheckDelay("Mary_LoveSex", 2.0);
 			NextDiag.CurrentNode = "sex_after";
 			npchar.greeting = "mary_hire";
 		break;
@@ -1577,7 +1577,7 @@ void ProcessDialogEvent()
 			DoQuestReloadToLocation(pchar.location+"_upstairs", "quest", "quest4", "");
 			ChangeCharacterAddressGroup(npchar, pchar.location+"_upstairs", "quest", "quest3");
 			} // patch-8
-			DoQuestCheckDelay("Mary_LoveSex", 1.5);
+			DoQuestCheckDelay("Mary_LoveSex", 2.5);
 			NextDiag.CurrentNode = "sex_after";
 			npchar.greeting = "mary_hire";
 		break;
@@ -2495,6 +2495,18 @@ void ProcessDialogEvent()
 				Link.l4 = "Mary, I am going to visit the old Indian city Tayasal. I won't lie to you: this trip is very dangerous and even more - it includes teleportation through the idol I told you about. Will you... follow me?";
 				Link.l4.go = "tieyasal";
 			}
+			////////////////////////казначей///////////////////////////////////////////////////////////
+			// boal отчёт о корабле
+			if(CheckAttribute(NPChar, "treasurer") && NPChar.treasurer == 1)
+			{
+			    Link.l11 = "Mary, give me a full ship report.";
+			    Link.l11.go = "QMASTER_1";
+				
+			    // Warship. Автозакупка товара
+				Link.l12 = "I want you to purchase certain goods every time we are docked.";
+				Link.l12.go = "QMASTER_2";
+			}
+
 			if (CheckAttribute(npchar, "quest.fugas"))
 			{
 				Link.l3 = "Mary, I need your advice.";
@@ -2517,6 +2529,19 @@ void ProcessDialogEvent()
 			NextDiag.TempNode = "Mary_officer";
 		break;
 		
+		/////////////////////////// ответы для казначея ///////////////////////////////////
+		case "QMASTER_1":
+			dialog.Text = "Charles, she's a beauty, alright! We fixed that teeny-tiny hole below the waterline and dried the sails. Wha- What did you expect? Don't look at me like that, I've never studied to be a purser.";
+			Link.l1 = "Sorry, Mary, I really didn't think it through.";
+			Link.l1.go = "exit";
+		break;	
+
+		case "QMASTER_2":
+			dialog.text = "Charles, but I am all good! I already got my wardrobe and my blade. But thanks for asking, it's so nice of you, alright!";
+			link.l1 = "But I don't even... Whatever, forget about it, dear, we're good.";
+			link.l1.go = "exit";
+		break;
+
 		case "stay_follow":
             dialog.Text = "Orders?";
             Link.l1 = "Stand here!";

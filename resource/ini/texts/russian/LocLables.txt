@@ -325,6 +325,7 @@ ExitTown		{Passage to the Jungle}
 Graveyard		{Cemetery}
 Port			{Port}
 Tavern			{Tavern}
+Tavern upstairs {Room in Tavern}
 Store			{Store}
 Shipyard		{Shipyard}
 PackHouse		{Storehouse}

@@ -67,6 +67,12 @@ bool CheckQuestColonyList(string sColony)
     if (CheckAttribute(pchar, "GenQuest.Intelligence.MayorId") &&
         characters[GetCharacterIndex(pchar.GenQuest.Intelligence.MayorId)].City == sColony) return false;
         
+	// mitrokosta фикс осад регатных городов
+	bool isRegataCity = (sColony == "PortRoyal") || (sColony == "Beliz") || (sColony == "PortPax") || (sColony == "SentJons") || (sColony == "Bridgetown");
+	if (CheckAttribute(pchar, "questTemp.Regata") && isRegataCity) {
+		return false;
+	}
+	
     if (CheckAttribute(pchar, "questTemp.State") && pchar.questTemp.State == "EndOfQuestLine") return true;
 
     if (CheckAttribute(pchar, "questTemp.NationQuest")) // если взята национальная линейка квестов - таковых в ККС нет
@@ -86,6 +92,7 @@ bool CheckQuestColonyList(string sColony)
             break;
         }
     }
+	
     return true;
 }
 
@@ -496,6 +503,7 @@ void BattleOfTheColony(string tmp)
     aData.SiegeTime = SiegeTime;
     Log_TestInfo("Siege period: "+SiegeTime);
     Log_TestInfo("Win: "+aData.win);
+    
     SetTimerCondition(sQuest, 0, 0, SiegeTime, false);
     pchar.quest.(sQuest).win_condition = "EndOfTheSiege";
     pchar.quest.(sQuest).function= "EndOfTheSiege";
@@ -648,7 +656,6 @@ void  EndOfTheSiege(string tmp)
             }
             FortDestroy();// уничтожаем форт
             Group_SetAddressNone(sGroup);
-            
             Log_TestInfo("Siege Finish - Squadron win!");
         }
         else

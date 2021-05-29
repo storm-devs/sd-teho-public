@@ -331,6 +331,8 @@ Abbot Benoit has lent me 50 000 pesos and 100 golden doubloons for six months. L
 My debt to abbot Benoit has been paid off.
 #TEXT   6
 Done, Michel's wish is fulfilled - I am a captain! Ha, I wonder what Lulu would say seeing me walking aboard this tub! A captain... Still can't get used to it. Fine. Time to hire the crew. Brother said that the bartender might help me with that.
+#TEXT 6-1
+The bartender suggested I look for crewmen among the folk in his tavern.
 #TEXT   7
 Now I am almost a true captain - I've got my own crew! I am damn proud... Now it is time to find a proper navigator, I am unable even to leave the island. I should ask the bartender again, he has already helped me with my crew, perhaps, he will assist me with my navigator problem.
 #TEXT   8

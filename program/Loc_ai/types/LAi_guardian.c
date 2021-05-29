@@ -173,7 +173,7 @@ void LAi_type_guardian_CharacterUpdate(aref chr, float dltTime)
 						{
 							//Нашли главного персонажа
 							if(stf(chr.chr_ai.type.dlgwas) <= 0.0)
-							{								
+							{
 								LAi_type_guardian_TestControl(chr);
 								return;
 							}

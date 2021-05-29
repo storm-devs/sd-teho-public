@@ -507,7 +507,7 @@ itmdescr_cirass1
 {
 An infantry siege armor. Excellent protection but heavy. 
 ~
--35% blades and -30% projectiles
+35% decrease of any damage
 80% chance to prevent a critical hit
 (-2 Reaction, -1 Endurance, -5 Stealth)
 }
@@ -555,7 +555,7 @@ itmdescr_cirass6
 {
 A waistcoat of a professional duelist. They wear it under the clothes. Provides some defense against slash blows and grape shot.
 ~
--10% blades and -5% projectiles
+10% blade damage reduction
 80% chance to prevent a critical hit
 (-1 Perception, -5 Stealth, -5 Charisma)
 }
@@ -565,7 +565,7 @@ itmdescr_cirass7
 {
 A leather coat with metal plates - a fine protection, yet the weight can not be ignored.
 ~
--20% blades and -10% projectiles
+15% decrease of any damage
 70% chance to prevent a critical hit
 (-1 Reaction, -1 Perception, -10 Stealth, -10 Charisma)
 }
@@ -575,7 +575,7 @@ itmdescr_cirass8
 {
 A unique cuirass of leather and metal, it protects the whole torso, including sides and a top. Good for stealth thanks to a lot of buckles.
 ~
--15% blades and -10% projectiles
+-20% blades and -10% projectiles
 50% chance to prevent a critical hit
 (-1 Perception, +15 Stealth, -15 Charisma)
 }
@@ -618,7 +618,7 @@ itmdescr_underwater
 {
 A unique diving suit, a masterpiece made by Henrick Vedecker. The best defense possible!
 ~ 
-50% reduction of any type of damage
+-60% blades and -35% projectiles
 100% chance to prevent a critical hit
 (-2 Perception and Endurance, -1 Reaction, -100 Stealth, -15 cold steel, -50 handguns)
 }
@@ -929,8 +929,8 @@ Disappears after 70 days of using or by removal.
 itmname_indian_3 {Amulet 'Ritual knife'}
 itmdescr_indian_3
 {
-Extra 15% chance to bypass block.
-Enemies' blades deliver 10% more damage.
+Increases your chance to deal a critical hit by 15%.
+Enemy heavy attacks deal 10% more damage.
 Can be activated only once.
 Works for any character.
 Disappears after 70 days of using or by removal.
@@ -1039,8 +1039,8 @@ Disappears after 70 days of using or by removal.
 itmname_amulet_3 {Amulet 'Crucifix'}
 itmdescr_amulet_3
 {
-15% less chance to bypass your block.
-Your chance to deliver a critical hit decreases by 10%.
+Lowers your chance to receive a critical hit by 10%.
+Your heavy attacks deal 10% less damage.
 Can be activated only once.
 Works for any character.
 Disappears after 70 days of using or by removal.

@@ -1,4 +1,4 @@
-
+/*
 int NetServer_FindFreeClientID()
 {
 	for (int i=0; i<NET_MAXCLIENTS; i++)
@@ -14,11 +14,6 @@ void NetServer_DropClient(int wNetClientID)
 	ref rClient = NetServer_GetClient(wNetClientID);
 	rClient.Use = false;
 
-	/*if (bServerGameStarted)
-	{
-		NetServer_UpdateGlobalPlayerStatistics(rClient);
-		DeleteClass(&NSClients[sti(rClient.index)]);
-	}*/
 
 	NetServer_DelClient(wNetClientID);
 
@@ -209,12 +204,6 @@ void NetServer_OnConnect(int dwIP, int wPort, int iMsg)
 	rClient.Ship.Sails.Color = iSailColor;
 
 	// setup goods
-/*	for (int i=0; i<Net_GetGoodsNum(); i++)
-	{
-		ref rGood = Net_GetGoodByIndex(i);
-		string sGood = rGood.Name;
-		rClient.Ship.Goods.(sGood) = (i + 1) * 1350;
-	}*/
 
 	iSMsg = NMCreate();
 	NMAddByte(iSMsg, NC_CONNECT);
@@ -266,3 +255,4 @@ void NetServer_OnConnect(int dwIP, int wPort, int iMsg)
 	//NetServer_DownloadClientFile(wNetClientID, "resource\textures\" + sUserFlagsPath + sFlagImage + "tga.tx");
 }
 
+*/

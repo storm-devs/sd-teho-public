@@ -330,11 +330,14 @@ void ProcessDialogEvent()
 		case "result_8": // Элен уходит, но ее не затираем
 			DialogExit();
 			RemovePassenger(pchar, npchar);
-			chrDisableReloadToLocation = true;//закрыть локацию
+			//chrDisableReloadToLocation = true;//закрыть локацию  // уже не надо.
 			LAi_SetActorType(npchar);
-			LAi_ActorGoToLocation(npchar, "reload", "reload3_back", "none", "", "", "OpenTheDoors", 15.0);
+			LAi_ActorRunToLocation(npchar, "goto", "goto24", "", "", "", "", 7);//OpenTheDoors лесник . чтобы бежала и исчезла а не стояла.
 			AddQuestRecord("Testament", "11");
 			CloseQuestHeader("Testament");
+			LocatorReloadEnterDisable("PortRoyal_town", "reload1_back", false); // лесник . пирс. 
+			LocatorReloadEnterDisable("PortRoyal_town", "gate_back", false); // ворота.
+			InterfaceStates.Buttons.Save.enable = true;//можно сохраняться		
 		break;
 		
 		case "result_9": // вот тут - ключевой момент, если игрок нашел Мэри - выбирай, какая девушка милее
@@ -387,6 +390,9 @@ void ProcessDialogEvent()
 			RecalculateJumpTable();
 			DoQuestCheckDelay("Saga_HelenaBye", 12.0);
 			pchar.questTemp.LSC.Mary = "return"; // к Мэри
+			LocatorReloadEnterDisable("PortRoyal_town", "reload1_back", false); // лесник . пирс. 
+			LocatorReloadEnterDisable("PortRoyal_town", "gate_back", false); // ворота.
+			InterfaceStates.Buttons.Save.enable = true;//можно сохраняться																					   
 		break;
 		
 		case "result_15":
@@ -426,6 +432,8 @@ void ProcessDialogEvent()
 			pchar.GenQuest.MusicContinue = true;
 			AddCharacterExpToSkill(pchar, "Leadership", 100);
 			DeleteAttribute(pchar, "questTemp.LSC.MaryWait");
+			LocatorReloadEnterDisable("PortRoyal_town", "reload1_back", false); // лесник . пирс. 
+			LocatorReloadEnterDisable("PortRoyal_town", "gate_back", false); // ворота.																					   
 		break;
 		
 		case "happy":
@@ -494,11 +502,13 @@ void ProcessDialogEvent()
 		
 		// секс - Элен соглашается не всегда (голова болит, а что вы хотели? :)) и сама не требует секса
 		case "cabin_sex":
-			if (drand(4) == 0) // вероятность отказа 20%
+			if (drand(4) == 0)// вероятность отказа 20%
 			{
-				dialog.text = RandPhraseSimple(""+pchar.name+", I am not feeling well today. Don't feel bad, please. Let's don't do it today...",""+pchar.name+", dear, I have been so tired for the last few days. To be honest, I only want to sleep. Forgive me. Let's do it another time.");
+				dialog.text = RandPhraseSimple(""+pchar.name+", I am not feeling well today. Don't feel bad, please. Let's not do it today...",""+pchar.name+", dear, I have been so tired for the last few days. To be honest, I only want to sleep. Forgive me. Let's do it another time.");
 				link.l1 = RandPhraseSimple("Fine...","That's alright. As you wish...");
-				link.l1.go = "sex_exit";
+				link.l1.go = "exit";
+				SaveCurrentNpcQuestDateParam(npchar, "sex_go"); // лесник = так же . но в корабле . отказ сохраняем . 
+				npchar.quest.daily_sex_cabin = true; // на случай если в самый первый раз откажет чтоб по 10000 раз не приставал .. в кабине
 			}
 			else
 			{
@@ -508,14 +518,11 @@ void ProcessDialogEvent()
 			}
 		break;
 		
-		case "sex_exit":
-			DialogExit();
-			npchar.quest.daily_sex = true;
-			SetFunctionTimerCondition("Helena_SexReady", 0, 0, 1, false);
-		break;
 		
 		case "cabin_sex_go":
 			DialogExit();
+			npchar.quest.daily_sex_cabin = true; // для первого раза в каюте перед счетчиком. лесник
+			npchar.quest.daily_sex_room = true; // для первого раза в таверне чтобы счетчик запустить . лесник
 			chrDisableReloadToLocation = true;//закрыть локацию
 			DoQuestCheckDelay("Helena_LoveSex", 1.0);
 			NextDiag.CurrentNode = "sex_after";
@@ -524,26 +531,30 @@ void ProcessDialogEvent()
 		case "sex_after":
 			dialog.text = RandPhraseSimple("It was wonderful, "+pchar.name+"!..","You were great as always, dear...");
 			link.l1 = RandPhraseSimple("I am glad that you were satisfied...","It is always good to be with you, Helen...");
+			//DeleteAttribute(npchar, "sex_go");
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Helena_officer";
-			chrDisableReloadToLocation = false;//открыть локацию
-			npchar.quest.daily_sex = true;
-			SetFunctionTimerCondition("Helena_SexReady", 0, 0, 1, false);
+			chrDisableReloadToLocation = false;//открыть локаци.
+			//SetFunctionTimerCondition("Helena_SexReady", 0, 0, 1, false); // лесник . уже не надо.
+			SaveCurrentNpcQuestDateParam(npchar, "sex_go"); // вот тут теперь сохраняются параметры времени . 
 		break;
 		
 		case "room_sex":
 			if (CheckAttribute(pchar, "questTemp.Terrapin") && pchar.questTemp.Terrapin == "tavern")
 			{
-				dialog.text = ""+pchar.name+", I always glad to... But it's not the right time now - we have to catch that scum Thibaut until he escaped.";
+				dialog.text = ""+pchar.name+", I always glad to... But it's not the right time now - we have to catch that scum Thibaut before he escapes.";
 				link.l1 = "You are right as always, my girl...";
 				link.l1.go = "exit";
 				break;
 			}
 			if (drand(4) == 0) // вероятность отказа 20%
 			{
-				dialog.text = RandPhraseSimple(""+pchar.name+", I am not feeling well today. Don't feel hurt, please. Let's don't do it today...",""+pchar.name+", dear, I have been so tired for the last few days. To be honest, I only want to sleep. Forgive me. Let's do it another time.");
+				dialog.text = RandPhraseSimple(""+pchar.name+", I am not feeling well today. Don't feel hurt, please. Let's not do it today...",""+pchar.name+", dear, I have been so tired for the last few days. To be honest, I only want to sleep. Forgive me. Let's do it another time.");
 				link.l1 = RandPhraseSimple("Fine...","That's alright. As you wish...");
-				link.l1.go = "sex_exit";
+				link.l1.go = "exit";
+				SaveCurrentNpcQuestDateParam(npchar, "sex_go"); // лесник - если отказала , сохраним . чтоб не приставал по 100 раз.
+				npchar.quest.daily_sex_room = true; // сли первый раз в таверне отказала. лесник
+				link.l1.go = "exit";
 			}
 			else
 			{
@@ -555,10 +566,13 @@ void ProcessDialogEvent()
 		
 		case "room_sex_go":
 			DialogExit();
+			npchar.quest.daily_sex_room = true; // для первого раза в таверне чтобы счетчик запустить . лесник
+			npchar.quest.daily_sex_cabin = true;
 			if (sti(pchar.money) >= 10) AddMoneyToCharacter(pchar, -10);
+			chrDisableReloadToLocation = true;//закрыть локацию // лесник - добавил закрцтие локи в таверне, чтоб поговорил после траханья с ней.
 			DoQuestReloadToLocation(pchar.location+"_upstairs", "quest", "quest4", "");
 			ChangeCharacterAddressGroup(npchar, pchar.location+"_upstairs", "quest", "quest3");
-			DoQuestCheckDelay("Helena_LoveSex", 1.5);
+			DoQuestCheckDelay("Helena_LoveSex", 2.5);
 			NextDiag.CurrentNode = "sex_after";
 		break;
 		
@@ -571,6 +585,27 @@ void ProcessDialogEvent()
 				Link.l4 = "Helen, I am going to visit the old Indian city Tayasal. I won't lie to you: this trip is very dangerous and even more - it includes teleportation through the idol. Will you... follow me?";
 				Link.l4.go = "tieyasal";
 			}
+       ////////////////////////казначей///////////////////////////////////////////////////////////
+           		// boal отчёт о корабле
+			if(CheckAttribute(NPChar, "treasurer") && NPChar.treasurer == 1)
+			{
+			    Link.l11 = "Helen, give me a full ship report.";
+			    Link.l11.go = "QMASTER_1";
+			        
+			    // Warship. Автозакупка товара
+				Link.l12 = "I want you to purchase certain goods every time we are docked.";
+				Link.l12.go = "QMASTER_2";
+			}
+			
+            /////////////////////////////////////казначей////////////////////////////////////////////////////////////     			
+			if (CheckAttribute(NPChar, "IsCompanionClone"))//////////////////компаньон//////////////////////////////////////////////
+			{
+				//dialog.text = "Я прибыл по вашему распоряжению, капитан.";
+				Link.l2 = "Helen, I need to issue several orders to you.";
+				Link.l2.go = "Companion_Tasks";
+				NextDiag.TempNode = "Helena_officer";// не забыть менять в зависисомости от оффа
+				break;
+			}																															
 			if (CheckAttribute(npchar, "quest.fugas"))
 			{
 				Link.l3 = "Helen, I need your advice.";
@@ -578,12 +613,12 @@ void ProcessDialogEvent()
 			}
 			Link.l1 = "Helen, I have an order for you...";
             Link.l1.go = "stay_follow";
-			if (CheckAttribute(pchar, "questTemp.Saga.Helena_officer") && pchar.location == Get_My_Cabin() && !CheckAttribute(npchar, "quest.daily_sex"))
+			if (CheckAttribute(pchar, "questTemp.Saga.Helena_officer") && pchar.location == Get_My_Cabin() && GetNpcQuestPastDayParam(npchar, "sex_go") >= 1 || !CheckAttribute(npchar, "quest.daily_sex_cabin") && pchar.location == Get_My_Cabin()) // лесник - ждем 1 день и снова трах предлагать можно.
 			{
 				Link.l2 = RandPhraseSimple("Helen, let's stay in the cabin together alone... for a few hours? Are you okay with that?","Darling, let's spend next few hours tete-a-tete? Do you like this idea?");
 				Link.l2.go = "cabin_sex";
 			}
-			if (CheckAttribute(pchar, "questTemp.Saga.Helena_officer") && rLoc.type == "tavern" && !CheckAttribute(npchar, "quest.daily_sex") && sti(pchar.money) >= 10)
+			if (CheckAttribute(pchar, "questTemp.Saga.Helena_officer") && rLoc.type == "tavern" && sti(pchar.money) >= 10 && GetNpcQuestPastDayParam(npchar, "sex_go") >= 1 || !CheckAttribute(npchar, "quest.daily_sex_room") && rLoc.type == "tavern")//  лесник - так же ждем 1 день и снова предлогать можно.
 			{
 				Link.l2 = RandPhraseSimple("Helen, why won't we rent a room and stay there in private... for a next few hours? How do you feel about that?","Darling, let's spend next few hours tete-a-tete? We'll rent a room... Will you stay?");
 				Link.l2.go = "room_sex";
@@ -592,6 +627,75 @@ void ProcessDialogEvent()
 			link.l9.go = "exit";
 			NextDiag.TempNode = "Helena_officer";
 		break;
+		
+		/////////////////////////// ответы для казнаячея - Элен ..(элен казначей - ужас!))///////////////////////////////////
+		case "QMASTER_1":
+			dialog.Text = "Charles, dear, are you ill or something? What, you expect me to go down below, sweep the hold and start counting rats?";
+			Link.l1 = "Right, sorry darling, my bad...";
+			Link.l1.go = "exit";
+		break;	
+
+		case "QMASTER_2":
+			dialog.text = "And I want my very own frigate, with a hundred guns and 20 knots fast. I had been a captain like you all my life. Go get yourself a purser and bother him with it.";
+			link.l1 = "Yup, you probably right, my dear. Sorry about that.";
+			link.l1.go = "exit";
+		break;
+		//Указания для компаньона 19.02.08 -->/////////////////////////////////////////////////////////////////////////////////////////
+		case "Companion_Tasks":
+			dialog.Text = "I am all ears.";
+			Link.l1 = "About our boarding policy...";
+			Link.l1.go = "Companion_TaskBoarding";
+			Link.l2 = "About the ship you command...";
+			Link.l2.go = "Companion_TaskChange";
+			Link.l8 = "Nothing so far.";
+			Link.l8.go = "exit";
+			 
+		break;
+		
+		case "Companion_TaskBoarding":
+			dialog.Text = "What is your wish, my captain?";
+			Link.l1 = "I don't want you to board anything. Keep yourself and your men safe.";
+			Link.l1.go = "Companion_TaskBoardingNo";
+			Link.l2 = "I want you to board enemy ships at the first opportunity.";
+			Link.l2.go = "Companion_TaskBoardingYes";
+		break;
+		
+		case "Companion_TaskChange":
+			dialog.Text = "Что желает мой капитан?";
+			Link.l1 = "I'd appreciate it if you abstained from swapping ships after boarding. She's too valuable for me.";
+			Link.l1.go = "Companion_TaskChangeNo";
+			Link.l2 = "If you happen to board anyone, take a good look at the prize vessel. If she's any good, feel free to take her for yourself.";
+			Link.l2.go = "Companion_TaskChangeYes";
+		break;
+		
+		case "Companion_TaskBoardingNo":
+			dialog.Text = "Okay, I'll think about it.";
+			Link.l1 = "She'll think... Right, like I can give her orders anyway.";
+			Link.l1.go = "exit";
+			NPChar.Tasks.CanBoarding = false;
+		break;
+		
+		case "Companion_TaskBoardingYes":
+			dialog.Text = "Okay, I'll think about it.";
+			Link.l1 = "She'll think... Right, like I can give her orders anyway.";
+			Link.l1.go = "exit";
+			NPChar.Tasks.CanBoarding = true;
+		break;
+		
+		case "Companion_TaskChangeNo":
+			dialog.Text = "Okay, I'll think about it.";
+			Link.l1 = "She'll think... Right, like I can give her orders anyway.";
+			Link.l1.go = "exit";
+			NPChar.Tasks.CanChangeShipAfterBoarding = false;
+		break;
+		
+		case "Companion_TaskChangeYes":
+			dialog.Text = "Okay, I'll think about it.";
+			Link.l1 = "She'll think... Right, like I can give her orders anyway.";
+			Link.l1.go = "exit";
+			NPChar.Tasks.CanChangeShipAfterBoarding = true;
+		break;
+	//	<========//////////////////////////////////////																																			  
 		
 		case "stay_follow":
             dialog.Text = "Orders?";

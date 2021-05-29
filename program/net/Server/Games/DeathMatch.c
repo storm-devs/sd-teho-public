@@ -1,4 +1,4 @@
-bool NetServer_CheckGameOver_DeathMatch()
+/*bool NetServer_CheckGameOver_DeathMatch()
 {
 	int i;
 	int iNumAlive = 0;
@@ -28,4 +28,4 @@ bool NetServer_CheckGameOver_DeathMatch()
 	}
 
 	return false;
-}
+}*/

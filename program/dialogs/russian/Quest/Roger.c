@@ -999,20 +999,38 @@ void ProcessDialogEvent()
 		break;
 		
 		case "Pelly_17":
-            dialog.text = "Three ships. Lots of guns. We are fucked.";
-			link.l1 = "We'll see. Jean go to Cutlass's ship. Cutlass you should rise the Spanish flag and get the hell out of here. I will distract them from you. See you all in La Vega.";
-			link.l1.go = "Pelly_18";
+            dialog.text = "Three ships. Lots of guns. We are fucked."; // лесникПОСЛЕДНЕЕ
+			link.l1 = "We'll see.";// Жан, ты отправляйся на борт к Тесаку. Тесак, поднимешь испанский флаг и на всех парусах прочь отсюда - глядишь, за торговца сойдёшь. А я пойду прямо на испанцев - отвлеку их от вас. Увидимся в Ла Веге у Тиракса.";
+			link.l1.go = "Pelly_181";
 		break;
-		
+		case "Pelly_181":
+	    	DialogExit();
+		   sld = characterFromId("Mrt_Rocur");
+		   sld.Dialog.currentnode = "Pelly_182";
+		LAi_SetActorType(sld);
+		LAi_ActorDialog(sld, pchar, "", -1, 0);
+		break;
+		case "Pelly_182":
+		   dialog.text = ""; 
+		   link.l1 = "Jean you go to Cutlass's ship.";
+		   link.l1.go = "Pelly_183"; 
+		break;
+		case "Pelly_183":
+		     DialogExit();
+			sld = characterFromId("Pelly");
+			sld.Dialog.currentnode = "Pelly_18";
+			LAi_SetActorType(sld);
+			LAi_ActorDialog(sld, pchar, "", -1, 0);
+		break;
 		case "Pelly_18":
-            dialog.text = "But...";
-			link.l1 = "No buts! Cutlass it's your ass on the line if Picard will not get to Tyrex's place. All aboard!";
+            dialog.text = "";//"Но...";
+			link.l1 = "Cutlass you should rise the Spanish flag and get the hell out of here. I will distract them from you. See you all in La Vega.";//"Отставить! Тесак, за Жана Пикара отвечаешь головой перед Тираксом. Все на борт!";
 			link.l1.go = "Pelly_19";
 		break;
 		
 		case "Pelly_19":
-            dialog.text = "Aye, aye admiral!";
-			link.l1 = "...";
+            dialog.text = "But...";
+			link.l1 = "No buts! Cutlass it's your ass on the line if Picard does not get to Tyrex's place. All aboard!";
 			link.l1.go = "exit";
 			AddDialogExitQuestFunction("Mtraxx_PlantSeaEscape");
 		break;

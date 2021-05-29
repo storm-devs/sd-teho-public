@@ -7,6 +7,9 @@ void GoldFleet()
 {
     ref sld, chref;
 	string sName = GenerateRandomNameToShip(SPAIN); 	
+	if (!CheckAttribute(pchar, "questTemp.MapBest")) { // mitrokosta отличная карта
+		sName = "Rosario";
+	}
 	chref = GetCharacter(NPC_GenerateCharacter("Head_of_Gold_Squadron", "off_spa_2", "man", "man", 5, SPAIN, 31, true, "governor"));
 	FantomMakeCoolSailor(chref, SHIP_LSHIP_SPA, sName, CANNON_TYPE_CANNON_LBS36, 105, 105, 105);
 	FantomMakeCoolFighter(chref, 45, 100, 100, "blade_21", "pistol5", "bullet", 100); // 170912

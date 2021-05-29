@@ -259,13 +259,13 @@ string NationKingsName(ref NPChar)
     switch(sti(NPChar.nation))
 	{
 		case ENGLAND:
-            return "His Majesty Charles II of England";
+            return "Lord Protector";
 		break;
 		case FRANCE:
             return "His Majesty Louis XIV of France";
 		break;
 		case SPAIN:
-            return "His Catholic Majesty Charles II of Spain";
+            return "His Catholic Majesty Philip IV von Habsburg";
 		break;
 		case HOLLAND:
 			return "His Majesty William III of the Netherlands";

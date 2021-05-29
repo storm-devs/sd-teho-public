@@ -186,6 +186,7 @@ void ProcessDialogEvent()
 			pchar.quest.FMQG_Block1.win_condition.l1.operation = ">=";
 			pchar.quest.FMQG_Block1.function = "FMQG_Block";
 			SetFunctionTimerCondition("FMQG_Block", 0, 0, 90, false);
+			LAi_LocationFightDisable(&Locations[FindLocation(pchar.location)], false);	// лесник - открыть оружие снова.
 		break;
 		
 		case "citizen_12a":

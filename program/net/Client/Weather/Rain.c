@@ -1,5 +1,5 @@
 object NCRain;
-
+/*
 void NetClient_WhrDeleteRainEnvironment()
 {
 	if (isEntity(&NCRain))
@@ -48,3 +48,4 @@ void NetClient_MoveRainToLayers(string sExecuteLayer, string sRealizeLayer)
 	LayerAddObject(sExecuteLayer, &NCRain, 65537);
 	LayerAddObject(sRealizeLayer, &NCRain, 65537);
 }
+*/

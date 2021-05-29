@@ -260,7 +260,22 @@ void Map_TraderSucces_quest(string sChar)
 			Log_TestInfo("Пираты на необитайке: кэп вышел из " + character.fromCity + " и направился в: " + character.toShore);
 		}
 	}
-	
+	if(sChar == "ShipWreck_BadPirate") // лесник - добавил блок по генеру "потерпевшие кораблекрушение"
+	{
+		Map_ReleaseQuestEncounter("ShipWreck_BadPirate");
+		
+		if(!CheckAttribute(PChar, "GenQuest.ShipWreck_BadPirate.ClearShip")) // проверка на срок действия квеста. 
+		{
+			character.fromCity = character.toCity; // Колония, из бухты которой выйдет
+			character.fromShore = character.toShore;
+			character.toCity = SelectAnyColony(character.fromCity); // Колония, в бухту которой придет
+			character.toShore = GetIslandRandomShoreId(GetArealByCityName(character.toCity));
+			
+			Map_CreateTrader(character.fromShore, character.toShore, "ShipWreck_BadPirate", -1);
+			
+			Log_TestInfo("Кораблекрушенцы: корабль вышел из " + character.fromCity + " и направился в: " + character.toCity);
+		}
+	}
 	// ugeen --> генератор "Повод для спешки"
 	if(sChar == "PirateCapt")
 	{

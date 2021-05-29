@@ -1177,9 +1177,9 @@ void AcceptAddOfficer()
         attributeName2 = GetOfficerTypeByNum(nCurScrollNum);
     	characters[iChar].(attributeName2) = true; // совместитель дожности
     	//SetCharacterTask_FollowCharacter(&Characters[iChar], PChar);
-    	if (!IsEntity(worldMap) && !bSeaActive && bNeedFollow) // только для офов
+    	if (!IsEntity(&worldMap) && !bSeaActive && bNeedFollow) // только для офов
     	{
-	    	if (IsEntity(loadedLocation) && loadedLocation.type == "tavern")
+	    	if (IsEntity(&loadedLocation) && loadedLocation.type == "tavern")
 	    	{   //  пусть всегда будут появляться
 	    	    PlaceCharacter(&Characters[iChar], "goto", "random_must_be_near");
 	    	}

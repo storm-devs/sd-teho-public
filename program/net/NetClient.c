@@ -1,3 +1,4 @@
+
 #include "Net\Client\Cameras.c"
 #include "Net\Client\ShipLights.c"
 #include "Net\Client\Rigging.c"
@@ -47,7 +48,7 @@ int iLangNetClient;
 string sClientNetCamera = "DeckCamera";
 int iClientTime, iClientServerTime, iClientDeltaTime;
 int iTestDeltaTime;
-
+/*
 void Net_ClientFirstInit()
 {
 	NetClient.NickName = "default";
@@ -209,3 +210,4 @@ void NetClient_SelectProfile(string sProfileName)
 	NetClient.FlagImage = NCProfiles.Profiles.(sProfileName).ImageFlag;
 	NetClient.SailImage = NCProfiles.Profiles.(sProfileName).ImageSail;
 }
+*/

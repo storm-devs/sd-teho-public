@@ -138,9 +138,11 @@ void SetHalfPerksToChar(ref _ch, bool _isOfficer)
 void RemoveAllCharacterItems(ref _ch, bool _removemoney)
 {
 	// сносим нафик всю экипировку
-	if(_ch == GetMainCharacter())
+	if(_ch.index == GetMainCharacterIndex()) // mitrokosta фикс сравнения ссылок
 	{
 		StoreEquippedMaps(_ch);
+        RemoveItems(_ch, "mapsatlas", 1); // belamour : иначе атлас так и лежит в инвентаре
+        DeleteAttribute(_ch,"perks.list.MapMaker"); //  висит после изъятия полного атласа
 		_ch.MapsAtlasCount = 0;
 	}	
 	RemoveCharacterEquip(_ch, BLADE_ITEM_TYPE);

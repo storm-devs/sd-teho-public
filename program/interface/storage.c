@@ -503,7 +503,7 @@ void TransactionOK()
 	}
     if (!GetRemovable(refCharacter)) return;
 	
-	trace("CargoCostCoeff() " + GetCargoCostCoeff(GetMainCharacter(), iCurGoodsIdx) + " GetStorageGoodsCostCoeff() " + GetStorageGoodsCostCoeff(refStore, iCurGoodsIdx));
+//	trace("CargoCostCoeff() " + GetCargoCostCoeff(GetMainCharacter(), iCurGoodsIdx) + " GetStorageGoodsCostCoeff() " + GetStorageGoodsCostCoeff(refStore, iCurGoodsIdx));
 	
     
  	if (BuyOrSell == 1) // BUY

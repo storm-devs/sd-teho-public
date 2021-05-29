@@ -134,10 +134,7 @@ void ProcessDialogEvent()
 			//общие параметры
 			DialogExit();
 			pchar.GenQuest.Escort.Trader.id = npchar.id;
-			pchar.GenQuest.Escort.Trader.model = npchar.model;
-			npchar.lifeday = sti(pchar.GenQuest.Escort.Trader.DaysQty)+1; // 170712
-			DeleteAttribute(npchar, "CityType");
-			CreateTraderShipAndAdd();//присоединяем торговца
+			CreateTraderShipAndAdd(npchar);//присоединяем торговца
 			pchar.GenQuest.Escort.Trader.ShipMaxHP = sti(npchar.ship.HP);
 			ReOpenQuestHeader("TraderEscort");
 			AddQuestRecord("TraderEscort", "1");

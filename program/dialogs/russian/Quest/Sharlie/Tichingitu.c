@@ -160,11 +160,37 @@ void ProcessDialogEvent()
 				Link.l4 = "Tichingitu, I'm about to depart to an old Indian village called Tayasal. I won't lie to you it's an extremely dangerous journey and furthermore unusual: through a teleportation idol. You... Will you joing me?";
 				Link.l4.go = "tieyasal";
 			}
+			
+			////////////////////////казначей///////////////////////////////////////////////////////////
+           	// boal отчёт о корабле
+			if(CheckAttribute(NPChar, "treasurer") && NPChar.treasurer == 1)
+			{
+			    Link.l11 = "Tichingitu, give me a full ship report.";
+			    Link.l11.go = "QMASTER_1";
+				
+			    // Warship. Автозакупка товара
+				Link.l12 = "I want you to purchase certain goods every time we are docked.";
+				Link.l12.go = "QMASTER_2";
+			}
+
 			Link.l1 = "Listen to my order!";
             Link.l1.go = "stay_follow";
 			link.l2 = "Nothing at the moment. At ease!";
 			link.l2.go = "exit";
 			NextDiag.TempNode = "Tichingitu_officer";
+		break;
+		
+		/////////////////////////// ответы для казначея ///////////////////////////////////
+		case "QMASTER_1":
+			dialog.Text = "Ship report? Tichingitu has no report, master. Only weapon and clothes. Tichingitu took no report from nowhere.";
+			Link.l1 = "Fine, whatever.";
+			Link.l1.go = "exit";
+		break;	
+
+		case "QMASTER_2":
+			dialog.text = "Master, Tichingitu never set foot in a colony without you. 'cause when Tichingitu enters a shop - all think Tichingitu is a thief again. Then, a prison.";
+			link.l1 = "Yeah, you probably right. Not that prison thing again. Plus, nobody will ever believe you are a purser.";
+			link.l1.go = "exit";
 		break;
 		
 		case "stay_follow":

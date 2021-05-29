@@ -1,4 +1,4 @@
-void NetServer_OnPing(int wNetClientID, int iMsg)
+/*void NetServer_OnPing(int wNetClientID, int iMsg)
 {
 	int iSubCode = NMGetByte(iMsg);
 	int iPingCode = NMGetByte(iMsg);
@@ -22,4 +22,4 @@ void NetServer_OnPing(int wNetClientID, int iMsg)
 			Trace("Server: got pong");
 		break;
 	}
-}
+}*/

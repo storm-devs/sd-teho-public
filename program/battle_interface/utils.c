@@ -495,8 +495,9 @@ object objTimerInterface;
 #event_handler("evntTimerTimeOut","procTimerTimeOut");
 void InitTimerInterface()
 {
+	float fHtRatio = stf(Render.screen_y) / iGlobalVar1;
 	DeleteAttribute( &objTimerInterface, "" );
-	objTimerInterface.timerpos = RecalculateHIcon(100)+","+RecalculateVIcon(20)+","+RecalculateHIcon(228)+","+RecalculateVIcon(40);
+	objTimerInterface.timerpos = RecalculateHIcon(makeint(100 * fHtRatio))+","+RecalculateVIcon(makeint(20 * fHtRatio))+","+RecalculateHIcon(makeint(228 * fHtRatio))+","+RecalculateVIcon(makeint(40 * fHtRatio));
 	objTimerInterface.timeroffset = "0,0,0,0";
 	objTimerInterface.timerbackuv = "0.0,0.0,1.0,0.5";
 	objTimerInterface.timerforeuv = "0.0,0.5,1.0,1.0";

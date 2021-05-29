@@ -40,6 +40,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "Eh... what a pity! But I can't do anything here, you were too vigilant. Farewell!";
 			link.l1.go = "exit";
 			DeleteAttribute(pchar, "questTemp.Regata");
+			pchar.quest.Regata_PU.over = "yes"; // mitrokosta снимаем прерывание
 			}
 			else
 			{

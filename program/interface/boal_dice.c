@@ -68,30 +68,30 @@ void InitInterface(string iniName)
     
     npchar = GetCharacter(sti(pchar.GenQuest.Dice.npcharIdx));
     
-    switch (iRate)
-    {
-        case 50 :
+	iMoneyP = sti(pchar.Money); // mitrokosta реальные деньги смотрим только в начале и в конце
+	iMoneyN = sti(npchar.Money);
+    
+	// mitrokosta фикс опыта за некратные ставки -->
+	if (iRate >= 50) {
             money_s = "silver";
             iExpRate = 1;
-        break;
-        
-        case 200 :
+	}
+	if (iRate >= 200) {
             money_s = "gold";
             iExpRate = 2;
-        break;
-        
-        case 500 :
+	}
+	if (iRate >= 500) {
             money_s = "silver";
             SetNewPicture("SCROLLPICT", "interfaces\card_sukno.tga");
             iExpRate = 4;
-        break;
-
-        case 2000 :
+	}
+	if (iRate >= 2000) {
             money_s = "gold";
             SetNewPicture("SCROLLPICT", "interfaces\card_sukno.tga");
             iExpRate = 8;
-        break;
-    }
+	}
+	// <--
+    
     if (money_s == "gold")
     {
         smxy = sgxy;
@@ -161,6 +161,8 @@ void Exit()
     	}
         interfaceResultCommand = RC_INTERFACE_SALARY_EXIT;
 
+		AddMoneyToCharacter(pchar, iMoneyP - sti(pchar.Money)); // mitrokosta раздача денег теперь в конце
+		AddMoneyToCharacter(npchar, iMoneyN - sti(npchar.Money));
     	Statistic_AddValue(Pchar, "GameDice_Win", iHeroWin);
 		Achievment_SetStat(pchar, 25, iHeroWin);
     	AddCharacterExpToSkill(Pchar, SKILL_FORTUNE, iExpRate*4*iHeroWin);
@@ -364,8 +366,7 @@ void RedrawDeck(bool _newGame, bool _clearDice)
 		CreateImage("CompDice4","DICE","", 300, 42, 300 + scx, 42 + scy);
 		CreateImage("CompDice5","DICE","", 380, 42, 380 + scx, 42 + scy);
     }
-    iMoneyP = sti(pchar.Money);
-    iMoneyN = sti(npchar.Money);
+
     ShowMoney();
     
     SetNextTip();
@@ -457,26 +458,18 @@ void NewGameBegin(bool _newGame)
     BetaInfo();
 }
 // деньги в карман
+// mitrokosta а теперь не в карман
 void EndGameCount(int who)
 {
     //openExit = true;
     if (who == 1) // ГГ
     {
-        AddMoneyToCharacter(pchar, iChest - (sti(pchar.Money) - iMoneyP));
-        AddMoneyToCharacter(npchar,  -(sti(npchar.Money) - iMoneyN));
+		iMoneyP += iChest;
     }
     if (who == -1)
     {
-        AddMoneyToCharacter(pchar, -(sti(pchar.Money) - iMoneyP));
-        AddMoneyToCharacter(npchar, iChest - (sti(npchar.Money) - iMoneyN));
+		iMoneyN += iChest;
     }
-    if (who == 0)// ничья
-    {
-        AddMoneyToCharacter(pchar, -(sti(pchar.Money) - iMoneyP));
-        AddMoneyToCharacter(npchar, -(sti(npchar.Money) - iMoneyN));
-    }
-    iMoneyP = sti(pchar.Money);
-    iMoneyN = sti(npchar.Money);
 }
 
 // проверить деньги для след игры
@@ -585,10 +578,11 @@ void ClickHeroDice(int d)
 {
 	if (bLockClick) return;
 	if (bStartGame < 2 || bStartGame > 3)  return;
+	sGlobalTemp = "d"+d;
+	if (DiceState.Hero.(sGlobalTemp).Mix == true) return; // mitrokosta фикс множественного переброса
 	if (iMoneyP >= iRate)
 	{
 		CreateImage("HeroDice" + d ,"","", 0,0,0,0);
-		sGlobalTemp = "d"+d;
 		DiceState.Hero.(sGlobalTemp).Mix = true;
 		DiceState.Desk.(sGlobalTemp).Mix = true;
 		PutNextCoin();

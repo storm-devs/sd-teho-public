@@ -845,6 +845,10 @@ float FindShipWindAgainstSpeed(aref refCharacter)
 
 	float fWindAgainstSpeed = stf(rShip.WindAgainstSpeed) * isEquippedArtefactUse(refCharacter, "obereg_11", 1.0, 1.15);
 		
+	if (fWindAgainstSpeed > 1.985) { // mitrokosta фикс невозможных значений
+		fWindAgainstSpeed = 1.985;
+	}
+	
 	return fWindAgainstSpeed;
 }
 
@@ -905,7 +909,7 @@ float FindShipTurnRate(aref refCharacter)
 
 	float fTurn = fTRFromWeight * fTRFromSkill * fTRFromPeople * fTRFromSailDamage * fSpeedFromHp * isEquippedArtefactUse(refCharacter, "obereg_10", 1.0, 1.15);
 
-	fTurn = isEquippedArtefactUse(refCharacter, "amulet_5", fTurn, 0.9);
+	fTurn = fTurn * isEquippedArtefactUse(refCharacter, "amulet_5", 1.0, 0.9); // гаденыш Согбо belamour 
 	
 	if(CheckAttribute(refCharacter, "Ship.hulls.baller_destroyed")) fTurn *= 0.3; // потеряли руль - уменьшаем маневренность
 	//Log_info(refCharacter.id + "  " + fTurn);

@@ -1853,6 +1853,9 @@ void ProcessDialogEvent()
 			DialogExit();
 			LAi_SetActorType(npchar);
 			LAi_ActorRunToLocation(npchar, "reload", "reload3", "none", "", "", "", 20.0);
+			LAi_RemoveCheckMinHP(npchar); 
+            LAi_SetCurHPMax(npchar);
+            LAi_SetImmortal(npchar, false); // Captain Beltrop, снимаем проверку на жизнь и восстанавливаем её
 			GoldenGirl_DuelNext();
 		break;
 		
@@ -2822,6 +2825,8 @@ void ProcessDialogEvent()
 			DoFunctionReloadToLocation("Baster_prison", "goto", "goto9", "");
 			WaitDate("", 0, 0, 2, 0, 10); //крутим время
 			RecalculateJumpTable();
+			sld = characterFromId("Cortny");
+			sld.lifeday = 0; // Captain Beltrop, убираем Кортни
 			sld = characterFromId("Julianna");
 			sld.dialog.currentnode = "Julianna_136"; 
 			LAi_SetActorTypeNoGroup(sld);

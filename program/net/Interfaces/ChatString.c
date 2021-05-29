@@ -1,3 +1,4 @@
+/*
 void InitInterface(string iniName)
 {
 	GameInterface.title = "";
@@ -60,3 +61,4 @@ void ChatS_Enter()
 
 	ChatS_OnSend();
 }
+*/

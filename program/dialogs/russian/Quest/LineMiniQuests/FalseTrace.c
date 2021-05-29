@@ -223,6 +223,7 @@ void ProcessDialogEvent()
 			NextDiag.currentnode = "FalseTrace_21";
 			chrDisableReloadToLocation = true;
 			LAi_LocationFightDisable(&Locations[FindLocation(pchar.location)], false);
+			LAi_SetHP(npchar, 100+MOD_SKILL_ENEMY_RATE*35, 100+MOD_SKILL_ENEMY_RATE*35); // belamour с 40 хп боец из него никудышный
 			LAi_SetWarriorType(npchar);
 			LAi_group_MoveCharacter(npchar, "EnemyFight");
 			LAi_group_SetRelation("EnemyFight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);

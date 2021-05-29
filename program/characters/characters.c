@@ -195,7 +195,7 @@ bool TeleportCharacterToLocator(ref character, string group, string locator)
 
 bool CheckLocationPosition(ref location, float x, float y, float z)
 {
-	if(IsEntity(loadedLocation) == false) return false;
+	if(IsEntity(&loadedLocation) == false) return false;
 	return (SendMessage(loadedLocation, "lfff", MSG_LOCATION_CHECKENTRY, x, y, z) != 0);
 }
 

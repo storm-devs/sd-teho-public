@@ -2,7 +2,7 @@
 // здесь и далее ник boal - это разработческий ник ALexusB
 
 #define VERSION_NUMBER1       "Sea Dogs: To Each His Own  " // Корсары: КС modding base #1
-#define VERSION_NUMBER2       "ver. 1.7.0.ENG (09.04.20)"
+#define VERSION_NUMBER2       "ver. 1.7.3.ENG (15.04.21)"
 #define VERSION_NUMBER3       "BlackMark.bz"
 
 #define VERSION_NUM      99940  // текущий номер
@@ -65,7 +65,7 @@ bool bDrawBars = true;
 // отправление полученных ачивок в стим; для внутренних тестов устанавливать в false !!!
 bool bSteamAchievements	= true;
 // дополнительный контент, для внутренних тестов ставим в true
-bool bAddonContent = false;
+bool bAddonContent = true;
 
 // --> резервные глобальные переменные на всякий случай
 bool bGlobalVar1 = false;
@@ -74,7 +74,8 @@ bool bGlobalVar3 = false;
 bool bGlobalVar4 = false;
 bool bGlobalVar5 = false;
 
-int iGlobalVar1 = 0;
+#define BI_COMPARE_HEIGHT 900
+int iGlobalVar1 = BI_COMPARE_HEIGHT;   // забрал ugeen 13.09.2020, нужна для HUD
 int iGlobalVar2 = 0;
 // <-- резервные глобальные переменные на всякий случай
 

@@ -2,7 +2,7 @@ object Animals;
 
 void CreateAnimals(ref Location)
 {
-	if (!IsEntity(Animals))
+	if (!IsEntity(&Animals))
 		CreateEntity(&Animals, "Animals");
 
 	float midX, midY, midZ;
@@ -57,7 +57,7 @@ void CreateAnimals(ref Location)
 
 void CreateSeaAnimals()
 {
-	if (!IsEntity(Animals))
+	if (!IsEntity(&Animals))
 	{
 		CreateEntity(&Animals, "Animals");
 		LayerAddObject(SEA_EXECUTE, &Animals, 77);
@@ -86,7 +86,7 @@ void CreateSeaAnimals()
 
 void DeleteAnimals()
 {
-	if (IsEntity(Animals))
+	if (IsEntity(&Animals))
 		DeleteClass(Animals);
 }
 

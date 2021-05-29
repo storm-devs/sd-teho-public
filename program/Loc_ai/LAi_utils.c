@@ -71,7 +71,7 @@ void Lai_CharacterChangeEnergy(aref chr, float dlt)
 //Может ли сражаться персонаж в заданной локации
 bool LAi_LocationCanFight()
 {
-	if(IsEntity(loadedLocation) != true) return true;
+	if(IsEntity(&loadedLocation) != true) return true;
 	if(CheckAttribute(loadedLocation, "noFight") != true)  return true;
 	if(sti(loadedLocation.noFight) != false) return false;
 	return true;
@@ -80,7 +80,7 @@ bool LAi_LocationCanFight()
 //Найт кол-во локаторов в заданной группе <-- ugeen 
 int LAi_GetLocatorNum(string group)
 {
-	if(IsEntity(loadedLocation) != true) return -1;
+	if(IsEntity(&loadedLocation) != true) return -1;
 	string at = "locators." + group;
 	if(CheckAttribute(loadedLocation, at) == 0) return 0;
 	aref grp;
@@ -91,7 +91,7 @@ int LAi_GetLocatorNum(string group)
 //Найти случайный локатор в заданной группе локаторов
 string LAi_FindRandomLocator(string group)
 {
-	if(IsEntity(loadedLocation) != true) return "";
+	if(IsEntity(&loadedLocation) != true) return "";
 	string at = "locators." + group;
 	if(CheckAttribute(loadedLocation, at) == 0) return "";
 	aref grp;
@@ -105,7 +105,7 @@ string LAi_FindRandomLocator(string group)
 //Найти дальний локатор в заданной группе локаторов
 string LAi_FindFarLocator(string group, float x, float y, float z)
 {
-	if(IsEntity(loadedLocation) != true) return "";
+	if(IsEntity(&loadedLocation) != true) return "";
 	string at = "locators." + group;
 	if(CheckAttribute(loadedLocation, at) == 0) return "";
 	aref grp;
@@ -140,7 +140,7 @@ string LAi_FindFarLocator(string group, float x, float y, float z)
 //Найти дальний свободный локатор в заданной группе локаторов
 string LAi_FindFarFreeLocator(string group, float x, float y, float z)
 {
-	if(IsEntity(loadedLocation) != true) return "";
+	if(IsEntity(&loadedLocation) != true) return "";
 	string at = "locators." + group;
 	if(CheckAttribute(loadedLocation, at) == 0) return "";
 	aref grp;
@@ -181,7 +181,7 @@ string LAi_FindFarFreeLocator(string group, float x, float y, float z)
 //Найти ближайший свободный локатор
 string LAi_FindNearestFreeLocator(string group, float x, float y, float z)
 {
-	if(IsEntity(loadedLocation) != true) return "";
+	if(IsEntity(&loadedLocation) != true) return "";
 	string at = "locators." + group;
 	if(CheckAttribute(loadedLocation, at) == 0) return "";
 	aref grp;
@@ -221,7 +221,7 @@ string LAi_FindNearestFreeLocator(string group, float x, float y, float z)
 // boal
 string LAi_FindNearestLocator(string group, float x, float y, float z)
 {
-	if(IsEntity(loadedLocation) != true) return "";
+	if(IsEntity(&loadedLocation) != true) return "";
 	string at = "locators." + group;
 	if(CheckAttribute(loadedLocation, at) == 0) return "";
 	aref grp;
@@ -425,12 +425,20 @@ void LAi_CheckKillCharacter(aref chr)
 				ref rOff = GetCharacter(NPC_GenerateCharacter("Clon", "none", chr.sex, chr.model.animation, 1, sti(chr.nation), -1, false, "officer"));
 				ChangeAttributesFromCharacter(rOff, chr, true);
 				rOff.id = chr.id;
+				chr.id = "Dead_" + chr.index; // mitrokosta чтоб не перекрывались id мертвяка и живого
 				rOff.HalfImmortal = true;
+				if (CheckAttribute(chr, "CompanionDisable")) { // mitrokosta общий фикс полубессмертных
+					rOff.CompanionDisable = chr.CompanionDisable;
+				}
 				int ihpm = sti(rOff.chr.chr_ai.hp_max)-40;
 				if (ihpm < 40) ihpm = 40;
 				LAi_SetHP(rOff, ihpm, ihpm); // штраф в НР
 				LAi_SetCurHPMax(rOff);
 				AddPassenger(pchar, rOff, false);
+				//belamour правка пусторуких -->
+				string bladeID = FindCharacterItemByGroup(rOff, BLADE_ITEM_TYPE);
+				rOff.equip.blade = bladeID;
+				//<-- belamour
 				Log_Info("Boarding officer " + GetFullName(rOff) + " is unconscious! Character's capabilities will be crippled forever!");
 		}
 	}
@@ -465,7 +473,7 @@ ref LAi_CreateFantomCharacterEx(string model, string ani, string group, string l
 	chr.id = "Location fantom character <" + i + ">";
 	chr.index = LOC_FANTOM_CHARACTERS + i;
 	//address
-	if(IsEntity(loadedLocation) != true)
+	if(IsEntity(&loadedLocation) != true)
 	{
 		chr.location = "none";
 	}else{
@@ -693,7 +701,7 @@ void LAi_CheckCharacterID(aref chr)
 
 void LAi_SetDefaultStayAnimation(aref chr)
 {
-	if(IsEntity(chr))
+	if(IsEntity(&chr))
 	{
 		BeginChangeCharacterActions(chr);
 		SetDefaultStayIdle(chr);
@@ -707,7 +715,7 @@ void LAi_SetDefaultStayAnimation(aref chr)
 
 void LAi_SetDefaultDead(aref chr)
 {
-	if(IsEntity(chr))
+	if(IsEntity(&chr))
 	{
 		BeginChangeCharacterActions(chr);
 		SetDefaultDead(chr);
@@ -717,7 +725,7 @@ void LAi_SetDefaultDead(aref chr)
 
 void LAi_SetAfraidDead(aref chr)
 {
-	if(IsEntity(chr))
+	if(IsEntity(&chr))
 	{
 		BeginChangeCharacterActions(chr);
 		SetAfraidDead(chr);
@@ -727,7 +735,7 @@ void LAi_SetAfraidDead(aref chr)
 
 void LAi_SetDefaultSitAnimation(aref chr)
 {
-	if(IsEntity(chr))
+	if(IsEntity(&chr))
 	{
 		BeginChangeCharacterActions(chr);
 		if (CheckAttribute(chr, "nonTable")) SetDefaultSit2Idle(chr);
@@ -739,7 +747,7 @@ void LAi_SetDefaultSitAnimation(aref chr)
 
 void LAi_SetHuberSitAnimation(aref chr)
 {
-	if(IsEntity(chr))
+	if(IsEntity(&chr))
 	{
 		BeginChangeCharacterActions(chr);
 		SetHuberAnimation(chr);	
@@ -750,7 +758,7 @@ void LAi_SetHuberSitAnimation(aref chr)
 
 void LAi_SetDefaultLayAnimation(aref chr)
 {
-	if(IsEntity(chr))
+	if(IsEntity(&chr))
 	{
 		chr.chr_ai.type.mode = "lay";
 		BeginChangeCharacterActions(chr);
@@ -1158,7 +1166,7 @@ void MakePoisonAttackCheckSex(aref attacked, aref enemy)
 
 string LAi_FindFreeRandomLocator(string group)
 {
-	if(IsEntity(loadedLocation) != true) return "";
+	if(IsEntity(&loadedLocation) != true) return "";
 	string at = "locators." + group;
 	if(CheckAttribute(loadedLocation, at) == 0) return "";
 	aref grp;
@@ -1187,7 +1195,7 @@ string LAi_FindFreeRandomLocator(string group)
 
 bool LAi_CheckLocatorFree(string _group, string _locator)
 {
-	if(!IsEntity(loadedLocation)) return false;	
+	if(!IsEntity(&loadedLocation)) return false;	
 	string at = "locators." + _group + "." + _locator;
 	if(!CheckAttribute(loadedLocation, at)) return false;
 	aref grp;

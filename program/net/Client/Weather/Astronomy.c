@@ -1,5 +1,5 @@
 object NCAstronomy;
-
+/*
 void NetClient_WhrDeleteAstronomyEnvironment()
 {
 	if (isEntity(&NCAstronomy))
@@ -120,4 +120,4 @@ void NetClient_MoveAstronomyToLayers(string sExecuteLayer, string sRealizeLayer)
 {
 	LayerAddObject(sExecuteLayer, &NCAstronomy, -1);
 	LayerAddObject(sRealizeLayer, &NCAstronomy, 3);
-}
+}*/

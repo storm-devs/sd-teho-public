@@ -100,7 +100,7 @@ void Fort_Login(int iIslandIndex)
 
 			if(iColony < 0)
 			{
-				trace("we have problem with indetify fort colony");
+				trace("we have problem identifying fort colony");
 				continue;
 			}
 			if (iFortCharacter < 0)
@@ -111,7 +111,7 @@ void Fort_Login(int iIslandIndex)
 			Forts[iNumForts - 1].fortcmdridx = iFortCharacter;
 			if(colonies[iColony].nation != characters[iFortCharacter].nation)
 			{
-				trace("Colony " + colonies[iColony].id + " have wrong nation field.");
+				trace("Colony " + colonies[iColony].id + " has wrong nation field.");
 				continue;
 			}
 			if (isEntity(&AIFort) == 0)

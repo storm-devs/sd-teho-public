@@ -496,7 +496,7 @@ void LAi_Character_Dead_Process(aref chr)
 void LAi_Character_Dead_Event()
 {
 	aref chr = GetEventData();
-	if (IsEntity(chr))  //fix
+	if (IsEntity(&chr))  //fix
 	{
 		// boal dead can be searched 14.12.2003 -->
 		Dead_DelLoginedCharacter(chr); // трем
@@ -597,7 +597,7 @@ void LAi_Character_FreePos_Event()
 
 void LAi_Character_NeedDialog(aref chr, aref by)
 {
-	if(IsEntity(by))
+	if(IsEntity(&by))
 	{
 		string func = chr.chr_ai.type;
 		if(func != "")
@@ -611,7 +611,7 @@ void LAi_Character_NeedDialog(aref chr, aref by)
 //Запрос на диалог, если возвратить true то в этот момент можно начать диалог
 bool LAi_Character_CanDialog(aref chr, aref by)
 {
-	if(IsEntity(by))
+	if(IsEntity(&by))
 	{
 		bool isDisable = false;
 		if(CheckAttribute(chr, "chr_ai.disableDlg"))
@@ -634,7 +634,7 @@ bool LAi_Character_CanDialog(aref chr, aref by)
 //Начать диалог
 void LAi_Character_StartDialog(aref chr, aref by)
 {
-	if(IsEntity(by))
+	if(IsEntity(&by))
 	{
 		string func = by.chr_ai.type;
 		if(func != "")
@@ -648,7 +648,7 @@ void LAi_Character_StartDialog(aref chr, aref by)
 //Закончить диалог
 void LAi_Character_EndDialog(aref chr, aref by)
 {
-	if(IsEntity(by))
+	if(IsEntity(&by))
 	{
 		string func = by.chr_ai.type;
 		if(func != "")

@@ -71,6 +71,8 @@ void InitInterface_BB(string iniName, bool isSave, bool isMainMenu)
 	SetEventHandler("LoadProfile","LoadProfile",0);
 	SetEventHandler("SaveLoad","SaveLoad",0);
 	SetEventHandler("eventSaveCustom","ProcessCustomSaveAction",0);
+	SetEventHandler("ScrollTopChange","ProcScrollChange",0);
+
 
 	PostEvent( "evLoadOneSaveInfo",1 );
 
@@ -115,15 +117,40 @@ void SetCurrentProfile( string sProfileName )
 	g_nFirstSaveIndex = -1;
 	FillSaveList( (g_nCurrentSaveIndex/10) * 10 );
 	if( bThisSave ) {
-		SelectSaveImage( g_nSaveQuantity );
+		setInitSelection( g_nSaveQuantity );
 	} else {
-		SelectSaveImage( 0 );
+		
+		setInitSelection( 0 );
 	}
 	SetClickable("SAVESCROLL",g_nSaveQuantity>10);
 	// show profile name
 	SendMessage( &GameInterface,"lslls",MSG_INTERFACE_MSG_TO_NODE, "SAVEINFO", 1, 1, "#"+XI_ConvertString("ProfileName")+": " + currentProfile );
 	// read option from profile
 	LoadGameOptions();
+}
+
+void setInitSelection(int _sel)
+{
+    if(_sel < 0 || _sel > g_nSaveQuantity) {
+        _sel = 0;
+    }
+    int nTimeout = 500;
+    int nLinesPer = (10 / 5) - 1;
+    int nLineQ = makeint(g_nSaveQuantity / 5);
+    int nLine = 0;
+    if(nLineQ != 0)
+        nLine = makeint( makefloat(nLineQ) * (makefloat(_sel / 5) / makefloat(nLineQ) ));
+
+    int imgIdx = _sel + 1;
+    if(nLine > nLinesPer) {
+        FillSaveList(nLine * 5);
+        imgIdx = (_sel + 1) % 5;
+        nTimeout = 350;
+    }
+    if(imgIdx != 1)
+        SetSelecting(0,false);
+    string sName = "SAVEIMG" + imgIdx;
+    PostEvent("eventSaveClick", nTimeout, "ls", 0, sName);
 }
 
 void ProcessCancelExit()
@@ -140,6 +167,8 @@ void ProcessCancelExit()
 	DelEventHandler("LoadProfile","LoadProfile");
 	DelEventHandler("SaveLoad","SaveLoad");
 	DelEventHandler("eventSaveCustom","ProcessCustomSaveAction");
+	DelEventHandler("ScrollTopChange","ProcScrollChange");
+
 
 	if( CheckAttribute(&PlayerProfile,"old_name") ) {
 		PlayerProfile.name = PlayerProfile.old_name;
@@ -403,7 +432,7 @@ void DeleteProfile(string profileName)
 {
 	string oldpath = "";
 	
-	// Warship 08.07.09 fix - ошибка езка об отсутствии атрибута
+	// Warship 08.07.09 fix - ошибка движка об отсутствии атрибута
 	if(CheckAttribute(GameInterface, "SavePath"))
 	{
 		oldpath = GameInterface.SavePath;
@@ -467,6 +496,31 @@ void SetSelecting(int nSlot,bool bSelect)
 	SendMessage( &GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "SAVENOTES", 3, nSlot*3+3, nColor );
 }
 
+void ProcScrollChange()
+{
+	int changeNum = GetEventData();
+	trace("changeNum = " + changeNum);
+	if(changeNum == 0) return;
+	
+	bool bMakeMove = false;
+	int nLeft,nTop,nRight,nBottom;
+	
+	if(changeNum>0) 
+	{
+		bMakeMove = GetMoveToOtherSave( g_nCurrentSaveIndex+5, &nLeft,&nTop,&nRight,&nBottom );
+	}	
+	else
+	{
+		bMakeMove = GetMoveToOtherSave( g_nCurrentSaveIndex-5, &nLeft,&nTop,&nRight,&nBottom );
+	}
+
+	if( bMakeMove ) 
+	{
+		SendMessage( &GameInterface, "lslllll", MSG_INTERFACE_MSG_TO_NODE,"SAVE_SELECTER",0, nLeft,nTop,nRight,nBottom );
+	}
+}
+
+
 bool GetMoveToOtherSave( int nNewSaveIndex, ref rLeft, ref rTop, ref rRight, ref rBottom )
 {
 	if( nNewSaveIndex < 0 ) return false;
@@ -508,6 +562,14 @@ bool GetMoveToOtherSave( int nNewSaveIndex, ref rLeft, ref rTop, ref rRight, ref
 
 	g_nCurrentSaveIndex = nNewSaveIndex;
 	ReloadSaveInfo();
+	
+	if(g_nSaveQuantity > 5)
+	{	
+		int nLineQ = g_nSaveQuantity / 5;
+		int nLineCur = (g_nCurrentSaveIndex + 1) / 5;
+		//trace(" nLineQ " + nLineQ + " g_nCurrentSaveIndex " + g_nCurrentSaveIndex);
+		SendMessage(&GameInterface,"lsf",MSG_INTERFACE_SET_SCROLLER,"SAVESCROLL",makefloat(nLineCur)/makefloat(nLineQ));
+	}
 
 	int nLeft = 0;
 	int nTop = 0;
@@ -753,7 +815,7 @@ void procLoadOneSaveInfo()
 	int i;
 	int pTex;
 	string strdata;
-	bool bYesScrShoter = IsEntity(scrshot);
+	bool bYesScrShoter = IsEntity(&scrshot);
 	for( i=0; i<10; i++ )
 	{
 		if( g_oSaveList[i].saveidx != "-1" )
@@ -914,13 +976,16 @@ void ProcessLoad()
 	Event("evntPreLoad");
 }
 
-void ProcessSave()
+void DeleteCurrent()
 {
 	string curSave = GetCurSaveName();
 	if( curSave!="" ) {
 		SendMessage(&GameInterface,"ls",MSG_INTERFACE_DELETE_SAVE_FILE,curSave);
 	}
+}
 
+void ProcessSave()
+{
 	LaunchCustomSaveGame();
 }
 
@@ -961,7 +1026,8 @@ void ProcessCustomSaveAction()
 
 	if( iComIndex == ACTION_ACTIVATE || iComIndex == ACTION_MOUSECLICK ) {
 		if( sNodName == "CUSTOM_SAVE_BTN_OK" ) {
-
+           
+            DeleteCurrent(); // сначала грохнем старый сейв воизбежание...
 			string saveName = GameInterface.CUSTOM_SAVE_NAME.str;
 			string sSaveDescriber = GetSaveDataString(saveName);
 			SetEventHandler("evntSave","SaveGame",1);
@@ -1141,6 +1207,7 @@ void ScrollPosChange()
 {
 	float fPos = GetEventData();
 	string sNod = GetEventData();
+	//trace("sNod " + sNod);
 	if( sNod == "SAVESCROLL" ) {
 		if( g_nCurrentSaveIndex>=0 ) {
 			int nOldIdx = g_nCurrentSaveIndex - g_nFirstSaveIndex;
@@ -1152,6 +1219,8 @@ void ScrollPosChange()
 		// старое немигает новое подмигивает & старый текст серый новый выделенный - светлый
 		SetSelecting(0,true);
 		SelectSaveImage(g_nFirstSaveIndex);
+		//trace("ScrollPosChange " + fPos + " nLineQ " + nLineQ + " nLine " + nLine);
+		//SendMessage(&GameInterface,"lsf",MSG_INTERFACE_SET_SCROLLER,"SAVESCROLL",fPos);
 	}
 }
 

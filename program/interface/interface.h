@@ -1,4 +1,4 @@
-#define INTERFACE_QUANTITY				58
+#define INTERFACE_QUANTITY				59
 
 #define INTERFACE_STORE					0
 #define INTERFACE_SHIPYARD				1
@@ -61,6 +61,7 @@
 #define INTERFACE_ALCHEMY				55 // Интерфейс мультиобъектов
 #define INTERFACE_CONTRATRADE			56 // Интерфейс торговли с контрабандистами
 #define INTERFACE_REPAIR					57 // Интерфейс ремонта
+#define INTERFACE_DIRSAILENC			58
 // <-- Ugeen
 
 #define RC_INTERFACE_DO_NOTHING			-1
@@ -151,6 +152,7 @@
 #define RC_INTERFACE_ALCHEMY_EXIT				45081   // Интерфейс мультиобъектов
 #define RC_INTERFACE_CONTRATRADE				45082   // Интерфейс торговли с контрабандистами
 #define RC_INTERFACE_REPAIR						45083	// Интерфейс ремонта
+#define RC_INTERFACE_DIRSAILENC					45084
 // <-- Ugeen
 
 #define MAX_SAVE_STORE_BLOCKS	160

@@ -126,10 +126,36 @@ void ProcessDialogEvent()
 			dialog.text = "Yes, captain?";
 			Link.l1 = "Listen to my order!";
             Link.l1.go = "stay_follow";
+			
+			////////////////////////казначей///////////////////////////////////////////////////////////
+           	// boal отчёт о корабле
+			if(CheckAttribute(NPChar, "treasurer") && NPChar.treasurer == 1)
+			{
+			    Link.l11 = "Raymond, give me a full ship report.";
+			    Link.l11.go = "QMASTER_1";
+
+			    // Warship. Автозакупка товара
+				Link.l12 = "I want you to purchase certain goods every time we are docked.";
+				Link.l12.go = "QMASTER_2";
+			}
+			
 			link.l2 = "It's nothing. Dismissed!";
 			link.l2.go = "exit";
 			NextDiag.TempNode = "Baker_officer";
 		break;
+		
+		/////////////////////////// ответы для казначея ///////////////////////////////////
+        case "QMASTER_1":
+			dialog.Text = "Come on, Captain, I am a physician, not a purser. Although, in the past, I used to work in a different capacity... Nevermind. I really don't do accounting, sorry.";
+			Link.l1 = "Fine, so be it. You are my physician - as we agreed upon after you joined this crew.";
+			Link.l1.go = "exit";
+		break;	
+
+		case "QMASTER_2":
+			dialog.text = "Captain, to be completely honest, I never had an experience with trade. Never bragained, never tracked price tags. Also... I'd rather keep staying on the ship if you don't mind. Some of them merchants might recognize me and before you know it - masked men come shortly.";
+			link.l1 = "So, you will go on living in fear of your past... Right, breath out, I will do it myself.";
+			Link.l1.go = "exit";
+        break;
 		
 		case "stay_follow":
             dialog.Text = "Orders?";

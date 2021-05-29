@@ -125,6 +125,8 @@ void ProcessDialogEvent()
 					}
 					if (pchar.questTemp.Saga == "court" && GetNpcQuestPastDayParam(npchar, "court_date") >= 1 && IsOfficer(characterFromId("Helena")))
 					{
+						 // запрет сохранения чтобы ленку не заграбастали себе умники всякие с ГК-  лесник
+						InterfaceStates.Buttons.Save.enable = false;//запретить сохраняться																																			   
 						dialog.text = "A-ah, here you are, sir. Glad to see you. I must admit, I've been waiting for you for quite long. Is this you principal?";
 						link.l1 = "Yes. Let me introduce you Helen McArthur.";
 						link.l1.go = "saga_26";
@@ -372,7 +374,7 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = "First time";
 			// закрываем выходы из города
 			LocatorReloadEnterDisable("PortRoyal_town", "reload1_back", true);
-			LocatorReloadEnterDisable("PortRoyal_town", "reload2_back", true);
+			//LocatorReloadEnterDisable("PortRoyal_town", "reload2_back", true);// лесник там нет этого пирса
 			LocatorReloadEnterDisable("PortRoyal_town", "gate_back", true);
 			pchar.GenQuest.CannotWait = true;//запрет ожидания
 			// снимаем общий таймер Саги!
@@ -397,9 +399,9 @@ void ProcessDialogEvent()
 			LAi_ActorFollow(sld, npchar, "", -1);
 			NextDiag.CurrentNode = "saga_28";
 			// открываем выходы из города
-			LocatorReloadEnterDisable("PortRoyal_town", "reload1_back", false);
-			LocatorReloadEnterDisable("PortRoyal_town", "reload2_back", false);
-			LocatorReloadEnterDisable("PortRoyal_town", "gate_back", false);
+			//LocatorReloadEnterDisable("PortRoyal_town", "reload1_back", false); // лесник рано 
+			//LocatorReloadEnterDisable("PortRoyal_town", "reload2_back", false);
+			//LocatorReloadEnterDisable("PortRoyal_town", "gate_back", false);
 			DeleteAttribute(pchar, "GenQuest.CannotWait");//можно мотать время
 		break;
 		

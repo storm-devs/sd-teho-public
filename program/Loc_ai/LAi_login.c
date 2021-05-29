@@ -334,7 +334,7 @@ bool LAi_login_CheckTime(float start, float end)
 
 void LAi_PostLoginInit(aref chr)
 {
-	if(!IsEntity(chr)) return;
+	if(!IsEntity(&chr)) return;
 	//Добавляем в группу
 	LAi_group_MoveCharacter(chr, chr.chr_ai.group);
 	//Инициализируем шаблон

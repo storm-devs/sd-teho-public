@@ -41,7 +41,7 @@ object NSPlayers;						// All players in server for last month
 int iServerTime;
 int iPingTime;
 bool bNetServerIsStarted = false;
-
+/*
 void Net_DeleteServer()
 {
 	DelEventHandler("NetServer_UpdateMasterServerInfo", "NetServer_UpdateMasterServerInfo");
@@ -334,3 +334,4 @@ void NetServer_UpdateGlobalPlayerStatistics(ref rPlayer)
 	arPlayer.Rewards.Vitality = Net_GetRewardVitality(iSunks, iWrecks);
 	arPlayer.Rewards.Victorious = Net_GetRewardVictorious(iWon, iLost);
 }
+*/

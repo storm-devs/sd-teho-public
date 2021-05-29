@@ -1,6 +1,6 @@
 object NetGoods[6];
 int iNetGoodsNum = 0;
-
+/*
 ref Net_GetGoodByName(string sGood) 
 { 
 	for (int i=0; i<iNetGoodsNum; i++) { if (sGood == NetGoods[i].Name) return &NetGoods[i]; }
@@ -99,3 +99,4 @@ void Net_InitGoods()
 
 	iNetGoodsNum = n + 1;
 }
+*/

@@ -480,7 +480,7 @@ void FillBoxForTreasureSuper(ref item)
 		itmName = "";
 		while (itmName == "" && i < 15)
 		{
-            switch (rand(17)) // 170912
+            switch (rand(19)) // 170912 belamour 20102020 ДиС
 			{
                 case 0:
         			itmName = "pistol4";
@@ -535,6 +535,12 @@ void FillBoxForTreasureSuper(ref item)
 				break;					
 				case 17:
         			itmName = "mushket3";
+				break;	
+                                case 18:
+        			itmName = GetGeneratedItem("shamshir"); // belamour клинок ДиС
+				break;	
+                                case 19:
+        			itmName = "howdah";                    // belamour картечница ДиС
 				break;	
 			}
 			if (GetCharacterItem(Pchar, itmName) > 0)

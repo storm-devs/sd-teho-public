@@ -1,5 +1,5 @@
 object NCShipLights;
-
+/*
 void NetClient_DeleteShipLightsEnvironment()
 {
 	DeleteClass(&NCShipLights);
@@ -20,4 +20,4 @@ void NetClient_CreateShipLightsEnvironment(int iMsg)
 	LayerAddObject("net_execute", &NCShipLights, 0);
 	LayerAddObject("net_realize", &NCShipLights, -1);
 	LayerAddObject("sea_sunroad", &NCShipLights, -1);
-}
+}*/

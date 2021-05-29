@@ -378,8 +378,8 @@ void Cabin_ReloadEndFadeAfter()
 /////////// диалог на палубе ////////////
 void Sea_DeckBoatStartNow(ref _iShipsCharacter)
 {
-	string boat_pic = "loading\boat_"+rand(1)+".tga";	
-	if(CheckAttribute(pchar, "TownEscape")) boat_pic = "loading\Start_Loading.tga";
+	string boat_pic = "loading\boat_"+rand(1)+".tga.tx";	
+	if(CheckAttribute(pchar, "TownEscape")) boat_pic = "loading\Start_Loading.tga.tx";
 	
 	if (!bAbordageStarted)
 	{
@@ -812,7 +812,7 @@ void SetPrisonerInHold()
             {
 	            if(sti(offref.prisoned)==true && GetRemovable(offref)) // ставим только фантомов
 	            {
-                    PlaceCharacter(offref, "goto", mchr.location);
+                    PlaceCharacter(offref, "goto", "random_must_be"); // mitrokosta всех в трюм
                 }
             }
         }

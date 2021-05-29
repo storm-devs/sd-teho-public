@@ -1002,7 +1002,7 @@ int LocationInitTortuga(int n)
 	locations[n].reload.l1.name = "reload2_back";
 	locations[n].reload.l1.go = "Shore58";
 	locations[n].reload.l1.emerge = "reload2";
-	locations[n].reload.l2.autoreload = "1";
+	locations[n].reload.l2.autoreload = "0";
 
 	locations[n].reload.l2.name = "reload1";
 	locations[n].reload.l2.go = "Tortuga_town";
