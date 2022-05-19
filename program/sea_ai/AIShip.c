@@ -523,7 +523,7 @@ float Ship_HullDamage()
 	float z = GetEventData();
 	float fDamage = GetEventData();
 	aref rCharacter = GetEventData(); // в кого прилетело
-	aref aCharacter = GetEventData(); // владелец ядра (от кого прилетело)
+	//aref aCharacter = GetEventData(); // владелец ядра (от кого прилетело)
 	string HullName = GetEventData(); // имя ноды в которую прилетело
 	
 	switch (iDamageType)
