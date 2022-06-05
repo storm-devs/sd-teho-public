@@ -172,7 +172,7 @@ int GenerateShipExt(int iBaseType, bool isLock, ref chr)
 	string  attr, sCity;
 	int 	i;
 	aref 	refShip;
-	float	Кdckyrd = 1.0;
+	float	Kdckyrd = 1.0;
 	bool	isShipyard = false; 
 	
 	int iShip = CreateBaseShip(iBaseType);
@@ -199,7 +199,7 @@ int GenerateShipExt(int iBaseType, bool isLock, ref chr)
 		sCity = chr.City; 
 		if(CheckCharacterID(chr, sCity + "_shipyarder"))
 		{
-			Кdckyrd 	= 0.8;
+			Kdckyrd 	= 0.8;
 			isShipyard 	= true;
 		}
 	}	
@@ -441,20 +441,20 @@ int GenerateShipExt(int iBaseType, bool isLock, ref chr)
 			rRealShip.Bonus_SpeedRate   = (stf(rRealShip.SpeedRate)*iCannonDiff)/(15 * iDiffClass);
 			rRealShip.Bonus_TurnRate    = (stf(rRealShip.TurnRate)*iCannonDiff)/(15 * iDiffClass);
 		
-			rRealShip.SpeedRate	   		= stf(rRealShip.SpeedRate) + Кdckyrd * (frandSmall(stf(rRealShip.SpeedRate) / 5.0) - stf(rRealShip.SpeedRate) / 10.0);
-			rRealShip.TurnRate         	= stf(rRealShip.TurnRate) + Кdckyrd * (frandSmall(stf(rRealShip.TurnRate) / 5.0) - stf(rRealShip.TurnRate) / 10.0);
-			rRealShip.HP               	= sti(rRealShip.HP) + makeint(Кdckyrd * (rand(makeint(sti(rRealShip.HP)/5)) - makeint(sti(rRealShip.HP)/10)));
-			rRealShip.WindAgainstSpeed 	= stf(rRealShip.WindAgainstSpeed) + Кdckyrd * (frandSmall(stf(rRealShip.WindAgainstSpeed)/5.0) - stf(rRealShip.WindAgainstSpeed)/10.0);
+			rRealShip.SpeedRate	   		= stf(rRealShip.SpeedRate) + Kdckyrd * (frandSmall(stf(rRealShip.SpeedRate) / 5.0) - stf(rRealShip.SpeedRate) / 10.0);
+			rRealShip.TurnRate         	= stf(rRealShip.TurnRate) + Kdckyrd * (frandSmall(stf(rRealShip.TurnRate) / 5.0) - stf(rRealShip.TurnRate) / 10.0);
+			rRealShip.HP               	= sti(rRealShip.HP) + makeint(Kdckyrd * (rand(makeint(sti(rRealShip.HP)/5)) - makeint(sti(rRealShip.HP)/10)));
+			rRealShip.WindAgainstSpeed 	= stf(rRealShip.WindAgainstSpeed) + Kdckyrd * (frandSmall(stf(rRealShip.WindAgainstSpeed)/5.0) - stf(rRealShip.WindAgainstSpeed)/10.0);
 		}	
 	}
 	
 	if(!CheckAttribute(rRealShip, "QuestShip"))
 	{
-		rRealShip.Capacity        = sti(rRealShip.Capacity) + makeint(Кdckyrd * (rand(makeint(sti(rRealShip.Capacity)/4)) - makeint(sti(rRealShip.Capacity)/8)));
-		rRealShip.OptCrew         = makeint(sti(rRealShip.OptCrew) + Кdckyrd * (rand(makeint(sti(rRealShip.OptCrew)/3)) - makeint(sti(rRealShip.OptCrew)/6)));
+		rRealShip.Capacity        = sti(rRealShip.Capacity) + makeint(Kdckyrd * (rand(makeint(sti(rRealShip.Capacity)/4)) - makeint(sti(rRealShip.Capacity)/8)));
+		rRealShip.OptCrew         = makeint(sti(rRealShip.OptCrew) + Kdckyrd * (rand(makeint(sti(rRealShip.OptCrew)/3)) - makeint(sti(rRealShip.OptCrew)/6)));
 		rRealShip.MaxCrew         = makeint(sti(rRealShip.OptCrew) * 1.25 + 0.5);  // 25% перегруза
-		rRealShip.MinCrew         = makeint(sti(rRealShip.MinCrew) + Кdckyrd * (rand(makeint(sti(rRealShip.MinCrew)/3)) - makeint(sti(rRealShip.MinCrew)/6)));
-		rRealShip.Weight		  = sti(rRealShip.Weight) + makeint(Кdckyrd * (rand(sti(rRealShip.Weight)/20) - rand(sti(rRealShip.Weight)/20)));
+		rRealShip.MinCrew         = makeint(sti(rRealShip.MinCrew) + Kdckyrd * (rand(makeint(sti(rRealShip.MinCrew)/3)) - makeint(sti(rRealShip.MinCrew)/6)));
+		rRealShip.Weight		  = sti(rRealShip.Weight) + makeint(Kdckyrd * (rand(sti(rRealShip.Weight)/20) - rand(sti(rRealShip.Weight)/20)));
 	}	
 	
 	// to_do del -->
