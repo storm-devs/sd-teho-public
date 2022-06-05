@@ -3856,7 +3856,7 @@ void Ship_UpdateParameters()
 		{ 
             // boal -->
 			if(!IsPerkIntoList("sink"))
-        	{
+        	{
 				if (rand(1) == 0)
 				{
 					PlaySound("Interface\_Abandon1.wav");

@@ -5,7 +5,7 @@ void LoginCharactersInLocation(ref loc)
     // boal 01.02.2004 -->
 	SetTimeScale(1.0);
     TimeScaleCounter = 0;
-    DelPerkFromActiveList("TimeSpeed");
+    DelPerkFromActiveList("TimeSpeed");
 	// boal 01.02.2004 <--
 	LocAi_Init(loc);
 	string locID = loc.id;
