@@ -3,7 +3,7 @@
 #define MUSIC_SILENCE_TIME 180000.0
 #define SOUNDS_FADE_TIME   200
 
-#event_handler ("LoadSceneSound", "LoadSceneSound")
+#event_handler ("LoadSceneSound", "LoadSceneSound");
 // PLAY
 int Play3DSound(string name, float x, float y, float z)
 {
