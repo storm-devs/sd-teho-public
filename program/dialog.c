@@ -77,7 +77,13 @@ bool DialogMain(ref Character)
 	Dialog.CurrentNode = CharacterRef.Dialog.CurrentNode;
 	startDialogMainCounter = 0;
 	SetEventHandler("frame", "StartDialogMain", 1);
+
 	SetTimeScale(0.0);
+	TimeScaleCounter = 0;
+	if (IsPerkIntoList("TimeSpeed")) {
+		DelPerkFromActiveList("TimeSpeed");
+	}
+
 	if (locCameraCurMode == LOCCAMERA_FOLLOW && !CheckAttribute(loadedLocation, "lockCamAngle") && mainChr.location.group != "sit") // для квестов
 	{
 		SetCameraDialogMode(Character);  // boal
