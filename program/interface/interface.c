@@ -742,7 +742,7 @@ void LaunchMainMenu()
 	SetTimeScale(1.0);
 	// fix
 	TimeScaleCounter = 0;
-    DelPerkFromActiveList("TimeSpeed");
+    DelPerkFromActiveList("TimeSpeed");
 }
 
 void LaunchSaveGame()

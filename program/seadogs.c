@@ -1071,13 +1071,13 @@ void ProcessControls()
 	
 
     // boal 27.11.03 time -->
-  	if (ControlName=="TimeScaleFaster" || ControlName == "TimeScaleSlower")
-  	{
+  	if (ControlName=="TimeScaleFaster" || ControlName == "TimeScaleSlower")
+  	{
         if (loadedLocation.type == "underwater") return; //запрет ускорения под водой.
 		if (CheckAttribute(pchar, "questTemp.NoFast")) return; //запрет ускорения
 		DeleteAttribute(pchar, "pause");
 		if (ControlName == "TimeScaleFaster")
-     	{
+     	{
 			if (TimeScaleCounter >= 12)
 			{
 			    TimeScaleCounter += 4;
@@ -1094,8 +1094,8 @@ void ProcessControls()
 				}
 			}
 		}
-     	else
-     	{
+     	else
+     	{
             if (TimeScaleCounter >= 16)
 			{
 			    TimeScaleCounter -= 4;
@@ -1135,31 +1135,31 @@ void ProcessControls()
         {
             if (TimeScaleCounter > 6) TimeScaleCounter = 6;
         }
-     	float newTimeScale = 1 + (TimeScaleCounter)*0.25; // GetSeaTimeScale()
-     	if (newTimeScale < 0) //don't wanna crash the game
-     	{
-        		TimeScaleCounter = -4;
-        		newTimeScale = 0;
-     	}
+     	float newTimeScale = 1 + (TimeScaleCounter)*0.25; // GetSeaTimeScale()
+     	if (newTimeScale < 0) //don't wanna crash the game
+     	{
+        		TimeScaleCounter = -4;
+        		newTimeScale = 0;
+     	}
 
-     	Log_SetStringToLog("x" + newTimeScale);
-     	if (TimeScaleCounter == 0) //back to normal
-     	{
+     	Log_SetStringToLog("x" + newTimeScale);
+     	if (TimeScaleCounter == 0) //back to normal
+     	{
 			if(IsPerkIntoList("TimeSpeed"))
-        	{
-        		SetTimeScale(1.0);
-        		DelPerkFromActiveList("TimeSpeed");
-        	}
-     	}
-     	else
-     	{
-        	SetTimeScale(newTimeScale);
-        	//if perk not in list
-        	if(!IsPerkIntoList("TimeSpeed"))
-        	{
+        	{
+        		SetTimeScale(1.0);
+        		DelPerkFromActiveList("TimeSpeed");
+        	}
+     	}
+     	else
+     	{
+        	SetTimeScale(newTimeScale);
+        	//if perk not in list
+        	if(!IsPerkIntoList("TimeSpeed"))
+        	{
 				AddPerkToActiveList("TimeSpeed");
 			}
-     	}
+     	}
 	}
 	// boal <--
 	switch(ControlName)
@@ -1179,7 +1179,7 @@ void ProcessControls()
 			{
 				SetTimeScale(GetSeaTimeScale());
 				TimeScaleCounter = 4;
-                Log_SetStringToLog(XI_ConvertString("Time x2"));
+                Log_SetStringToLog(XI_ConvertString("Time x2"));
 				AddPerkToActiveList("TimeSpeed");
 			}
 		break;
